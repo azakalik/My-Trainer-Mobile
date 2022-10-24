@@ -58,7 +58,7 @@ fun ArriveScreen() {
             Text(text = stringResource(id = R.string.introScreenMessage), color = Color.White, fontSize = 30.sp)
             Button(onClick = { /*TODO enviar a pagina correspondiente*/ }, shape = RoundedCornerShape(10.dp), colors = ButtonDefaults.buttonColors(backgroundColor = Color.Magenta)
             , modifier = Modifier.fillMaxWidth(0.5F)) {
-                Text(text = stringResource(id = R.string.singInButton), fontSize = 30.sp)
+                Text(text = stringResource(id = R.string.signInButton), fontSize = 30.sp)
             }
             Button(onClick = { /*TODO enviar a pagina correspondiente*/ }, shape = RoundedCornerShape(10.dp), colors = ButtonDefaults.buttonColors(backgroundColor = Color.Magenta)
                 , modifier = Modifier.fillMaxWidth(0.5F)) {
