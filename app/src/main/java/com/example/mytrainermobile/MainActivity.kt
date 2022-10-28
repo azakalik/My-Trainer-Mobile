@@ -8,6 +8,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -146,4 +147,33 @@ fun ShowForm() {
         //aca iria el datepicker
     }
 
+}
+@Preview
+@Composable
+fun RoutineBox() {
+    Card(
+            modifier = Modifier.fillMaxWidth(1f),
+            shape = RoundedCornerShape(15.dp)
+
+        ) {
+        Row(
+            modifier = Modifier
+                .background(Color(0xFF1E1E1E))
+                .padding(8.dp)
+        ) {
+            //Image()
+            Column {
+                Row {
+                    Text("TitleExercise", style = TextStyle(Color.Magenta), fontSize = 16.sp )// replace for Api.fetch(title)
+                    Spacer(modifier = Modifier.padding(75.dp,10.dp))
+                    Text("time/cycle", style = TextStyle(Color.Gray), fontSize = 8.sp) // replace for Api.fetch(time/cycle). See whats better and possible
+                }
+                Row {
+                    Text("Exercise description", style = TextStyle(Color.White), fontSize = 10.sp)// replace for Api.fetch(desc)
+                    Spacer(modifier = Modifier.padding(75.dp, 5.dp))
+                    Text("Difficulty", style = TextStyle(Color.White), fontSize = 8.sp)
+                }
+            }
+        }
+    }
 }
