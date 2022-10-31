@@ -4,21 +4,34 @@ import android.app.DatePickerDialog
 import android.graphics.Picture
 import android.os.Bundle
 import android.widget.DatePicker
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import android.widget.ImageView
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.GridCells
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -26,8 +39,10 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.mytrainermobile.classes.Routine
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 import com.example.mytrainermobile.ui.theme.Purple500
 import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
@@ -39,6 +54,7 @@ class MainActivity : ComponentActivity() {
             MyTrainerMobileTheme {
                 // A surface container using the 'background' color from the theme
                 ArriveScreen()
+
             }
         }
     }
@@ -49,7 +65,6 @@ fun Greeting(name: String) {
     Text(text = "Hello $name!")
 }
 
-@Preview(showBackground = true)
 @Composable
 fun ArriveScreen() {
         Column(modifier = Modifier
@@ -150,7 +165,7 @@ fun ShowForm() {
 }
 @Preview
 @Composable
-fun RoutineBox() {
+fun RoutineBox2() {
     Card(
             modifier = Modifier.fillMaxWidth(1f),
             shape = RoundedCornerShape(15.dp)
@@ -174,6 +189,73 @@ fun RoutineBox() {
                     Text("Difficulty", style = TextStyle(Color.White), fontSize = 8.sp)
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun TitleForSection(){
+    Text(text= "My Trainer",color = Color.Magenta, fontSize = 38.sp, modifier = Modifier.padding(start = 60.dp))
+}
+
+@Composable
+fun TitleBox(title: String, startPadding: Dp){
+    Box(modifier = Modifier
+        .offset(x = (-5).dp)
+        .border(
+            width = 2.dp,
+            color = Color.Magenta,
+            shape = RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp)
+        )
+        .fillMaxHeight(0.15f)
+        .fillMaxWidth(0.45f)
+    ){
+        Text(text = title, color = Color.White, fontWeight = FontWeight.Bold, fontSize = 16.sp,modifier = Modifier.padding(start = startPadding,top = 5.dp, bottom = 5.dp, end = 2.dp))
+    }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Preview(showBackground = true)
+@Composable
+fun FavouritesView(){
+
+    val list  = listOf<Routine>(
+        Routine(1,"r1","Chest"),Routine(2,"r2","Back"),
+        Routine(3,"r3","Legs"),Routine(3,"r3","Legs"),Routine(3,"r3","Legs"),Routine(3,"r3","Legs"),Routine(3,"r3","Legs"),
+        Routine(3,"r3","Legs"),Routine(3,"r3","Legs"),Routine(3,"r3","Legs"),Routine(3,"r3","Legs"),Routine(3,"r3","Legs"),
+        Routine(3,"r3","Legs"),Routine(3,"r3","Legs"),
+        Routine(3,"r3","Legs"),Routine(3,"r3","Legs"),Routine(3,"r3","Legs"),Routine(3,"r3","Legs")
+    )
+    Box(modifier = Modifier
+        .fillMaxSize()
+        .background(color = colorResource(id = R.color.blackMainTheme)) ){
+        Column(modifier = Modifier.fillMaxSize()) {
+            Column( modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.3f), verticalArrangement = Arrangement.SpaceEvenly) {
+                TitleForSection()
+                TitleBox(title = "Favourites", 80.dp)
+            }
+            LazyVerticalGrid(modifier = Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceAround,verticalArrangement = Arrangement.Center,cells = GridCells.Fixed(2) , content = {
+                items(list.size) {
+                        idx -> RoutineBox(routineName = list[idx].name, routineType = list[idx].type)
+                }
+            })
+        }
+
+    }
+}
+
+@Composable 
+fun RoutineBox(routineName: String, routineType: String){
+    Card(modifier = Modifier
+        .fillMaxWidth()
+        .padding(15.dp)
+        .clickable {  /*TODO*/ }, elevation = 10.dp, shape = RoundedCornerShape(15.dp)
+    ) {
+        Box(modifier = Modifier.height(90.dp)){
+            Image(painter = painterResource(id = R.drawable.arms), contentDescription = "image", contentScale = ContentScale.FillBounds)
+
         }
     }
 }
