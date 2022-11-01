@@ -111,7 +111,7 @@ fun ExerciseView() {
                 ) {
                     Icon(
                         Icons.Outlined.PlayArrow,
-                        contentDescription = "Previous Exercise",
+                        contentDescription = "Play / pause",
                         modifier = Modifier.size(33.dp)
                     )
                 }
@@ -123,7 +123,7 @@ fun ExerciseView() {
                 ) {
                     Icon(
                         Icons.Filled.ArrowForward,
-                        contentDescription = "Previous Exercise",
+                        contentDescription = "Next Exercise",
                         modifier = Modifier.size(33.dp)
                     )
                 }
