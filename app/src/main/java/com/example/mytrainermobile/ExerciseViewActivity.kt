@@ -1,4 +1,5 @@
 package com.example.mytrainermobile
+/*
 
 import android.app.DatePickerDialog
 import android.graphics.Picture
@@ -135,3 +136,6 @@ fun ExerciseView() {
     }
 }
 
+
+
+ */
