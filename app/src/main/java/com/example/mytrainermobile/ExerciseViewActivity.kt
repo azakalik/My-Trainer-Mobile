@@ -1,5 +1,4 @@
 package com.example.mytrainermobile
-/*
 
 import android.app.DatePickerDialog
 import android.graphics.Picture
@@ -35,7 +34,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
-import com.example.mytrainermobile.ui.theme.Purple500
 import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 class ExerciseViewActivity : ComponentActivity() {
@@ -135,7 +133,3 @@ fun ExerciseView() {
 
     }
 }
-
-
-
- */
