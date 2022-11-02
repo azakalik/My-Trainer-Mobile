@@ -20,7 +20,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.mytrainermobile.RoutineBox2
+import com.example.mytrainermobile.ExerciseBox
 
 @Preview(showBackground = true)
 @Composable
@@ -38,7 +38,7 @@ fun WorkoutView() {
         ) {
             items(items = list, itemContent = { item ->
                 Box(modifier = Modifier.padding(10.dp)) {
-                    RoutineBox2()
+                    ExerciseBox()
                 }//reemplazar item por datos de la lista a enviar a routineBox2
             })
         }

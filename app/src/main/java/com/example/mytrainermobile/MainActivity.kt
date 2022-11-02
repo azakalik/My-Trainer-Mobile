@@ -8,10 +8,14 @@ import androidx.compose.foundation.clickable
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -30,8 +34,12 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mytrainermobile.classes.Routine
+import com.example.mytrainermobile.screens.BottomBar
+import com.example.mytrainermobile.screens.TitleWorkout
+import com.example.mytrainermobile.screens.TopBar
 import com.example.mytrainermobile.screens.WorkoutView
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
+import kotlin.math.round
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,7 +77,6 @@ fun ArriveScreen() {
         }
 }
 
-@Preview
 @Composable
 fun ShowSignupScreen(){
     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically) {
@@ -149,35 +156,6 @@ fun ShowForm() {
     }
 
 }
-@Preview
-@Composable
-fun RoutineBox2() {
-    Card(
-            modifier = Modifier.fillMaxWidth(1f),
-            shape = RoundedCornerShape(15.dp)
-
-        ) {
-        Row(
-            modifier = Modifier
-                .background(Color(0xFF1E1E1E))
-                .padding(8.dp)
-        ) {
-            //Image()
-            Column {
-                Row {
-                    Text("TitleExercise", style = TextStyle(Color.Magenta), fontSize = 16.sp )// replace for Api.fetch(title)
-                    Spacer(modifier = Modifier.padding(75.dp,10.dp))
-                    Text("time/cycle", style = TextStyle(Color.Gray), fontSize = 8.sp) // replace for Api.fetch(time/cycle). See whats better and possible
-                }
-                Row {
-                    Text("Exercise description", style = TextStyle(Color.White), fontSize = 10.sp)// replace for Api.fetch(desc)
-                    Spacer(modifier = Modifier.padding(75.dp, 5.dp))
-                    Text("Difficulty", style = TextStyle(Color.White), fontSize = 8.sp)
-                }
-            }
-        }
-    }
-}
 
 @Composable
 fun TitleForSection(){
@@ -201,7 +179,6 @@ fun TitleBox(title: String, startPadding: Dp){
 }
 
 @OptIn(ExperimentalFoundationApi::class)
-@Preview(showBackground = true)
 @Composable
 fun FavouritesView(){
 
@@ -245,3 +222,202 @@ fun RoutineBox(routineName: String, routineType: String){
         }
     }
 }
+
+//--------------------------------------------------------------------------------
+
+@Composable
+fun ExerciseBox() {
+    Card(
+        modifier = Modifier.fillMaxWidth(1f).height(75.dp),
+        shape = RoundedCornerShape(15.dp)
+
+    ) {
+        Row(
+            modifier = Modifier
+                .background(Color(0xFF1E1E1E))
+                .padding(8.dp)
+        ) {
+            //Image(painter = painterResource(id = R.drawable.))
+            Column {
+                Row(/*horizontalArrangement = Arrangement.SpaceBetween*/) {
+                    Text(
+                        "TitleExercise",
+                        style = TextStyle(Color.Magenta),
+                        fontSize = 20.sp
+                    )// replace for Api.fetch(title)
+                    Spacer(modifier = Modifier.padding(65.dp, 10.dp))
+                    Text(
+                        "time/cycle",
+                        style = TextStyle(Color.Gray),
+                        fontSize = 12.sp
+                    ) // replace for Api.fetch(time/cycle). See whats better and possible
+                }
+                //Spacer(modifier = Modifier.padding(0.dp, 10.dp, 0.dp, 0.dp))
+                Row {
+                    Text(
+                        "Exercise description",
+                        style = TextStyle(Color.White),
+                        fontSize = 14.sp
+                    )// replace for Api.fetch(desc)
+                    Spacer(modifier = Modifier.padding(65.dp, 5.dp))
+                    Text("Difficulty", style = TextStyle(Color.White), fontSize = 12.sp)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun StartButton() {
+    Button(
+        onClick = { },
+        shape = RoundedCornerShape(10.dp),
+        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Magenta),
+        modifier = Modifier
+            .fillMaxWidth(0.5F)
+            .padding(0.dp, 15.dp, 0.dp, 25.dp),
+    ) {
+        Text("Start Workout")
+    }
+}
+
+@Composable
+fun WorkoutBar() {
+    Box(
+        Modifier
+            .background(Color(0xFF1E1E1E))
+            .fillMaxWidth(1f)
+    ) {
+        Column() {
+            Row(Modifier.fillMaxWidth(1f),
+                horizontalArrangement = Arrangement.SpaceBetween,) {
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(
+                        modifier = Modifier.size(50.dp),
+                        imageVector = Icons.Filled.KeyboardArrowLeft,
+                        contentDescription = "back arrow"
+                    )
+                }
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(
+                        modifier = Modifier.size(50.dp),
+                        imageVector = Icons.Filled.Favorite,
+                        contentDescription = "Favorite"
+
+                    )
+                    Text("Favourite Me!")
+                }
+            }
+            Column(
+                Modifier.fillMaxWidth(1f),
+                horizontalAlignment = Alignment.End
+            ) {
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(
+                        modifier = Modifier.size(50.dp),
+                        imageVector = Icons.Filled.Star,
+                        contentDescription = "Star"
+
+                    )
+                    Text("Rate Me!")
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun StartBar() {
+    Box(
+        Modifier
+            .background(Color(0xFF1E1E1E))
+            .fillMaxWidth(1f),
+        contentAlignment = Alignment.Center
+    ) {
+        StartButton()
+    }
+}
+
+@Preview
+@Composable
+fun StartWorkout() {
+    val list = listOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5 ,6 ,7 ,8)
+    Scaffold(modifier = Modifier.fillMaxSize(),
+        backgroundColor = Color.DarkGray,
+        topBar = { WorkoutBar() },
+        bottomBar = { StartBar() }) {
+
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier
+                .fillMaxSize(1f)
+                .background(Color.DarkGray)
+        ) {
+            Spacer(modifier = Modifier.padding(0.dp, 10.dp, 0.dp, 0.dp))
+            DescriptorBox()
+            Box(
+                modifier = Modifier
+                    .height(180.dp)
+                    .width(180.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.arms),
+                    contentDescription = "image",
+                    modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+                    contentScale = ContentScale.FillBounds
+                )
+            }
+            LazyColumn(
+                modifier = Modifier
+                    .padding(), contentPadding = PaddingValues(20.dp)
+            ) {
+                items(items = list, itemContent = { item ->
+                    Box(modifier = Modifier.padding(10.dp)) {
+                        ExerciseBox()
+                    }//reemplazar item por datos de la lista a enviar a routineBox2
+                })
+            }
+
+        }
+    }
+}
+
+@Composable
+fun DescriptorBox() {
+    Box(modifier = Modifier.fillMaxWidth()
+        .background(Color.Magenta, RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
+        .offset(x = (-5).dp)
+        .border(2.dp, Color.Black, shape = RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
+        .height(95.dp)
+        ) {
+        Column() {
+            Row(Modifier.offset(x=10.dp)){
+                Text("Routine Title", fontSize = 24.sp, color = Color.White)
+            }
+            Spacer(modifier = Modifier.padding(10.dp, 0.dp, 0.dp, 10.dp))
+            Row(Modifier.offset(x=10.dp)){
+                Text("38'", color = Color.White) // tiempo de rutina???
+                Text("Intermediate", color = Color.White) // dificultad
+            }
+            Spacer(modifier = Modifier.padding(10.dp, 0.dp, 0.dp, 10.dp))
+            Row(Modifier.offset(x=10.dp)){
+                Text("Rating", color = Color.White) // rating
+                Text("username", color = Color.White) // username????
+            }
+        }
+        Column(horizontalAlignment = Alignment.End, modifier = Modifier.fillMaxWidth()){
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(
+                    modifier = Modifier.size(50.dp),
+                    imageVector = Icons.Filled.Share,
+                    contentDescription = "Share"
+
+                )
+                Text("Share")
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------
