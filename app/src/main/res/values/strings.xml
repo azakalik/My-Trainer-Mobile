@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">My Trainer Mobile</string>
-    <string name="signInButton">Sign In</string>
-    <string name="signUpButton">Sign Up</string>
+    <string name="signInText">Sign In</string>
+    <string name="signUpText">Sign Up</string>
     <string name="introScreenMessage">Train anywhere, anytime.</string>
+
+    <!--    ACA ABAJO ESTAN LOS DE SIGN UP SCREEN-->
+    <string name="signup_insert_name">Insert name</string>
+    <string name="signup_insert_surname">Insert surname</string>
+    <string name="signup_insert_email">Insert email</string>
+    <string name="signup_reinsert_email">Reinsert email</string>
+    <string name="signup_insert_password">Insert password</string>
+    <string name="signup_reinsert_password">Reinsert password</string>
 </resources>

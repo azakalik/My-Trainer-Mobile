@@ -7,20 +7,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.*
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.ScrollableState
-import androidx.compose.foundation.gestures.scrollable
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Email
-import androidx.compose.runtime.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,7 +23,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -85,7 +77,7 @@ fun ArriveScreen() {
             colors = ButtonDefaults.buttonColors(backgroundColor = Color.Magenta),
             modifier = Modifier.fillMaxWidth(0.5F)
         ) {
-            Text(text = stringResource(id = R.string.signInButton), fontSize = 30.sp)
+            Text(text = stringResource(id = R.string.signInText), fontSize = 30.sp)
         }
         Button(
             onClick = { /*TODO enviar a pagina correspondiente*/ },
@@ -94,7 +86,7 @@ fun ArriveScreen() {
             modifier = Modifier.fillMaxWidth(0.5F)
         ) {
             Text(
-                text = stringResource(id = R.string.signUpButton),
+                text = stringResource(id = R.string.signUpText),
                 color = Color.White,
                 fontSize = 30.sp
             )
