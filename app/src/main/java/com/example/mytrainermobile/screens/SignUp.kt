@@ -11,21 +11,22 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
-import androidx.compose.material.SnackbarDefaults.backgroundColor
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.Green
-import androidx.compose.ui.graphics.Color.Companion.Magenta
-import androidx.compose.ui.graphics.Color.Companion.Yellow
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import com.example.mytrainermobile.components.DefaultButton
+import com.example.mytrainermobile.components.DefaultTextField
 import com.example.mytrainermobile.R
+import com.example.mytrainermobile.ui.theme.DefaultBackground
 
 @Preview(showBackground = true)
 @Composable
 fun ShowSignupScreen() {
-    Box(modifier = Modifier.fillMaxWidth()) {
+    Box(modifier = Modifier
+        .fillMaxSize()
+        .background(DefaultBackground)) {
         Column(
             modifier = Modifier
                 .verticalScroll(state = ScrollState(initial = 0))
@@ -36,7 +37,7 @@ fun ShowSignupScreen() {
 //                ShowImage()
                 SignupText()
             }
-            ShowForm()
+            ShowSignUpForm()
         }
     }
 }
@@ -55,12 +56,13 @@ fun SignupText() {
     Text(
         text = stringResource(id = R.string.signUpText),
         style = Typography().h3.copy(fontWeight = FontWeight.Bold),
-        modifier = Modifier.padding(bottom = 10.dp)
+        modifier = Modifier.padding(vertical = 30.dp),
+        color = Color.White
     )
 }
 
 @Composable
-fun ShowForm() {
+fun ShowSignUpForm() {
     var name by remember { mutableStateOf("") }
     var surname by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
@@ -68,66 +70,42 @@ fun ShowForm() {
     var password by remember { mutableStateOf("") }
     var password2 by remember { mutableStateOf("") }
 
-    SignUpTextField(
+    DefaultTextField(
         value = name,
         callback = { name = it },
         placeholder = stringResource(id = R.string.signup_insert_name)
     )
-    SignUpTextField(
+    DefaultTextField(
         value = surname,
         callback = { surname = it },
         placeholder = stringResource(id = R.string.signup_insert_surname)
     )
-    SignUpTextField(
+    DefaultTextField(
         value = email,
         callback = { email = it },
         placeholder = stringResource(id = R.string.signup_insert_email)
     )
-    SignUpTextField(
+    DefaultTextField(
         value = email2,
         callback = { email2 = it },
         placeholder = stringResource(id = R.string.signup_reinsert_email)
     )
-    SignUpTextField(
+    DefaultTextField(
         value = password,
         callback = { password = it },
         placeholder = stringResource(id = R.string.signup_insert_password)
     )
-    SignUpTextField(
+    DefaultTextField(
         value = password2,
         callback = { password2 = it },
         placeholder = stringResource(id = R.string.signup_reinsert_password)
     )
 
-    Button(
-        onClick = { SignUp() },
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Magenta)
-    ) {
-        Text(stringResource(id = R.string.signUpText))
-    }
-
-    Button(
-        onClick = { GoToSignIn() },
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
-    ) {
-        Text("Go to sign in", color = Color.Black)
-    }
+    DefaultButton(text = stringResource(id = R.string.signUpText), onClick = {SignUp()})
+    DefaultButton(text = stringResource(id = R.string.signup_goto_signin), onClick = { GoToSignIn()})
     //aca iria el datepicker
 
 
-}
-
-@Composable
-fun SignUpTextField(value: String, callback: (String) -> Unit, placeholder: String) {
-    OutlinedTextField(
-        value = value,
-        placeholder = { Text(placeholder) },
-        onValueChange = callback,
-        modifier = Modifier.padding(vertical = 5.dp),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = Magenta
-        )
-    )
 }
 
 fun SignUp() {/*TODO*/}
