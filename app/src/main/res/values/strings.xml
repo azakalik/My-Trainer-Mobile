@@ -14,4 +14,11 @@
     <string name="signup_reinsert_password">Reinsert password</string>
     <string name="signup_goto_signin">Go to sign in</string>
     <string name="signup_goto_signup">Go to sign up</string>
+
+    <!-- workout-1 -->
+    <string name="share">Share</string>
+    <string name="favourite">Favourite Me!</string>
+    <string name="rate">Rate Me!</string>
+    <string name="start">Start Workout</string>
+
 </resources>

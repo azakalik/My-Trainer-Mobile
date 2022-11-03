@@ -1,8 +1,10 @@
 package com.example.mytrainermobile.screens
 
 import android.content.res.Configuration
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -12,11 +14,12 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.mytrainermobile.RoutineBox
-import com.example.mytrainermobile.TitleBox
-import com.example.mytrainermobile.TitleForSection
+import com.example.mytrainermobile.components.TitleBox
+import com.example.mytrainermobile.components.TitleForSection
+
 
 @Preview ( showBackground = true )
 @Composable
@@ -68,3 +71,4 @@ fun HomeScreen(){
         }
     }
 }
+
