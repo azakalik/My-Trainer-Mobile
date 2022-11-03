@@ -106,7 +106,6 @@ fun ArriveScreen() {
     }
 }
 
-@Preview
 @Composable
 fun RoutineBox2() {
     Card(
@@ -279,13 +278,13 @@ fun ExerciseBox() {
         ) {
             //Image(painter = painterResource(id = R.drawable.))
             Column {
-                Row(/*horizontalArrangement = Arrangement.SpaceBetween*/) {
+                Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
                     Text(
                         "TitleExercise",
                         style = TextStyle(Color.Magenta),
                         fontSize = 20.sp
                     )// replace for Api.fetch(title)
-                    Spacer(modifier = Modifier.padding(65.dp, 10.dp))
+                    //Spacer(modifier = Modifier.padding(65.dp, 10.dp))
                     Text(
                         "time/cycle",
                         style = TextStyle(Color.Gray),
@@ -293,13 +292,13 @@ fun ExerciseBox() {
                     ) // replace for Api.fetch(time/cycle). See whats better and possible
                 }
                 //Spacer(modifier = Modifier.padding(0.dp, 10.dp, 0.dp, 0.dp))
-                Row {
+                Row (horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()){
                     Text(
                         "Exercise description",
                         style = TextStyle(Color.White),
                         fontSize = 14.sp
                     )// replace for Api.fetch(desc)
-                    Spacer(modifier = Modifier.padding(65.dp, 5.dp))
+                    //Spacer(modifier = Modifier.padding(65.dp, 5.dp))
                     Text("Difficulty", style = TextStyle(Color.White), fontSize = 12.sp)
                 }
             }
@@ -448,13 +447,16 @@ fun DescriptorBox() {
         }
         Column(horizontalAlignment = Alignment.End, modifier = Modifier.fillMaxWidth()){
             IconButton(onClick = { /*TODO*/ }) {
-                Icon(
-                    modifier = Modifier.size(50.dp),
-                    imageVector = Icons.Filled.Share,
-                    contentDescription = "Share"
+                Column() {
+                    Icon(
+                        modifier = Modifier.size(50.dp),
+                        imageVector = Icons.Filled.Share,
+                        contentDescription = "Share",
+                        tint = Color.White
+                    )
 
-                )
-                Text("Share")
+                    Text("Share")
+                }
             }
         }
     }
