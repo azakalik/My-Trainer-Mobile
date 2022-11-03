@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My Trainer Mobile</string>
+    <string name="signInButton">Sign In</string>
+    <string name="signUpButton">Sign Up</string>
+    <string name="introScreenMessage">Train anywhere, anytime.</string>
+</resources>
