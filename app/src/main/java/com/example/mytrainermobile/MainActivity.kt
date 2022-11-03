@@ -174,7 +174,6 @@ fun TitleBox(title: String, startPadding: Dp) {
                 end = 2.dp
             )
         )
-    }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
