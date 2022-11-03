@@ -17,12 +17,8 @@ fun DefaultTextField(value: String, callback: (String) -> Unit, placeholder: Str
         onValueChange = callback,
         modifier = Modifier.padding(vertical = 5.dp),
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = Color.Magenta,
             textColor = Color.White,
             errorBorderColor = Color.Red,
-            placeholderColor = Color.White,
-            unfocusedBorderColor = Color.White,
-            cursorColor = Color.Magenta,
         )
     )
 }

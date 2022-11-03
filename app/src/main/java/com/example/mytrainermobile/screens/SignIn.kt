@@ -3,6 +3,7 @@ package com.example.mytrainermobile.screens
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.material.Typography
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -16,19 +17,22 @@ import com.example.mytrainermobile.components.DefaultTextField
 import com.example.mytrainermobile.R
 import com.example.mytrainermobile.components.DefaultButton
 import com.example.mytrainermobile.ui.theme.DefaultBackground
+import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 
 @Preview(showBackground = true)
 @Composable
 fun ShowSignInScreen() {
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .background(color = DefaultBackground), contentAlignment = Alignment.Center) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            SignInText()
-            ShowSignInForm()
+    MyTrainerMobileTheme() {
+        Box(modifier = Modifier
+            .fillMaxSize()
+            .background(color = DefaultBackground), contentAlignment = Alignment.Center) {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                SignInText()
+                ShowSignInForm()
+            }
         }
     }
 }
