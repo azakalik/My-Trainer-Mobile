@@ -20,24 +20,32 @@ import com.example.mytrainermobile.components.DefaultButton
 import com.example.mytrainermobile.components.DefaultTextField
 import com.example.mytrainermobile.R
 import com.example.mytrainermobile.ui.theme.DefaultBackground
+import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 
 @Preview(showBackground = true)
 @Composable
 fun ShowSignupScreen() {
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .background(DefaultBackground)) {
-        Column(
+    MyTrainerMobileTheme() {
+        Box(
             modifier = Modifier
-                .verticalScroll(state = ScrollState(initial = 0))
-                .fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .fillMaxSize()
+                .background(DefaultBackground)
         ) {
-            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceEvenly) {
+            Column(
+                modifier = Modifier
+                    .verticalScroll(state = ScrollState(initial = 0))
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
 //                ShowImage()
-                SignupText()
+                    SignupText()
+                }
+                ShowSignUpForm()
             }
-            ShowSignUpForm()
         }
     }
 }

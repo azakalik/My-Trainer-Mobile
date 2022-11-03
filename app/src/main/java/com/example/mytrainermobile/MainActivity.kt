@@ -1,5 +1,6 @@
 package com.example.mytrainermobile
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -44,12 +45,6 @@ import com.example.mytrainermobile.screens.WorkoutView
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 import kotlin.math.round
 
-//import androidx.fragment.app.FragmentManager
-//import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
-//import com.example.mytrainermobile.ui.theme.Purple500
-//import com.google.android.material.datepicker.MaterialDatePicker
-//import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
-
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,11 +56,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
 }
 
 @Composable
@@ -268,7 +258,9 @@ fun RoutineBox(routineName: String, routineType: String) {
 @Composable
 fun ExerciseBox() {
     Card(
-        modifier = Modifier.fillMaxWidth(1f).height(75.dp),
+        modifier = Modifier
+            .fillMaxWidth(1f)
+            .height(75.dp),
         shape = RoundedCornerShape(15.dp)
 
     ) {
@@ -329,8 +321,10 @@ fun WorkoutBar() {
             .fillMaxWidth(1f)
     ) {
         Column() {
-            Row(Modifier.fillMaxWidth(1f),
-                horizontalArrangement = Arrangement.SpaceBetween,) {
+            Row(
+                Modifier.fillMaxWidth(1f),
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
                 IconButton(onClick = { /*TODO*/ }) {
                     Icon(
                         modifier = Modifier.size(50.dp),
@@ -378,10 +372,11 @@ fun StartBar() {
     }
 }
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Preview
 @Composable
 fun StartWorkout() {
-    val list = listOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5 ,6 ,7 ,8)
+    val list = listOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8)
     Scaffold(modifier = Modifier.fillMaxSize(),
         backgroundColor = Color.DarkGray,
         topBar = { WorkoutBar() },
@@ -404,7 +399,9 @@ fun StartWorkout() {
                 Image(
                     painter = painterResource(id = R.drawable.arms),
                     contentDescription = "image",
-                    modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(),
                     contentScale = ContentScale.FillBounds
                 )
             }
@@ -425,28 +422,30 @@ fun StartWorkout() {
 
 @Composable
 fun DescriptorBox() {
-    Box(modifier = Modifier.fillMaxWidth()
-        .background(Color.Magenta, RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
-        .offset(x = (-5).dp)
-        .border(2.dp, Color.Black, shape = RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
-        .height(95.dp)
-        ) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Color.Magenta, RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
+            .offset(x = (-5).dp)
+            .border(2.dp, Color.Black, shape = RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
+            .height(95.dp)
+    ) {
         Column() {
-            Row(Modifier.offset(x=10.dp)){
+            Row(Modifier.offset(x = 10.dp)) {
                 Text("Routine Title", fontSize = 24.sp, color = Color.White)
             }
             Spacer(modifier = Modifier.padding(10.dp, 0.dp, 0.dp, 10.dp))
-            Row(Modifier.offset(x=10.dp)){
+            Row(Modifier.offset(x = 10.dp)) {
                 Text("38'", color = Color.White) // tiempo de rutina???
                 Text("Intermediate", color = Color.White) // dificultad
             }
             Spacer(modifier = Modifier.padding(10.dp, 0.dp, 0.dp, 10.dp))
-            Row(Modifier.offset(x=10.dp)){
+            Row(Modifier.offset(x = 10.dp)) {
                 Text("Rating", color = Color.White) // rating
                 Text("username", color = Color.White) // username????
             }
         }
-        Column(horizontalAlignment = Alignment.End, modifier = Modifier.fillMaxWidth()){
+        Column(horizontalAlignment = Alignment.End, modifier = Modifier.fillMaxWidth()) {
             IconButton(onClick = { /*TODO*/ }) {
                 Icon(
                     modifier = Modifier.size(50.dp),
