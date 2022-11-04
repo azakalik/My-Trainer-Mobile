@@ -1,9 +1,11 @@
 package com.example.mytrainermobile.screens
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.interaction.FocusInteraction
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -14,18 +16,23 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.BlurredEdgeTreatment
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.mytrainermobile.components.ExerciseBox
+import androidx.compose.ui.unit.*
+import androidx.compose.ui.window.Popup
+import androidx.compose.ui.window.PopupPositionProvider
+import coil.size.Size
 import com.example.mytrainermobile.R
+import com.example.mytrainermobile.components.ExerciseBox
+import java.util.Properties
 
 
 @Composable
@@ -38,12 +45,14 @@ fun StartButton() {
             .fillMaxWidth(0.5F)
             .padding(0.dp, 5.dp, 0.dp, 10.dp),
     ) {
-        Text(text = stringResource(id = R.string.start))
+        Text(text = stringResource(id = R.string.start), color = Color.White, fontSize = 16.sp)
     }
 }
 
 @Composable
 fun WorkoutBar() {
+    var popupControl by remember { mutableStateOf(false) }
+
     Box(
         Modifier
             .background(Color(0xFF1E1E1E))
@@ -71,7 +80,7 @@ fun WorkoutBar() {
                     )
                 }
             }
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = { popupControl = true }) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(text = stringResource(id = R.string.rate), color = Color.White)
                     Icon(
@@ -82,6 +91,83 @@ fun WorkoutBar() {
                     )
                 }
             }
+            if (popupControl) {
+                Popup (/*popupPositionProvider =
+                    WindowCenterOffsetPositionProvider(),*/
+                    onDismissRequest = { popupControl = false },
+                ) {
+                    Surface(
+                        border = BorderStroke(1.dp, MaterialTheme.colors.primary),
+                        shape = RoundedCornerShape(8.dp),
+                        color = Color(0xCC1E1E1E),
+                        modifier = Modifier
+                            .fillMaxSize(1f)
+                            .padding(60.dp, 230.dp, 60.dp, 230.dp)) {
+                        Column(
+                            modifier = Modifier.padding(10.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.SpaceEvenly
+                        ) {
+                            Text(text = stringResource(id = R.string.ratepopup), color = Color.White, fontSize = 20.sp)
+                            RatingSystem()
+                            Row(horizontalArrangement = Arrangement.SpaceEvenly) {
+                                TextButton(onClick = { popupControl = false }) {
+                                    Text(text = stringResource(id = R.string.cancel), color = Color.Red, fontSize = 18.sp)
+                                }
+                                TextButton(onClick = { popupControl = false }) {
+                                    Text(text = stringResource(id = R.string.save), fontSize = 18.sp)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun RatingSystem() {
+    Row() {
+        IconButton(onClick = { /*TODO*/ }) {
+            Icon(
+                modifier = Modifier.size(35.dp),
+                imageVector = Icons.Filled.Star,
+                contentDescription = "Star",
+                tint = Color.White,
+            )
+        }
+        IconButton(onClick = { /*TODO*/ }) {
+            Icon(
+                modifier = Modifier.size(35.dp),
+                imageVector = Icons.Filled.Star,
+                contentDescription = "Star",
+                tint = Color.White,
+            )
+        }
+        IconButton(onClick = { /*TODO*/ }) {
+            Icon(
+                modifier = Modifier.size(35.dp),
+                imageVector = Icons.Filled.Star,
+                contentDescription = "Star",
+                tint = Color.White,
+            )
+        }
+        IconButton(onClick = { /*TODO*/ }) {
+            Icon(
+                modifier = Modifier.size(35.dp),
+                imageVector = Icons.Filled.Star,
+                contentDescription = "Star",
+                tint = Color.White,
+            )
+        }
+        IconButton(onClick = { /*TODO*/ }) {
+            Icon(
+                modifier = Modifier.size(35.dp),
+                imageVector = Icons.Filled.Star,
+                contentDescription = "Star",
+                tint = Color.White,
+            )
         }
     }
 }
@@ -174,7 +260,9 @@ fun DescriptorBox() {
             IconButton(onClick = { /*TODO*/ }) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Icon(
-                        modifier = Modifier.size(40.dp).padding(0.dp, 10.dp, 10.dp, 0.dp),
+                        modifier = Modifier
+                            .size(40.dp)
+                            .padding(0.dp, 10.dp, 10.dp, 0.dp),
                         imageVector = Icons.Filled.Share,
                         contentDescription = "Share",
                         tint = Color.White
@@ -185,3 +273,7 @@ fun DescriptorBox() {
         }
     }
 }
+
+
+
+

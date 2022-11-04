@@ -19,7 +19,10 @@
     <string name="share">Share</string>
     <string name="favourite">Favourite Me!</string>
     <string name="rate">Rate Me!</string>
+    <string name="ratepopup">Rating Current Workout</string>
     <string name="start">Start Workout</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 
     <!-- Favourites -->
     <string name="myfavourites">My Favourites</string>
