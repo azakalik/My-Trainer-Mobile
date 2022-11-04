@@ -15,7 +15,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MyTrainerMobileTheme {
                 // A surface container using the 'background' color from the theme
-                MyRoutines()
+                ViewWorkout()
             }
         }
     }
