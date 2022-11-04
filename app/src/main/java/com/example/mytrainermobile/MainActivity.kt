@@ -16,7 +16,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MyTrainerMobileTheme {
                 val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = "home") {
+                NavHost(navController = navController, startDestination = "favourites") {
                     composable("arrive") { ArriveScreen(/*...*/) }
                     composable("favourites") { FavouritesView(/*...*/) }
                     composable("home") { HomeScreen() }

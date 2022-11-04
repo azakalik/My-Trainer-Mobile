@@ -25,27 +25,25 @@ import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 @Preview(showBackground = true)
 @Composable
 fun ShowSignupScreen() {
-    MyTrainerMobileTheme() {
-        Box(
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(DefaultBackground)
+    ) {
+        Column(
             modifier = Modifier
-                .fillMaxSize()
-                .background(DefaultBackground)
+                .verticalScroll(state = ScrollState(initial = 0))
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Column(
-                modifier = Modifier
-                    .verticalScroll(state = ScrollState(initial = 0))
-                    .fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
 //                ShowImage()
-                    SignupText()
-                }
-                ShowSignUpForm()
+                SignupText()
             }
+            ShowSignUpForm()
         }
     }
 }
@@ -109,13 +107,16 @@ fun ShowSignUpForm() {
         placeholder = stringResource(id = R.string.signup_reinsert_password)
     )
 
-    DefaultButton(text = stringResource(id = R.string.signUpText), onClick = {SignUp()})
-    DefaultButton(text = stringResource(id = R.string.signup_goto_signin), onClick = { GoToSignIn()})
+    DefaultButton(text = stringResource(id = R.string.signUpText), onClick = { SignUp() })
+    DefaultButton(
+        text = stringResource(id = R.string.signup_goto_signin),
+        onClick = { GoToSignIn() })
     //aca iria el datepicker
 
 
 }
 
-fun SignUp() {/*TODO*/}
+fun SignUp() {/*TODO*/
+}
 
 fun GoToSignIn() {}

@@ -12,19 +12,21 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.mytrainermobile.components.DefaultTextField
 import com.example.mytrainermobile.R
 import com.example.mytrainermobile.components.DefaultButton
+import com.example.mytrainermobile.components.DefaultTextField
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 
 @Preview(showBackground = true)
 @Composable
 fun ShowSignInScreen() {
-    MyTrainerMobileTheme() {
-        Box(modifier = Modifier
-            .fillMaxSize()
-            .background(color = DefaultBackground), contentAlignment = Alignment.Center) {
+    MyTrainerMobileTheme {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = DefaultBackground), contentAlignment = Alignment.Center
+        ) {
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -64,9 +66,13 @@ fun ShowSignInForm() {
     )
 
     DefaultButton(onClick = { SignIn() }, text = stringResource(id = R.string.signInText))
-    DefaultButton(onClick = { GoToSignUp() }, text = stringResource(id = R.string.signup_goto_signup))
+    DefaultButton(
+        onClick = { GoToSignUp() },
+        text = stringResource(id = R.string.signup_goto_signup)
+    )
 }
 
-fun SignIn() {/*TODO*/}
+fun SignIn() {/*TODO*/
+}
 
 fun GoToSignUp() {}
