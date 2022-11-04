@@ -36,7 +36,7 @@ fun StartButton() {
         colors = ButtonDefaults.buttonColors(backgroundColor = Color.Magenta),
         modifier = Modifier
             .fillMaxWidth(0.5F)
-            .padding(0.dp, 15.dp, 0.dp, 25.dp),
+            .padding(0.dp, 5.dp, 0.dp, 10.dp),
     ) {
         Text(text = stringResource(id = R.string.start))
     }
@@ -49,40 +49,37 @@ fun WorkoutBar() {
             .background(Color(0xFF1E1E1E))
             .fillMaxWidth(1f)
     ) {
-        Column() {
-            Row(
-                Modifier.fillMaxWidth(1f),
-                horizontalArrangement = Arrangement.SpaceBetween,
-            ) {
-                IconButton(onClick = { /*TODO*/ }) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(
+                    modifier = Modifier.size(85.dp),
+                    imageVector = Icons.Filled.KeyboardArrowLeft,
+                    contentDescription = "back arrow",
+                    tint = Color.White,
+                )
+            }
+        }
+        Column(modifier = Modifier.fillMaxWidth(1f), horizontalAlignment = Alignment.End) {
+            IconButton(onClick = { /*TODO*/ }) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(text = stringResource(id = R.string.favourite), color = Color.White)
                     Icon(
-                        modifier = Modifier.size(50.dp),
-                        imageVector = Icons.Filled.KeyboardArrowLeft,
-                        contentDescription = "back arrow"
-                    )
-                }
-                IconButton(onClick = { /*TODO*/ }) {
-                    Icon(
-                        modifier = Modifier.size(50.dp),
+                        modifier = Modifier.size(35.dp),
                         imageVector = Icons.Filled.Favorite,
-                        contentDescription = "Favorite"
-
+                        contentDescription = "Favorite",
+                        tint = Color.White,
                     )
-                    Text( text = stringResource(id = R.string.favourite) )
                 }
             }
-            Column(
-                Modifier.fillMaxWidth(1f),
-                horizontalAlignment = Alignment.End
-            ) {
-                IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = { /*TODO*/ }) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(text = stringResource(id = R.string.rate), color = Color.White)
                     Icon(
-                        modifier = Modifier.size(50.dp),
+                        modifier = Modifier.size(35.dp),
                         imageVector = Icons.Filled.Star,
-                        contentDescription = "Star"
-
+                        contentDescription = "Star",
+                        tint = Color.White,
                     )
-                    Text(text = stringResource(id = R.string.rate))
                 }
             }
         }
@@ -104,7 +101,7 @@ fun StartBar() {
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Preview
 @Composable
-fun StartWorkout() {
+fun ViewWorkout() {
     val list = listOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8)
     Scaffold(modifier = Modifier.fillMaxSize(),
         backgroundColor = Color.DarkGray,
@@ -122,8 +119,8 @@ fun StartWorkout() {
             DescriptorBox()
             Box(
                 modifier = Modifier
-                    .height(180.dp)
-                    .width(180.dp)
+                    .height(120.dp)
+                    .width(120.dp)
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.arms),
@@ -136,7 +133,7 @@ fun StartWorkout() {
             }
             LazyColumn(
                 modifier = Modifier
-                    .padding(), contentPadding = PaddingValues(20.dp)
+                    .padding(), contentPadding = PaddingValues(20.dp, 10.dp, 20.dp, 60.dp)
             ) {
                 items(items = list, itemContent = { item ->
                     Box(modifier = Modifier.padding(10.dp)) {
@@ -162,12 +159,12 @@ fun DescriptorBox() {
             Row(Modifier.offset(x = 10.dp)) {
                 Text("Routine Title", fontSize = 24.sp, color = Color.White)
             }
-            Spacer(modifier = Modifier.padding(10.dp, 0.dp, 0.dp, 10.dp))
+            Spacer(modifier = Modifier.padding(7.dp, 0.dp, 0.dp, 0.dp))
             Row(Modifier.offset(x = 10.dp)) {
                 Text("38'", color = Color.White) // tiempo de rutina???
                 Text("Intermediate", color = Color.White) // dificultad
             }
-            Spacer(modifier = Modifier.padding(10.dp, 0.dp, 0.dp, 10.dp))
+            Spacer(modifier = Modifier.padding(7.dp, 0.dp, 0.dp, 0.dp))
             Row(Modifier.offset(x = 10.dp)) {
                 Text("Rating", color = Color.White) // rating
                 Text("username", color = Color.White) // username????
@@ -175,14 +172,14 @@ fun DescriptorBox() {
         }
         Column(horizontalAlignment = Alignment.End, modifier = Modifier.fillMaxWidth()) {
             IconButton(onClick = { /*TODO*/ }) {
-                Column() {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Icon(
-                        modifier = Modifier.size(50.dp),
+                        modifier = Modifier.size(40.dp).padding(0.dp, 10.dp, 10.dp, 0.dp),
                         imageVector = Icons.Filled.Share,
                         contentDescription = "Share",
                         tint = Color.White
                     )
-                    Text(text = stringResource(id = R.string.share))
+                    Text(text = stringResource(id = R.string.share), color = Color.White, modifier = Modifier.padding(0.dp, 0.dp, 10.dp, 0.dp))
                 }
             }
         }
