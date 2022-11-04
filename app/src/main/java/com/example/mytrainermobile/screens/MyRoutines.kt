@@ -1,6 +1,5 @@
 package com.example.mytrainermobile.screens
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -9,18 +8,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.mytrainermobile.classes.Routine
 import com.example.mytrainermobile.R
+import com.example.mytrainermobile.classes.Routine
 import com.example.mytrainermobile.components.RoutineBox
 import com.example.mytrainermobile.components.TitleBox
 import com.example.mytrainermobile.components.TitleForSection
 
 
-@OptIn(ExperimentalFoundationApi::class)
+@Preview
 @Composable
-fun FavouritesView() {
-
+fun MyRoutines() {
     val list = listOf<Routine>(
         Routine(1, "r1", "Chest"),
         Routine(2, "r2", "Back"),
@@ -53,7 +52,7 @@ fun FavouritesView() {
                     .fillMaxHeight(0.3f), verticalArrangement = Arrangement.SpaceEvenly
             ) {
                 TitleForSection()
-                TitleBox(title = stringResource(id = R.string.myfavourites), 80.dp)
+                TitleBox(title = stringResource(id = R.string.myroutines), 25.dp)
             }
             LazyVerticalGrid(
                 modifier = Modifier.fillMaxSize(),
@@ -71,4 +70,3 @@ fun FavouritesView() {
         }
     }
 }
-

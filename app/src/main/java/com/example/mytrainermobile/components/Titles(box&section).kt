@@ -32,7 +32,7 @@ fun TitleBox(title: String, startPadding: Dp) {
                 color = Color.Magenta,
                 shape = RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp)
             )
-            .fillMaxHeight(0.15f)
+            .fillMaxHeight(0.20f)
             .fillMaxWidth(0.45f)
     ) {
         Text(

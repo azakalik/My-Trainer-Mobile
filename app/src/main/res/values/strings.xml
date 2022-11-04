@@ -15,10 +15,16 @@
     <string name="signup_goto_signin">Go to sign in</string>
     <string name="signup_goto_signup">Go to sign up</string>
 
-    <!-- workout-1 -->
+    <!-- ViewWorkout -->
     <string name="share">Share</string>
     <string name="favourite">Favourite Me!</string>
     <string name="rate">Rate Me!</string>
     <string name="start">Start Workout</string>
+
+    <!-- Favourites -->
+    <string name="myfavourites">My Favourites</string>
+
+    <!-- MyRoutines -->
+    <string name="myroutines">My Routines</string>
 
 </resources>
