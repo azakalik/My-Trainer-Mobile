@@ -36,7 +36,7 @@ fun HomeScreen(){
 
     val l = listOf<Int>(1,2,3,4,5,6,7,8,9,10,11,12,13,14)
 
-    Scaffold(modifier = Modifier.fillMaxSize(), backgroundColor = Color.Black) {
+    Scaffold(modifier = Modifier.fillMaxSize()) {
         Column( modifier = Modifier.fillMaxSize() ) {
             Spacer(modifier = Modifier
                 .fillMaxWidth()
@@ -52,8 +52,7 @@ fun HomeScreen(){
                 .height(40.dp))
             TitleBox(title = "Last Routines", startPadding = 10.dp)
             Box(modifier = Modifier
-                .fillMaxWidth()
-                .height(180.dp)){
+                .fillMaxWidth()){
                 LazyRow(modifier = Modifier.fillMaxSize().padding(15.dp)){
                     items(l.size) {
                         num -> RoutineBox(routineName = "pepe", routineType = "pecho")
@@ -62,8 +61,7 @@ fun HomeScreen(){
             }
             TitleBox(title = "Recommended", startPadding = 10.dp)
             Box(modifier = Modifier
-                .fillMaxWidth()
-                .height(180.dp)){
+                .fillMaxWidth()){
                 LazyRow(modifier = Modifier.fillMaxSize().padding(15.dp)){
                     items(l.size) {
                             num -> RoutineBox(routineName = "pepe", routineType = "pecho")

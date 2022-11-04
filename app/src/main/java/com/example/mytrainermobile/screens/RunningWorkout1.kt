@@ -23,7 +23,7 @@ import com.example.mytrainermobile.components.ExerciseBox
 
 @Preview(showBackground = true)
 @Composable
-fun WorkoutView() {
+fun RunningWorkout1() {
     val list = listOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5 ,6 ,7 ,8)
     Scaffold(
         modifier = Modifier.fillMaxSize(),

@@ -101,7 +101,7 @@ fun StartBar() {
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Preview
 @Composable
-fun ViewWorkout() {
+fun StartWorkout() {
     val list = listOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8)
     Scaffold(modifier = Modifier.fillMaxSize(),
         backgroundColor = Color.DarkGray,

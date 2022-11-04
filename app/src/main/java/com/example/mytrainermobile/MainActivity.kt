@@ -4,9 +4,10 @@ package com.example.mytrainermobile
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.ComponentActivity
-import com.example.mytrainermobile.screens.ArriveScreen
-import com.example.mytrainermobile.screens.MyRoutines
-import com.example.mytrainermobile.screens.ViewWorkout
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.mytrainermobile.screens.*
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 
 class MainActivity : ComponentActivity() {
@@ -14,8 +15,17 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyTrainerMobileTheme {
-                // A surface container using the 'background' color from the theme
-                MyRoutines()
+                val navController = rememberNavController()
+                NavHost(navController = navController, startDestination = "home") {
+                    composable("arrive") { ArriveScreen(/*...*/) }
+                    composable("favourites") { FavouritesView(/*...*/) }
+                    composable("home") { HomeScreen() }
+                    composable("myRoutines") { MyRoutines() }
+                    composable("signIn") { ShowSignInScreen() }
+                    composable("signUp") { ShowSignupScreen() }
+                    composable("startWorkout") { StartWorkout() }
+                    composable("runningWorkout1") { RunningWorkout1() }
+                }
             }
         }
     }
