@@ -1,5 +1,6 @@
 package com.example.mytrainermobile.screens
 
+import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -22,6 +23,7 @@ import com.example.mytrainermobile.components.TitleBox
 import com.example.mytrainermobile.components.TitleForSection
 
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Preview ( showBackground = true )
 @Composable
 fun HomeScreen(){
