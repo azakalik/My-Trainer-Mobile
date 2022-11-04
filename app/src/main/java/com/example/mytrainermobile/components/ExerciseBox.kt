@@ -23,7 +23,7 @@ fun ExerciseBox() {
     ) {
         Row(
             modifier = Modifier
-                .background(Color(0xFF1E1E1E))
+                .background(Color.DarkGray)
                 .padding(8.dp)
         ) {
             //Image(painter = painterResource(id = R.drawable.))

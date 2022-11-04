@@ -32,6 +32,7 @@ import androidx.compose.ui.window.PopupPositionProvider
 import coil.size.Size
 import com.example.mytrainermobile.R
 import com.example.mytrainermobile.components.ExerciseBox
+import com.example.mytrainermobile.ui.theme.DefaultBackground
 import java.util.Properties
 
 
@@ -176,7 +177,7 @@ fun RatingSystem() {
 fun StartBar() {
     Box(
         Modifier
-            .background(Color(0xFF1E1E1E))
+            .background(DefaultBackground)
             .fillMaxWidth(1f),
         contentAlignment = Alignment.Center
     ) {
@@ -190,16 +191,14 @@ fun StartBar() {
 fun StartWorkout() {
     val list = listOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8)
     Scaffold(modifier = Modifier.fillMaxSize(),
-        backgroundColor = Color.DarkGray,
+        backgroundColor = DefaultBackground,
         topBar = { WorkoutBar() },
         bottomBar = { StartBar() }) {
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier
-                .fillMaxSize(1f)
-                .background(Color.DarkGray)
+            modifier = Modifier.fillMaxSize(1f)
         ) {
             Spacer(modifier = Modifier.padding(0.dp, 10.dp, 0.dp, 0.dp))
             DescriptorBox()

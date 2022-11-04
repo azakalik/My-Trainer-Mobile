@@ -15,8 +15,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.mytrainermobile.R
+import com.example.mytrainermobile.aux_functions.pictureDecider
 
 @Composable
 fun RoutineBox(routineName: String, routineType: String) {
@@ -29,7 +32,7 @@ fun RoutineBox(routineName: String, routineType: String) {
         shape = RoundedCornerShape(15.dp)
     ) {
         Image(
-            painter = painterResource(id = R.drawable.arms),
+            painter = painterResource(id = pictureDecider(routineType)),
             contentDescription = "image",
             contentScale = ContentScale.FillBounds,
             modifier = Modifier.fillMaxSize()
@@ -39,10 +42,13 @@ fun RoutineBox(routineName: String, routineType: String) {
                 Icon(
                     Icons.Filled.Favorite,
                     contentDescription = "Favorite",
-                    modifier = Modifier.size(ButtonDefaults.IconSize),
+                    modifier = Modifier.size(30.dp),
                     tint = Color.LightGray,
                 )
             }
+        }
+        Row(verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.Start){
+            Text(text = routineName, fontSize = 20.sp, color = Color.White, modifier = Modifier.padding(start = 15.dp, bottom = 5.dp))
         }
     }
 }
