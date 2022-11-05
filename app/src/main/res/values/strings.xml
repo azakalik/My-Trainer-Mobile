@@ -6,14 +6,14 @@
     <string name="introScreenMessage">Train anywhere, anytime.</string>
 
     <!--SIGN UP and IN SCREEN-->
-    <string name="signup_insert_name">Insert name</string>
-    <string name="signup_insert_surname">Insert surname</string>
-    <string name="signup_insert_email">Insert email</string>
-    <string name="signup_reinsert_email">Reinsert email</string>
-    <string name="signup_insert_password">Insert password</string>
-    <string name="signup_reinsert_password">Reinsert password</string>
-    <string name="signup_goto_signin">Go to sign in</string>
-    <string name="signup_goto_signup">Go to sign up</string>
+    <string name="signup_insert_name">Insert Name</string>
+    <string name="signup_insert_surname">Insert Surname</string>
+    <string name="signup_insert_email">Insert Email</string>
+    <string name="signup_reinsert_email">Reinsert Email</string>
+    <string name="signup_insert_password">Insert Password</string>
+    <string name="signup_reinsert_password">Reinsert Password</string>
+    <string name="signup_goto_signin">Sign In</string>
+    <string name="signup_goto_signup">Sign Up</string>
 
     <!-- ViewWorkout -->
     <string name="share">Share</string>
@@ -29,5 +29,8 @@
 
     <!-- MyRoutines -->
     <string name="myroutines">My Routines</string>
+
+    <!-- Home/Explore -->
+    <string name="explore">Explore</string>
 
 </resources>
