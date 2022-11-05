@@ -12,15 +12,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHost
 import com.example.mytrainermobile.R
 import com.example.mytrainermobile.components.DefaultButton
 import com.example.mytrainermobile.components.DefaultTextField
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 
-@Preview(showBackground = true)
 @Composable
-fun ShowSignInScreen() {
+fun ShowSignInScreen(onNavigateToSignUp: () -> Unit, onNavigateToHome: () -> Unit) {
     MyTrainerMobileTheme {
         Box(
             modifier = Modifier
@@ -33,6 +33,7 @@ fun ShowSignInScreen() {
             ) {
                 SignInText()
                 ShowSignInForm()
+                ShowSignInButtons(onNavigateToSignUp, onNavigateToHome)
             }
         }
     }
@@ -64,15 +65,21 @@ fun ShowSignInForm() {
         callback = { password = it },
         placeholder = stringResource(id = R.string.signup_insert_password)
     )
+}
 
-    DefaultButton(onClick = { SignIn() }, text = stringResource(id = R.string.signInText))
+@Composable
+fun ShowSignInButtons(onNavigateToSignUp: () -> Unit, onNavigateToHome: () -> Unit){
+    DefaultButton(onClick = { SignIn(onNavigateToHome) }, text = stringResource(id = R.string.signInText))
     DefaultButton(
-        onClick = { GoToSignUp() },
+        onClick = { GoToSignUp(onNavigateToSignUp) },
         text = stringResource(id = R.string.signup_goto_signup)
     )
 }
 
-fun SignIn() {/*TODO*/
+fun SignIn(onNavigateToHome: () -> Unit) {/*TODO*/
+    onNavigateToHome()
 }
 
-fun GoToSignUp() {}
+fun GoToSignUp(onNavigateToSignUp: () -> Unit) {
+    onNavigateToSignUp()
+}

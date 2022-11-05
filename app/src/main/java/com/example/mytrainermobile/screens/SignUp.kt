@@ -22,9 +22,8 @@ import com.example.mytrainermobile.components.DefaultTextField
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 
-@Preview(showBackground = true)
 @Composable
-fun ShowSignupScreen() {
+fun ShowSignupScreen(onNavigateToSignIn: () -> Unit, onNavigateToHome: () -> Unit) {
     MyTrainerMobileTheme {
         Box(
             modifier = Modifier
@@ -45,6 +44,7 @@ fun ShowSignupScreen() {
                     SignupText()
                 }
                 ShowSignUpForm()
+                ShowSignUpButtons(onNavigateToSignIn, onNavigateToHome)
             }
         }
     }
@@ -109,16 +109,21 @@ fun ShowSignUpForm() {
         placeholder = stringResource(id = R.string.signup_reinsert_password)
     )
 
-    DefaultButton(text = stringResource(id = R.string.signUpText), onClick = { SignUp() })
+    //aca iria el datepicker
+}
+
+@Composable
+fun ShowSignUpButtons(onNavigateToSignIn: () -> Unit, onNavigateToHome: () -> Unit){
+    DefaultButton(text = stringResource(id = R.string.signUpText), onClick = { SignUp(onNavigateToHome) })
     DefaultButton(
         text = stringResource(id = R.string.signup_goto_signin),
-        onClick = { GoToSignIn() })
-    //aca iria el datepicker
-
-
+        onClick = { GoToSignIn(onNavigateToSignIn) })
 }
 
-fun SignUp() {/*TODO*/
+fun SignUp(onNavigateToHome: () -> Unit) {/*TODO*/
+    onNavigateToHome()
 }
 
-fun GoToSignIn() {}
+fun GoToSignIn(onNavigateToSignIn: () -> Unit) {
+    onNavigateToSignIn()
+}

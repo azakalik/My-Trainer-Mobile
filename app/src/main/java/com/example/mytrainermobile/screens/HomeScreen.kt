@@ -21,117 +21,123 @@ import com.example.mytrainermobile.components.TitleBox
 import com.example.mytrainermobile.components.TitleForSection
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 
-
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-@Preview(showBackground = true)
+@Preview
 @Composable
-fun HomeScreen() {
-    MyTrainerMobileTheme() {
-        val list = listOf<Routine>(
-            Routine(1, "r1", "cardio"),
-            Routine(2, "r2", "back"),
-            Routine(3, "r3", "legs"),
-            Routine(3, "r3", "cardio"),
-            Routine(3, "r3", "mixed"),
-            Routine(3, "r3", "Legs"),
-            Routine(3, "r3", "Legs"),
-            Routine(3, "r3", "Legs"),
-            Routine(3, "r3", "Legs"),
-            Routine(3, "r3", "Legs"),
-            Routine(3, "r3", "Legs"),
-            Routine(3, "r3", "Legs"),
-            Routine(3, "r3", "Legs"),
-            Routine(3, "r3", "Legs"),
-            Routine(3, "r3", "Legs"),
-            Routine(3, "r3", "Legs"),
-            Routine(3, "r3", "Legs"),
-            Routine(3, "r3", "Legs")
-        )
-
-        Scaffold(modifier = Modifier.fillMaxSize()) {
-            Column(modifier = Modifier.fillMaxSize()) {
-                Spacer(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(20.dp)
-                )
-                TitleForSection()
-                Spacer(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(40.dp)
-                )
-                Text(
-                    text = "Glad to have you back",
-                    color = Color.White,
-                    modifier = Modifier.padding(start = 15.dp),
-                    fontSize = 20.sp
-                )
-                Text(
-                    text = "James Smith",
-                    color = Color.White,
-                    modifier = Modifier.padding(start = 20.dp),
-                    style = TextStyle(fontWeight = FontWeight.Bold),
-                    fontSize = 30.sp
-                )
-                Spacer(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(40.dp)
-                )
-                LazyVerticalGrid(
-                    modifier = Modifier.fillMaxSize(),
-                    horizontalArrangement = Arrangement.SpaceAround,
-                    verticalArrangement = Arrangement.Center,
-                    columns = GridCells.Adaptive(150.dp),
-                    content = {
-                        items(list.size) { idx ->
-                            RoutineBox(
-                                routineName = list[idx].name,
-                                routineType = list[idx].type
-                            )
-                        }
-                    })
-//                TitleBox(title = "Last Routines", startPadding = 10.dp)
-//                Box(
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                ) {
-//                    LazyRow(
-//                        modifier = Modifier
-//                            .fillMaxSize()
-//                            .padding(15.dp)
-//                    ) {
-//                        items(l.size) { num ->
-//                            RoutineBox(routineName = "pepe", routineType = "pecho")
-//                        }
-//                    }
-//                }
-//                TitleBox(title = "Recommended", startPadding = 10.dp)
-//                Box(
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                ) {
-//                    LazyRow(
-//                        modifier = Modifier
-//                            .fillMaxSize()
-//                            .padding(15.dp)
-//                    ) {
-//                        items(l.size) { num ->
-//                            RoutineBox(routineName = "pepe", routineType = "pecho")
-//                        }
-//                    }
-//                }
-
-            }
-        }
-    }
-//    val configuration = LocalConfiguration.current
-//    if ( configuration.orientation == Configuration.ORIENTATION_PORTRAIT){
-//        configuration.
-//    } else {
-//
-//    }
-
+fun HomeScreen(){
+    DefaultShowRoutinesScreen(title = "Home screen")
 }
+
+
+//@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+//@Preview(showBackground = true)
+//@Composable
+//fun HomeScreen() {
+//    MyTrainerMobileTheme() {
+//        val list = listOf<Routine>(
+//            Routine(1, "r1", "cardio"),
+//            Routine(2, "r2", "back"),
+//            Routine(3, "r3", "legs"),
+//            Routine(3, "r3", "cardio"),
+//            Routine(3, "r3", "mixed"),
+//            Routine(3, "r3", "Legs"),
+//            Routine(3, "r3", "Legs"),
+//            Routine(3, "r3", "Legs"),
+//            Routine(3, "r3", "Legs"),
+//            Routine(3, "r3", "Legs"),
+//            Routine(3, "r3", "Legs"),
+//            Routine(3, "r3", "Legs"),
+//            Routine(3, "r3", "Legs"),
+//            Routine(3, "r3", "Legs"),
+//            Routine(3, "r3", "Legs"),
+//            Routine(3, "r3", "Legs"),
+//            Routine(3, "r3", "Legs"),
+//            Routine(3, "r3", "Legs")
+//        )
+//
+//        Scaffold(modifier = Modifier.fillMaxSize()) {
+//            Column(modifier = Modifier.fillMaxSize()) {
+//                Spacer(
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .height(20.dp)
+//                )
+//                TitleForSection()
+//                Spacer(
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .height(40.dp)
+//                )
+//                Text(
+//                    text = "Glad to have you back",
+//                    color = Color.White,
+//                    modifier = Modifier.padding(start = 15.dp),
+//                    fontSize = 20.sp
+//                )
+//                Text(
+//                    text = "James Smith",
+//                    color = Color.White,
+//                    modifier = Modifier.padding(start = 20.dp),
+//                    style = TextStyle(fontWeight = FontWeight.Bold),
+//                    fontSize = 30.sp
+//                )
+//                Spacer(
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .height(40.dp)
+//                )
+//                LazyVerticalGrid(
+//                    modifier = Modifier.fillMaxSize(),
+//                    horizontalArrangement = Arrangement.SpaceAround,
+//                    verticalArrangement = Arrangement.Center,
+//                    columns = GridCells.Adaptive(150.dp),
+//                    content = {
+//                        items(list.size) { idx ->
+//                            RoutineBox(
+//                                routineName = list[idx].name,
+//                                routineType = list[idx].type
+//                            )
+//                        }
+//                    })
+////                TitleBox(title = "Last Routines", startPadding = 10.dp)
+////                Box(
+////                    modifier = Modifier
+////                        .fillMaxWidth()
+////                ) {
+////                    LazyRow(
+////                        modifier = Modifier
+////                            .fillMaxSize()
+////                            .padding(15.dp)
+////                    ) {
+////                        items(l.size) { num ->
+////                            RoutineBox(routineName = "pepe", routineType = "pecho")
+////                        }
+////                    }
+////                }
+////                TitleBox(title = "Recommended", startPadding = 10.dp)
+////                Box(
+////                    modifier = Modifier
+////                        .fillMaxWidth()
+////                ) {
+////                    LazyRow(
+////                        modifier = Modifier
+////                            .fillMaxSize()
+////                            .padding(15.dp)
+////                    ) {
+////                        items(l.size) { num ->
+////                            RoutineBox(routineName = "pepe", routineType = "pecho")
+////                        }
+////                    }
+////                }
+//
+//            }
+//        }
+//    }
+////    val configuration = LocalConfiguration.current
+////    if ( configuration.orientation == Configuration.ORIENTATION_PORTRAIT){
+////        configuration.
+////    } else {
+////
+////    }
+//
+//}
 
