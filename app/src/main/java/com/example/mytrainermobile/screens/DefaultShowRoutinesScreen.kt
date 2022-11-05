@@ -1,14 +1,23 @@
 package com.example.mytrainermobile.screens
 
 import android.annotation.SuppressLint
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.material.BottomAppBar
-import androidx.compose.material.Scaffold
-import androidx.compose.runtime.Composable
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.mytrainermobile.classes.Routine
 import com.example.mytrainermobile.components.RoutineBox
@@ -23,25 +32,31 @@ import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 fun DefaultShowRoutinesScreen(title: String) {
     MyTrainerMobileTheme() {
         val list = listOf<Routine>(
-            Routine(1, "r1", "chest"),
-            Routine(2, "r2", "back"),
-            Routine(3, "r3", "legs"),
-            Routine(3, "r3", "cardio"),
-            Routine(3, "r3", "Legs"),
-            Routine(3, "r3", "Legs"),
-            Routine(3, "r3", "Legs"),
-            Routine(3, "r3", "Legs"),
-            Routine(3, "r3", "Legs"),
-            Routine(3, "r3", "Legs"),
-            Routine(3, "r3", "Legs"),
-            Routine(3, "r3", "Legs"),
-            Routine(3, "r3", "Legs"),
-            Routine(3, "r3", "Legs"),
-            Routine(3, "r3", "Legs"),
-            Routine(3, "r3", "Legs"),
-            Routine(3, "r3", "Legs"),
-            Routine(3, "r3", "Legs")
-        )
+            Routine(1, "rutina chest", "chest"),
+            Routine(2, "rutina back", "back"),
+            Routine(3, "rutina legs", "legs"),
+            Routine(3, "rutina cardio", "cardio"),
+            Routine(1, "rutina chest", "chest"),
+            Routine(2, "rutina back", "back"),
+            Routine(3, "rutina legs", "legs"),
+            Routine(3, "rutina cardio", "cardio"),
+            Routine(1, "rutina chest", "chest"),
+            Routine(2, "rutina back", "back"),
+            Routine(3, "rutina legs", "legs"),
+            Routine(3, "rutina cardio", "cardio"),
+            Routine(1, "rutina chest", "chest"),
+            Routine(2, "rutina back", "back"),
+            Routine(3, "rutina legs", "legs"),
+            Routine(3, "rutina cardio", "cardio"),
+            Routine(1, "rutina chest", "chest"),
+            Routine(2, "rutina back", "back"),
+            Routine(3, "rutina legs", "legs"),
+            Routine(3, "rutina cardio", "cardio"),
+            Routine(1, "rutina chest", "chest"),
+            Routine(2, "rutina back", "back"),
+            Routine(3, "rutina legs", "legs"),
+            Routine(3, "rutina cardio", "cardio"),
+            )
         Scaffold(
             modifier = Modifier
                 .fillMaxSize()
@@ -49,16 +64,42 @@ fun DefaultShowRoutinesScreen(title: String) {
             bottomBar = { ThisBottomAppBar() },
         ) {
             Column(modifier = Modifier.fillMaxWidth()) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(0.3f), verticalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    TitleForSection()
-                    TitleBox(title = title, 30.dp,
+                val configuration = LocalConfiguration.current
+                when (configuration.orientation) {
+                    Configuration.ORIENTATION_PORTRAIT -> {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .fillMaxHeight(0.23f),
+                            verticalArrangement = Arrangement.SpaceEvenly
+                        ) {
+                            TitleForSection()
+                            TitleBox(
+                                title = title,
+                                30.dp,
                                 0.2f,
-                        0.5f
-                    )
+                                0.5f
+                            )
+                        }
+                    }
+                    else -> {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .fillMaxHeight(0.2f),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            TitleBox(
+                                title = title,
+                                30.dp,
+                                0.5f,
+                                0.3f
+                            )
+                            TitleForSection()
+                            Spacer(modifier = Modifier.padding(0.dp, 0.dp, 25.dp, 0.dp))
+                        }
+                    }
                 }
                 LazyVerticalGrid(
                     modifier = Modifier.fillMaxWidth(),
@@ -80,7 +121,47 @@ fun DefaultShowRoutinesScreen(title: String) {
 
 @Composable
 fun ThisBottomAppBar(){
-    BottomAppBar() {
+    var selectedItem by remember { mutableStateOf(0) }
+    val items = listOf("Songs", "Artists", "Playlists")
 
+    NavigationBar {
+        items.forEachIndexed { index, item ->
+            NavigationBarItem(
+                icon = { Icon(Icons.Filled.Favorite, contentDescription = item) },
+                label = { Text(item) },
+                selected = selectedItem == index,
+                onClick = { selectedItem = index }
+            )
+        }
     }
+//    val selectedIndex = remember { mutableStateOf(0) }
+//    BottomNavigation(elevation = 10.dp) {
+//
+//        BottomNavigationItem(icon = {
+//            Icon(imageVector = Icons.Default.Home,"")
+//        },
+//            label = { Text(text = "Home") },
+//            selected = (selectedIndex.value == 0),
+//            onClick = {
+//                selectedIndex.value = 0
+//            })
+//
+//        BottomNavigationItem(icon = {
+//            Icon(imageVector = Icons.Default.Favorite,"")
+//        },
+//            label = { Text(text = "Favorite") },
+//            selected = (selectedIndex.value == 1),
+//            onClick = {
+//                selectedIndex.value = 1
+//            })
+//
+//        BottomNavigationItem(icon = {
+//            Icon(imageVector = Icons.Default.Person,"")
+//        },
+//            label = { Text(text = "Profile") },
+//            selected = (selectedIndex.value == 2),
+//            onClick = {
+//                selectedIndex.value = 2
+//            })
+//    }
 }
