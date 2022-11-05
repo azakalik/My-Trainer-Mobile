@@ -11,11 +11,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -121,18 +123,33 @@ fun DefaultShowRoutinesScreen(title: String) {
 
 @Composable
 fun ThisBottomAppBar(){
-    var selectedItem by remember { mutableStateOf(0) }
-    val items = listOf("Songs", "Artists", "Playlists")
+    var selectedItem by remember { mutableStateOf("") }
 
-    NavigationBar {
-        items.forEachIndexed { index, item ->
-            NavigationBarItem(
-                icon = { Icon(Icons.Filled.Favorite, contentDescription = item) },
-                label = { Text(item) },
-                selected = selectedItem == index,
-                onClick = { selectedItem = index }
-            )
-        }
+    NavigationBar(containerColor = DefaultBackground, contentColor = Color.Magenta) {
+        NavigationBarItem(
+            icon = { Icon(Icons.Filled.Home, contentDescription = "Home") },
+            label = { Text("Home") },
+            onClick = { selectedItem = "home" },
+            selected = selectedItem == "home"
+        )
+        NavigationBarItem(
+            icon = { Icon(Icons.Filled.Favorite, contentDescription = "Favourites") },
+            label = { Text("Favourites") },
+            onClick = { selectedItem = "fav" },
+            selected = selectedItem == "fav"
+        )
+        NavigationBarItem(
+            icon = { Icon(Icons.Filled.Search, contentDescription = "Explore") },
+            label = { Text("Explore") },
+            onClick = { selectedItem = "exp" },
+            selected = selectedItem == "exp"
+        )
+        NavigationBarItem(
+            icon = { Icon(Icons.Filled.Person, contentDescription = "Me") },
+            label = { Text("Me") },
+            onClick = { selectedItem = "me" },
+            selected = selectedItem == "me"
+        )
     }
 //    val selectedIndex = remember { mutableStateOf(0) }
 //    BottomNavigation(elevation = 10.dp) {
