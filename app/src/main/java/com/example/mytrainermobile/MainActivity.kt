@@ -15,7 +15,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyTrainerMobileTheme {
-                val navController = rememberNavController()
+                HomeScreen()
+                /*val navController = rememberNavController()
                 NavHost(navController = navController, startDestination = "signIn") {
                     composable("arrive") { ArriveScreen(/*...*/) }
                     composable("favourites") { FavouritesView(/*...*/) }
@@ -25,7 +26,7 @@ class MainActivity : ComponentActivity() {
                     composable("signUp") { ShowSignupScreen() }
                     composable("startWorkout") { StartWorkout() }
                     composable("runningWorkout1") { RunningWorkout1() }
-                }
+                }*/
             }
         }
     }
