@@ -25,97 +25,10 @@ import com.example.mytrainermobile.components.RoutineBox
 import com.example.mytrainermobile.components.TitleBox
 import com.example.mytrainermobile.components.TitleForSection
 
-@Preview
 @Composable
-fun MyRoutines(onNavigateToHome: () -> Unit,
+fun MyRoutines(onNavigateToMyRoutines: () -> Unit,
                onNavigateToFavourites: () -> Unit,
                onNavigateToExplore: () -> Unit,
                onNavigateToProfile: () -> Unit){
-    DefaultShowRoutinesScreen(title = stringResource(id = R.string.myroutines), onNavigateToHome, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile)
+    DefaultShowRoutinesScreen(title = stringResource(id = R.string.myroutines), onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile)
 }
-
-//
-//@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-//@Preview
-//@Composable
-//fun MyRoutines() {
-//    val list = listOf<Routine>(
-//        Routine(1, "r1", "Chest"),
-//        Routine(2, "r2", "Back"),
-//        Routine(3, "r3", "Legs"),
-//        Routine(3, "r3", "Legs"),
-//        Routine(3, "r3", "Legs"),
-//        Routine(3, "r3", "Legs"),
-//        Routine(3, "r3", "Legs"),
-//        Routine(3, "r3", "Legs"),
-//        Routine(3, "r3", "Legs"),
-//        Routine(3, "r3", "Legs"),
-//        Routine(3, "r3", "Legs"),
-//        Routine(3, "r3", "Legs"),
-//        Routine(3, "r3", "Legs"),
-//        Routine(3, "r3", "Legs"),
-//        Routine(3, "r3", "Legs"),
-//        Routine(3, "r3", "Legs"),
-//        Routine(3, "r3", "Legs"),
-//        Routine(3, "r3", "Legs")
-//    )
-//
-//    Scaffold(modifier = Modifier
-//        .fillMaxSize()
-//        .background(color = colorResource(id = R.color.blackMainTheme)),
-//        bottomBar = { NavBottomBar() }) {
-//        Column(modifier = Modifier.fillMaxSize(), ) {
-//            val configuration = LocalConfiguration.current
-//            when (configuration.orientation) {
-//                Configuration.ORIENTATION_PORTRAIT -> {
-//                    Column(
-//                        modifier = Modifier
-//                            .fillMaxWidth()
-//                            .fillMaxHeight(0.3f),
-//                        verticalArrangement = Arrangement.SpaceEvenly
-//                    ) {
-//                        TitleForSection()
-//                        TitleBox(
-//                            title = stringResource(id = R.string.myroutines),
-//                            30.dp,
-//                            0.2f,
-//                            0.5f
-//                        )
-//                    }
-//                }
-//                else -> {
-//                    Row(
-//                        modifier = Modifier
-//                            .fillMaxWidth()
-//                            .fillMaxHeight(0.2f),
-//                        horizontalArrangement = Arrangement.SpaceBetween,
-//                        verticalAlignment = Alignment.CenterVertically
-//                    ) {
-//                        TitleBox(
-//                            title = stringResource(id = R.string.myroutines),
-//                            30.dp,
-//                            0.5f,
-//                            0.3f
-//                        )
-//                        TitleForSection()
-//                        Spacer(modifier = Modifier.padding(0.dp, 0.dp, 25.dp, 0.dp))
-//                    }
-//                }
-//            }
-//            LazyVerticalGrid(
-//                modifier = Modifier.fillMaxSize(),
-//                horizontalArrangement = Arrangement.SpaceAround,
-//                verticalArrangement = Arrangement.Center,
-//                columns = GridCells.Fixed(2),
-//                content = {
-//                    items(list.size) { idx ->
-//                        RoutineBox(
-//                            routineName = list[idx].name,
-//                            routineType = list[idx].type
-//                        )
-//                    }
-//                }
-//            )
-//        }
-//    }
-//}

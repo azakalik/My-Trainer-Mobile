@@ -9,44 +9,57 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemColors
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 
 @Composable
-fun ThisBottomAppBar(onNavigateToHome: () -> Unit,
-                     onNavigateToFavourites: () -> Unit,
-                     onNavigateToExplore: () -> Unit,
-                     onNavigateToProfile: () -> Unit) {
-    var selectedItem by remember { mutableStateOf("") }
+fun ThisBottomAppBar(
+    onNavigateToMyRoutines: () -> Unit,
+    onNavigateToFavourites: () -> Unit,
+    onNavigateToExplore: () -> Unit,
+    onNavigateToProfile: () -> Unit
+) {
+    var selectedItem by remember() { mutableStateOf("myRoutines") }
 
     NavigationBar(containerColor = DefaultBackground, contentColor = Color.Magenta) {
         NavigationBarItem(
-            icon = { Icon(Icons.Filled.Home, contentDescription = "Home") },
-            label = { Text("Home") },
-            onClick = { selectedItem = "home"
-                      onNavigateToHome()},
-            selected = selectedItem == "home"
+            icon = { Icon(Icons.Filled.Home, contentDescription = "myRoutines") },
+            label = { Text("My Routines") },
+            onClick = {
+                selectedItem = "myRoutines"
+                onNavigateToMyRoutines()
+            },
+            selected = selectedItem == "myRoutines",
+            colors = NavigationBarItemDefaults.colors(selectedIconColor = Color.Red)
         )
         NavigationBarItem(
             icon = { Icon(Icons.Filled.Favorite, contentDescription = "Favourites") },
             label = { Text("Favourites") },
-            onClick = { selectedItem = "fav"
-                      onNavigateToFavourites()},
+            onClick = {
+                selectedItem = "fav"
+                onNavigateToFavourites()
+            },
             selected = selectedItem == "fav"
         )
         NavigationBarItem(
             icon = { Icon(Icons.Filled.Search, contentDescription = "Explore") },
             label = { Text("Explore") },
-            onClick = { selectedItem = "exp"
-                      onNavigateToExplore()},
+            onClick = {
+                selectedItem = "exp"
+                onNavigateToExplore()
+            },
             selected = selectedItem == "exp"
         )
         NavigationBarItem(
             icon = { Icon(Icons.Filled.Person, contentDescription = "Me") },
             label = { Text("Me") },
-            onClick = { selectedItem = "me"
-                      onNavigateToProfile()},
+            onClick = {
+                selectedItem = "me"
+                onNavigateToProfile()
+            },
             selected = selectedItem == "me"
         )
     }

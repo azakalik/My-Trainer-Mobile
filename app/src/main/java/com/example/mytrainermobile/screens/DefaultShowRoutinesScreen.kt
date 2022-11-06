@@ -29,10 +29,10 @@ import com.example.mytrainermobile.components.TitleForSection
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 
-//This class is only meant to be used by home, favourites and my routines
+//This class is only meant to be used by explore, favourites and my routines
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun DefaultShowRoutinesScreen(title: String, onNavigateToHome: () -> Unit,
+fun DefaultShowRoutinesScreen(title: String, onNavigateToMyRoutines: () -> Unit,
                               onNavigateToFavourites: () -> Unit,
                               onNavigateToExplore: () -> Unit,
                               onNavigateToProfile: () -> Unit) {
@@ -67,7 +67,7 @@ fun DefaultShowRoutinesScreen(title: String, onNavigateToHome: () -> Unit,
             modifier = Modifier
                 .fillMaxSize()
                 .background(DefaultBackground),
-            bottomBar = { ThisBottomAppBar(onNavigateToHome, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile) },
+            bottomBar = { ThisBottomAppBar(onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile) },
         ) {
             Column(modifier = Modifier.fillMaxWidth()) {
                 val configuration = LocalConfiguration.current

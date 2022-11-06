@@ -35,37 +35,37 @@ fun MyAppNavHost(
         navController = navController,
         startDestination = startDestination
     ) {
-        val onNavigateToHome = {
+        val onNavigateToMyRoutines = {
             navController.navigate("myRoutines"){
                 popUpTo(0)
             }
         }
         val onNavigateToFavourites = {
             navController.navigate("favourites"){
-                popUpTo("home")
+                popUpTo("myRoutines")
             }
         }
         val onNavigateToExplore = {
-            navController.navigate("home"){ //todo
-                popUpTo("home")
+            navController.navigate("explore"){ //todo
+                popUpTo("myRoutines")
             }
         }
         val onNavigateToProfile = {
             navController.navigate("profile"){
-                popUpTo("home")
+                popUpTo("myRoutines")
             }
         }
         composable("arrive") { ArriveScreen(/*...*/) }
-        composable("favourites") { FavouritesView(onNavigateToHome, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile) }
-        composable("home") { HomeScreen(onNavigateToHome, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile) }
-        composable("profile") { ShowProfileScreen(onNavigateToHome, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile) }
-        composable("myRoutines") { MyRoutines(onNavigateToHome, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile) }
+        composable("favourites") { FavouritesView(onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile) }
+        composable("explore") { ExploreScreen(onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile) }
+        composable("profile") { ShowProfileScreen(onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile) }
+        composable("myRoutines") { MyRoutines(onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile) }
         composable("signIn") { ShowSignInScreen(onNavigateToSignUp = {navController.navigate("signUp"){
             popUpTo("signUp"){inclusive = false}
-        } }, onNavigateToHome) }
+        } }, onNavigateToMyRoutines) }
         composable("signUp") { ShowSignupScreen(onNavigateToSignIn = {navController.navigate("signIn"){
             popUpTo("signIn"){inclusive = true}
-        } }, onNavigateToHome) }
+        } }, onNavigateToMyRoutines) }
         composable("startWorkout") { StartWorkout() }
         composable("runningWorkout1") { RunningWorkout1() }
     }

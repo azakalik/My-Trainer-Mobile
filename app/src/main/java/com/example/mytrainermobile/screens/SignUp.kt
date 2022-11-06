@@ -23,7 +23,7 @@ import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 
 @Composable
-fun ShowSignupScreen(onNavigateToSignIn: () -> Unit, onNavigateToHome: () -> Unit) {
+fun ShowSignupScreen(onNavigateToSignIn: () -> Unit, onNavigateToMyRoutines: () -> Unit) {
     MyTrainerMobileTheme {
         Box(
             modifier = Modifier
@@ -44,7 +44,7 @@ fun ShowSignupScreen(onNavigateToSignIn: () -> Unit, onNavigateToHome: () -> Uni
                     SignupText()
                 }
                 ShowSignUpForm()
-                ShowSignUpButtons(onNavigateToSignIn, onNavigateToHome)
+                ShowSignUpButtons(onNavigateToSignIn, onNavigateToMyRoutines)
             }
         }
     }
@@ -113,15 +113,15 @@ fun ShowSignUpForm() {
 }
 
 @Composable
-fun ShowSignUpButtons(onNavigateToSignIn: () -> Unit, onNavigateToHome: () -> Unit){
-    DefaultButton(text = stringResource(id = R.string.signUpText), onClick = { SignUp(onNavigateToHome) })
+fun ShowSignUpButtons(onNavigateToSignIn: () -> Unit, onNavigateToMyRoutines: () -> Unit){
+    DefaultButton(text = stringResource(id = R.string.signUpText), onClick = { SignUp(onNavigateToMyRoutines) })
     DefaultButton(
         text = stringResource(id = R.string.signup_goto_signin),
         onClick = { GoToSignIn(onNavigateToSignIn) })
 }
 
-fun SignUp(onNavigateToHome: () -> Unit) {/*TODO*/
-    onNavigateToHome()
+fun SignUp(onNavigateToMyRoutines: () -> Unit) {/*TODO*/
+    onNavigateToMyRoutines()
 }
 
 fun GoToSignIn(onNavigateToSignIn: () -> Unit) {
