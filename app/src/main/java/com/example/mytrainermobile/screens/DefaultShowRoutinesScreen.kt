@@ -23,6 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.mytrainermobile.classes.Routine
 import com.example.mytrainermobile.components.RoutineBox
+import com.example.mytrainermobile.components.ThisBottomAppBar
 import com.example.mytrainermobile.components.TitleBox
 import com.example.mytrainermobile.components.TitleForSection
 import com.example.mytrainermobile.ui.theme.DefaultBackground
@@ -31,7 +32,10 @@ import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 //This class is only meant to be used by home, favourites and my routines
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun DefaultShowRoutinesScreen(title: String) {
+fun DefaultShowRoutinesScreen(title: String, onNavigateToHome: () -> Unit,
+                              onNavigateToFavourites: () -> Unit,
+                              onNavigateToExplore: () -> Unit,
+                              onNavigateToProfile: () -> Unit) {
     MyTrainerMobileTheme() {
         val list = listOf<Routine>(
             Routine(1, "rutina chest", "chest"),
@@ -63,7 +67,7 @@ fun DefaultShowRoutinesScreen(title: String) {
             modifier = Modifier
                 .fillMaxSize()
                 .background(DefaultBackground),
-            bottomBar = { ThisBottomAppBar() },
+            bottomBar = { ThisBottomAppBar(onNavigateToHome, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile) },
         ) {
             Column(modifier = Modifier.fillMaxWidth()) {
                 val configuration = LocalConfiguration.current
@@ -119,66 +123,4 @@ fun DefaultShowRoutinesScreen(title: String) {
             }
         }
     }
-}
-
-@Composable
-fun ThisBottomAppBar(){
-    var selectedItem by remember { mutableStateOf("") }
-
-    NavigationBar(containerColor = DefaultBackground, contentColor = Color.Magenta) {
-        NavigationBarItem(
-            icon = { Icon(Icons.Filled.Home, contentDescription = "Home") },
-            label = { Text("Home") },
-            onClick = { selectedItem = "home" },
-            selected = selectedItem == "home"
-        )
-        NavigationBarItem(
-            icon = { Icon(Icons.Filled.Favorite, contentDescription = "Favourites") },
-            label = { Text("Favourites") },
-            onClick = { selectedItem = "fav" },
-            selected = selectedItem == "fav"
-        )
-        NavigationBarItem(
-            icon = { Icon(Icons.Filled.Search, contentDescription = "Explore") },
-            label = { Text("Explore") },
-            onClick = { selectedItem = "exp" },
-            selected = selectedItem == "exp"
-        )
-        NavigationBarItem(
-            icon = { Icon(Icons.Filled.Person, contentDescription = "Me") },
-            label = { Text("Me") },
-            onClick = { selectedItem = "me" },
-            selected = selectedItem == "me"
-        )
-    }
-//    val selectedIndex = remember { mutableStateOf(0) }
-//    BottomNavigation(elevation = 10.dp) {
-//
-//        BottomNavigationItem(icon = {
-//            Icon(imageVector = Icons.Default.Home,"")
-//        },
-//            label = { Text(text = "Home") },
-//            selected = (selectedIndex.value == 0),
-//            onClick = {
-//                selectedIndex.value = 0
-//            })
-//
-//        BottomNavigationItem(icon = {
-//            Icon(imageVector = Icons.Default.Favorite,"")
-//        },
-//            label = { Text(text = "Favorite") },
-//            selected = (selectedIndex.value == 1),
-//            onClick = {
-//                selectedIndex.value = 1
-//            })
-//
-//        BottomNavigationItem(icon = {
-//            Icon(imageVector = Icons.Default.Person,"")
-//        },
-//            label = { Text(text = "Profile") },
-//            selected = (selectedIndex.value == 2),
-//            onClick = {
-//                selectedIndex.value = 2
-//            })
-//    }
 }

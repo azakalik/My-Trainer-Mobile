@@ -25,10 +25,12 @@ import com.example.mytrainermobile.components.TitleForSection
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 
-@Preview
 @Composable
-fun FavouritesView(){
-    DefaultShowRoutinesScreen(title = stringResource(id = R.string.myfavourites))
+fun FavouritesView(onNavigateToHome: () -> Unit,
+                   onNavigateToFavourites: () -> Unit,
+                   onNavigateToExplore: () -> Unit,
+                   onNavigateToProfile: () -> Unit){
+    DefaultShowRoutinesScreen(title = stringResource(id = R.string.myfavourites), onNavigateToHome, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile)
 }
 
 //@OptIn(ExperimentalFoundationApi::class)

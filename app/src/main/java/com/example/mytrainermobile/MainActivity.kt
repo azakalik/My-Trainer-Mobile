@@ -36,14 +36,30 @@ fun MyAppNavHost(
         startDestination = startDestination
     ) {
         val onNavigateToHome = {
-            navController.navigate("home"){
+            navController.navigate("myRoutines"){
                 popUpTo(0)
             }
         }
+        val onNavigateToFavourites = {
+            navController.navigate("favourites"){
+                popUpTo("home")
+            }
+        }
+        val onNavigateToExplore = {
+            navController.navigate("home"){ //todo
+                popUpTo("home")
+            }
+        }
+        val onNavigateToProfile = {
+            navController.navigate("profile"){
+                popUpTo("home")
+            }
+        }
         composable("arrive") { ArriveScreen(/*...*/) }
-        composable("favourites") { FavouritesView(/*...*/) }
-        composable("home") { HomeScreen() }
-        composable("myRoutines") { MyRoutines() }
+        composable("favourites") { FavouritesView(onNavigateToHome, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile) }
+        composable("home") { HomeScreen(onNavigateToHome, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile) }
+        composable("profile") { ShowProfileScreen(onNavigateToHome, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile) }
+        composable("myRoutines") { MyRoutines(onNavigateToHome, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile) }
         composable("signIn") { ShowSignInScreen(onNavigateToSignUp = {navController.navigate("signUp"){
             popUpTo("signUp"){inclusive = false}
         } }, onNavigateToHome) }

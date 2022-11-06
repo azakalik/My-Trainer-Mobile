@@ -27,8 +27,11 @@ import com.example.mytrainermobile.components.TitleForSection
 
 @Preview
 @Composable
-fun MyRoutines(){
-    DefaultShowRoutinesScreen(title = stringResource(id = R.string.myroutines))
+fun MyRoutines(onNavigateToHome: () -> Unit,
+               onNavigateToFavourites: () -> Unit,
+               onNavigateToExplore: () -> Unit,
+               onNavigateToProfile: () -> Unit){
+    DefaultShowRoutinesScreen(title = stringResource(id = R.string.myroutines), onNavigateToHome, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile)
 }
 
 //

@@ -30,8 +30,11 @@ import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 @Preview
 @Composable
 
-fun HomeScreen() {
-    DefaultShowRoutinesScreen(title = "Home screen")
+fun HomeScreen(onNavigateToHome: () -> Unit,
+               onNavigateToFavourites: () -> Unit,
+               onNavigateToExplore: () -> Unit,
+               onNavigateToProfile: () -> Unit) {
+    DefaultShowRoutinesScreen(title = "Home screen", onNavigateToHome, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile)
 }
 
 //fun HomeScreen() {
