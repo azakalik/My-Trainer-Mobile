@@ -13,10 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import com.example.mytrainermobile.classes.Routine
-import com.example.mytrainermobile.components.RoutineBox
-import com.example.mytrainermobile.components.ThisBottomAppBar
-import com.example.mytrainermobile.components.TitleBox
-import com.example.mytrainermobile.components.TitleForSection
+import com.example.mytrainermobile.components.*
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 
@@ -58,6 +55,7 @@ fun DefaultShowRoutinesScreen(title: String, onNavigateToMyRoutines: () -> Unit,
             modifier = Modifier
                 .fillMaxSize()
                 .background(DefaultBackground),
+            floatingActionButton = { FilterFAB() },
             bottomBar = { ThisBottomAppBar(onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile) },
         ) {
             Column(modifier = Modifier.fillMaxWidth()) {
@@ -70,7 +68,9 @@ fun DefaultShowRoutinesScreen(title: String, onNavigateToMyRoutines: () -> Unit,
                                 .fillMaxHeight(0.23f),
                             verticalArrangement = Arrangement.SpaceEvenly
                         ) {
-                            TitleForSection()
+                            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+                                TitleForSection()
+                            }
                             TitleBox(
                                 title = title
                             )
@@ -93,7 +93,7 @@ fun DefaultShowRoutinesScreen(title: String, onNavigateToMyRoutines: () -> Unit,
                     }
                 }
                 LazyVerticalGrid(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxSize(),
                     horizontalArrangement = Arrangement.SpaceAround,
                     verticalArrangement = Arrangement.Center,
                     columns = GridCells.Adaptive(150.dp),

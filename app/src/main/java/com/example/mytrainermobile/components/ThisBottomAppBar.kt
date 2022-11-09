@@ -23,8 +23,9 @@ fun ThisBottomAppBar(
     onNavigateToProfile: () -> Unit
 ) {
     var selectedItem by remember() { mutableStateOf("myRoutines") }
+    NavigationBarItemDefaults.colors(selectedIconColor = Color.Blue, unselectedIconColor = Color.Red)
 
-    NavigationBar(containerColor = DefaultBackground, contentColor = Color.Magenta) {
+    NavigationBar(containerColor = DefaultBackground) {
         NavigationBarItem(
             icon = { Icon(Icons.Filled.Home, contentDescription = "myRoutines") },
             label = { Text("My Routines") },
@@ -32,8 +33,7 @@ fun ThisBottomAppBar(
                 selectedItem = "myRoutines"
                 onNavigateToMyRoutines()
             },
-            selected = selectedItem == "myRoutines",
-            colors = NavigationBarItemDefaults.colors(selectedIconColor = Color.Red)
+            selected = selectedItem == "myRoutines"
         )
         NavigationBarItem(
             icon = { Icon(Icons.Filled.Favorite, contentDescription = "Favourites") },

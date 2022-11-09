@@ -17,8 +17,7 @@ fun TitleForSection() {
         text = "My Trainer",
         color = Color.Magenta,
         fontSize = 44.sp,
-        fontWeight = FontWeight.Bold,
-        modifier = Modifier.padding(60.dp, 0.dp, 0.dp, 0.dp)
+        fontWeight = FontWeight.Bold
     )
 }
 
