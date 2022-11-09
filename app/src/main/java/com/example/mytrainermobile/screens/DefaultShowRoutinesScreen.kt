@@ -23,7 +23,8 @@ import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 fun DefaultShowRoutinesScreen(title: String, onNavigateToMyRoutines: () -> Unit,
                               onNavigateToFavourites: () -> Unit,
                               onNavigateToExplore: () -> Unit,
-                              onNavigateToProfile: () -> Unit) {
+                              onNavigateToProfile: () -> Unit,
+                              onNavigateToStartWorkout: () -> Unit) {
     MyTrainerMobileTheme() {
         val list = listOf<Routine>(
             Routine(1, "rutina chest", "chest"),
@@ -101,7 +102,8 @@ fun DefaultShowRoutinesScreen(title: String, onNavigateToMyRoutines: () -> Unit,
                         items(list.size) { idx ->
                             RoutineBox(
                                 routineName = list[idx].name,
-                                routineType = list[idx].type
+                                routineType = list[idx].type,
+                                onNavigateToStartWorkout
                             )
                         }
                     })

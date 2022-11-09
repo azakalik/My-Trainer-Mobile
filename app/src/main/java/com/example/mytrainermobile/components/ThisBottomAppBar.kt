@@ -20,9 +20,9 @@ fun ThisBottomAppBar(
     onNavigateToMyRoutines: () -> Unit,
     onNavigateToFavourites: () -> Unit,
     onNavigateToExplore: () -> Unit,
-    onNavigateToProfile: () -> Unit
+    onNavigateToProfile: () -> Unit,
 ) {
-    var selectedItem by remember() { mutableStateOf("myRoutines") }
+    var selectedItem by remember() { mutableStateOf("myRoutines"    ) }
     NavigationBarItemDefaults.colors(selectedIconColor = Color.Blue, unselectedIconColor = Color.Red)
 
     NavigationBar(containerColor = DefaultBackground) {
