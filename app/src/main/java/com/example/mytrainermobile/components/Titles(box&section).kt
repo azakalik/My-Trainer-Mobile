@@ -7,9 +7,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -25,7 +23,7 @@ fun TitleForSection() {
 }
 
 @Composable
-fun TitleBox(title: String, startPadding: Dp, maxHeight: Float, maxWidth: Float) {
+fun TitleBox(title: String) {
     Box(
         modifier = Modifier
             .offset(x = (-5).dp)
@@ -34,20 +32,15 @@ fun TitleBox(title: String, startPadding: Dp, maxHeight: Float, maxWidth: Float)
                 color = Color.Magenta,
                 shape = RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp)
             )
-            .fillMaxHeight(maxHeight)
-            .fillMaxWidth(maxWidth)
-    ) {
-        Text(
-            text = title,
-            color = Color.White,
-            fontWeight = FontWeight.Bold,
-            fontSize = 16.sp,
-            modifier = Modifier.padding(
-                start = startPadding,
-                top = 5.dp,
-                bottom = 0.dp,
-                end = 2.dp
+    ){
+        Row() {
+            Text(
+                text = title,
+                color = Color.White,
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp,
+                modifier = Modifier.padding(vertical = 5.dp, horizontal = 10.dp)
             )
-        )
+        }
     }
 }

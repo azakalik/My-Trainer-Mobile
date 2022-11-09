@@ -12,12 +12,17 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.mytrainermobile.screens.*
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MyTrainerMobileTheme {
+                val systemUiController = rememberSystemUiController()
+                systemUiController.setSystemBarsColor(
+                    color = androidx.compose.ui.graphics.Color.Black
+                )
                 MyAppNavHost()
             }
         }

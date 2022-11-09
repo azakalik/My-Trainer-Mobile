@@ -20,7 +20,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.mytrainermobile.R
 import com.example.mytrainermobile.classes.Routine
-import com.example.mytrainermobile.components.NavBottomBar
 import com.example.mytrainermobile.components.RoutineBox
 import com.example.mytrainermobile.components.TitleBox
 import com.example.mytrainermobile.components.TitleForSection
