@@ -10,12 +10,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.mytrainermobile.ui.theme.DefaultColor
 
 @Composable
 fun TitleForSection() {
     Text(
         text = "My Trainer",
-        color = Color.Magenta,
+        color = DefaultColor,
         fontSize = 44.sp,
         fontWeight = FontWeight.Bold
     )
@@ -28,7 +29,7 @@ fun TitleBox(title: String) {
             .offset(x = (-5).dp)
             .border(
                 width = 2.dp,
-                color = Color.Magenta,
+                color = DefaultColor,
                 shape = RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp)
             )
     ){

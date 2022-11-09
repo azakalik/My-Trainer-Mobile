@@ -28,6 +28,7 @@ import androidx.compose.ui.window.Popup
 import com.example.mytrainermobile.R
 import com.example.mytrainermobile.components.ExerciseBox
 import com.example.mytrainermobile.ui.theme.DefaultBackground
+import com.example.mytrainermobile.ui.theme.DefaultColor
 
 
 @Composable
@@ -35,7 +36,7 @@ fun StartButton() {
     Button(
         onClick = { },
         shape = RoundedCornerShape(10.dp),
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Magenta),
+        colors = ButtonDefaults.buttonColors(backgroundColor = DefaultColor),
         modifier = Modifier
             .fillMaxWidth(0.5F)
             .padding(0.dp, 5.dp, 0.dp, 10.dp),
@@ -229,7 +230,7 @@ fun DescriptorBox() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.Magenta, RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
+            .background(DefaultColor, RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
             .offset(x = (-5).dp)
             .border(2.dp, Color.Black, shape = RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
             .height(95.dp)

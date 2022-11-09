@@ -21,8 +21,6 @@
     <string name="rate">Rate Me!</string>
     <string name="ratepopup">Rating Current Workout</string>
     <string name="start">Start Workout</string>
-    <string name="save">Save</string>
-    <string name="cancel">Cancel</string>
 
     <!-- Favourites -->
     <string name="myfavourites">My Favourites</string>
@@ -32,5 +30,13 @@
 
     <!-- Home/Explore -->
     <string name="explore">Explore</string>
+
+    <!-- Filter FAB -->
+    <string name="fab_name">Filter routines</string>
+
+    <!-- Buttons -->
+    <string name="accept">Accept</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
 
 </resources>

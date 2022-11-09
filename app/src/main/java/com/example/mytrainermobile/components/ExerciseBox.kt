@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.mytrainermobile.ui.theme.DefaultColor
 
 @Composable
 fun ExerciseBox() {
@@ -31,7 +32,7 @@ fun ExerciseBox() {
                 Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
                     Text(
                         "TitleExercise",
-                        style = TextStyle(Color.Magenta),
+                        style = TextStyle(DefaultColor),
                         fontSize = 20.sp
                     )// replace for Api.fetch(title)
                     //Spacer(modifier = Modifier.padding(65.dp, 10.dp))

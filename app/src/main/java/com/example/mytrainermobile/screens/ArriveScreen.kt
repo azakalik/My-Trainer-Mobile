@@ -19,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mytrainermobile.R
+import com.example.mytrainermobile.ui.theme.DefaultColor
 
 @Preview
 @Composable
@@ -30,7 +31,7 @@ fun ArriveScreen() {
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "My Trainer", color = Color.Magenta, fontSize = 60.sp)
+        Text(text = "My Trainer", color = DefaultColor, fontSize = 60.sp)
         Text(
             text = stringResource(id = R.string.introScreenMessage),
             color = Color.White,
@@ -39,7 +40,7 @@ fun ArriveScreen() {
         Button(
             onClick = { /*TODO enviar a pagina correspondiente*/ },
             shape = RoundedCornerShape(10.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Magenta),
+            colors = ButtonDefaults.buttonColors(backgroundColor = DefaultColor),
             modifier = Modifier.fillMaxWidth(0.5F)
         ) {
             Text(text = stringResource(id = R.string.signInText), fontSize = 30.sp)
@@ -47,7 +48,7 @@ fun ArriveScreen() {
         Button(
             onClick = { /*TODO enviar a pagina correspondiente*/ },
             shape = RoundedCornerShape(10.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Magenta),
+            colors = ButtonDefaults.buttonColors(backgroundColor = DefaultColor),
             modifier = Modifier.fillMaxWidth(0.5F)
         ) {
             Text(
