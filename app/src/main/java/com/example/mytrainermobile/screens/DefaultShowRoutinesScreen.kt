@@ -94,7 +94,8 @@ fun DefaultShowRoutinesScreen(title: String, onNavigateToMyRoutines: () -> Unit,
                     }
                 }
                 LazyVerticalGrid(
-                    modifier = Modifier.fillMaxSize(),
+
+                    modifier = Modifier.fillMaxSize().padding(), contentPadding = PaddingValues(5.dp, 0.dp, 5.dp, 80.dp),
                     horizontalArrangement = Arrangement.SpaceAround,
                     verticalArrangement = Arrangement.Center,
                     columns = GridCells.Adaptive(150.dp),
