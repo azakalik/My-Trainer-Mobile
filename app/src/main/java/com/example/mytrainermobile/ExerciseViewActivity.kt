@@ -64,7 +64,7 @@
 //            .weight(1F)
 //            .background(color = Color.Black)
 //        ) {
-//            Text(text = "Current Exercise", color = Color.Magenta, fontSize = 24.sp)
+//            Text(text = "Current Exercise", color = DefaultColor, fontSize = 24.sp)
 //        }
 //
 //        Box(
@@ -94,7 +94,7 @@
 //                Button(
 //                onClick = { /*TODO*/ },
 //                shape = RoundedCornerShape(10.dp),
-//                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Magenta)
+//                colors = ButtonDefaults.buttonColors(backgroundColor = DefaultColor)
 //                ) {
 //                    Icon(
 //                        Icons.Filled.ArrowBack,
@@ -106,7 +106,7 @@
 //                Button(
 //                onClick = { /*TODO*/ },
 //                shape = RoundedCornerShape(10.dp),
-//                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Magenta)
+//                colors = ButtonDefaults.buttonColors(backgroundColor = DefaultColor)
 //                ) {
 //                    Icon(
 //                        Icons.Outlined.PlayArrow,
@@ -118,7 +118,7 @@
 //                Button(
 //                onClick = { /*TODO*/ },
 //                shape = RoundedCornerShape(10.dp),
-//                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Magenta)
+//                colors = ButtonDefaults.buttonColors(backgroundColor = DefaultColor)
 //                ) {
 //                    Icon(
 //                        Icons.Filled.ArrowForward,

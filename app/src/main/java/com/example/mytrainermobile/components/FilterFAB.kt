@@ -12,43 +12,50 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
+import com.example.mytrainermobile.R
+import com.example.mytrainermobile.aux_functions.getRoutineTypesList
 import com.example.mytrainermobile.ui.theme.DefaultBackground
+import com.example.mytrainermobile.ui.theme.DefaultColor
 
 @Composable
 fun FilterFAB() {
     var popupControl by remember { mutableStateOf(false) }
     FloatingActionButton(
-        onClick = { popupControl = true },
-        contentColor = Color.Magenta,
+        onClick = { popupControl = !popupControl },
+        contentColor = DefaultColor,
         containerColor = DefaultBackground
     ) {
-        Icon(Icons.Filled.Menu, "Localized description")
+        Icon(Icons.Filled.Menu, stringResource(id = R.string.fab_name))
     }
     if (popupControl) {
         Popup(
             alignment = Alignment.Center,
-            onDismissRequest = { popupControl = false },
+            onDismissRequest = { popupControl = !popupControl },
 //            properties = PopupProperties()
         ) {
-            Box(modifier = Modifier.fillMaxSize(0.6f).border(
-                width = 2.dp,
-                color = Color.Magenta,
-                shape = RoundedCornerShape(15.dp)
-            ).background(color = DefaultBackground)){
-                Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
+            Box(modifier = Modifier
+                .fillMaxWidth(0.6f)
+                .border(
+                    width = 2.dp,
+                    color = DefaultColor,
+                    shape = RoundedCornerShape(15.dp)
+                )
+                .background(color = DefaultBackground)){
+                Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-                        Text(text = "Select options", color = Color.White)
+                        Text(text = stringResource(id = R.string.fab_name), color = Color.White, modifier = Modifier.padding(10.dp))
                     }
                     GroupedCheckbox(
-                        mItemsList = listOf(
-                            "One",
-                            "Two",
-                            "Three"
-                        )
+                        mItemsList = getRoutineTypesList()
                     )
+                    Row(Modifier.fillMaxWidth().padding(vertical = 5.dp), horizontalArrangement = Arrangement.SpaceEvenly){
+                        DefaultButton(onClick = { popupControl = false }, text = stringResource(id = R.string.cancel))
+                        DefaultButton(onClick = { popupControl = !popupControl; filter() }, text = stringResource(id = R.string.accept))
+                    }
                 }
             }
 
@@ -60,7 +67,7 @@ fun FilterFAB() {
 fun GroupedCheckbox(mItemsList: List<String>) {
 
     mItemsList.forEach { items ->
-        Row(modifier = Modifier.padding(5.dp)) {
+        Row(modifier = Modifier.padding(5.dp).fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Start) {
             val isChecked = remember { mutableStateOf(false) }
 
             Checkbox(
@@ -68,12 +75,16 @@ fun GroupedCheckbox(mItemsList: List<String>) {
                 onCheckedChange = { isChecked.value = it },
                 enabled = true,
                 colors = CheckboxDefaults.colors(
-                    checkedColor = Color.Magenta,
-                    uncheckedColor = Color.DarkGray,
-                    checkmarkColor = Color.DarkGray
+                    checkedColor = DefaultColor,
+                    uncheckedColor = DefaultBackground,
+                    checkmarkColor = DefaultBackground
                 )
             )
             Text(text = items, color = Color.White)
         }
     }
+}
+
+fun filter(){
+
 }

@@ -8,7 +8,8 @@ import androidx.compose.ui.tooling.preview.Preview
 fun ExploreScreen(onNavigateToMyRoutines: () -> Unit,
                   onNavigateToFavourites: () -> Unit,
                   onNavigateToExplore: () -> Unit,
-                  onNavigateToProfile: () -> Unit) {
-    DefaultShowRoutinesScreen(title = "Explore Routines", onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile)
+                  onNavigateToProfile: () -> Unit,
+                  onNavigateToStartWorkout: () -> Unit,) {
+    DefaultShowRoutinesScreen(title = "Explore Routines", onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile, onNavigateToStartWorkout)
 }
 

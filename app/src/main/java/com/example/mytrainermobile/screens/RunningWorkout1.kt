@@ -21,8 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.mytrainermobile.components.ExerciseBox
 
-
-
+@Preview(showBackground = true)
 @Composable
 fun RunningWorkout1() {
 
@@ -63,7 +62,7 @@ fun RunningWorkout1() {
 
 @Composable
 fun BottomBar(){
-    BottomAppBar(backgroundColor = Color.Black, contentColor = Color.Magenta) {
+    BottomAppBar(backgroundColor = Color.Black, contentColor = DefaultColor) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -105,7 +104,7 @@ fun BottomBar(){
 
 @Composable
 fun TopBar(title: String) {
-    TopAppBar(backgroundColor = Color.Black, contentColor = Color.Magenta, title = {
+    TopAppBar(backgroundColor = Color.Black, contentColor = DefaultColor, title = {
         TitleWorkout(title = "Your Workout")
     }, navigationIcon =
     {

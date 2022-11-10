@@ -28,6 +28,7 @@ import androidx.compose.ui.window.Popup
 import com.example.mytrainermobile.R
 import com.example.mytrainermobile.components.ExerciseBox
 import com.example.mytrainermobile.ui.theme.DefaultBackground
+import com.example.mytrainermobile.ui.theme.DefaultColor
 
 
 @Composable
@@ -35,7 +36,7 @@ fun StartButton() {
     Button(
         onClick = { },
         shape = RoundedCornerShape(10.dp),
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Magenta),
+        colors = ButtonDefaults.buttonColors(backgroundColor = DefaultColor),
         modifier = Modifier
             .fillMaxWidth(0.5F)
             .padding(0.dp, 5.dp, 0.dp, 10.dp),
@@ -47,6 +48,14 @@ fun StartButton() {
 @Composable
 fun WorkoutBar() {
     var popupControl by remember { mutableStateOf(false) }
+
+    // heart favourite
+    var selected by remember { mutableStateOf(false) }
+    val color = if (selected) DefaultColor else Color.White
+
+    // star rate
+    var selected2 by remember { mutableStateOf(false) }
+    val colorStar = if (selected2) Color.Yellow else Color.White
 
     Box(
         Modifier
@@ -64,14 +73,14 @@ fun WorkoutBar() {
             }
         }
         Column(modifier = Modifier.fillMaxWidth(1f), horizontalAlignment = Alignment.End) {
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = { selected = !selected }) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(text = stringResource(id = R.string.favourite), color = Color.White)
                     Icon(
                         modifier = Modifier.size(35.dp),
                         imageVector = Icons.Filled.Favorite,
                         contentDescription = "Favorite",
-                        tint = Color.White,
+                        tint = color,
                     )
                 }
             }
@@ -82,7 +91,7 @@ fun WorkoutBar() {
                         modifier = Modifier.size(35.dp),
                         imageVector = Icons.Filled.Star,
                         contentDescription = "Star",
-                        tint = Color.White,
+                        tint = colorStar,
                     )
                 }
             }
@@ -109,7 +118,7 @@ fun WorkoutBar() {
                                 TextButton(onClick = { popupControl = false }) {
                                     Text(text = stringResource(id = R.string.cancel), color = Color.Red, fontSize = 18.sp)
                                 }
-                                TextButton(onClick = { popupControl = false }) {
+                                TextButton(onClick = { popupControl = false; selected2 = !selected2 }) {
                                     Text(text = stringResource(id = R.string.save), fontSize = 18.sp)
                                 }
                             }
@@ -123,45 +132,61 @@ fun WorkoutBar() {
 
 @Composable
 fun RatingSystem() {
+    // rating : 1
+    var selected1 by remember { mutableStateOf(false) }
+    val colorStar1 = if (selected1) Color.Yellow else Color.White
+    // rating : 2
+    var selected2 by remember { mutableStateOf(false) }
+    val colorStar2 = if (selected2) Color.Yellow else Color.White
+    // rating : 3
+    var selected3 by remember { mutableStateOf(false) }
+    val colorStar3 = if (selected3) Color.Yellow else Color.White
+    // rating : 4
+    var selected4 by remember { mutableStateOf(false) }
+    val colorStar4 = if (selected4) Color.Yellow else Color.White
+    // rating : 5
+    var selected5 by remember { mutableStateOf(false) }
+    val colorStar5 = if (selected5) Color.Yellow else Color.White
+
     Row() {
-        IconButton(onClick = { /*TODO*/ }) {
+        IconButton(onClick = { if(!selected1) selected1 = !selected1 ; if(selected2) selected2 = !selected2 ; if(selected3) selected3 = !selected3 ; if(selected4) selected4 = !selected4 ; if(selected5) selected5 = !selected5 }) {
             Icon(
                 modifier = Modifier.size(35.dp),
                 imageVector = Icons.Filled.Star,
                 contentDescription = "Star",
-                tint = Color.White,
+                tint = colorStar1,
             )
         }
-        IconButton(onClick = { /*TODO*/ }) {
+        IconButton(onClick = { if(!selected1) selected1 = !selected1 ; if(!selected2 )selected2 = !selected2 ; if(selected3) selected3 = !selected3 ; if(selected4) selected4 = !selected4 ; if(selected5) selected5 = !selected5 }) {
             Icon(
                 modifier = Modifier.size(35.dp),
                 imageVector = Icons.Filled.Star,
                 contentDescription = "Star",
-                tint = Color.White,
+                tint = colorStar2,
             )
         }
-        IconButton(onClick = { /*TODO*/ }) {
+        IconButton(onClick = { if(!selected1) selected1 = !selected1 ; if(!selected2 )selected2 = !selected2 ; if(!selected3) selected3 = !selected3 ; if(selected4) selected4 = !selected4 ; if(selected5) selected5 = !selected5 }) {
             Icon(
                 modifier = Modifier.size(35.dp),
                 imageVector = Icons.Filled.Star,
                 contentDescription = "Star",
-                tint = Color.White,
+                tint = colorStar3,
             )
         }
-        IconButton(onClick = { /*TODO*/ }) {
+        IconButton(onClick = { if(!selected1) selected1 = !selected1 ; if(!selected2 )selected2 = !selected2 ; if(!selected3) selected3 = !selected3 ; if(!selected4) selected4 = !selected4 ; if(selected5) selected5 = !selected5 }) {
             Icon(
                 modifier = Modifier.size(35.dp),
                 imageVector = Icons.Filled.Star,
                 contentDescription = "Star",
-                tint = Color.White,
+                tint = colorStar4,
             )
         }
-        IconButton(onClick = { /*TODO*/ }) {
+        IconButton(onClick = { if(!selected1) selected1 = !selected1 ; if(!selected2 )selected2 = !selected2 ; if(!selected3) selected3 = !selected3 ; if(!selected4) selected4 = !selected4 ; if(!selected5) selected5 = !selected5 }) {
             Icon(
                 modifier = Modifier.size(35.dp),
                 imageVector = Icons.Filled.Star,
                 contentDescription = "Star",
-                tint = Color.White,
+                tint = colorStar5,
             )
         }
     }
@@ -229,7 +254,7 @@ fun DescriptorBox() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.Magenta, RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
+            .background(DefaultColor, RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
             .offset(x = (-5).dp)
             .border(2.dp, Color.Black, shape = RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
             .height(95.dp)

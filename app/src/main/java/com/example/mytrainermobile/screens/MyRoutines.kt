@@ -28,6 +28,7 @@ import com.example.mytrainermobile.components.TitleForSection
 fun MyRoutines(onNavigateToMyRoutines: () -> Unit,
                onNavigateToFavourites: () -> Unit,
                onNavigateToExplore: () -> Unit,
-               onNavigateToProfile: () -> Unit){
-    DefaultShowRoutinesScreen(title = stringResource(id = R.string.myroutines), onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile)
+               onNavigateToProfile: () -> Unit,
+               onNavigateToStartWorkout: () -> Unit,){
+    DefaultShowRoutinesScreen(title = stringResource(id = R.string.myroutines), onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile, onNavigateToStartWorkout)
 }

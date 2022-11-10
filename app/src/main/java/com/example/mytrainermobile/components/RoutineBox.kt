@@ -8,7 +8,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,13 +20,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mytrainermobile.R
 import com.example.mytrainermobile.aux_functions.pictureDecider
+import com.example.mytrainermobile.ui.theme.DefaultColor
 
 @Composable
-fun RoutineBox(routineName: String, routineType: String) {
+fun RoutineBox(routineName: String, routineType: String,
+               onNavigateToStartWorkout: () -> Unit) {
+    var selected by remember { mutableStateOf(false) }
+    val color = if (selected) DefaultColor else Color.White
     Card(
         modifier = Modifier
             .padding(10.dp)
-            .clickable {  /*TODO*/ }
+            .clickable ( onClick={ onNavigateToStartWorkout() } )
             .size(150.dp, 215.dp),
         elevation = 10.dp,
         shape = RoundedCornerShape(15.dp)
@@ -38,12 +42,12 @@ fun RoutineBox(routineName: String, routineType: String) {
             modifier = Modifier.fillMaxSize()
         )
         Row(verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.End) {
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = { selected = !selected }) {
                 Icon(
                     Icons.Filled.Favorite,
                     contentDescription = "Favorite",
                     modifier = Modifier.size(30.dp),
-                    tint = Color.LightGray,
+                    tint = color,
                 )
             }
         }

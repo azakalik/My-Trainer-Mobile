@@ -9,13 +9,15 @@ fun FavouritesView(
     onNavigateToMyRoutines: () -> Unit,
     onNavigateToFavourites: () -> Unit,
     onNavigateToExplore: () -> Unit,
-    onNavigateToProfile: () -> Unit
-) {
+    onNavigateToProfile: () -> Unit,
+    onNavigateToStartWorkout: () -> Unit,
+    ) {
     DefaultShowRoutinesScreen(
         title = stringResource(id = R.string.myfavourites),
         onNavigateToMyRoutines,
         onNavigateToFavourites,
         onNavigateToExplore,
-        onNavigateToProfile
+        onNavigateToProfile,
+        onNavigateToStartWorkout,
     )
 }

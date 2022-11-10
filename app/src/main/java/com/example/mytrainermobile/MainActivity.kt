@@ -60,11 +60,16 @@ fun MyAppNavHost(
                 popUpTo("myRoutines")
             }
         }
+        val onNavigateToStartWorkout = {
+            navController.navigate("startWorkout"){
+
+            }
+        }
         composable("arrive") { ArriveScreen(/*...*/) }
-        composable("favourites") { FavouritesView(onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile) }
-        composable("explore") { ExploreScreen(onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile) }
+        composable("favourites") { FavouritesView(onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile, onNavigateToStartWorkout) }
+        composable("explore") { ExploreScreen(onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile, onNavigateToStartWorkout) }
         composable("profile") { ShowProfileScreen(onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile) }
-        composable("myRoutines") { MyRoutines(onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile) }
+        composable("myRoutines") { MyRoutines(onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile, onNavigateToStartWorkout) }
         composable("signIn") { ShowSignInScreen(onNavigateToSignUp = {navController.navigate("signUp"){
             popUpTo("signUp"){inclusive = false}
         } }, onNavigateToMyRoutines) }
