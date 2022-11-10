@@ -2,10 +2,13 @@ package com.example.mytrainermobile.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.Arrangement.Absolute.Center
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -15,14 +18,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
-import androidx.compose.ui.window.PopupProperties
 import com.example.mytrainermobile.R
 import com.example.mytrainermobile.aux_functions.getRoutineTypesList
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
 
 @Composable
-fun FilterFAB() {
+fun SortFAB() {
     var popupControl by remember { mutableStateOf(false) }
     FloatingActionButton(
         onClick = { popupControl = !popupControl },
@@ -49,13 +51,14 @@ fun FilterFAB() {
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
                         Text(text = stringResource(id = R.string.fab_name), color = Color.White, modifier = Modifier.padding(10.dp))
                     }
-                    GroupedCheckbox(
-                        mItemsList = getRoutineTypesList()
-                    )
-                    Row(Modifier.fillMaxWidth().padding(vertical = 5.dp), horizontalArrangement = Arrangement.SpaceEvenly){
-                        DefaultButton(onClick = { popupControl = false }, text = stringResource(id = R.string.cancel))
-                        DefaultButton(onClick = { popupControl = !popupControl; filter() }, text = stringResource(id = R.string.accept))
-                    }
+                    ShowDropDownMenu()
+//                    GroupedCheckbox(
+//                        mItemsList = getRoutineTypesList()
+//                    )
+//                    Row(Modifier.fillMaxWidth().padding(vertical = 5.dp), horizontalArrangement = Arrangement.SpaceEvenly){
+//                        DefaultButton(onClick = { popupControl = false }, text = stringResource(id = R.string.cancel))
+//                        DefaultButton(onClick = { popupControl = !popupControl; filter() }, text = stringResource(id = R.string.accept))
+//                    }
                 }
             }
 
@@ -67,7 +70,9 @@ fun FilterFAB() {
 fun GroupedCheckbox(mItemsList: List<String>) {
 
     mItemsList.forEach { items ->
-        Row(modifier = Modifier.padding(5.dp).fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Start) {
+        Row(modifier = Modifier
+            .padding(5.dp)
+            .fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Start) {
             val isChecked = remember { mutableStateOf(false) }
 
             Checkbox(
@@ -85,6 +90,27 @@ fun GroupedCheckbox(mItemsList: List<String>) {
     }
 }
 
-fun filter(){
+@Composable
+fun ShowDropDownMenu(){
+    var expanded by remember { mutableStateOf(true)}
+    val options = listOf("Creation date", "Rating", "Difficulty", "Category")
+    var currentValue by remember { mutableStateOf(options[0])}
+    
+    Row(modifier = Modifier.clickable { expanded = !expanded }) {
+        Text(text = currentValue, color = Color.White)
+        Icon(imageVector = Icons.Filled.ArrowDropDown, contentDescription = "Select sort options", tint = Color.White)
+    }
+
+//    val icon = if (expanded)
+//        Icons.Filled.KeyboardArrowUp
+//    else
+//        Icons.Filled.KeyboardArrowDown
+
+    DropdownMenu(expanded = expanded, onDismissRequest = {expanded = false}) {
+        options.forEach {
+            DropdownMenuItem(text = { it }, onClick = { currentValue = it; expanded = false })
+        }
+    }
+
 
 }

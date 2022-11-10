@@ -56,7 +56,7 @@ fun DefaultShowRoutinesScreen(title: String, onNavigateToMyRoutines: () -> Unit,
             modifier = Modifier
                 .fillMaxSize()
                 .background(DefaultBackground),
-            floatingActionButton = { FilterFAB() },
+            floatingActionButton = { SortFAB() },
             bottomBar = { ThisBottomAppBar(onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile) },
         ) {
             Column(modifier = Modifier.fillMaxWidth()) {
@@ -101,11 +101,15 @@ fun DefaultShowRoutinesScreen(title: String, onNavigateToMyRoutines: () -> Unit,
                     columns = GridCells.Adaptive(150.dp),
                     content = {
                         items(list.size) { idx ->
-                            RoutineBox(
-                                routineName = list[idx].name,
-                                routineType = list[idx].type,
-                                onNavigateToStartWorkout
-                            )
+                            list[idx].name?.let { it1 ->
+                                list[idx].type?.let { it2 ->
+                                    RoutineBox(
+                                        routineName = it1,
+                                        routineType = it2,
+                                        onNavigateToStartWorkout
+                                    )
+                                }
+                            }
                         }
                     })
             }

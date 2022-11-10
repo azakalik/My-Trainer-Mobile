@@ -23,9 +23,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.*
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
 import com.example.mytrainermobile.R
+import com.example.mytrainermobile.components.DefaultButton
 import com.example.mytrainermobile.components.ExerciseBox
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
@@ -62,7 +64,10 @@ fun WorkoutBar() {
             .background(Color(0xFF1E1E1E))
             .fillMaxWidth(1f)
     ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
             IconButton(onClick = { /*TODO*/ }) {
                 Icon(
                     modifier = Modifier.size(85.dp),
@@ -96,7 +101,8 @@ fun WorkoutBar() {
                 }
             }
             if (popupControl) {
-                Popup (/*popupPositionProvider =
+                Popup(
+/*popupPositionProvider =
                     WindowCenterOffsetPositionProvider(),*/
                     onDismissRequest = { popupControl = false },
                 ) {
@@ -106,21 +112,30 @@ fun WorkoutBar() {
                         color = Color(0xCC1E1E1E),
                         modifier = Modifier
                             .fillMaxSize(1f)
-                            .padding(60.dp, 230.dp, 60.dp, 230.dp)) {
+                            .padding(60.dp, 230.dp, 60.dp, 230.dp)
+                    ) {
                         Column(
                             modifier = Modifier.padding(10.dp),
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.SpaceEvenly
                         ) {
-                            Text(text = stringResource(id = R.string.ratepopup), color = Color.White, fontSize = 20.sp)
+                            Text(
+                                text = stringResource(id = R.string.ratepopup),
+                                color = Color.White,
+                                fontSize = 20.sp
+                            )
                             RatingSystem()
-                            Row(horizontalArrangement = Arrangement.SpaceEvenly) {
-                                TextButton(onClick = { popupControl = false }) {
-                                    Text(text = stringResource(id = R.string.cancel), color = Color.Red, fontSize = 18.sp)
-                                }
-                                TextButton(onClick = { popupControl = false; selected2 = !selected2 }) {
-                                    Text(text = stringResource(id = R.string.save), fontSize = 18.sp)
-                                }
+                            Row(
+                                horizontalArrangement = Arrangement.SpaceAround,
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                DefaultButton(
+                                    onClick = { popupControl = false },
+                                    text = stringResource(id = R.string.cancel)
+                                )
+                                DefaultButton(onClick = {
+                                    popupControl = false; selected2 = !selected2
+                                }, text = stringResource(id = R.string.save))
                             }
                         }
                     }
@@ -149,7 +164,11 @@ fun RatingSystem() {
     val colorStar5 = if (selected5) Color.Yellow else Color.White
 
     Row() {
-        IconButton(onClick = { if(!selected1) selected1 = !selected1 ; if(selected2) selected2 = !selected2 ; if(selected3) selected3 = !selected3 ; if(selected4) selected4 = !selected4 ; if(selected5) selected5 = !selected5 }) {
+        IconButton(onClick = {
+            if (!selected1) selected1 = !selected1; if (selected2) selected2 =
+            !selected2; if (selected3) selected3 = !selected3; if (selected4) selected4 =
+            !selected4; if (selected5) selected5 = !selected5
+        }) {
             Icon(
                 modifier = Modifier.size(35.dp),
                 imageVector = Icons.Filled.Star,
@@ -157,7 +176,11 @@ fun RatingSystem() {
                 tint = colorStar1,
             )
         }
-        IconButton(onClick = { if(!selected1) selected1 = !selected1 ; if(!selected2 )selected2 = !selected2 ; if(selected3) selected3 = !selected3 ; if(selected4) selected4 = !selected4 ; if(selected5) selected5 = !selected5 }) {
+        IconButton(onClick = {
+            if (!selected1) selected1 = !selected1; if (!selected2) selected2 =
+            !selected2; if (selected3) selected3 = !selected3; if (selected4) selected4 =
+            !selected4; if (selected5) selected5 = !selected5
+        }) {
             Icon(
                 modifier = Modifier.size(35.dp),
                 imageVector = Icons.Filled.Star,
@@ -165,7 +188,11 @@ fun RatingSystem() {
                 tint = colorStar2,
             )
         }
-        IconButton(onClick = { if(!selected1) selected1 = !selected1 ; if(!selected2 )selected2 = !selected2 ; if(!selected3) selected3 = !selected3 ; if(selected4) selected4 = !selected4 ; if(selected5) selected5 = !selected5 }) {
+        IconButton(onClick = {
+            if (!selected1) selected1 = !selected1; if (!selected2) selected2 =
+            !selected2; if (!selected3) selected3 = !selected3; if (selected4) selected4 =
+            !selected4; if (selected5) selected5 = !selected5
+        }) {
             Icon(
                 modifier = Modifier.size(35.dp),
                 imageVector = Icons.Filled.Star,
@@ -173,7 +200,11 @@ fun RatingSystem() {
                 tint = colorStar3,
             )
         }
-        IconButton(onClick = { if(!selected1) selected1 = !selected1 ; if(!selected2 )selected2 = !selected2 ; if(!selected3) selected3 = !selected3 ; if(!selected4) selected4 = !selected4 ; if(selected5) selected5 = !selected5 }) {
+        IconButton(onClick = {
+            if (!selected1) selected1 = !selected1; if (!selected2) selected2 =
+            !selected2; if (!selected3) selected3 = !selected3; if (!selected4) selected4 =
+            !selected4; if (selected5) selected5 = !selected5
+        }) {
             Icon(
                 modifier = Modifier.size(35.dp),
                 imageVector = Icons.Filled.Star,
@@ -181,7 +212,11 @@ fun RatingSystem() {
                 tint = colorStar4,
             )
         }
-        IconButton(onClick = { if(!selected1) selected1 = !selected1 ; if(!selected2 )selected2 = !selected2 ; if(!selected3) selected3 = !selected3 ; if(!selected4) selected4 = !selected4 ; if(!selected5) selected5 = !selected5 }) {
+        IconButton(onClick = {
+            if (!selected1) selected1 = !selected1; if (!selected2) selected2 =
+            !selected2; if (!selected3) selected3 = !selected3; if (!selected4) selected4 =
+            !selected4; if (!selected5) selected5 = !selected5
+        }) {
             Icon(
                 modifier = Modifier.size(35.dp),
                 imageVector = Icons.Filled.Star,
@@ -285,7 +320,11 @@ fun DescriptorBox() {
                         contentDescription = "Share",
                         tint = Color.White
                     )
-                    Text(text = stringResource(id = R.string.share), color = Color.White, modifier = Modifier.padding(0.dp, 0.dp, 10.dp, 0.dp))
+                    Text(
+                        text = stringResource(id = R.string.share),
+                        color = Color.White,
+                        modifier = Modifier.padding(0.dp, 0.dp, 10.dp, 0.dp)
+                    )
                 }
             }
         }

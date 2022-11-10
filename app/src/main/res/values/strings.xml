@@ -32,7 +32,7 @@
     <string name="explore">Explore</string>
 
     <!-- Filter FAB -->
-    <string name="fab_name">Filter routines</string>
+    <string name="fab_name">Sort routines</string>
 
     <!-- Buttons -->
     <string name="accept">Accept</string>

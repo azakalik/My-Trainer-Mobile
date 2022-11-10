@@ -20,6 +20,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.mytrainermobile.components.ExerciseBox
+import com.example.mytrainermobile.ui.theme.DefaultColor
 
 @Preview(showBackground = true)
 @Composable
