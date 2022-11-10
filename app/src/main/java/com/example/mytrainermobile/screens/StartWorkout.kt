@@ -34,20 +34,6 @@ import com.example.mytrainermobile.ui.theme.DefaultColor
 
 
 @Composable
-fun StartButton() {
-    Button(
-        onClick = { },
-        shape = RoundedCornerShape(10.dp),
-        colors = ButtonDefaults.buttonColors(backgroundColor = DefaultColor),
-        modifier = Modifier
-            .fillMaxWidth(0.5F)
-            .padding(0.dp, 5.dp, 0.dp, 10.dp),
-    ) {
-        Text(text = stringResource(id = R.string.start), color = Color.White, fontSize = 16.sp)
-    }
-}
-
-@Composable
 fun WorkoutBar() {
     var popupControl by remember { mutableStateOf(false) }
 
@@ -228,26 +214,39 @@ fun RatingSystem() {
 }
 
 @Composable
-fun StartBar() {
+fun StartButton(onNavigateToRunningWorkout1: () -> Unit) {
+    Button(
+        onClick = { onNavigateToRunningWorkout1() },
+        shape = RoundedCornerShape(10.dp),
+        colors = ButtonDefaults.buttonColors(backgroundColor = DefaultColor),
+        modifier = Modifier
+            .fillMaxWidth(0.5F)
+            .padding(0.dp, 5.dp, 0.dp, 10.dp),
+    ) {
+        Text(text = stringResource(id = R.string.start), color = Color.Black, fontSize = 16.sp)
+    }
+}
+
+@Composable
+fun StartBar(onNavigateToRunningWorkout1: () -> Unit) {
     Box(
         Modifier
             .background(DefaultBackground)
             .fillMaxWidth(1f),
         contentAlignment = Alignment.Center
     ) {
-        StartButton()
+        StartButton(onNavigateToRunningWorkout1)
     }
 }
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-@Preview
 @Composable
-fun StartWorkout() {
+fun StartWorkout(onNavigateToRunningWorkout1: () -> Unit) {
     val list = listOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8)
     Scaffold(modifier = Modifier.fillMaxSize(),
         backgroundColor = DefaultBackground,
         topBar = { WorkoutBar() },
-        bottomBar = { StartBar() }) {
+        bottomBar = { StartBar(onNavigateToRunningWorkout1) }) {
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,

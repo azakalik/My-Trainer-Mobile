@@ -2,23 +2,30 @@
 
 package com.example.mytrainermobile.screens
 
+import android.graphics.Paint.Align
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.PlayArrow
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.mytrainermobile.R
 import com.example.mytrainermobile.components.ExerciseBox
 import com.example.mytrainermobile.ui.theme.DefaultColor
 
@@ -35,27 +42,31 @@ fun RunningWorkout1() {
     //    bottomBar = { BottomBar()}
     )
     {
+        Column() {
+            CycleBox()
 
+            LazyColumn(
+                modifier = Modifier
+                    .padding(it)
+                    .fillMaxSize(), contentPadding = PaddingValues(20.dp)
+            ) {
+                items(items = list, itemContent = { item ->
 
-        LazyColumn(
-            modifier = Modifier
-                .padding(it)
-                .fillMaxSize(), contentPadding = PaddingValues(20.dp)
-        ) {
-            items(items = list, itemContent = { item ->
-
-                Box(modifier = Modifier.padding(10.dp).pointerInput(Unit){
-                    detectTapGestures(
-                        onDoubleTap = {/*TODO DOUBLETAP*/},
-                        onTap = {/*TODO */}
-                    )
-                }) {
-                    ExerciseBox()
-                }//reemplazar item por datos de la lista a enviar a routineBox2
-            })
-        }
+                    Box(modifier = Modifier
+                        .padding(10.dp)
+                        .pointerInput(Unit) {
+                            detectTapGestures(
+                                onDoubleTap = {/*TODO DOUBLETAP*/ },
+                                onTap = {/*TODO */ }
+                            )
+                        }) {
+                        ExerciseBox()
+                    }//reemplazar item por datos de la lista a enviar a routineBox2
+                })
+            }
         }
     }
+}
 
 
 
@@ -122,4 +133,39 @@ fun TopBar(title: String) {
 @Composable
 fun TitleWorkout(title: String) {
     Text(modifier = Modifier.fillMaxWidth(), text = title)
+}
+
+@Composable
+fun CycleBox() {
+    val list = listOf<String>(stringResource(id = R.string.cycle), stringResource(id = R.string.cycle), stringResource(id = R.string.cycle) )
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(DefaultColor, RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
+            .offset(x = (-5).dp)
+            .border(2.dp, Color.Black, shape = RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
+            .height(95.dp)
+    ) {
+        Row(horizontalArrangement = Arrangement.SpaceEvenly, verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxSize(1f)) {
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(
+                    modifier = Modifier.size(85.dp),
+                    imageVector = Icons.Filled.KeyboardArrowLeft,
+                    contentDescription = "back arrow",
+                    tint = Color.White,
+                )
+            }
+            Text(stringResource(id = R.string.cycle), fontSize = 38.sp, color = Color.White)
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(
+                    modifier = Modifier.size(85.dp),
+                    imageVector = Icons.Filled.KeyboardArrowRight,
+                    contentDescription = "next arrow",
+                    tint = Color.White,
+                )
+            }
+        }
+
+    }
 }

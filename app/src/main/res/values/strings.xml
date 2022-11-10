@@ -22,6 +22,10 @@
     <string name="ratepopup">Rating Current Workout</string>
     <string name="start">Start Workout</string>
 
+    <!-- Running workout 1 -->
+
+    <string name="cycle">Cycle</string>
+
     <!-- Favourites -->
     <string name="myfavourites">My Favourites</string>
 

@@ -65,6 +65,11 @@ fun MyAppNavHost(
 
             }
         }
+        val onNavigateToRunningWorkout1 = {
+            navController.navigate("runningWorkout1") {
+
+            }
+        }
         composable("arrive") { ArriveScreen(/*...*/) }
         composable("favourites") { FavouritesView(onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile, onNavigateToStartWorkout) }
         composable("explore") { ExploreScreen(onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile, onNavigateToStartWorkout) }
@@ -76,7 +81,7 @@ fun MyAppNavHost(
         composable("signUp") { ShowSignupScreen(onNavigateToSignIn = {navController.navigate("signIn"){
             popUpTo("signIn"){inclusive = true}
         } }, onNavigateToMyRoutines) }
-        composable("startWorkout") { StartWorkout() }
+        composable("startWorkout") { StartWorkout(onNavigateToRunningWorkout1) }
         composable("runningWorkout1") { RunningWorkout1() }
     }
 }
