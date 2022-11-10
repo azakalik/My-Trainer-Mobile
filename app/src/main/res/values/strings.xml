@@ -17,8 +17,8 @@
 
     <!-- ViewWorkout -->
     <string name="share">Share</string>
-    <string name="favourite">Favourite Me!</string>
-    <string name="rate">Rate Me!</string>
+    <string name="favourite">Favourite</string>
+    <string name="rate">Rate</string>
     <string name="ratepopup">Rating Current Workout</string>
     <string name="start">Start Workout</string>
 

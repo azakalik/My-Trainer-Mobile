@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mytrainermobile.R
 import com.example.mytrainermobile.components.ExerciseBox
+import com.example.mytrainermobile.components.TopBar
 import com.example.mytrainermobile.ui.theme.DefaultColor
 @Preview (showBackground = true)
 @Composable
@@ -119,27 +120,6 @@ fun BottomBar() {
             }
         }
     }
-}
-
-@Composable
-fun TopBar(title: String) {
-    TopAppBar(backgroundColor = Color.Black, contentColor = DefaultColor, title = {
-        TitleWorkout(title = "Your Workout")
-    }, navigationIcon =
-    {
-        IconButton(onClick = { /*TODO*/ }) {
-            Icon(
-                modifier = Modifier.size(33.dp),
-                imageVector = Icons.Filled.KeyboardArrowLeft,
-                contentDescription = "back arrow"
-            )
-        }
-    })
-}
-
-@Composable
-fun TitleWorkout(title: String) {
-    Text(modifier = Modifier.fillMaxWidth(), text = title)
 }
 
 

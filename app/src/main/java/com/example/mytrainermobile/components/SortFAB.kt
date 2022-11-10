@@ -52,6 +52,10 @@ fun SortFAB() {
                         Text(text = stringResource(id = R.string.fab_name), color = Color.White, modifier = Modifier.padding(10.dp))
                     }
                     ShowDropDownMenu()
+                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
+                        DefaultButton(onClick = { popupControl = false }, text = stringResource(id = R.string.cancel))
+                        DefaultButton(onClick = { popupControl = false }, text = stringResource(id = R.string.accept))
+                    }
 //                    GroupedCheckbox(
 //                        mItemsList = getRoutineTypesList()
 //                    )
@@ -92,25 +96,19 @@ fun GroupedCheckbox(mItemsList: List<String>) {
 
 @Composable
 fun ShowDropDownMenu(){
-    var expanded by remember { mutableStateOf(true)}
+    var expanded by remember { mutableStateOf(false)}
     val options = listOf("Creation date", "Rating", "Difficulty", "Category")
     var currentValue by remember { mutableStateOf(options[0])}
-    
-    Row(modifier = Modifier.clickable { expanded = !expanded }) {
-        Text(text = currentValue, color = Color.White)
-        Icon(imageVector = Icons.Filled.ArrowDropDown, contentDescription = "Select sort options", tint = Color.White)
-    }
 
-//    val icon = if (expanded)
-//        Icons.Filled.KeyboardArrowUp
-//    else
-//        Icons.Filled.KeyboardArrowDown
-
-    DropdownMenu(expanded = expanded, onDismissRequest = {expanded = false}) {
-        options.forEach {
-            DropdownMenuItem(text = { it }, onClick = { currentValue = it; expanded = false })
+    Column() {
+        Row(modifier = Modifier.clickable { expanded = !expanded }) {
+            Text(text = currentValue, color = Color.White)
+            Icon(imageVector = Icons.Filled.ArrowDropDown, contentDescription = "Select sort options", tint = Color.White)
+        }
+        DropdownMenu(expanded = expanded, onDismissRequest = {expanded = false}) {
+            options.forEach {
+                DropdownMenuItem(text = { Text(it) }, onClick = { currentValue = it; expanded = false })
+            }
         }
     }
-
-
 }
