@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.mytrainermobile.classes.Routine
 import com.example.mytrainermobile.components.*
 import com.example.mytrainermobile.ui.theme.DefaultBackground
@@ -20,11 +21,14 @@ import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 //This class is only meant to be used by explore, favourites and my routines
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun DefaultShowRoutinesScreen(title: String, onNavigateToMyRoutines: () -> Unit,
-                              onNavigateToFavourites: () -> Unit,
-                              onNavigateToExplore: () -> Unit,
-                              onNavigateToProfile: () -> Unit,
-                              onNavigateToStartWorkout: () -> Unit) {
+fun DefaultShowRoutinesScreen(
+    navController: NavController,
+    title: String, onNavigateToMyRoutines: () -> Unit,
+    onNavigateToFavourites: () -> Unit,
+    onNavigateToExplore: () -> Unit,
+    onNavigateToProfile: () -> Unit,
+    onNavigateToStartWorkout: () -> Unit
+) {
     MyTrainerMobileTheme() {
         val list = listOf<Routine>(
             Routine(1, "rutina chest", "chest"),
@@ -51,13 +55,15 @@ fun DefaultShowRoutinesScreen(title: String, onNavigateToMyRoutines: () -> Unit,
             Routine(2, "rutina back", "back"),
             Routine(3, "rutina legs", "legs"),
             Routine(3, "rutina cardio", "cardio"),
-            )
+        )
         Scaffold(
             modifier = Modifier
                 .fillMaxSize()
                 .background(DefaultBackground),
             floatingActionButton = { SortFAB() },
-            bottomBar = { ThisBottomAppBar(onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile) },
+            bottomBar = {
+                ThisBottomAppBar(navController)
+            },
         ) {
             Column(modifier = Modifier.fillMaxWidth()) {
                 val configuration = LocalConfiguration.current
@@ -69,7 +75,10 @@ fun DefaultShowRoutinesScreen(title: String, onNavigateToMyRoutines: () -> Unit,
                                 .fillMaxHeight(0.23f),
                             verticalArrangement = Arrangement.SpaceEvenly
                         ) {
-                            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.Center
+                            ) {
                                 TitleForSection()
                             }
                             TitleBox(
@@ -95,7 +104,10 @@ fun DefaultShowRoutinesScreen(title: String, onNavigateToMyRoutines: () -> Unit,
                 }
                 LazyVerticalGrid(
 
-                    modifier = Modifier.fillMaxSize().padding(), contentPadding = PaddingValues(5.dp, 0.dp, 5.dp, 80.dp),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(),
+                    contentPadding = PaddingValues(5.dp, 0.dp, 5.dp, 80.dp),
                     horizontalArrangement = Arrangement.SpaceAround,
                     verticalArrangement = Arrangement.Center,
                     columns = GridCells.Adaptive(150.dp),

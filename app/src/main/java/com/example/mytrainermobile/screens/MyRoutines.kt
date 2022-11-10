@@ -18,6 +18,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.mytrainermobile.R
 import com.example.mytrainermobile.classes.Routine
 import com.example.mytrainermobile.components.RoutineBox
@@ -25,10 +26,21 @@ import com.example.mytrainermobile.components.TitleBox
 import com.example.mytrainermobile.components.TitleForSection
 
 @Composable
-fun MyRoutines(onNavigateToMyRoutines: () -> Unit,
-               onNavigateToFavourites: () -> Unit,
-               onNavigateToExplore: () -> Unit,
-               onNavigateToProfile: () -> Unit,
-               onNavigateToStartWorkout: () -> Unit,){
-    DefaultShowRoutinesScreen(title = stringResource(id = R.string.myroutines), onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile, onNavigateToStartWorkout)
+fun MyRoutines(
+    navController: NavController,
+    onNavigateToMyRoutines: () -> Unit,
+    onNavigateToFavourites: () -> Unit,
+    onNavigateToExplore: () -> Unit,
+    onNavigateToProfile: () -> Unit,
+    onNavigateToStartWorkout: () -> Unit,
+) {
+    DefaultShowRoutinesScreen(
+        navController,
+        title = stringResource(id = R.string.myroutines),
+        onNavigateToMyRoutines,
+        onNavigateToFavourites,
+        onNavigateToExplore,
+        onNavigateToProfile,
+        onNavigateToStartWorkout
+    )
 }

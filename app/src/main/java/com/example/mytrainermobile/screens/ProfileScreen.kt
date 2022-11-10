@@ -7,6 +7,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import com.example.mytrainermobile.components.ThisBottomAppBar
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
@@ -14,6 +15,7 @@ import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun ShowProfileScreen(
+    navController: NavController,
     onNavigateToMyRoutines: () -> Unit,
     onNavigateToFavourites: () -> Unit,
     onNavigateToExplore: () -> Unit,
@@ -24,7 +26,7 @@ fun ShowProfileScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .background(DefaultBackground),
-            bottomBar = { ThisBottomAppBar(onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile) },
+            bottomBar = { ThisBottomAppBar(navController) },
         ) {
             Text("Profile Screen")
         }

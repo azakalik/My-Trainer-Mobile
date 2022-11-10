@@ -1,5 +1,6 @@
 package com.example.mytrainermobile.components
 
+import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -13,54 +14,47 @@ import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.mytrainermobile.classes.BottomNavigationData
 import com.example.mytrainermobile.ui.theme.DefaultBackground
+import com.example.mytrainermobile.ui.theme.DefaultColor
 
 @Composable
-fun ThisBottomAppBar(
-    onNavigateToMyRoutines: () -> Unit,
-    onNavigateToFavourites: () -> Unit,
-    onNavigateToExplore: () -> Unit,
-    onNavigateToProfile: () -> Unit,
-) {
-    var selectedItem by remember() { mutableStateOf("myRoutines") }
-    NavigationBarItemDefaults.colors(selectedIconColor = Color.Blue, unselectedIconColor = Color.Red)
+fun ThisBottomAppBar(navController: NavController) {
+
+
+    val items = listOf(
+        BottomNavigationData.MyRoutines,
+        BottomNavigationData.Favourites,
+        BottomNavigationData.Explore,
+        BottomNavigationData.Profile
+    )
 
     NavigationBar(containerColor = DefaultBackground) {
-        NavigationBarItem(
-            icon = { Icon(Icons.Filled.Home, contentDescription = "myRoutines") },
-            label = { Text("My Routines") },
-            onClick = {
-                selectedItem = "myRoutines"
-                onNavigateToMyRoutines()
-            },
-            selected = selectedItem == "myRoutines"
-        )
-        NavigationBarItem(
-            icon = { Icon(Icons.Filled.Favorite, contentDescription = "Favourites") },
-            label = { Text("Favourites") },
-            onClick = {
-                selectedItem = "fav"
-                onNavigateToFavourites()
-            },
-            selected = selectedItem == "fav"
-        )
-        NavigationBarItem(
-            icon = { Icon(Icons.Filled.Search, contentDescription = "Explore") },
-            label = { Text("Explore") },
-            onClick = {
-                selectedItem = "exp"
-                onNavigateToExplore()
-            },
-            selected = selectedItem == "exp"
-        )
-        NavigationBarItem(
-            icon = { Icon(Icons.Filled.Person, contentDescription = "Me") },
-            label = { Text("Me") },
-            onClick = {
-                selectedItem = "me"
-                onNavigateToProfile()
-            },
-            selected = selectedItem == "me"
-        )
+        val navBackStackEntry by navController.currentBackStackEntryAsState()
+        val currentRoute = navBackStackEntry?.destination?.route
+        items.forEach { item ->
+            BottomNavigationItem(
+                unselectedContentColor = Color.White,
+                selectedContentColor = DefaultColor,
+                icon = { Icon(imageVector = item.icon, contentDescription = item.title) },
+                label = { Text(text = item.title) },
+                alwaysShowLabel = true,
+                selected = currentRoute == item.route,
+                onClick = {
+                    navController.navigate(item.route) {
+                        navController.graph.startDestinationRoute?.let { screenRoute ->
+                            popUpTo(screenRoute) {
+                                saveState = true
+                                inclusive = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    }
+                }
+            )
+        }
     }
 }
