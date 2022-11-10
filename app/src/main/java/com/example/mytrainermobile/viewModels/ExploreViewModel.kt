@@ -4,13 +4,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.example.mytrainermobile.viewModelStates.HomeUIState
+import com.example.mytrainermobile.viewModelStates.ExploreUIState
 import kotlinx.coroutines.Job
 
-class HomeViewModel(): ViewModel() {
+class ExploreViewModel(): ViewModel() {
 
 
-    var homeUIState by mutableStateOf( HomeUIState() )
+    var homeUIState by mutableStateOf( ExploreUIState() )
         private set
 
 
