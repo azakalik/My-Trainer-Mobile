@@ -19,7 +19,7 @@ fun CyclesScreen(){
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         backgroundColor = Color.DarkGray,
-        topBar = { TopBar("your workout") }) {
+        topBar = { TopBar("Routine Cycles") }) {
         CyclesBody(pad = it)
 
     }
