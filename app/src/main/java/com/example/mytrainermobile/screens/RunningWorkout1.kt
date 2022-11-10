@@ -1,5 +1,3 @@
-@file:JvmName("ViewRoutineKt")
-
 package com.example.mytrainermobile.screens
 
 import android.graphics.Paint.Align
@@ -29,6 +27,7 @@ import androidx.compose.ui.unit.sp
 import com.example.mytrainermobile.R
 import com.example.mytrainermobile.components.ExerciseBox
 import com.example.mytrainermobile.components.TopBar
+import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
 @Preview (showBackground = true)
 @Composable
@@ -38,14 +37,11 @@ fun RunningWorkout1() {
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        backgroundColor = Color.DarkGray,
-        topBar = { TopBar("your workout") },
-        //    bottomBar = { BottomBar()}
+        backgroundColor = DefaultBackground,
+        topBar = { TopBar("Routine title") }
     )
     {
-
         Column() {
-
             LazyRow(
                 modifier = Modifier
                     .padding(it).padding(top=25.dp)
@@ -55,8 +51,6 @@ fun RunningWorkout1() {
                     CycleBox(1,true)
                 })
             }
-
-
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize(), contentPadding = PaddingValues(20.dp)
@@ -74,49 +68,6 @@ fun RunningWorkout1() {
                         ExerciseBox()
                     }//reemplazar item por datos de la lista a enviar a routineBox2
                 })
-            }
-        }
-    }
-}
-
-
-@Composable
-fun BottomBar() {
-    BottomAppBar(backgroundColor = Color.Black, contentColor = DefaultColor) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(color = Color.Transparent),
-            horizontalArrangement = Arrangement.SpaceEvenly,
-        ) {
-            IconButton(
-                onClick = { /*TODO*/ },
-            ) {
-                Icon(
-                    Icons.Filled.ArrowBack,
-                    contentDescription = "Previous Exercise",
-                    modifier = Modifier.size(33.dp)
-                )
-            }
-
-            IconButton(
-                onClick = { /*TODO*/ },
-            ) {
-                Icon(
-                    Icons.Outlined.PlayArrow,
-                    contentDescription = "Previous Exercise",
-                    modifier = Modifier.size(33.dp)
-                )
-            }
-
-            IconButton(
-                onClick = { /*TODO*/ },
-            ) {
-                Icon(
-                    Icons.Filled.ArrowForward,
-                    contentDescription = "Previous Exercise",
-                    modifier = Modifier.size(33.dp)
-                )
             }
         }
     }

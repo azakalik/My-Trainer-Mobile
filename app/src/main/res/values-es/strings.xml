@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="cycleWithNumber">Cyclo %1$d</string>
+    <string name="cycleWithNumber">Ciclo %1$d</string>
 </resources>
