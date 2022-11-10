@@ -18,6 +18,7 @@ class ExerciseListViewModel() : ViewModel() {
     private var fetchExerciseListJob: Job? = null
 
     fun fetchExercises(cycleid:Int){
+
         fetchExerciseListJob?.cancel()
 
 

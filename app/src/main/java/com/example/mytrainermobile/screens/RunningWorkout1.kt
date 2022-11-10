@@ -9,6 +9,7 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -28,26 +29,35 @@ import androidx.compose.ui.unit.sp
 import com.example.mytrainermobile.R
 import com.example.mytrainermobile.components.ExerciseBox
 import com.example.mytrainermobile.ui.theme.DefaultColor
-
-@Preview(showBackground = true)
+@Preview (showBackground = true)
 @Composable
 fun RunningWorkout1() {
 
-    val list = listOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5 ,6 ,7 ,8)
+    val list = listOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8)
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         backgroundColor = Color.DarkGray,
         topBar = { TopBar("your workout") },
-    //    bottomBar = { BottomBar()}
+        //    bottomBar = { BottomBar()}
     )
     {
+
         Column() {
-            CycleBox()
+
+            LazyRow(
+                modifier = Modifier
+                    .padding(it).padding(top=25.dp)
+                    .fillMaxWidth()
+            ) {
+                items(items = list, itemContent = {
+                    CycleBox(1,true)
+                })
+            }
+
 
             LazyColumn(
                 modifier = Modifier
-                    .padding(it)
                     .fillMaxSize(), contentPadding = PaddingValues(20.dp)
             ) {
                 items(items = list, itemContent = { item ->
@@ -69,11 +79,8 @@ fun RunningWorkout1() {
 }
 
 
-
-
-
 @Composable
-fun BottomBar(){
+fun BottomBar() {
     BottomAppBar(backgroundColor = Color.Black, contentColor = DefaultColor) {
         Row(
             modifier = Modifier
@@ -135,37 +142,20 @@ fun TitleWorkout(title: String) {
     Text(modifier = Modifier.fillMaxWidth(), text = title)
 }
 
-@Composable
-fun CycleBox() {
-    val list = listOf<String>(stringResource(id = R.string.cycle), stringResource(id = R.string.cycle), stringResource(id = R.string.cycle) )
 
+@Composable
+fun CycleBox(cycleNumber: Int, isSelected: Boolean = false) {
     Box(
         modifier = Modifier
-            .fillMaxWidth()
-            .background(DefaultColor, RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
-            .offset(x = (-5).dp)
-            .border(2.dp, Color.Black, shape = RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
-            .height(95.dp)
+            .width(200.dp)
+            .background(
+                if (isSelected) DefaultColor else Color.Black,
+                RoundedCornerShape(15.dp, 15.dp, 15.dp, 15.dp)
+            )
+            .border(2.dp, Color.Black, shape = RoundedCornerShape(15.dp, 15.dp, 15.dp, 15.dp))
+            .height(50.dp), contentAlignment = Alignment.Center
     ) {
-        Row(horizontalArrangement = Arrangement.SpaceEvenly, verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxSize(1f)) {
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(
-                    modifier = Modifier.size(85.dp),
-                    imageVector = Icons.Filled.KeyboardArrowLeft,
-                    contentDescription = "back arrow",
-                    tint = Color.White,
-                )
-            }
-            Text(stringResource(id = R.string.cycle), fontSize = 38.sp, color = Color.White)
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(
-                    modifier = Modifier.size(85.dp),
-                    imageVector = Icons.Filled.KeyboardArrowRight,
-                    contentDescription = "next arrow",
-                    tint = Color.White,
-                )
-            }
-        }
-
+        //TODO agregar condicional de longitud!, para poder distinguir warmup y coolof
+        Text(text = stringResource(id = R.string.cycleWithNumber,cycleNumber),color = if ( isSelected ) Color.White else DefaultColor)
     }
 }

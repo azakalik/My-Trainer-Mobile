@@ -25,6 +25,7 @@
     <!-- Running workout 1 -->
 
     <string name="cycle">Cycle</string>
+    <string name="cycleWithNumber">Cycle %1$d</string>
 
     <!-- Favourites -->
     <string name="myfavourites">My Favourites</string>
