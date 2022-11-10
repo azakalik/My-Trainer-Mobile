@@ -21,15 +21,22 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.mytrainermobile.components.ExerciseBox
 
-@Preview(showBackground = true)
+
+
 @Composable
 fun RunningWorkout1() {
+
     val list = listOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5 ,6 ,7 ,8)
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         backgroundColor = Color.DarkGray,
-        topBar = { TopBar() },
-        bottomBar = { BottomBar()}) {
+        topBar = { TopBar("your workout") },
+    //    bottomBar = { BottomBar()}
+    )
+    {
+
+
         LazyColumn(
             modifier = Modifier
                 .padding(it)
@@ -47,8 +54,11 @@ fun RunningWorkout1() {
                 }//reemplazar item por datos de la lista a enviar a routineBox2
             })
         }
+        }
     }
-}
+
+
+
 
 
 @Composable
@@ -94,7 +104,7 @@ fun BottomBar(){
 }
 
 @Composable
-fun TopBar() {
+fun TopBar(title: String) {
     TopAppBar(backgroundColor = Color.Black, contentColor = Color.Magenta, title = {
         TitleWorkout(title = "Your Workout")
     }, navigationIcon =
