@@ -31,6 +31,7 @@ fun ThisBottomAppBar(navController: NavController) {
         BottomNavigationData.Profile
     )
 
+
     NavigationBar(containerColor = DefaultBackground) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route

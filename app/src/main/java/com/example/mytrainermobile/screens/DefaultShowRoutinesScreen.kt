@@ -22,11 +22,7 @@ import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun DefaultShowRoutinesScreen(
-    navController: NavController,
-    title: String, onNavigateToMyRoutines: () -> Unit,
-    onNavigateToFavourites: () -> Unit,
-    onNavigateToExplore: () -> Unit,
-    onNavigateToProfile: () -> Unit,
+    title: String,
     onNavigateToStartWorkout: () -> Unit
 ) {
     MyTrainerMobileTheme() {
@@ -56,75 +52,67 @@ fun DefaultShowRoutinesScreen(
             Routine(3, "rutina legs", "legs"),
             Routine(3, "rutina cardio", "cardio"),
         )
-        Scaffold(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(DefaultBackground),
-            floatingActionButton = { SortFAB() },
-            bottomBar = {
-                ThisBottomAppBar(navController)
-            },
-        ) {
-            Column(modifier = Modifier.fillMaxWidth()) {
-                val configuration = LocalConfiguration.current
-                when (configuration.orientation) {
-                    Configuration.ORIENTATION_PORTRAIT -> {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .fillMaxHeight(0.23f),
-                            verticalArrangement = Arrangement.SpaceEvenly
-                        ) {
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.Center
-                            ) {
-                                TitleForSection()
-                            }
-                            TitleBox(
-                                title = title
-                            )
-                        }
-                    }
-                    else -> {
+
+        Column(modifier = Modifier.fillMaxWidth()) {
+            val configuration = LocalConfiguration.current
+            when (configuration.orientation) {
+                Configuration.ORIENTATION_PORTRAIT -> {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .fillMaxHeight(0.23f),
+                        verticalArrangement = Arrangement.SpaceEvenly
+                    ) {
                         Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .fillMaxHeight(0.2f),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Center
                         ) {
-                            TitleBox(
-                                title = title
-                            )
                             TitleForSection()
-                            Spacer(modifier = Modifier.padding(0.dp, 0.dp, 25.dp, 0.dp))
                         }
+                        TitleBox(
+                            title = title
+                        )
                     }
                 }
-                LazyVerticalGrid(
+                else -> {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .fillMaxHeight(0.2f),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        TitleBox(
+                            title = title
+                        )
+                        TitleForSection()
+                        Spacer(modifier = Modifier.padding(0.dp, 0.dp, 25.dp, 0.dp))
+                    }
+                }
+            }
+            LazyVerticalGrid(
 
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(),
-                    contentPadding = PaddingValues(5.dp, 0.dp, 5.dp, 80.dp),
-                    horizontalArrangement = Arrangement.SpaceAround,
-                    verticalArrangement = Arrangement.Center,
-                    columns = GridCells.Adaptive(150.dp),
-                    content = {
-                        items(list.size) { idx ->
-                            list[idx].name?.let { it1 ->
-                                list[idx].type?.let { it2 ->
-                                    RoutineBox(
-                                        routineName = it1,
-                                        routineType = it2,
-                                        onNavigateToStartWorkout
-                                    )
-                                }
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(),
+                contentPadding = PaddingValues(5.dp, 0.dp, 5.dp, 80.dp),
+                horizontalArrangement = Arrangement.SpaceAround,
+                verticalArrangement = Arrangement.Center,
+                columns = GridCells.Adaptive(150.dp),
+                content = {
+                    items(list.size) { idx ->
+                        list[idx].name?.let { it1 ->
+                            list[idx].type?.let { it2 ->
+                                RoutineBox(
+                                    routineName = it1,
+                                    routineType = it2,
+                                    onNavigateToStartWorkout
+                                )
                             }
                         }
-                    })
-            }
+                    }
+                })
         }
+
     }
 }

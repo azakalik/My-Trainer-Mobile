@@ -4,6 +4,7 @@ package com.example.mytrainermobile
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.ComponentActivity
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -23,14 +24,14 @@ class MainActivity : ComponentActivity() {
                 systemUiController.setSystemBarsColor(
                     color = androidx.compose.ui.graphics.Color.Black
                 )
-                MyAppNavHost()
+                RootNavigationGraph()
             }
         }
     }
 }
 
 @Composable
-fun MyAppNavHost(
+fun RootNavigationGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     startDestination: String = "signIn"
@@ -40,49 +41,24 @@ fun MyAppNavHost(
         navController = navController,
         startDestination = startDestination
     ) {
-        val onNavigateToMyRoutines = {
-            navController.navigate("myRoutines"){
-                popUpTo(0)
-            }
-        }
-        val onNavigateToFavourites = {
-            navController.navigate("favourites"){
-                popUpTo("myRoutines")
-            }
-        }
-        val onNavigateToExplore = {
-            navController.navigate("explore"){ //todo
-                popUpTo("myRoutines")
-            }
-        }
-        val onNavigateToProfile = {
-            navController.navigate("profile"){
-                popUpTo("myRoutines")
-            }
-        }
-        val onNavigateToStartWorkout = {
-            navController.navigate("startWorkout"){
 
+        val onNavigateToAppNavigator = {
+            navController.navigate("appNavigatorHandler"){
+                popUpTo("appNavigatorHandler")
             }
         }
-        val onNavigateToRunningWorkout1 = {
-            navController.navigate("runningWorkout1") {
 
-            }
-        }
         composable("arrive") { ArriveScreen(/*...*/) }
-        composable("favourites") { FavouritesView(navController,onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile, onNavigateToStartWorkout) }
-        composable("explore") { ExploreScreen(navController,onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile, onNavigateToStartWorkout) }
-        composable("profile") { ShowProfileScreen(navController,onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile) }
-        composable("myRoutines") { MyRoutines(navController,onNavigateToMyRoutines, onNavigateToFavourites, onNavigateToExplore, onNavigateToProfile, onNavigateToStartWorkout) }
         composable("signIn") { ShowSignInScreen(onNavigateToSignUp = {navController.navigate("signUp"){
             popUpTo("signUp"){inclusive = false}
-        } }, onNavigateToMyRoutines) }
+        } }, onNavigateToAppNavigator) }
         composable("signUp") { ShowSignupScreen(onNavigateToSignIn = {navController.navigate("signIn"){
             popUpTo("signIn"){inclusive = true}
-        } }, onNavigateToMyRoutines) }
-        composable("startWorkout") { StartWorkout(onNavigateToRunningWorkout1) }
-        composable("runningWorkout1") { RunningWorkout1() }
+        } }, onNavigateToAppNavigator) }
+        composable("appNavigatorHandler"){ AppNavigatorHandler() }
+
+
+
     }
 }
 

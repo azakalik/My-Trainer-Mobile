@@ -15,20 +15,9 @@ import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun ShowProfileScreen(
-    navController: NavController,
-    onNavigateToMyRoutines: () -> Unit,
-    onNavigateToFavourites: () -> Unit,
-    onNavigateToExplore: () -> Unit,
-    onNavigateToProfile: () -> Unit
+
 ) {
-    MyTrainerMobileTheme() {
-        Scaffold(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(DefaultBackground),
-            bottomBar = { ThisBottomAppBar(navController) },
-        ) {
-            Text("Profile Screen")
-        }
-    }
+
+    Text("Profile Screen")
+
 }
