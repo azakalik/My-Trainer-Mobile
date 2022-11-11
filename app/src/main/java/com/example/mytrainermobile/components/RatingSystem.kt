@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
 import com.example.mytrainermobile.R
+import com.example.mytrainermobile.ui.theme.DefaultBackground
 
 @Composable
 fun RatingSystem() {
@@ -122,7 +123,7 @@ fun RateButton() {
             Surface(
                 border = BorderStroke(1.dp, MaterialTheme.colors.primary),
                 shape = RoundedCornerShape(8.dp),
-                color = Color(0xCC1E1E1E),
+                color = DefaultBackground,
                 modifier = Modifier
                     .fillMaxSize(1f)
                     .padding(60.dp, 230.dp, 60.dp, 230.dp)
@@ -147,8 +148,7 @@ fun RateButton() {
                             text = stringResource(id = R.string.cancel)
                         )
                         DefaultButton(onClick = {
-                            popupControl = false; popupControl =
-                            !popupControl
+                            popupControl = false
                         }, text = stringResource(id = R.string.save))
                     }
                 }
