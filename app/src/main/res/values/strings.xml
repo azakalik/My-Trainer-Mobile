@@ -46,4 +46,28 @@
 
     <!-- Share -->
     <string name="shareText">Check out this routine! &#xA; http://mytrainer.com</string>
+
+    <!-- General -->
+    <string name="no_information">No information</string>
+
+    <!-- Sort -->
+    <string name="creation_date">Creation date</string>
+    <string name="rating">Rating</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="category">Category</string>
+
+    <!-- Display routine info -->
+    <string name="display_difficulty">Creation date</string> <!-- TODO esto recibe como parametro la dificultad-->
+    <string name="display_rating">Creation date</string>
+    <string name="display_creator">Creation date</string>
+
+    <!-- Routine types -->
+    <string name="arms">Arms</string>
+    <string name="abs">Abs</string>
+    <string name="back">Back</string>
+    <string name="cardio">Cardio</string>
+    <string name="chest">Chest</string>
+    <string name="legs">Legs</string>
+    <string name="mixed">Mixed</string>
+    <string name="shoulder">Shoulder</string>
 </resources>

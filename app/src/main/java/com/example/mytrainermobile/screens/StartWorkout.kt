@@ -58,7 +58,7 @@ fun StartWorkout(onNavigateToRunningWorkout1: () -> Unit) {
             modifier = Modifier.fillMaxSize(1f)
         ) {
             Spacer(modifier = Modifier.padding(0.dp, 10.dp, 0.dp, 0.dp))
-            DescriptorBox(null, null, null, routineTitle)
+            DescriptorBox(routineTitle = routineTitle)
             Box(
                 modifier = Modifier
                     .height(120.dp)
@@ -88,7 +88,7 @@ fun StartWorkout(onNavigateToRunningWorkout1: () -> Unit) {
 }
 
 @Composable
-fun DescriptorBox(rating: Float? = null, creator: String? = null, difficulty: Int? = null, routineTitle: String) {
+fun DescriptorBox(rating: String? = stringResource(id = R.string.no_information), category: String? = stringResource(id = R.string.no_information), difficulty: String? = stringResource(id = R.string.no_information), routineTitle: String) {
 
     Box(
         modifier = Modifier
@@ -98,11 +98,11 @@ fun DescriptorBox(rating: Float? = null, creator: String? = null, difficulty: In
             .border(2.dp, Color.Black, shape = RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
             .height(95.dp)
     ) {
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+        Row(modifier = Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.offset(x = 10.dp), verticalArrangement = Arrangement.SpaceEvenly) {
-                Text("Difficulty: ", color = Color.White)
-                Text("Rating: ", color = Color.White)
-                Text("Creator: ", color = Color.White)
+                Text("Difficulty: $difficulty", color = Color.White)
+                Text("Rating: $rating", color = Color.White)
+                Text("Category: $category", color = Color.White)
             }
             Column(horizontalAlignment = Alignment.End, modifier = Modifier.fillMaxWidth()) {
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
