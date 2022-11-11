@@ -1,4 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="cycleWithNumber">Ciclo %1$d</string>
+    <!--ARRIVE SCREEN-->
+    <string name="app_name">My Trainer Mobile</string>
+    <string name="signInText">Ingresar</string>
+    <string name="signUpText">Registrarse</string>
+    <string name="introScreenMessage">Entrena donde sea, cuando sea.</string>
+
+    <!--SIGN UP and IN SCREEN-->
+    <string name="signup_insert_name">Ingrese Nombre</string>
+    <string name="signup_insert_surname">Ingrese Apellido</string>
+    <string name="signup_insert_email">Ingrese Correo</string>
+    <string name="signup_reinsert_email">Reingrese Correo</string>
+    <string name="signup_insert_password">Ingrese Clave</string>
+    <string name="signup_reinsert_password">Reingrese Clave</string>
+    <string name="signup_goto_signin">ir a inicio de sesion</string>
+    <string name="signup_goto_signup">ir a registrar una cuenta</string>
+
+    <!-- ViewWorkout -->
+    <string name="share">Compartir</string>
+    <string name="favourite">Favoritas</string>
+    <string name="rate">Puntuar</string>
+    <string name="ratepopup">Puntuando Entrenamiento Actual</string>
+    <string name="start">Comenzar Entrenamiento</string>
+
+    <!-- Running workout 1 -->
+
+    <string name="cycle">Ciclo</string>
+
+    <!-- Favourites -->
+    <string name="myfavourites">Mis Favoritas</string>
+
+    <!-- MyRoutines -->
+    <string name="myroutines">Mis Rutinas</string>
+
+    <!-- Home/Explore -->
+    <string name="explore">Explorar</string>
+
+    <!-- Filter FAB -->
+    <string name="fab_name">Ordenar rutinas</string>
+
+    <!-- Buttons -->
+    <string name="accept">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="save">Guardar</string>
 </resources>
