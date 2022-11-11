@@ -24,14 +24,16 @@ import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
 
 @Composable
-fun SortFAB() {
+fun SortFAB(showButton: Boolean) {
     var popupControl by remember { mutableStateOf(false) }
-    FloatingActionButton(
-        onClick = { popupControl = !popupControl },
-        contentColor = DefaultColor,
-        containerColor = DefaultBackground
-    ) {
-        Icon(Icons.Filled.Menu, stringResource(id = R.string.fab_name))
+    if ( showButton ) {
+        FloatingActionButton(
+            onClick = { popupControl = !popupControl },
+            contentColor = DefaultColor,
+            containerColor = DefaultBackground
+        ) {
+            Icon(Icons.Filled.Menu, stringResource(id = R.string.fab_name))
+        }
     }
     if (popupControl) {
         Popup(

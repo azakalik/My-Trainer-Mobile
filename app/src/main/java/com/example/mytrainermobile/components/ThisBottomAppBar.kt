@@ -21,7 +21,7 @@ import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
 
 @Composable
-fun ThisBottomAppBar(navController: NavController) {
+fun ThisBottomAppBar(navController: NavController, showBottomBar: Boolean) {
 
 
     val items = listOf(
@@ -31,31 +31,32 @@ fun ThisBottomAppBar(navController: NavController) {
         BottomNavigationData.Profile
     )
 
-
-    NavigationBar(containerColor = DefaultBackground) {
-        val navBackStackEntry by navController.currentBackStackEntryAsState()
-        val currentRoute = navBackStackEntry?.destination?.route
-        items.forEach { item ->
-            BottomNavigationItem(
-                unselectedContentColor = Color.White,
-                selectedContentColor = DefaultColor,
-                icon = { Icon(imageVector = item.icon, contentDescription = item.title) },
-                label = { Text(text = item.title) },
-                alwaysShowLabel = true,
-                selected = currentRoute == item.route,
-                onClick = {
-                    navController.navigate(item.route) {
-                        navController.graph.startDestinationRoute?.let { screenRoute ->
-                            popUpTo(screenRoute) {
-                                saveState = true
-                                inclusive = true
+    if (showBottomBar) {
+        NavigationBar(containerColor = DefaultBackground) {
+            val navBackStackEntry by navController.currentBackStackEntryAsState()
+            val currentRoute = navBackStackEntry?.destination?.route
+            items.forEach { item ->
+                BottomNavigationItem(
+                    unselectedContentColor = Color.White,
+                    selectedContentColor = DefaultColor,
+                    icon = { Icon(imageVector = item.icon, contentDescription = item.title) },
+                    label = { Text(text = item.title) },
+                    alwaysShowLabel = true,
+                    selected = currentRoute == item.route,
+                    onClick = {
+                        navController.navigate(item.route) {
+                            navController.graph.startDestinationRoute?.let { screenRoute ->
+                                popUpTo(screenRoute) {
+                                    saveState = true
+                                    inclusive = true
+                                }
+                                launchSingleTop = true
+                                restoreState = true
                             }
-                            launchSingleTop = true
-                            restoreState = true
                         }
                     }
-                }
-            )
+                )
+            }
         }
     }
 }

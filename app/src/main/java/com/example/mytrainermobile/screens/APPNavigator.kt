@@ -4,12 +4,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Scaffold
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.mytrainermobile.components.SortFAB
 import com.example.mytrainermobile.components.ThisBottomAppBar
@@ -17,36 +19,60 @@ import com.example.mytrainermobile.ui.theme.DefaultBackground
 
 
 @Composable
-fun AppNavigatorHandler(navController: NavHostController = rememberNavController()){
+fun AppNavigatorHandler(navController: NavHostController = rememberNavController()) {
+    var bottomBarStateManager by rememberSaveable { mutableStateOf(true) }
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val detailsScreens = listOf(WorkoutNavigatorItems.StartWorkout.route,WorkoutNavigatorItems.RunningWorkout.route)
+    val filterScreen = listOf(AppNavigatorItems.Favourites.route,AppNavigatorItems.MyRoutines.route,AppNavigatorItems.Explore.route)
+    var floatingActionButtonManager by rememberSaveable { mutableStateOf(true) }
+
+    val currentRoute = navBackStackEntry?.destination?.route
+
+    floatingActionButtonManager = currentRoute in  filterScreen
+    bottomBarStateManager = currentRoute !in detailsScreens
+
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
             .background(DefaultBackground),
-        floatingActionButton = { SortFAB() },
+        floatingActionButton = { SortFAB(floatingActionButtonManager) },
         bottomBar = {
-            ThisBottomAppBar(navController)
+            ThisBottomAppBar(navController, bottomBarStateManager)
         },
-    ){
-        AppNavigator(navController =  navController, padding = it)
+    ) {
+        AppNavigator(navController = navController, padding = it)
     }
 }
 
 
+sealed class WorkoutNavigatorItems(val route:String){
+    object StartWorkout: WorkoutNavigatorItems("startWorkout")
+    object RunningWorkout: WorkoutNavigatorItems("runningWorkout1")
+}
 
-sealed class AppNavigatorItems(val route: String){
-    object Favourites: AppNavigatorItems("favourites")
-    object Explore: AppNavigatorItems("explore")
-    object Profile: AppNavigatorItems("profile")
-    object MyRoutines: AppNavigatorItems("myRoutines")
-    object WorkoutNavigationHandler: AuthNavigatorItems("WorkoutNavigationHandler")
+
+
+sealed class AppNavigatorItems(val route: String) {
+    object Favourites : AppNavigatorItems("favourites")
+    object Explore : AppNavigatorItems("explore")
+    object Profile : AppNavigatorItems("profile")
+    object MyRoutines : AppNavigatorItems("myRoutines")
 }
 
 @Composable
-fun AppNavigator(navController: NavHostController,padding: PaddingValues,startDestination: String = AppNavigatorItems.MyRoutines.route ){
+fun AppNavigator(
+    navController: NavHostController,
+    padding: PaddingValues,
+    startDestination: String = AppNavigatorItems.MyRoutines.route,
+) {
 
 
     val onNavigateToStartWorkout = {
-        navController.navigate(AppNavigatorItems.WorkoutNavigationHandler.route){
+        navController.navigate(WorkoutNavigatorItems.StartWorkout.route) {
+        }
+    }
+    val onNavigateToRunningWorkout1 = {
+        navController.navigate(WorkoutNavigatorItems.RunningWorkout.route) {
         }
     }
 
@@ -55,7 +81,8 @@ fun AppNavigator(navController: NavHostController,padding: PaddingValues,startDe
         composable(AppNavigatorItems.Explore.route) { ExploreScreen(onNavigateToStartWorkout) }
         composable(AppNavigatorItems.Profile.route) { ShowProfileScreen() }
         composable(AppNavigatorItems.MyRoutines.route) { MyRoutines(onNavigateToStartWorkout) }
-        composable(AppNavigatorItems.WorkoutNavigationHandler.route) { WorkoutDetailsNavigatorHandler() }
+        composable(WorkoutNavigatorItems.StartWorkout.route) { StartWorkout(onNavigateToRunningWorkout1) }
+        composable(WorkoutNavigatorItems.RunningWorkout.route) { RunningWorkout1() }
     }
 
 }
