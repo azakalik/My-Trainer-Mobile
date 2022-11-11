@@ -25,7 +25,7 @@ fun ShareButton() {
         type = "text/plain"
     }
     val shareIntent = Intent.createChooser(sendIntent, null)
-    IconButton(onClick = { startActivity(shareIntent) }) {
+    IconButton(onClick = { }) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Icon(
                 modifier = Modifier

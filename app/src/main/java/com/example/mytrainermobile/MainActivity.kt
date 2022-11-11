@@ -24,45 +24,8 @@ class MainActivity : ComponentActivity() {
                 systemUiController.setSystemBarsColor(
                     color = androidx.compose.ui.graphics.Color.Black
                 )
-                RootNavigationGraph()
+                AuthNavigatorHandler()
             }
         }
     }
 }
-
-@Composable
-fun RootNavigationGraph(
-    modifier: Modifier = Modifier,
-    navController: NavHostController = rememberNavController(),
-    startDestination: String = "signIn"
-) {
-    NavHost(
-        modifier = modifier,
-        navController = navController,
-        startDestination = startDestination
-    ) {
-
-        val onNavigateToAppNavigator = {
-            navController.navigate("appNavigatorHandler"){
-                popUpTo("appNavigatorHandler")
-            }
-        }
-
-        composable("arrive") { ArriveScreen(/*...*/) }
-        composable("signIn") { ShowSignInScreen(onNavigateToSignUp = {navController.navigate("signUp"){
-            popUpTo("signUp"){inclusive = false}
-        } }, onNavigateToAppNavigator) }
-        composable("signUp") { ShowSignupScreen(onNavigateToSignIn = {navController.navigate("signIn"){
-            popUpTo("signIn"){inclusive = true}
-        } }, onNavigateToAppNavigator) }
-        composable("appNavigatorHandler"){ AppNavigatorHandler() }
-
-
-
-    }
-}
-
-
-
-
-

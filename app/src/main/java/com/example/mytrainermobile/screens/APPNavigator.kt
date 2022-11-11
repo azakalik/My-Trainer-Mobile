@@ -32,21 +32,30 @@ fun AppNavigatorHandler(navController: NavHostController = rememberNavController
 }
 
 
+
+sealed class AppNavigatorItems(val route: String){
+    object Favourites: AppNavigatorItems("favourites")
+    object Explore: AppNavigatorItems("explore")
+    object Profile: AppNavigatorItems("profile")
+    object MyRoutines: AppNavigatorItems("myRoutines")
+    object WorkoutNavigationHandler: AuthNavigatorItems("WorkoutNavigationHandler")
+}
+
 @Composable
-fun AppNavigator(navController: NavHostController,padding: PaddingValues,startDestination: String = "myRoutines" ){
+fun AppNavigator(navController: NavHostController,padding: PaddingValues,startDestination: String = AppNavigatorItems.MyRoutines.route ){
 
 
     val onNavigateToStartWorkout = {
-        navController.navigate("WorkoutNavigationHandler"){
+        navController.navigate(AppNavigatorItems.WorkoutNavigationHandler.route){
         }
     }
 
     NavHost(navController = navController, startDestination = startDestination) {
-        composable("favourites") { FavouritesView(onNavigateToStartWorkout) }
-        composable("explore") { ExploreScreen(onNavigateToStartWorkout) }
-        composable("profile") { ShowProfileScreen() }
-        composable("myRoutines") { MyRoutines(onNavigateToStartWorkout) }
-        composable("WorkoutNavigationHandler") { WorkoutDetailsNavigatorHandler() }
+        composable(AppNavigatorItems.Favourites.route) { FavouritesView(onNavigateToStartWorkout) }
+        composable(AppNavigatorItems.Explore.route) { ExploreScreen(onNavigateToStartWorkout) }
+        composable(AppNavigatorItems.Profile.route) { ShowProfileScreen() }
+        composable(AppNavigatorItems.MyRoutines.route) { MyRoutines(onNavigateToStartWorkout) }
+        composable(AppNavigatorItems.WorkoutNavigationHandler.route) { WorkoutDetailsNavigatorHandler() }
     }
 
 }
