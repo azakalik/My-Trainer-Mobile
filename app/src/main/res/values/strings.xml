@@ -44,4 +44,6 @@
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
 
+    <!-- Share -->
+    <string name="shareText">Check out this routine! &#xA; http://mytrainer.com</string>
 </resources>

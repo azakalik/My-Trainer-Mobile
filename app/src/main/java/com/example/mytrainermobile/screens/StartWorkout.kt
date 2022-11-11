@@ -46,9 +46,10 @@ fun StartBar(onNavigateToRunningWorkout1: () -> Unit) {
 @Composable
 fun StartWorkout(onNavigateToRunningWorkout1: () -> Unit) {
     val list = listOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8)
+    val routineTitle = "Routine Title"
     Scaffold(modifier = Modifier.fillMaxSize(),
         backgroundColor = DefaultBackground,
-        topBar = { TopBar("Routine title") },
+        topBar = { TopBar(routineTitle) },
         bottomBar = { StartBar(onNavigateToRunningWorkout1) }) {
 
         Column(
@@ -57,7 +58,7 @@ fun StartWorkout(onNavigateToRunningWorkout1: () -> Unit) {
             modifier = Modifier.fillMaxSize(1f)
         ) {
             Spacer(modifier = Modifier.padding(0.dp, 10.dp, 0.dp, 0.dp))
-            DescriptorBox()
+            DescriptorBox(null, null, null, routineTitle)
             Box(
                 modifier = Modifier
                     .height(120.dp)
@@ -87,7 +88,7 @@ fun StartWorkout(onNavigateToRunningWorkout1: () -> Unit) {
 }
 
 @Composable
-fun DescriptorBox(rating: Float? = null, creator: String? = null, difficulty: Int? = null) {
+fun DescriptorBox(rating: Float? = null, creator: String? = null, difficulty: Int? = null, routineTitle: String) {
 
     Box(
         modifier = Modifier
@@ -107,7 +108,7 @@ fun DescriptorBox(rating: Float? = null, creator: String? = null, difficulty: In
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
                     FavouriteButton(description = true)
                     RateButton()
-                    ShareButton()
+                    ShareButton(routineTitle)
                 }
             }
         }
