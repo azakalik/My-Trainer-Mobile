@@ -6,11 +6,12 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
 
 @Composable
 fun TopBar(title: String) {
-    TopAppBar(backgroundColor = Color.Black, contentColor = DefaultColor, title = {
+    TopAppBar(backgroundColor = DefaultBackground, contentColor = DefaultColor, title = {
         TitleWorkout(title = title)
     })
 }
