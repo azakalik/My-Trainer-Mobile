@@ -15,7 +15,7 @@ data class Exercise(
     val id: Int,
     val name: String,
     val detail: String,
-    val type: String? = null,
+    val category: String? = null,
     val metadata: String? = null,
     val duration: Int? = null,
     val repetitions: String? = null
