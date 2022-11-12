@@ -44,6 +44,7 @@
     <string name="accept">Accept</string>
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
+    <string name="close">Close</string>
 
     <!-- Share -->
     <string name="shareText">Check out this routine! &#xA; http://mytrainer.com</string>
@@ -52,10 +53,10 @@
     <string name="no_information">No information</string>
 
     <!-- Sort -->
-    <string name="creation_date">Creation date</string>
-    <string name="rating">Rating</string>
-    <string name="difficulty">Difficulty</string>
-    <string name="category">Category</string>
+    <string name="sort_creation_date">Creation date</string>
+    <string name="sort_rating">Rating</string>
+    <string name="sort_difficulty">Difficulty</string>
+    <string name="sort_category">Category</string>
 
     <!-- Display routine info -->
     <string name="display_difficulty">Creation date</string> <!-- TODO esto recibe como parametro la dificultad-->
@@ -71,4 +72,12 @@
     <string name="legs">Legs</string>
     <string name="mixed">Mixed</string>
     <string name="shoulder">Shoulder</string>
+
+    <!-- Routine info FAB -->
+    <string name="info_fab_name">More information</string>
+    <string name="info_name">Name: %1s</string>
+    <string name="info_difficulty">Difficulty</string>
+    <string name="info_rating">Rating</string>
+    <string name="info_category">Category</string>
+    <string name="info_description">Description</string>
 </resources>

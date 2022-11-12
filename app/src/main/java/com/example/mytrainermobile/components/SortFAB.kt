@@ -36,7 +36,7 @@ fun SortFAB(showButton: Boolean) {
             FloatingActionButton(
                 onClick = { popupControl = !popupControl },
                 contentColor = DefaultColor,
-                containerColor = DefaultBackground
+                containerColor = DefaultBackground,
             ) {
                 Icon(Icons.Filled.Menu, stringResource(id = R.string.fab_name))
         }
