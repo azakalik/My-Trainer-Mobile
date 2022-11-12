@@ -15,5 +15,6 @@ data class Cycle(
     val name: String,
     val detail: String,
     val type: String,
-    val repetitions: Int
+    val repetitions: Int,
+    val exerciseIds: List<Int>
 )

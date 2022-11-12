@@ -9,6 +9,7 @@ data class Routine(
     val rating: String? = null,
     val description: String? = null,
     var isFavourite: Boolean? = false,
+    val cycleIds: List<Int>
 ) {
     //https://kotlinlang.org/docs/classes.html#secondary-constructors
 }

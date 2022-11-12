@@ -10,6 +10,7 @@ class CycleRepository {
             detail = "cycleDetail",
             type = "cycleType",
             repetitions = 4,
+            exerciseIds = listOf(1, 2, 3, 4, 5)
         )
     }
 }

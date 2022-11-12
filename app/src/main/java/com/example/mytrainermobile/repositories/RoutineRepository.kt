@@ -13,20 +13,7 @@ class RoutineRepository {
             creator = "user1",
             category = "Arms",
             isFavourite = true,
-        ),
-        Routine(
-            id = 1,
-            name = "routine1",
-            creator = "user1",
-            category = "Arms",
-            isFavourite = false,
-        ),
-        Routine(
-            id = 1,
-            name = "routine1",
-            creator = "user1",
-            category = "Arms",
-            isFavourite = true,
+            cycleIds = listOf(1, 2, 3, 4, 5)
         ),
         Routine(
             id = 1,
@@ -34,13 +21,7 @@ class RoutineRepository {
             creator = "user1",
             category = "Arms",
             isFavourite = true,
-        ),
-        Routine(
-            id = 1,
-            name = "routine1",
-            creator = "user1",
-            category = "Arms",
-            isFavourite = false,
+            cycleIds = listOf(1, 2, 3, 4, 5)
         ),
         Routine(
             id = 1,
@@ -48,6 +29,23 @@ class RoutineRepository {
             creator = "user1",
             category = "Arms",
             isFavourite = true,
+            cycleIds = listOf(1, 2, 3, 4, 5)
+        ),
+        Routine(
+            id = 1,
+            name = "routine1",
+            creator = "user1",
+            category = "Arms",
+            isFavourite = true,
+            cycleIds = listOf(1, 2, 3, 4, 5)
+        ),
+        Routine(
+            id = 1,
+            name = "routine1",
+            creator = "user1",
+            category = "Arms",
+            isFavourite = true,
+            cycleIds = listOf(1, 2, 3, 4, 5)
         ),
     )
 
@@ -58,6 +56,7 @@ class RoutineRepository {
             creator = "user1",
             category = "Arms",
             isFavourite = true,
+            cycleIds = listOf(1, 2, 3, 4, 5)
         ),
         Routine(
             id = 1,
@@ -65,6 +64,7 @@ class RoutineRepository {
             creator = "user1",
             category = "Arms",
             isFavourite = true,
+            cycleIds = listOf(1, 2, 3, 4, 5)
         ),
         Routine(
             id = 1,
@@ -72,6 +72,7 @@ class RoutineRepository {
             creator = "user1",
             category = "Arms",
             isFavourite = true,
+            cycleIds = listOf(1, 2, 3, 4, 5)
         ),
         Routine(
             id = 1,
@@ -79,20 +80,7 @@ class RoutineRepository {
             creator = "user1",
             category = "Arms",
             isFavourite = true,
-        ),
-        Routine(
-            id = 1,
-            name = "routine1",
-            creator = "user1",
-            category = "Arms",
-            isFavourite = true,
-        ),
-        Routine(
-            id = 1,
-            name = "routine1",
-            creator = "user1",
-            category = "Arms",
-            isFavourite = true,
+            cycleIds = listOf(1, 2, 3, 4, 5)
         ),
     )
 
@@ -115,8 +103,8 @@ class RoutineRepository {
             creator = "user1",
             category = "Arms",
             isFavourite = true,
+            cycleIds = listOf(1, 2, 3, 4, 5)
         )
     }
-
 }
 
