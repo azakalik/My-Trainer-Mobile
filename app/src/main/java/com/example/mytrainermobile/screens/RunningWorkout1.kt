@@ -22,7 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mytrainermobile.R
-import com.example.mytrainermobile.classes.CyclesData
+import com.example.mytrainermobile.classes.Cycle
 import com.example.mytrainermobile.components.ExerciseBox
 import com.example.mytrainermobile.components.TopBar
 import com.example.mytrainermobile.ui.theme.DefaultBackground
@@ -71,7 +71,7 @@ fun RunningWorkout1() {
             DrawerHeader()
             DrawerBody(
                 items = listOf(
-                    CyclesData(1,"ciclo Prueba", "test", "arm", 1, 1)
+                    Cycle(1,"ciclo Prueba", "test", "arm", 1, 1)
                 ),
                 Modifier,
                 onItemClick = {
@@ -128,9 +128,9 @@ fun DrawerHeader(){
 }
 @Composable
 fun DrawerBody(
-    items: List<CyclesData>,
+    items: List<Cycle>,
     modifier: Modifier,
-    onItemClick: (CyclesData) -> Unit
+    onItemClick: (Cycle) -> Unit
 ){
     LazyColumn(modifier) {
         items(items) { item ->

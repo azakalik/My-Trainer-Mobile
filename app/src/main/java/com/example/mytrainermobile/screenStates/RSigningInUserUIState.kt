@@ -1,6 +1,6 @@
-package com.example.mytrainermobile.viewModelStates
+package com.example.mytrainermobile.screenStates
 
-data class SigningInUserUIState(
+data class RSigningInUserUIState(
     val userName: String = "",
     val password: String = "",
     val isLoggedIn: Boolean = false,

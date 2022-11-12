@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mytrainermobile.viewModelStates.SigningInUserUIState
+import com.example.mytrainermobile.screenStates.RSigningInUserUIState
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -13,7 +13,7 @@ import java.io.IOException
 //TODO PASAR REPOSITORY CUANDO VEAMOS
 class signInViewModel() : ViewModel() {
 
-    var signingInUserUIState by mutableStateOf(SigningInUserUIState())
+    var signingInUserUIState by mutableStateOf(RSigningInUserUIState())
         private set
 
 

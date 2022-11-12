@@ -1,7 +1,7 @@
 package com.example.mytrainermobile.viewModels
 
 import androidx.compose.runtime.mutableStateOf
-import com.example.mytrainermobile.viewModelStates.ExcercisesUIState
+import com.example.mytrainermobile.screenStates.ExcercisesUIState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 import java.io.IOException
 
 
-class ExerciseListViewModel() : ViewModel() {
+class RExerciseListViewModel() : ViewModel() {
 
 
     var exercisesUiState  = mutableStateOf(ExcercisesUIState())

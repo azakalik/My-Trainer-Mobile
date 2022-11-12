@@ -10,11 +10,10 @@ package com.example.mytrainermobile.classes
       "repetitions": 1,
       "metadata": null
  */
-data class CyclesData(
+data class Cycle(
     val id: Int,
     val name: String,
     val detail: String,
     val type: String,
-    val order: Int,
-    val repetitions: Int,
+    val repetitions: Int
 )
