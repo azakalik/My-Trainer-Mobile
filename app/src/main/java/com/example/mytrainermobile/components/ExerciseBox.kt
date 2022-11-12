@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.sp
 import com.example.mytrainermobile.ui.theme.DefaultColor
 
 @Composable
-fun ExerciseBox(/*exerciseTitle: String, exerciseDescription: String, rating: Float, type: String*/) {
+fun ExerciseBox(/*exerciseTitle: String, exerciseDescription: String, rating: Float, type: String, isRunning:Boolean*/) {
     Card(
         modifier = Modifier
             .fillMaxWidth(1f)
@@ -35,11 +35,7 @@ fun ExerciseBox(/*exerciseTitle: String, exerciseDescription: String, rating: Fl
                         style = TextStyle(DefaultColor),
                         fontSize = 20.sp
                     )// replace for Api.fetch(title)
-                    Text(
-                        "time/cycle",
-                        style = TextStyle(Color.Gray),
-                        fontSize = 12.sp
-                    ) // replace for Api.fetch(time/cycle). See whats better and possible
+                    MicroTimer(totalTime = 10000L, false)
                 }
                 Row (horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()){
                     Text(

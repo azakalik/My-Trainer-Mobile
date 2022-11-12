@@ -113,26 +113,3 @@ fun Timer(totalTime: Long, handleColor: Color, inactiveBarColor: Color, activeBa
         }
     }
 }
-
-/*drawLine(
-                color = inactiveBarColor,
-                start = Offset(x = 100f, y = 0f),
-                end = Offset(x = 970f, y = 0f),
-                strokeWidth = strokeWidth.toPx(),
-                cap = StrokeCap.Round,
-            )
-            drawLine(
-                color = activeBarColor,
-                start = Offset(100f, 0f),
-                end = Offset(970f * value, 0f),
-                strokeWidth = strokeWidth.toPx(),
-                cap = StrokeCap.Round,
-            )
-            drawPoints(
-                listOf(Offset(970f*value, 0f)),
-                pointMode = PointMode.Points,
-                color = handleColor,
-                strokeWidth = (strokeWidth * 3f).toPx(),
-                cap = StrokeCap.Round
-            )
- */
