@@ -27,7 +27,6 @@ import com.example.mytrainermobile.components.TitleForSection
 
 @Composable
 fun MyRoutines(
-
     onNavigateToStartWorkout: () -> Unit,
 ) {
     DefaultShowRoutinesScreen(

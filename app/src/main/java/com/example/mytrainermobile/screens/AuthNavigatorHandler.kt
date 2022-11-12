@@ -29,7 +29,7 @@ fun AuthNavigatorHandler(
     ) {
         val onNavigateToAppNavigator = {
             navController.navigate("appNavigatorHandler") {
-                popUpTo(0)
+                popUpTo(AuthNavigatorItems.SignIn.route){inclusive = true}
             }
         }
         composable(AuthNavigatorItems.Arrive.route) { ArriveScreen(/*...*/) }

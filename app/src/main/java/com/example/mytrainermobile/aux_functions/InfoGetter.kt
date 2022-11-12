@@ -13,5 +13,5 @@ fun getRoutineTypesList(): List<String> {
 
 @Composable
 fun getSortOptionsList(): List<String> {
-    return listOf(stringResource(id = R.string.creation_date), stringResource(id = R.string.rating), stringResource(id = R.string.difficulty), stringResource(id = R.string.category))
+    return listOf(stringResource(id = R.string.sort_creation_date), stringResource(id = R.string.sort_rating), stringResource(id = R.string.sort_difficulty), stringResource(id = R.string.sort_category))
 }

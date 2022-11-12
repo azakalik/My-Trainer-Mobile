@@ -35,7 +35,7 @@ fun StartBar(onNavigateToRunningWorkout1: () -> Unit) {
     Box(
         Modifier
             .background(DefaultBackground)
-            .fillMaxWidth(1f),
+            .fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
         StartButton(onNavigateToRunningWorkout1)
@@ -50,12 +50,13 @@ fun StartWorkout(onNavigateToRunningWorkout1: () -> Unit) {
     Scaffold(modifier = Modifier.fillMaxSize(),
         backgroundColor = DefaultBackground,
         topBar = { TopBar(routineTitle) },
-        bottomBar = { StartBar(onNavigateToRunningWorkout1) }) {
+        bottomBar = { StartBar(onNavigateToRunningWorkout1) },
+    floatingActionButton = {RoutineInfoFAB()}) {
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxSize(1f)
+            modifier = Modifier.fillMaxSize()
         ) {
             Spacer(modifier = Modifier.padding(0.dp, 10.dp, 0.dp, 0.dp))
             DescriptorBox(routineTitle = routineTitle)
