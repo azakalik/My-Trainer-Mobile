@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.mytrainermobile.viewModels.SortFABViewModel
 
 
 sealed class AuthNavigatorItems(val route: String) {
@@ -20,7 +21,8 @@ sealed class AuthNavigatorItems(val route: String) {
 fun AuthNavigatorHandler(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: String = "signIn"
+    startDestination: String = "signIn",
+    sortFABViewModel: SortFABViewModel
 ) {
     NavHost(
         modifier = modifier,
@@ -47,7 +49,7 @@ fun AuthNavigatorHandler(
                 }
             }, onNavigateToAppNavigator)
         }
-        composable(AuthNavigatorItems.AppNavigationHandler.route) { AppNavigatorHandler() }
+        composable(AuthNavigatorItems.AppNavigationHandler.route) { AppNavigatorHandler(sortFABViewModel = sortFABViewModel) }
     }
 }
 

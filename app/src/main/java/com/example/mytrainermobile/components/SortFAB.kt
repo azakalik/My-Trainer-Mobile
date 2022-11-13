@@ -22,31 +22,33 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
 import com.example.mytrainermobile.R
 import com.example.mytrainermobile.aux_functions.getSortOptionsList
+import com.example.mytrainermobile.screenStates.SortFABState
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
+import com.example.mytrainermobile.viewModels.SortFABViewModel
 
 @Composable
-fun SortFAB(showButton: Boolean) {
-    var popupControl by remember { mutableStateOf(false) }
-
-    var selectedOption by remember { mutableStateOf("") }
+fun SortFAB(
+    showButton: Boolean,
+    viewModel: SortFABViewModel
+) {
 
     // ----------------- FAB -----------------------------------
-        if (showButton){
-            FloatingActionButton(
-                onClick = { popupControl = !popupControl },
-                contentColor = DefaultColor,
-                containerColor = DefaultBackground,
-            ) {
-                Icon(Icons.Filled.Menu, stringResource(id = R.string.fab_name))
+    if (showButton) {
+        FloatingActionButton(
+            onClick = { viewModel.toggleShowSortFAB() },
+            contentColor = DefaultColor,
+            containerColor = DefaultBackground,
+        ) {
+            Icon(Icons.Filled.Menu, stringResource(id = R.string.fab_name))
         }
     }
 
     // ------------------- POPUP ----------------------------------
-    if (popupControl) {
+    if (viewModel.state.showSortFAB) {
         Popup(
             alignment = Alignment.Center,
-            onDismissRequest = { popupControl = !popupControl },
+            onDismissRequest = { viewModel.toggleShowSortFAB() },
         ) {
             Box(
                 modifier = Modifier
@@ -71,32 +73,36 @@ fun SortFAB(showButton: Boolean) {
                             fontSize = 20.sp
                         )
                     }
-                    ShowRadioButtons()
+                    ShowRadioButtons(viewModel)
                     // ---------- POPUP BUTTONS ----------------------------
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
                         DefaultButton(
-                            onClick = { popupControl = false },
+                            onClick = { viewModel.toggleShowSortFAB(); viewModel.unSaveChanges() },
                             text = stringResource(id = R.string.cancel)
                         )
                         DefaultButton(
-                            onClick = { popupControl = false; sort(selectedOption) },
+                            onClick = {
+                                viewModel.toggleShowSortFAB(); viewModel.saveChanges()
+                            },
                             text = stringResource(id = R.string.accept)
                         )
                     }
                 }
             }
-
         }
     }
 }
 
 @Composable
-fun ShowRadioButtons() {
-    val radioOptions = getSortOptionsList()
-    val (selectedOption, onOptionSelected) = remember { mutableStateOf(radioOptions[0]) }
+fun ShowRadioButtons(viewModel: SortFABViewModel){
+    val state = viewModel.state
+    val radioOptions = state.sortOptions
+    val stringNames = getSortOptionsList()
+    var iterator = 0
+//    val (selectedOption, onOptionSelected) = remember { mutableStateOf(radioOptions[0]) }
 // Note that Modifier.selectableGroup() is essential to ensure correct accessibility behavior
     Row() {
         Column(Modifier.selectableGroup()) {
@@ -106,20 +112,20 @@ fun ShowRadioButtons() {
                         .fillMaxWidth()
                         .height(56.dp)
                         .selectable(
-                            selected = (text == selectedOption),
-                            onClick = { onOptionSelected(text) },
+                            selected = (text == state.auxSortingBy),
+                            onClick = { viewModel.toggleAuxSortingBy(text) },
                             role = Role.RadioButton
                         )
                         .padding(horizontal = 16.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     RadioButton(
-                        selected = (text == selectedOption),
+                        selected = (text == state.auxSortingBy),
                         onClick = null, // null recommended for accessibility with screenreaders
                         colors = RadioButtonDefaults.colors(selectedColor = DefaultColor)
                     )
                     Text(
-                        text = text,
+                        text = stringNames[iterator++],
                         style = MaterialTheme.typography.bodyLarge,
                         modifier = Modifier.padding(start = 16.dp),
                         color = Color.White
@@ -136,27 +142,21 @@ fun ShowRadioButtons() {
             .padding(horizontal = 16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        var checked by remember { mutableStateOf(true) }
         Switch(
             modifier = Modifier
                 .semantics { contentDescription = "Toggle sort descendingly" },
-            checked = checked,
-            onCheckedChange = { checked = it },
+            checked = state.auxSortDescending,
+            onCheckedChange = { viewModel.toggleAuxSortDescending() },
             colors = SwitchDefaults.colors(
                 checkedTrackColor = DefaultColor,
                 uncheckedTrackColor = Color.Transparent
             )
         )
-            Text(
-                text = "Sort descendingly",
-                style = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier.padding(start = 16.dp),
-                color = Color.White
-            )
+        Text(
+            text = "Descending",
+            style = MaterialTheme.typography.bodyLarge,
+            modifier = Modifier.padding(start = 16.dp),
+            color = Color.White
+        )
     }
-}
-
-
-fun sort(sortBy: String) {
-    //TODO
 }

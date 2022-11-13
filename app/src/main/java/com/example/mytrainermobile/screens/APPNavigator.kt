@@ -18,10 +18,11 @@ import androidx.navigation.compose.rememberNavController
 import com.example.mytrainermobile.components.SortFAB
 import com.example.mytrainermobile.components.ThisBottomAppBar
 import com.example.mytrainermobile.ui.theme.DefaultBackground
+import com.example.mytrainermobile.viewModels.SortFABViewModel
 
 
 @Composable
-fun AppNavigatorHandler(navController: NavHostController = rememberNavController()) {
+fun AppNavigatorHandler(navController: NavHostController = rememberNavController(), sortFABViewModel: SortFABViewModel) {
     var bottomBarStateManager by rememberSaveable { mutableStateOf(true) }
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val detailsScreens =
@@ -42,7 +43,7 @@ fun AppNavigatorHandler(navController: NavHostController = rememberNavController
         modifier = Modifier
             .fillMaxSize()
             .background(DefaultBackground),
-        floatingActionButton = { SortFAB(floatingActionButtonManager) },
+        floatingActionButton = { SortFAB(floatingActionButtonManager, viewModel = sortFABViewModel) },
         bottomBar = {
             ThisBottomAppBar(navController, bottomBarStateManager)
         },

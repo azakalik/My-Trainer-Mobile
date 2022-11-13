@@ -22,7 +22,7 @@ import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 fun DefaultShowRoutinesScreen(
     title: String,
     onNavigateToStartWorkout: () -> Unit,
-    routineList: List<Routine>
+    routineList: List<Routine>,
 ) {
     MyTrainerMobileTheme() {
         Column(modifier = Modifier.fillMaxWidth()) {
@@ -72,7 +72,7 @@ fun DefaultShowRoutinesScreen(
                 verticalArrangement = Arrangement.Center,
                 columns = GridCells.Adaptive(150.dp),
                 content = {
-                    items(routineList.size){idx ->
+                    items(routineList.size) { idx ->
                         RoutineBox(routine = routineList[idx], onNavigateToStartWorkout)
                     }
                 })
