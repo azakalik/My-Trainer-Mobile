@@ -59,7 +59,7 @@ fun StartWorkout(onNavigateToRunningWorkout1: () -> Unit) {
             modifier = Modifier.fillMaxSize()
         ) {
             Spacer(modifier = Modifier.padding(0.dp, 10.dp, 0.dp, 0.dp))
-            DescriptorBox(routineTitle = routineTitle)
+//            DescriptorBox(routineTitle = routineTitle)
             Box(
                 modifier = Modifier
                     .height(120.dp)
@@ -88,33 +88,33 @@ fun StartWorkout(onNavigateToRunningWorkout1: () -> Unit) {
     }
 }
 
-@Composable
-fun DescriptorBox(rating: String? = stringResource(id = R.string.no_information), category: String? = stringResource(id = R.string.no_information), difficulty: String? = stringResource(id = R.string.no_information), routineTitle: String) {
-
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(DefaultColor, RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
-            .offset(x = (-5).dp)
-            .border(2.dp, Color.Black, shape = RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
-            .height(95.dp)
-    ) {
-        Row(modifier = Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-            Column(Modifier.offset(x = 10.dp), verticalArrangement = Arrangement.SpaceEvenly) {
-                Text("Difficulty: $difficulty", color = Color.White)
-                Text("Rating: $rating", color = Color.White)
-                Text("Category: $category", color = Color.White)
-            }
-            Column(horizontalAlignment = Alignment.End, modifier = Modifier.fillMaxWidth()) {
-                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                    FavouriteButton(description = true)
-                    RateButton()
-                    ShareButton(routineTitle)
-                }
-            }
-        }
-    }
-}
+//@Composable
+//fun DescriptorBox(rating: String? = stringResource(id = R.string.no_information), category: String? = stringResource(id = R.string.no_information), difficulty: String? = stringResource(id = R.string.no_information), routineTitle: String) {
+//
+//    Box(
+//        modifier = Modifier
+//            .fillMaxWidth()
+//            .background(DefaultColor, RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
+//            .offset(x = (-5).dp)
+//            .border(2.dp, Color.Black, shape = RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
+//            .height(95.dp)
+//    ) {
+//        Row(modifier = Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+//            Column(Modifier.offset(x = 10.dp), verticalArrangement = Arrangement.SpaceEvenly) {
+//                Text("Difficulty: $difficulty", color = Color.White)
+//                Text("Rating: $rating", color = Color.White)
+//                Text("Category: $category", color = Color.White)
+//            }
+//            Column(horizontalAlignment = Alignment.End, modifier = Modifier.fillMaxWidth()) {
+//                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+//                    FavouriteButton(description = true)
+//                    RateButton()
+//                    ShareButton(routineTitle)
+//                }
+//            }
+//        }
+//    }
+//}
 
 
 

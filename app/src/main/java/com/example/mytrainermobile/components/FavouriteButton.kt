@@ -14,26 +14,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.mytrainermobile.R
+import com.example.mytrainermobile.classes.Routine
 
 @Composable
-fun FavouriteButton(description : Boolean) {
-    var heartPopupSelected by remember { mutableStateOf(false) }
-    val color = if (heartPopupSelected) Color.Red else Color.White
+fun FavouriteButton(routine : Routine) {
+    val color = if (routine.isFavourite) Color.Red else Color.White
 
-    IconButton(onClick = { heartPopupSelected = !heartPopupSelected }) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    IconButton(onClick = { toggleFavourite(routine) }) {
             Icon(
                 modifier = Modifier.size(35.dp),
                 imageVector = Icons.Filled.Favorite,
                 contentDescription = "Favorite",
                 tint = color,
             )
-            if(description) {
-                Text(
-                    text = stringResource(id = R.string.favourite),
-                    color = Color.White
-                )
-            }
-        }
     }
+}
+
+fun toggleFavourite(routine: Routine){
+    //TODO
 }

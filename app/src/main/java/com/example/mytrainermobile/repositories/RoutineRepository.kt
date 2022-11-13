@@ -1,7 +1,5 @@
 package com.example.mytrainermobile.repositories
 
-import com.example.mytrainermobile.classes.Cycle
-import com.example.mytrainermobile.classes.Exercise
 import com.example.mytrainermobile.classes.Routine
 
 class RoutineRepository {
@@ -9,76 +7,121 @@ class RoutineRepository {
     private var myRoutines = listOf(
         Routine(
             id = 1,
-            name = "routine1",
+            name = "routine2",
             creator = "user1",
-            category = "Arms",
+            category = "legs",
+            description = "description",
+            difficulty = "difficulty",
+            rating = "rating",
             isFavourite = true,
             cycleIds = listOf(1, 2, 3, 4, 5)
         ),
         Routine(
             id = 1,
-            name = "routine1",
+            name = "routine2",
             creator = "user1",
-            category = "Arms",
-            isFavourite = true,
+            category = "legs",
+            description = "description",
+            difficulty = "difficulty",
+            rating = "rating",
+            isFavourite = false,
             cycleIds = listOf(1, 2, 3, 4, 5)
         ),
+
         Routine(
             id = 1,
-            name = "routine1",
+            name = "routine2",
             creator = "user1",
-            category = "Arms",
+            category = "legs",
+            description = "description",
+            difficulty = "difficulty",
+            rating = "rating",
             isFavourite = true,
             cycleIds = listOf(1, 2, 3, 4, 5)
         ),
+
         Routine(
             id = 1,
-            name = "routine1",
+            name = "routine2",
             creator = "user1",
-            category = "Arms",
+            category = "legs",
+            description = "description",
+            difficulty = "difficulty",
+            rating = "rating",
             isFavourite = true,
             cycleIds = listOf(1, 2, 3, 4, 5)
         ),
+
         Routine(
             id = 1,
-            name = "routine1",
+            name = "routine2",
             creator = "user1",
-            category = "Arms",
+            category = "legs",
+            description = "description",
+            difficulty = "difficulty",
+            rating = "rating",
             isFavourite = true,
             cycleIds = listOf(1, 2, 3, 4, 5)
         ),
-    )
+
+        )
 
     private var favouriteRoutines = listOf(
         Routine(
             id = 1,
-            name = "routine1",
+            name = "routine2",
             creator = "user1",
-            category = "Arms",
+            category = "legs",
+            description = "description",
+            difficulty = "difficulty",
+            rating = "rating",
             isFavourite = true,
             cycleIds = listOf(1, 2, 3, 4, 5)
         ),
         Routine(
             id = 1,
-            name = "routine1",
+            name = "routine2",
             creator = "user1",
-            category = "Arms",
+            category = "legs",
+            description = "description",
+            difficulty = "difficulty",
+            rating = "rating",
             isFavourite = true,
             cycleIds = listOf(1, 2, 3, 4, 5)
         ),
+
         Routine(
             id = 1,
-            name = "routine1",
+            name = "routine2",
             creator = "user1",
-            category = "Arms",
+            category = "legs",
+            description = "description",
+            difficulty = "difficulty",
+            rating = "rating",
             isFavourite = true,
             cycleIds = listOf(1, 2, 3, 4, 5)
         ),
+
         Routine(
             id = 1,
-            name = "routine1",
+            name = "routine2",
             creator = "user1",
-            category = "Arms",
+            category = "legs",
+            description = "description",
+            difficulty = "difficulty",
+            rating = "rating",
+            isFavourite = true,
+            cycleIds = listOf(1, 2, 3, 4, 5)
+        ),
+
+        Routine(
+            id = 1,
+            name = "routine2",
+            creator = "user1",
+            category = "legs",
+            description = "description",
+            difficulty = "difficulty",
+            rating = "rating",
             isFavourite = true,
             cycleIds = listOf(1, 2, 3, 4, 5)
         ),
@@ -99,9 +142,12 @@ class RoutineRepository {
     fun getRoutineById(id: Int): Routine {
         return Routine(
             id = 1,
-            name = "routine1",
+            name = "routine2",
             creator = "user1",
-            category = "Arms",
+            category = "legs",
+            description = "description",
+            difficulty = "difficulty",
+            rating = "rating",
             isFavourite = true,
             cycleIds = listOf(1, 2, 3, 4, 5)
         )

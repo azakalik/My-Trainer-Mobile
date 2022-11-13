@@ -5,14 +5,15 @@ import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import com.example.mytrainermobile.classes.Routine
-import com.example.mytrainermobile.components.*
+import com.example.mytrainermobile.components.RoutineBox
+import com.example.mytrainermobile.components.TitleBox
+import com.example.mytrainermobile.components.TitleForSection
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 
 //This class is only meant to be used by explore, favourites and my routines
@@ -72,16 +73,8 @@ fun DefaultShowRoutinesScreen(
                 verticalArrangement = Arrangement.Center,
                 columns = GridCells.Adaptive(150.dp),
                 content = {
-                    items(routineList.size) { idx ->
-                        routineList[idx].name?.let { it1 ->
-                            routineList[idx].category?.let { it2 ->
-                                RoutineBox(
-                                    routineName = it1,
-                                    routineType = it2,
-                                    onNavigateToStartWorkout
-                                )
-                            }
-                        }
+                    items(routineList.size){idx ->
+                        RoutineBox(routine = routineList[idx], onNavigateToStartWorkout)
                     }
                 })
         }

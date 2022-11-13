@@ -12,9 +12,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.mytrainermobile.aux_functions.pictureDecider
+import com.example.mytrainermobile.classes.Routine
 
 @Composable
-fun RoutineBox(routineName: String, routineType: String,
+fun RoutineBox(routine: Routine,
                onNavigateToStartWorkout: () -> Unit) {
     Card(
         modifier = Modifier
@@ -25,17 +26,17 @@ fun RoutineBox(routineName: String, routineType: String,
         shape = RoundedCornerShape(15.dp)
     ) {
         Image(
-            painter = painterResource(id = pictureDecider(routineType)),
+            painter = painterResource(id = pictureDecider(routine.category)),
             contentDescription = "image",
             contentScale = ContentScale.FillBounds,
             modifier = Modifier.fillMaxSize()
         )
         Row(verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.End) {
-            FavouriteButton(description = false)
+            FavouriteButton(routine)
         }
         Row(verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.Start){
 //            Text(text = routineName, fontSize = 20.sp, color = DefaultColor, modifier = Modifier.padding(start = 15.dp, bottom = 5.dp))
-            RoutineTitleBox(title = routineName)
+            RoutineTitleBox(title = routine.name)
         }
 
     }
