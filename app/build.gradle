@@ -24,6 +24,13 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "API_BASE_URL",
+                "\"https://reqres.in/\""
+        }
+
+        debug {
+            buildConfigField "String", "API_BASE_URL",
+                    "\"https://reqres.in/\""
         }
     }
     compileOptions {
@@ -47,6 +54,12 @@ android {
 }
 
 dependencies {
+
+
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.10.0"
+
 
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
