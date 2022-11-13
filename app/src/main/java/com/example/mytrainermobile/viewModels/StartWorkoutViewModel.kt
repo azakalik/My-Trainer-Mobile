@@ -29,4 +29,9 @@ class StartWorkoutViewModel(routineId: Int) : ViewModel() {
             )
         }
     }
+
+    fun rateRoutine() {
+
+    }
+
 }

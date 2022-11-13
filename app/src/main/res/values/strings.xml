@@ -6,12 +6,12 @@
     <string name="introScreenMessage">Train anywhere, anytime.</string>
 
     <!--SIGN UP and IN SCREEN-->
-    <string name="signup_insert_name">Insert Name</string>
-    <string name="signup_insert_surname">Insert Surname</string>
-    <string name="signup_insert_email">Insert Email</string>
-    <string name="signup_reinsert_email">Reinsert Email</string>
-    <string name="signup_insert_password">Insert Password</string>
-    <string name="signup_reinsert_password">Reinsert Password</string>
+    <string name="signup_insert_name">Insert Name *</string>
+    <string name="signup_insert_surname">Insert Surname *</string>
+    <string name="signup_insert_email">Insert Email *</string>
+    <string name="signup_reinsert_email">Confirm Email *</string>
+    <string name="signup_insert_password">Insert Password *</string>
+    <string name="signup_reinsert_password">Confirm Password *</string>
     <string name="signup_goto_signin">Go to Sign In</string>
     <string name="signup_goto_signup">Go to Sign Up</string>
 

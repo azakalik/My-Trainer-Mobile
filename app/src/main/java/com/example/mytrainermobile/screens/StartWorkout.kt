@@ -61,7 +61,7 @@ fun StartWorkout(onNavigateToRunningWorkout1: () -> Unit,routineId: Int) {
 
     Scaffold(modifier = Modifier.fillMaxSize(),
         backgroundColor = DefaultBackground,
-        topBar = { TopBar(routineTitle) },
+        topBar = { TopBar(state.routine.name) },
         bottomBar = { StartBar(onNavigateToRunningWorkout1) },
     floatingActionButton = { RoutineInfoFAB(state)} ) {
         Column(
@@ -71,7 +71,7 @@ fun StartWorkout(onNavigateToRunningWorkout1: () -> Unit,routineId: Int) {
         ) {
             Text(routineId.toString())
             Spacer(modifier = Modifier.padding(0.dp, 10.dp, 0.dp, 0.dp))
-            DescriptorBox(routineTitle = routineTitle)
+            DescriptorBox(state.routine)
             Box(
                 modifier = Modifier
                     .height(120.dp)
@@ -101,7 +101,7 @@ fun StartWorkout(onNavigateToRunningWorkout1: () -> Unit,routineId: Int) {
 }
 
 @Composable
-fun DescriptorBox(rating: String? = stringResource(id = R.string.no_information), category: String? = stringResource(id = R.string.no_information), difficulty: String? = stringResource(id = R.string.no_information), routineTitle: String) {
+fun DescriptorBox(routine: Routine) {
 
     Box(
         modifier = Modifier
@@ -113,15 +113,15 @@ fun DescriptorBox(rating: String? = stringResource(id = R.string.no_information)
     ) {
         Row(modifier = Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.offset(x = 10.dp), verticalArrangement = Arrangement.SpaceEvenly) {
-                Text("Difficulty: $difficulty", color = Color.White)
-                Text("Rating: $rating", color = Color.White)
-                Text("Category: $category", color = Color.White)
+                Text(stringResource(id = R.string.info_difficulty, routine.difficulty), color = Color.White)
+                Text(stringResource(R.string.info_rating, routine.rating), color = Color.White)
+                Text(stringResource(id = R.string.info_category, routine.category), color = Color.White)
             }
             Column(horizontalAlignment = Alignment.End, modifier = Modifier.fillMaxWidth()) {
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                    //FavouriteButton()
-                    RateButton()
-                    ShareButton(routineTitle)
+                    FavouriteButton(routine)
+                    RateButton(routine)
+                    ShareButton(routine.name)
                 }
             }
         }

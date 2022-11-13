@@ -5,6 +5,8 @@ import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.material.Typography
 import androidx.compose.runtime.*
@@ -16,10 +18,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.mytrainermobile.R
 import com.example.mytrainermobile.components.DefaultButton
 import com.example.mytrainermobile.components.DefaultTextField
 import com.example.mytrainermobile.ui.theme.DefaultBackground
+import com.example.mytrainermobile.ui.theme.DefaultColor
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 
 @Composable
@@ -36,11 +40,16 @@ fun ShowSignupScreen(onNavigateToSignIn: () -> Unit, onNavigateToMyRoutines: () 
                     .fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceEvenly
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    //verticalArrangement = Arrangement.SpaceEvenly
                 ) {
-//                ShowImage()
+                    Text(
+                        text = "My Trainer",
+                        color = DefaultColor,
+                        fontSize = 64.sp,
+                        fontWeight = FontWeight.Bold,
+                    )
                     SignupText()
                 }
                 ShowSignUpForm()
@@ -64,7 +73,7 @@ fun SignupText() {
     Text(
         text = stringResource(id = R.string.signUpText),
         style = Typography().h3.copy(fontWeight = FontWeight.Bold),
-        modifier = Modifier.padding(vertical = 30.dp),
+        modifier = Modifier.padding(0.dp,0.dp,0.dp,10.dp),
         color = Color.White
     )
 }
@@ -93,11 +102,11 @@ fun ShowSignUpForm() {
         callback = { email = it },
         placeholder = stringResource(id = R.string.signup_insert_email)
     )
-    DefaultTextField(
+    /*DefaultTextField(
         value = email2,
         callback = { email2 = it },
         placeholder = stringResource(id = R.string.signup_reinsert_email)
-    )
+    )*/
     DefaultTextField(
         value = password,
         callback = { password = it },
@@ -115,9 +124,9 @@ fun ShowSignUpForm() {
 @Composable
 fun ShowSignUpButtons(onNavigateToSignIn: () -> Unit, onNavigateToMyRoutines: () -> Unit){
     DefaultButton(text = stringResource(id = R.string.signUpText), onClick = { SignUp(onNavigateToMyRoutines) })
-    DefaultButton(
-        text = stringResource(id = R.string.signup_goto_signin),
-        onClick = { GoToSignIn(onNavigateToSignIn) })
+    Button(onClick= { GoToSignIn(onNavigateToSignIn) }, colors = ButtonDefaults.buttonColors(backgroundColor = DefaultBackground, Color.White)) {
+        Text(stringResource(id = R.string.signup_goto_signin), color = Color.White)
+    }
 }
 
 fun SignUp(onNavigateToMyRoutines: () -> Unit) {/*TODO*/

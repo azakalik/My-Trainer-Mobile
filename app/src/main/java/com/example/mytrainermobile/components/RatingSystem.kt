@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
 import com.example.mytrainermobile.R
+import com.example.mytrainermobile.classes.Routine
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 
 @Composable
@@ -40,6 +41,8 @@ fun RatingSystem() {
             if (!selected1) selected1 = !selected1; if (selected2) selected2 =
             !selected2; if (selected3) selected3 = !selected3; if (selected4) selected4 =
             !selected4; if (selected5) selected5 = !selected5
+            ;
+
         }) {
             Icon(
                 modifier = Modifier.size(35.dp),
@@ -64,6 +67,8 @@ fun RatingSystem() {
             if (!selected1) selected1 = !selected1; if (!selected2) selected2 =
             !selected2; if (!selected3) selected3 = !selected3; if (selected4) selected4 =
             !selected4; if (selected5) selected5 = !selected5
+            ;
+
         }) {
             Icon(
                 modifier = Modifier.size(35.dp),
@@ -100,7 +105,7 @@ fun RatingSystem() {
 }
 
 @Composable
-fun RateButton() {
+fun RateButton(routine: Routine) {
     var popupControl by remember { mutableStateOf(false) }
     val colorStar = if (popupControl) Color.Yellow else Color.White
 

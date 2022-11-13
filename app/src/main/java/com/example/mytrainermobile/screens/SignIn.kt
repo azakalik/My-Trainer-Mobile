@@ -2,8 +2,7 @@ package com.example.mytrainermobile.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Text
-import androidx.compose.material.Typography
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -12,11 +11,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHost
 import com.example.mytrainermobile.R
 import com.example.mytrainermobile.components.DefaultButton
 import com.example.mytrainermobile.components.DefaultTextField
+import com.example.mytrainermobile.components.TitleForSection
 import com.example.mytrainermobile.ui.theme.DefaultBackground
+import com.example.mytrainermobile.ui.theme.DefaultColor
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 
 @Composable
@@ -31,6 +33,13 @@ fun ShowSignInScreen(onNavigateToSignUp: () -> Unit, onNavigateToMyRoutines: () 
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                Text(
+                    text = "My Trainer",
+                    modifier = Modifier.padding(0.dp,0.dp,0.dp,20.dp),
+                    color = DefaultColor,
+                    fontSize = 64.sp,
+                    fontWeight = FontWeight.Bold,
+                )
                 SignInText()
                 ShowSignInForm()
                 ShowSignInButtons(onNavigateToSignUp, onNavigateToMyRoutines)
@@ -70,10 +79,9 @@ fun ShowSignInForm() {
 @Composable
 fun ShowSignInButtons(onNavigateToSignUp: () -> Unit, onNavigateToMyRoutines: () -> Unit){
     DefaultButton(onClick = { SignIn(onNavigateToMyRoutines) }, text = stringResource(id = R.string.signInText))
-    DefaultButton(
-        onClick = { GoToSignUp(onNavigateToSignUp) },
-        text = stringResource(id = R.string.signup_goto_signup)
-    )
+    Button(onClick= {GoToSignUp(onNavigateToSignUp)}, colors = ButtonDefaults.buttonColors(backgroundColor = DefaultBackground, Color.White)) {
+        Text(stringResource(id = R.string.signup_goto_signup), color = Color.White)
+    }
 }
 
 fun SignIn(onNavigateToMyRoutines: () -> Unit) {/*TODO*/
