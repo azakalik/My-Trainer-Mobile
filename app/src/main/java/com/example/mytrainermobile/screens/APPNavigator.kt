@@ -36,8 +36,12 @@ fun AppNavigatorHandler(
 ) {
     var bottomBarStateManager by rememberSaveable { mutableStateOf(true) }
     val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val detailsScreens =
-        listOf(WorkoutNavigatorItems.StartWorkout.route, WorkoutNavigatorItems.RunningWorkout.route)
+    val bottomBarScreens = listOf(
+        AppNavigatorItems.Favourites.route,
+        AppNavigatorItems.MyRoutines.route,
+        AppNavigatorItems.Explore.route,
+        AppNavigatorItems.Profile.route
+    )
     val filterScreen = listOf(
         AppNavigatorItems.Favourites.route,
         AppNavigatorItems.MyRoutines.route,
@@ -48,7 +52,7 @@ fun AppNavigatorHandler(
     val currentRoute = navBackStackEntry?.destination?.route
 
     floatingActionButtonManager = currentRoute in filterScreen
-    bottomBarStateManager = currentRoute !in detailsScreens
+    bottomBarStateManager = currentRoute in bottomBarScreens
 
     Scaffold(
         modifier = Modifier
@@ -64,7 +68,13 @@ fun AppNavigatorHandler(
             ThisBottomAppBar(navController, bottomBarStateManager)
         },
     ) {
-        AppNavigator(navController = navController, padding = it, myRoutinesViewModel = myRoutinesViewModel, favouritesViewModel = favouritesViewModel, exploreViewModel = exploreViewModel)
+        AppNavigator(
+            navController = navController,
+            padding = it,
+            myRoutinesViewModel = myRoutinesViewModel,
+            favouritesViewModel = favouritesViewModel,
+            exploreViewModel = exploreViewModel
+        )
     }
 }
 
@@ -93,7 +103,7 @@ fun AppNavigator(
 ) {
 
 
-    val onNavigateToStartWorkout = {  routineId:Int ->
+    val onNavigateToStartWorkout = { routineId: Int ->
         navController.navigate("${WorkoutNavigatorItems.StartWorkout.route}/$routineId") {
         }
     }
@@ -103,12 +113,28 @@ fun AppNavigator(
     }
 
     NavHost(navController = navController, startDestination = startDestination) {
-        composable(AppNavigatorItems.Favourites.route) { FavouritesView(onNavigateToStartWorkout, favouritesViewModel) }
-        composable(AppNavigatorItems.Explore.route) { ExploreScreen(onNavigateToStartWorkout, exploreViewModel) }
+        composable(AppNavigatorItems.Favourites.route) {
+            FavouritesView(
+                onNavigateToStartWorkout,
+                favouritesViewModel
+            )
+        }
+        composable(AppNavigatorItems.Explore.route) {
+            ExploreScreen(
+                onNavigateToStartWorkout,
+                exploreViewModel
+            )
+        }
         composable(AppNavigatorItems.Profile.route) { ShowProfileScreen() }
-        composable(AppNavigatorItems.MyRoutines.route) { MyRoutines(onNavigateToStartWorkout, myRoutinesViewModel) }
-        composable("${WorkoutNavigatorItems.StartWorkout.route}/{id}",
-            arguments = listOf(navArgument("id") { type = NavType.IntType})
+        composable(AppNavigatorItems.MyRoutines.route) {
+            MyRoutines(
+                onNavigateToStartWorkout,
+                myRoutinesViewModel
+            )
+        }
+        composable(
+            "${WorkoutNavigatorItems.StartWorkout.route}/{id}",
+            arguments = listOf(navArgument("id") { type = NavType.IntType })
         ) {
             it.arguments?.getInt("id")?.let { routineId ->
                 StartWorkout(
