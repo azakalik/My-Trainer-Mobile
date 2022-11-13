@@ -99,7 +99,7 @@ fun DefaultShowRoutinesScreen(
                 content = {
                     items(list.size) { idx ->
                         list[idx].name?.let { it1 ->
-                            list[idx].type?.let { it2 ->
+                            list[idx].category?.let { it2 ->
                                 RoutineBox(
                                     routineName = it1,
                                     routineType = it2,
