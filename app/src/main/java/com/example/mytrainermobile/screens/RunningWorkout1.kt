@@ -67,15 +67,18 @@ fun RunningWorkout1() {
                 )
             ) {}
         },
-//        drawerContent = {
-//            DrawerHeader()
-//            DrawerBody(
-//                items = listOf(Cycle()),
-//                onItemClick = {
-//                    //list = fetchExercises(it.id)
-//                }
-//            )
-//        },
+        drawerContent = {
+            DrawerHeader()
+            DrawerBody(
+                items = listOf(
+                    Cycle(1,"ciclo Prueba", "test", "arm", 1, listOf(1))
+                ),
+                Modifier,
+                onItemClick = {
+                    //list = fetchExercises(it.id)
+                }
+            )
+        },
         floatingActionButton = {
             ExtendedFloatingActionButton(
                 backgroundColor = DefaultColor ,

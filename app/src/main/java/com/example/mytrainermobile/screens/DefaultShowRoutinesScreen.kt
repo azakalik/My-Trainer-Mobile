@@ -25,7 +25,6 @@ fun DefaultShowRoutinesScreen(
     routineList: List<Routine>
 ) {
     MyTrainerMobileTheme() {
-
         Column(modifier = Modifier.fillMaxWidth()) {
             val configuration = LocalConfiguration.current
             when (configuration.orientation) {
