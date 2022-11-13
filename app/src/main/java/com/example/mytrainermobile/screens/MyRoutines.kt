@@ -24,6 +24,7 @@ import com.example.mytrainermobile.classes.Routine
 import com.example.mytrainermobile.components.RoutineBox
 import com.example.mytrainermobile.components.TitleBox
 import com.example.mytrainermobile.components.TitleForSection
+import com.example.mytrainermobile.repositories.RoutineRepository
 
 @Composable
 fun MyRoutines(
@@ -31,6 +32,7 @@ fun MyRoutines(
 ) {
     DefaultShowRoutinesScreen(
         title = stringResource(id = R.string.myroutines),
-        onNavigateToStartWorkout
+        onNavigateToStartWorkout,
+        routineList = RoutineRepository().getUserRoutines(),
     )
 }

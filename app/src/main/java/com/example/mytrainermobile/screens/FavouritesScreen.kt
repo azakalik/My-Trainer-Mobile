@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import com.example.mytrainermobile.R
+import com.example.mytrainermobile.repositories.RoutineRepository
 
 @Composable
 fun FavouritesView(
@@ -13,5 +14,6 @@ fun FavouritesView(
     DefaultShowRoutinesScreen(
         title = stringResource(id = R.string.myfavourites),
         onNavigateToStartWorkout,
+        routineList = RoutineRepository().getFavouriteRoutines(),
     )
 }

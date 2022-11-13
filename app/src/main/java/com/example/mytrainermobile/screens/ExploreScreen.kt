@@ -1,8 +1,7 @@
 package com.example.mytrainermobile.screens
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
+import com.example.mytrainermobile.repositories.RoutineRepository
 
 @Composable
 
@@ -13,7 +12,8 @@ fun ExploreScreen(
     DefaultShowRoutinesScreen(
 
         title = "Explore Routines",
-        onNavigateToStartWorkout
+        onNavigateToStartWorkout,
+        routineList = RoutineRepository().getAllRoutines(),
     )
 }
 
