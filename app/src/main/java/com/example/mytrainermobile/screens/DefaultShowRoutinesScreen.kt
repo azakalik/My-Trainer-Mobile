@@ -20,35 +20,10 @@ import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 @Composable
 fun DefaultShowRoutinesScreen(
     title: String,
-    onNavigateToStartWorkout: () -> Unit
+    onNavigateToStartWorkout: () -> Unit,
+    routineList: List<Routine>
 ) {
     MyTrainerMobileTheme() {
-        val list = listOf<Routine>(
-            Routine(1, "rutina chest", "chest"),
-            Routine(2, "rutina back", "back"),
-            Routine(3, "rutina legs", "legs"),
-            Routine(3, "rutina cardio", "cardio"),
-            Routine(1, "rutina chest", "chest"),
-            Routine(2, "rutina back", "back"),
-            Routine(3, "rutina legs", "legs"),
-            Routine(3, "rutina cardio", "cardio"),
-            Routine(1, "rutina chest", "chest"),
-            Routine(2, "rutina back", "back"),
-            Routine(3, "rutina legs", "legs"),
-            Routine(3, "rutina cardio", "cardio"),
-            Routine(1, "rutina chest", "chest"),
-            Routine(2, "rutina back", "back"),
-            Routine(3, "rutina legs", "legs"),
-            Routine(3, "rutina cardio", "cardio"),
-            Routine(1, "rutina chest", "chest"),
-            Routine(2, "rutina back", "back"),
-            Routine(3, "rutina legs", "legs"),
-            Routine(3, "rutina cardio", "cardio"),
-            Routine(1, "rutina chest", "chest"),
-            Routine(2, "rutina back", "back"),
-            Routine(3, "rutina legs", "legs"),
-            Routine(3, "rutina cardio", "cardio"),
-        )
 
         Column(modifier = Modifier.fillMaxWidth()) {
             val configuration = LocalConfiguration.current
@@ -97,9 +72,9 @@ fun DefaultShowRoutinesScreen(
                 verticalArrangement = Arrangement.Center,
                 columns = GridCells.Adaptive(150.dp),
                 content = {
-                    items(list.size) { idx ->
-                        list[idx].name?.let { it1 ->
-                            list[idx].type?.let { it2 ->
+                    items(routineList.size) { idx ->
+                        routineList[idx].name?.let { it1 ->
+                            routineList[idx].category?.let { it2 ->
                                 RoutineBox(
                                     routineName = it1,
                                     routineType = it2,
