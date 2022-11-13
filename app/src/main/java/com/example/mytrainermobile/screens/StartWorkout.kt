@@ -17,10 +17,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mytrainermobile.R
+import com.example.mytrainermobile.classes.Routine
 import com.example.mytrainermobile.components.*
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
+import com.example.mytrainermobile.viewModels.StartWorkoutViewModel
 
 
 @Composable
@@ -45,21 +49,26 @@ fun StartBar(onNavigateToRunningWorkout1: () -> Unit) {
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun StartWorkout(onNavigateToRunningWorkout1: () -> Unit) {
-    val list = listOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8)
+
     val routineTitle = "Routine Title"
+
+    val startWorkoutViewModel = StartWorkoutViewModel(1)
+
+    val state = startWorkoutViewModel.state
+
+
     Scaffold(modifier = Modifier.fillMaxSize(),
         backgroundColor = DefaultBackground,
         topBar = { TopBar(routineTitle) },
         bottomBar = { StartBar(onNavigateToRunningWorkout1) },
     floatingActionButton = {RoutineInfoFAB()}) {
-
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxSize()
         ) {
             Spacer(modifier = Modifier.padding(0.dp, 10.dp, 0.dp, 0.dp))
-//            DescriptorBox(routineTitle = routineTitle)
+            DescriptorBox(routineTitle = routineTitle)
             Box(
                 modifier = Modifier
                     .height(120.dp)
@@ -78,43 +87,43 @@ fun StartWorkout(onNavigateToRunningWorkout1: () -> Unit) {
                 modifier = Modifier
                     .padding(), contentPadding = PaddingValues(20.dp, 10.dp, 20.dp, 60.dp)
             ) {
-                items(items = list, itemContent = { item ->
+                items(state.cycles) {
                     Box(modifier = Modifier.padding(10.dp)) {
-                        ExerciseBox()
+                        CycleBox(it.name, it.detail, it.type, it.repetitions)
                     }//reemplazar item por datos de la lista a enviar a routineBox2
-                })
+                }
             }
         }
     }
 }
 
-//@Composable
-//fun DescriptorBox(rating: String? = stringResource(id = R.string.no_information), category: String? = stringResource(id = R.string.no_information), difficulty: String? = stringResource(id = R.string.no_information), routineTitle: String) {
-//
-//    Box(
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .background(DefaultColor, RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
-//            .offset(x = (-5).dp)
-//            .border(2.dp, Color.Black, shape = RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
-//            .height(95.dp)
-//    ) {
-//        Row(modifier = Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-//            Column(Modifier.offset(x = 10.dp), verticalArrangement = Arrangement.SpaceEvenly) {
-//                Text("Difficulty: $difficulty", color = Color.White)
-//                Text("Rating: $rating", color = Color.White)
-//                Text("Category: $category", color = Color.White)
-//            }
-//            Column(horizontalAlignment = Alignment.End, modifier = Modifier.fillMaxWidth()) {
-//                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-//                    FavouriteButton(description = true)
-//                    RateButton()
-//                    ShareButton(routineTitle)
-//                }
-//            }
-//        }
-//    }
-//}
+@Composable
+fun DescriptorBox(rating: String? = stringResource(id = R.string.no_information), category: String? = stringResource(id = R.string.no_information), difficulty: String? = stringResource(id = R.string.no_information), routineTitle: String) {
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(DefaultColor, RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
+            .offset(x = (-5).dp)
+            .border(2.dp, Color.Black, shape = RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
+            .height(95.dp)
+    ) {
+        Row(modifier = Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.offset(x = 10.dp), verticalArrangement = Arrangement.SpaceEvenly) {
+                Text("Difficulty: $difficulty", color = Color.White)
+                Text("Rating: $rating", color = Color.White)
+                Text("Category: $category", color = Color.White)
+            }
+            Column(horizontalAlignment = Alignment.End, modifier = Modifier.fillMaxWidth()) {
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                    //FavouriteButton()
+                    RateButton()
+                    ShareButton(routineTitle)
+                }
+            }
+        }
+    }
+}
 
 
 

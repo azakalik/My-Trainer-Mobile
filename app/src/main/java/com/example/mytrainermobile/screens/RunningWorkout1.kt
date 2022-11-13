@@ -112,7 +112,7 @@ fun RunningWorkout1() {
                                 onTap = {/*TODO */ }
                             )
                         }) {
-                        ExerciseBox()
+                        //ExerciseBox()
                     }//reemplazar item por datos de la lista a enviar a routineBox2
                 })
             }

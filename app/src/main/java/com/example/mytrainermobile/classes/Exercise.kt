@@ -15,8 +15,9 @@ data class Exercise(
     val id: Int,
     val name: String,
     val detail: String,
-    val category: String? = null,
+    val category: String,
     val metadata: String? = null,
-    val duration: Int? = null,
-    val repetitions: String? = null
+    val duration: Int,
+    val repetitions: Int,
+    val isRunning: Boolean = false
 )

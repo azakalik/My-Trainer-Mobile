@@ -35,7 +35,7 @@ import com.example.mytrainermobile.ui.theme.DefaultColor
 @Preview(showBackground = true)
 @Composable
 fun IndividualExerciseScreen() {
-    val uistate = Exercise(1,"Jumping jacks","JUMP!!","Legs", duration = 20)
+    val uistate = Exercise(1,"Jumping jacks","JUMP!!","Legs", duration = 20, repetitions = 0)
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -66,7 +66,7 @@ fun IndividualExerciseScreen() {
                     DetailText(title = "Name", description = uistate.name)
                     DetailText(title ="Detail" , description = uistate.detail)
                     DetailText(title = "type", description = "Exercise")
-                    uistate.repetitions?.let { it1 -> DetailText(title = "repetitions", description =it1 ) }
+                    uistate.repetitions?.let { it1 -> DetailText(title = "repetitions", description ="ss" ) }
                 }
             }
 

@@ -10,6 +10,8 @@ class ExerciseRepository {
             detail = "exerciseDetail",
             category = "exerciseCategory",
             metadata = "exerciseMetadata",
+            duration = 30,
+            repetitions = 0
         )
     }
 }
