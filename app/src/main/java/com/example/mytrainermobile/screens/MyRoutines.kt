@@ -29,7 +29,7 @@ import com.example.mytrainermobile.viewModels.MyRoutinesViewModel
 
 @Composable
 fun MyRoutines(
-    onNavigateToStartWorkout: () -> Unit,
+    onNavigateToStartWorkout: (id:Int) -> Unit,
     viewModel: MyRoutinesViewModel
 ) {
     DefaultShowRoutinesScreen(

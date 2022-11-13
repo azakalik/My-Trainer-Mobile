@@ -7,7 +7,7 @@ import com.example.mytrainermobile.viewModels.ExploreViewModel
 @Composable
 
 fun ExploreScreen(
-    onNavigateToStartWorkout: () -> Unit,
+    onNavigateToStartWorkout: (id:Int) -> Unit,
     viewModel: ExploreViewModel
 ) {
     DefaultShowRoutinesScreen(

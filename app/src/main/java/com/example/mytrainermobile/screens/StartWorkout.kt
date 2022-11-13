@@ -48,7 +48,7 @@ fun StartBar(onNavigateToRunningWorkout1: () -> Unit) {
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun StartWorkout(onNavigateToRunningWorkout1: () -> Unit) {
+fun StartWorkout(onNavigateToRunningWorkout1: () -> Unit,routineId: Int) {
 
     val routineTitle = "Routine Title"
 

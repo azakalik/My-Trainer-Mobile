@@ -23,7 +23,7 @@ import com.example.mytrainermobile.viewModels.MyRoutinesViewModel
 @Composable
 fun DefaultShowRoutinesScreen(
     title: String,
-    onNavigateToStartWorkout: () -> Unit,
+    onNavigateToStartWorkout: (id:Int) -> Unit,
     viewModel: DefaultViewModelInterface
 ) {
     MyTrainerMobileTheme() {
@@ -76,7 +76,7 @@ fun DefaultShowRoutinesScreen(
                 columns = GridCells.Adaptive(150.dp),
                 content = {
                     items(routineList.size) { idx ->
-                        RoutineBox(routine = routineList[idx], onNavigateToStartWorkout)
+                        RoutineBox(routine = routineList[idx], onNavigateToStartWorkout )
                     }
                 })
         }

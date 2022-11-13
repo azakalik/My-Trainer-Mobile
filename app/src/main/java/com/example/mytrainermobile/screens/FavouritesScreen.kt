@@ -10,7 +10,7 @@ import com.example.mytrainermobile.viewModels.FavouritesViewModel
 
 @Composable
 fun FavouritesView(
-    onNavigateToStartWorkout: () -> Unit,
+    onNavigateToStartWorkout: (id:Int) -> Unit,
     viewModel: FavouritesViewModel
     ) {
     DefaultShowRoutinesScreen(

@@ -16,11 +16,11 @@ import com.example.mytrainermobile.classes.Routine
 
 @Composable
 fun RoutineBox(routine: Routine,
-               onNavigateToStartWorkout: () -> Unit) {
+               onNavigateToStartWorkout: (id:Int) -> Unit) {
     Card(
         modifier = Modifier
             .padding(10.dp)
-            .clickable(onClick = { onNavigateToStartWorkout() })
+            .clickable(onClick = { onNavigateToStartWorkout(routine.id) })
             .size(150.dp, 215.dp),
         elevation = 10.dp,
         shape = RoundedCornerShape(15.dp)
