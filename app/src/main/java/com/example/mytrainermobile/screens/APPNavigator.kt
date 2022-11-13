@@ -18,11 +18,20 @@ import androidx.navigation.compose.rememberNavController
 import com.example.mytrainermobile.components.SortFAB
 import com.example.mytrainermobile.components.ThisBottomAppBar
 import com.example.mytrainermobile.ui.theme.DefaultBackground
+import com.example.mytrainermobile.viewModels.ExploreViewModel
+import com.example.mytrainermobile.viewModels.FavouritesViewModel
+import com.example.mytrainermobile.viewModels.MyRoutinesViewModel
 import com.example.mytrainermobile.viewModels.SortFABViewModel
 
 
 @Composable
-fun AppNavigatorHandler(navController: NavHostController = rememberNavController(), sortFABViewModel: SortFABViewModel) {
+fun AppNavigatorHandler(
+    navController: NavHostController = rememberNavController(),
+    sortFABViewModel: SortFABViewModel,
+    myRoutinesViewModel: MyRoutinesViewModel,
+    favouritesViewModel: FavouritesViewModel,
+    exploreViewModel: ExploreViewModel,
+) {
     var bottomBarStateManager by rememberSaveable { mutableStateOf(true) }
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val detailsScreens =
@@ -43,12 +52,17 @@ fun AppNavigatorHandler(navController: NavHostController = rememberNavController
         modifier = Modifier
             .fillMaxSize()
             .background(DefaultBackground),
-        floatingActionButton = { SortFAB(floatingActionButtonManager, viewModel = sortFABViewModel) },
+        floatingActionButton = {
+            SortFAB(
+                floatingActionButtonManager,
+                viewModel = sortFABViewModel
+            )
+        },
         bottomBar = {
             ThisBottomAppBar(navController, bottomBarStateManager)
         },
     ) {
-        AppNavigator(navController = navController, padding = it)
+        AppNavigator(navController = navController, padding = it, myRoutinesViewModel = myRoutinesViewModel, favouritesViewModel = favouritesViewModel, exploreViewModel = exploreViewModel)
     }
 }
 
@@ -71,6 +85,9 @@ fun AppNavigator(
     navController: NavHostController,
     padding: PaddingValues,
     startDestination: String = AppNavigatorItems.MyRoutines.route,
+    myRoutinesViewModel: MyRoutinesViewModel,
+    favouritesViewModel: FavouritesViewModel,
+    exploreViewModel: ExploreViewModel,
 ) {
 
 
@@ -84,10 +101,10 @@ fun AppNavigator(
     }
 
     NavHost(navController = navController, startDestination = startDestination) {
-        composable(AppNavigatorItems.Favourites.route) { FavouritesView(onNavigateToStartWorkout) }
-        composable(AppNavigatorItems.Explore.route) { ExploreScreen(onNavigateToStartWorkout) }
+        composable(AppNavigatorItems.Favourites.route) { FavouritesView(onNavigateToStartWorkout, favouritesViewModel) }
+        composable(AppNavigatorItems.Explore.route) { ExploreScreen(onNavigateToStartWorkout, exploreViewModel) }
         composable(AppNavigatorItems.Profile.route) { ShowProfileScreen() }
-        composable(AppNavigatorItems.MyRoutines.route) { MyRoutines(onNavigateToStartWorkout) }
+        composable(AppNavigatorItems.MyRoutines.route) { MyRoutines(onNavigateToStartWorkout, myRoutinesViewModel) }
         composable(WorkoutNavigatorItems.StartWorkout.route) {
             StartWorkout(
                 onNavigateToRunningWorkout1

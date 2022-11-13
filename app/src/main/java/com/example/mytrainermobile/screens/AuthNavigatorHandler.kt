@@ -6,6 +6,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.mytrainermobile.viewModels.ExploreViewModel
+import com.example.mytrainermobile.viewModels.FavouritesViewModel
+import com.example.mytrainermobile.viewModels.MyRoutinesViewModel
 import com.example.mytrainermobile.viewModels.SortFABViewModel
 
 
@@ -22,7 +25,10 @@ fun AuthNavigatorHandler(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     startDestination: String = "signIn",
-    sortFABViewModel: SortFABViewModel
+    sortFABViewModel: SortFABViewModel,
+    myRoutinesViewModel: MyRoutinesViewModel,
+    favouritesViewModel: FavouritesViewModel,
+    exploreViewModel: ExploreViewModel,
 ) {
     NavHost(
         modifier = modifier,
@@ -31,7 +37,7 @@ fun AuthNavigatorHandler(
     ) {
         val onNavigateToAppNavigator = {
             navController.navigate("appNavigatorHandler") {
-                popUpTo(AuthNavigatorItems.SignIn.route){inclusive = true}
+                popUpTo(AuthNavigatorItems.SignIn.route) { inclusive = true }
             }
         }
         composable(AuthNavigatorItems.Arrive.route) { ArriveScreen(/*...*/) }
@@ -49,7 +55,14 @@ fun AuthNavigatorHandler(
                 }
             }, onNavigateToAppNavigator)
         }
-        composable(AuthNavigatorItems.AppNavigationHandler.route) { AppNavigatorHandler(sortFABViewModel = sortFABViewModel) }
+        composable(AuthNavigatorItems.AppNavigationHandler.route) {
+            AppNavigatorHandler(
+                sortFABViewModel = sortFABViewModel,
+                myRoutinesViewModel = myRoutinesViewModel,
+                favouritesViewModel = favouritesViewModel,
+                exploreViewModel = exploreViewModel
+            )
+        }
     }
 }
 

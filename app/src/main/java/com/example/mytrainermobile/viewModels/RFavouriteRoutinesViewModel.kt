@@ -5,7 +5,7 @@ import androidx.compose.runtime.setValue
 import com.example.mytrainermobile.screenStates.RDefaultRoutinesUIState
 import kotlinx.coroutines.Job
 
-class FavouriteRoutinesViewModel {
+class RFavouriteRoutinesViewModel {
     var favouriteRoutinesUIState by mutableStateOf(RDefaultRoutinesUIState())
         private set
 
