@@ -18,11 +18,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
 import com.example.mytrainermobile.R
+import com.example.mytrainermobile.screenStates.StartWorkoutState
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
 
 @Composable
-fun RoutineInfoFAB() {
+fun RoutineInfoFAB( state: StartWorkoutState ) {
     var popupControl by remember { mutableStateOf(false) }
     FloatingActionButton(
         onClick = { popupControl = !popupControl },
@@ -61,30 +62,31 @@ fun RoutineInfoFAB() {
                         fontSize = 20.sp
                     )
                     Text(
-                        text = stringResource(id = R.string.info_name, "ejemplo"),
+                        text = stringResource(id = R.string.info_name, state.routine.name),
                         color = Color.White,
                         modifier = Modifier.padding(10.dp),
                     )
                     Text(
-                        text = stringResource(id = R.string.sort_difficulty),
+                        text = stringResource(id = R.string.info_description, state.routine.description),
                         color = Color.White,
                         modifier = Modifier.padding(10.dp),
                     )
                     Text(
-                        text = stringResource(id = R.string.sort_rating),
+                        text = stringResource(id = R.string.info_difficulty, state.routine.difficulty),
                         color = Color.White,
                         modifier = Modifier.padding(10.dp),
                     )
                     Text(
-                        text = stringResource(id = R.string.sort_category),
+                        text = stringResource(id = R.string.info_rating, state.routine.rating.toString()),
                         color = Color.White,
                         modifier = Modifier.padding(10.dp),
                     )
                     Text(
-                        text = stringResource(id = R.string.info_description),
+                        text = stringResource(id = R.string.info_category, state.routine.category),
                         color = Color.White,
                         modifier = Modifier.padding(10.dp),
                     )
+
                     Row(Modifier.fillMaxWidth().padding(10.dp), horizontalArrangement = Arrangement.Center) {
                         DefaultButton(
                             onClick = { popupControl = false },

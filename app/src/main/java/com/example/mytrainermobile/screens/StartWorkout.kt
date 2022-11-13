@@ -52,21 +52,24 @@ fun StartWorkout(onNavigateToRunningWorkout1: () -> Unit,routineId: Int) {
 
     val routineTitle = "Routine Title"
 
-    val startWorkoutViewModel = StartWorkoutViewModel(1)
+    val startWorkoutViewModel = StartWorkoutViewModel(routineId)
 
     val state = startWorkoutViewModel.state
+
+
 
 
     Scaffold(modifier = Modifier.fillMaxSize(),
         backgroundColor = DefaultBackground,
         topBar = { TopBar(routineTitle) },
         bottomBar = { StartBar(onNavigateToRunningWorkout1) },
-    floatingActionButton = {RoutineInfoFAB()}) {
+    floatingActionButton = { RoutineInfoFAB(state)} ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxSize()
         ) {
+            Text(routineId.toString())
             Spacer(modifier = Modifier.padding(0.dp, 10.dp, 0.dp, 0.dp))
             DescriptorBox(routineTitle = routineTitle)
             Box(

@@ -8,23 +8,23 @@ class RoutineRepository {
     private var allRoutines = listOf(
         Routine(
             id = 1,
-            name = "routine1",
-            creator = "user1",
+            name = "loleado",
+            creator = "masi",
             category = "legs",
-            description = "description",
-            difficulty = "difficulty",
-            rating = "rating",
+            description = "asdadadadsa",
+            difficulty = "hard",
+            rating = "1.3",
             isFavourite = true,
             cycleIds = listOf(1, 2, 3, 4, 5)
         ),
         Routine(
             id = 2,
-            name = "routine2",
-            creator = "user1",
-            category = "legs",
-            description = "description",
-            difficulty = "difficulty",
-            rating = "rating",
+            name = "bobo",
+            creator = "asda",
+            category = "tonto",
+            description = "foafoafoafoafoaf",
+            difficulty = "as,das",
+            rating = "1.6",
             isFavourite = false,
             cycleIds = listOf(1, 2, 3, 4, 5)
         ),
@@ -79,7 +79,7 @@ class RoutineRepository {
             cycleIds = listOf(1, 2, 3, 4, 5)
         ),
         Routine(
-            id = 1,
+            id = 2,
             name = "routine2",
             creator = "user1",
             category = "legs",
@@ -91,7 +91,7 @@ class RoutineRepository {
         ),
 
         Routine(
-            id = 1,
+            id = 3,
             name = "routine2",
             creator = "user1",
             category = "legs",
@@ -103,7 +103,7 @@ class RoutineRepository {
         ),
 
         Routine(
-            id = 1,
+            id = 4,
             name = "routine2",
             creator = "user1",
             category = "legs",
@@ -115,7 +115,7 @@ class RoutineRepository {
         ),
 
         Routine(
-            id = 1,
+            id = 5,
             name = "routine2",
             creator = "user1",
             category = "legs",

@@ -76,8 +76,8 @@
     <!-- Routine info FAB -->
     <string name="info_fab_name">More information</string>
     <string name="info_name">Name: %1s</string>
-    <string name="info_difficulty">Difficulty</string>
-    <string name="info_rating">Rating</string>
-    <string name="info_category">Category</string>
-    <string name="info_description">Description</string>
+    <string name="info_difficulty">Difficulty: %1s</string>
+    <string name="info_rating">Rating: %1s</string>
+    <string name="info_category">Category: %1s</string>
+    <string name="info_description">Description: %1s</string>
 </resources>
