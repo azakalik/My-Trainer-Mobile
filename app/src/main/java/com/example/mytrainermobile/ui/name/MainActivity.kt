@@ -1,4 +1,4 @@
-package com.example.mytrainermobile
+package com.example.mytrainermobile.ui.name
 
 
 import android.os.Bundle

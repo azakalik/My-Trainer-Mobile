@@ -24,11 +24,17 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // No usar localhost o la IP 127.0.0.1 porque es la interfaz de loopback
+            // del emulador. La forma de salir del emulador para acceder al localhost
+            // de host del mismo es usando la IP 10.0.2.2.
             buildConfigField "String", "API_BASE_URL",
                 "\"http://localhost:8080/\""
         }
 
         debug {
+            // No usar localhost o la IP 127.0.0.1 porque es la interfaz de loopback
+            // del emulador. La forma de salir del emulador para acceder al localhost
+            // de host del mismo es usando la IP 10.0.2.2.
             buildConfigField "String", "API_BASE_URL",
                     "\"http://localhost:8080/\""
         }
@@ -60,13 +66,12 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.squareup.okhttp3:logging-interceptor:4.10.0"
 
-
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
     implementation 'androidx.activity:activity-compose:1.6.1'
     implementation "androidx.compose.ui:ui:$compose_ui_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
-    implementation 'androidx.compose.material:material:1.3.0'
+    implementation 'androidx.compose.material:material:1.3.1'
     implementation("io.coil-kt:coil-compose:2.2.2")
     implementation "androidx.compose.material3:material3:1.1.0-alpha02"
     implementation "androidx.compose.material3:material3-window-size-class:1.1.0-alpha02"
@@ -78,6 +83,11 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version"
+    implementation "com.google.accompanist:accompanist-swiperefresh:0.27.0"
+    implementation 'com.google.code.gson:gson:2.10'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
 
     //para navigator
     def nav_version = "2.5.3"
