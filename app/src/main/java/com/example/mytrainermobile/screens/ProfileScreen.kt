@@ -20,6 +20,7 @@ fun ShowProfileScreen(
     viewModel: MainViewModel = viewModel(factory = getViewModelFactory())
 ) {
     val uiState = viewModel.uiState
+    viewModel.getCurrentUser()
     Column() {
         Text("Profile Screen")
         if(uiState.isAuthenticated){

@@ -41,6 +41,7 @@ fun ShowSignInScreen(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                // -------- TITLE--------------------------------------
                 Text(
                     text = "My Trainer",
                     modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 20.dp),
@@ -49,12 +50,30 @@ fun ShowSignInScreen(
                     fontWeight = FontWeight.Bold,
                 )
                 SignInText()
-                ShowSignInForm()
+
+                // ---------- SIGN IN FIELDS ---------------------------
+                var email by remember { mutableStateOf("") }
+                var password by remember { mutableStateOf("") }
+
+                DefaultTextField(
+                    value = email,
+                    callback = { email = it },
+                    placeholder = stringResource(id = R.string.signup_insert_email)
+                )
+
+                DefaultTextField(
+                    value = password,
+                    callback = { password = it },
+                    placeholder = stringResource(id = R.string.signup_insert_password)
+                )
+
+                // ------- SIGN IN BUTTONS -----------------------------
                 DefaultButton(onClick = {
                     if (!uiState.isAuthenticated) {
-                        viewModel.login("santi2", "2")
+                        viewModel.login(email, password)
                     }
-                    onNavigateToMyRoutines()
+                    if (uiState.isAuthenticated)
+                        onNavigateToMyRoutines()
                 }, text = stringResource(id = R.string.signInText))
                 Button(
                     onClick = { GoToSignUp(onNavigateToSignUp) },
@@ -82,20 +101,7 @@ fun SignInText() {
 
 @Composable
 fun ShowSignInForm() {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
 
-    DefaultTextField(
-        value = email,
-        callback = { email = it },
-        placeholder = stringResource(id = R.string.signup_insert_email)
-    )
-
-    DefaultTextField(
-        value = password,
-        callback = { password = it },
-        placeholder = stringResource(id = R.string.signup_insert_password)
-    )
 }
 
 fun GoToSignUp(onNavigateToSignUp: () -> Unit) {
