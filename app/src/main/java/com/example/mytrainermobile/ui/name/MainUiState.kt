@@ -1,7 +1,8 @@
 package com.example.mytrainermobile.ui.name
 
-import com.example.mytrainermobile.models.Sport
-import com.example.mytrainermobile.models.User
+import ar.edu.itba.example.api.data.model.Sport
+import ar.edu.itba.example.api.data.model.User
+
 
 data class MainUiState(
     val isAuthenticated: Boolean = false,

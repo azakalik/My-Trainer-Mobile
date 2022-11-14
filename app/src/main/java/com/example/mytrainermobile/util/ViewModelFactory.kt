@@ -5,8 +5,8 @@ import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
-import com.example.mytrainermobile.repository.SportRepository
-import com.example.mytrainermobile.repository.UserRepository
+import com.example.mytrainermobile.data.network.repository.SportRepository
+import com.example.mytrainermobile.data.network.repository.UserRepository
 import com.example.mytrainermobile.ui.name.MainViewModel
 
 class ViewModelFactory constructor(

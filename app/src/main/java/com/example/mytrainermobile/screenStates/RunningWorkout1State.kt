@@ -1,6 +1,6 @@
 package com.example.mytrainermobile.screenStates
 
-import com.example.mytrainermobile.classes.Exercise
+import com.example.mytrainermobile.data.classes.Exercise
 
 class RunningWorkout1State (
     val exercises: List<Exercise> = listOf(),

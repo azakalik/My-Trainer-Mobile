@@ -22,7 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mytrainermobile.R
-import com.example.mytrainermobile.classes.Cycle
+import com.example.mytrainermobile.data.classes.Cycle
 import com.example.mytrainermobile.components.ExerciseBox
 import com.example.mytrainermobile.components.TopBar
 import com.example.mytrainermobile.ui.theme.DefaultBackground

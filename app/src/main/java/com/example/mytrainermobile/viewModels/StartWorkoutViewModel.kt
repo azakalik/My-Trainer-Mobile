@@ -5,9 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mytrainermobile.classes.Cycle
-import com.example.mytrainermobile.repositories.CycleRepository
-import com.example.mytrainermobile.repositories.RoutineRepository
+import com.example.mytrainermobile.data.network.repository.CycleRepository
+import com.example.mytrainermobile.data.network.repository.RoutineRepository
 import com.example.mytrainermobile.screenStates.StartWorkoutState
 import kotlinx.coroutines.launch
 

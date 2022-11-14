@@ -1,8 +1,8 @@
 package com.example.mytrainermobile.screenStates
 
 
-import com.example.mytrainermobile.classes.Cycle
-import com.example.mytrainermobile.classes.Exercise
+import com.example.mytrainermobile.data.classes.Cycle
+import com.example.mytrainermobile.data.classes.Exercise
 
 
 //guardo a que ciclo le corresponde

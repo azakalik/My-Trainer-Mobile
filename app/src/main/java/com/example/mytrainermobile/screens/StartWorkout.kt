@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mytrainermobile.R
-import com.example.mytrainermobile.classes.Routine
+import com.example.mytrainermobile.data.classes.Routine
 import com.example.mytrainermobile.components.*
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor

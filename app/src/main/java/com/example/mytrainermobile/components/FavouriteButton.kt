@@ -14,7 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.mytrainermobile.R
-import com.example.mytrainermobile.classes.Routine
+import com.example.mytrainermobile.data.classes.Routine
 
 @Composable
 fun FavouriteButton(routine : Routine) {

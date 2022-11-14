@@ -12,7 +12,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.mytrainermobile.aux_functions.pictureDecider
-import com.example.mytrainermobile.classes.Routine
+import com.example.mytrainermobile.data.classes.Routine
 
 @Composable
 fun RoutineBox(routine: Routine,

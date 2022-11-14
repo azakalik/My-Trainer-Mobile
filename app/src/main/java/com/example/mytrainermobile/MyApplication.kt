@@ -1,11 +1,11 @@
 package com.example.mytrainermobile
 
 import android.app.Application
-import com.example.mytrainermobile.network.SportRemoteDataSource
-import com.example.mytrainermobile.network.UserRemoteDataSource
+import com.example.mytrainermobile.data.network.SportRemoteDataSource
+import com.example.mytrainermobile.data.network.UserRemoteDataSource
 import ar.edu.itba.example.api.data.network.api.RetrofitClient
-import com.example.mytrainermobile.repository.SportRepository
-import com.example.mytrainermobile.repository.UserRepository
+import com.example.mytrainermobile.data.network.repository.SportRepository
+import com.example.mytrainermobile.data.network.repository.UserRepository
 import com.example.mytrainermobile.util.SessionManager
 
 class MyApplication : Application() {

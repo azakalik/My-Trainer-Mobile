@@ -5,9 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mytrainermobile.models.Sport
-import com.example.mytrainermobile.repository.SportRepository
-import com.example.mytrainermobile.repository.UserRepository
+import ar.edu.itba.example.api.data.model.Sport
+import com.example.mytrainermobile.data.network.repository.SportRepository
+import com.example.mytrainermobile.data.network.repository.UserRepository
 import com.example.mytrainermobile.util.SessionManager
 import kotlinx.coroutines.launch
 
