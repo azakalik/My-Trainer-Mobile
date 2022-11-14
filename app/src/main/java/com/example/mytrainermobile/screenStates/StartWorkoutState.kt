@@ -1,7 +1,7 @@
 package com.example.mytrainermobile.screenStates
 
-import com.example.mytrainermobile.data.classes.Cycle
-import com.example.mytrainermobile.data.classes.Routine
+import com.example.mytrainermobile.data.model.Cycle
+import com.example.mytrainermobile.data.model.Routine
 
 data class StartWorkoutState(
     val cycles: List<Cycle> = listOf(),

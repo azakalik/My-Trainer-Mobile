@@ -1,6 +1,6 @@
 package com.example.mytrainermobile.screens
 
-import com.example.mytrainermobile.data.classes.Routine
+import com.example.mytrainermobile.data.model.Routine
 
 interface DefaultViewModelInterface {
     fun getRoutines() : List<Routine>

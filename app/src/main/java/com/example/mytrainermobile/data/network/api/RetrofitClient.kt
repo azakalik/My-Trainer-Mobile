@@ -2,10 +2,7 @@ package ar.edu.itba.example.api.data.network.api
 
 import android.content.Context
 import com.example.mytrainermobile.BuildConfig
-import com.example.mytrainermobile.data.network.api.ApiDateTypeAdapter
-import com.example.mytrainermobile.data.network.api.ApiSportService
-import com.example.mytrainermobile.data.network.api.ApiUserService
-import com.example.mytrainermobile.data.network.api.AuthInterceptor
+import com.example.mytrainermobile.data.network.api.*
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -49,5 +46,9 @@ object RetrofitClient {
 
     fun getApiSportService(context: Context) : ApiSportService {
         return getInstance(context).create(ApiSportService::class.java)
+    }
+
+    fun getApiRoutineService(context: Context) : ApiRoutineService {
+        return getInstance(context).create(ApiRoutineService::class.java)
     }
 }

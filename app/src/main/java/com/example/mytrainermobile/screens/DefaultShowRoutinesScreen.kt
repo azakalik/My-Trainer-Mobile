@@ -10,13 +10,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
-import com.example.mytrainermobile.data.classes.Routine
 import com.example.mytrainermobile.components.RoutineBox
 import com.example.mytrainermobile.components.TitleBox
 import com.example.mytrainermobile.components.TitleForSection
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
-import com.example.mytrainermobile.viewModels.MyRoutinesViewModel
 
 //This class is only meant to be used by explore, favourites and my routines
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")

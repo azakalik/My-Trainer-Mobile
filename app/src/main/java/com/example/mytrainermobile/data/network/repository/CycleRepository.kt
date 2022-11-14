@@ -1,6 +1,6 @@
 package com.example.mytrainermobile.data.network.repository
 
-import com.example.mytrainermobile.data.classes.Cycle
+import com.example.mytrainermobile.data.model.Cycle
 
 class CycleRepository {
 

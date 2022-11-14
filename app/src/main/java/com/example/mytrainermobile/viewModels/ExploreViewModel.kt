@@ -1,7 +1,7 @@
 package com.example.mytrainermobile.viewModels
 
 import androidx.lifecycle.ViewModel
-import com.example.mytrainermobile.data.classes.Routine
+import com.example.mytrainermobile.data.model.Routine
 import com.example.mytrainermobile.data.network.repository.RoutineRepository
 import com.example.mytrainermobile.screens.DefaultViewModelInterface
 

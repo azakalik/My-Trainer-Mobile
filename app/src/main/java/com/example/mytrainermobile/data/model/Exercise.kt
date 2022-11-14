@@ -1,4 +1,4 @@
-package com.example.mytrainermobile.data.classes
+package com.example.mytrainermobile.data.model
 /*
 {
       "id": 1,

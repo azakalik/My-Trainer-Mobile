@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
 import com.example.mytrainermobile.R
-import com.example.mytrainermobile.data.classes.Routine
+import com.example.mytrainermobile.data.model.Routine
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 
 @Composable

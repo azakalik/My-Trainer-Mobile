@@ -1,4 +1,4 @@
-package com.example.mytrainermobile.viewModels
+package com.example.mytrainermobile.deprecatedRana
 
 import androidx.compose.runtime.mutableStateOf
 import com.example.mytrainermobile.screenStates.ExcercisesUIState

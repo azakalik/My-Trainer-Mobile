@@ -11,8 +11,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.mytrainermobile.data.classes.Exercise
-import com.example.mytrainermobile.components.DefaultButton
+import com.example.mytrainermobile.data.model.Exercise
 import com.example.mytrainermobile.components.Timer
 import com.example.mytrainermobile.components.TopBar
 import com.example.mytrainermobile.ui.theme.DefaultBackground

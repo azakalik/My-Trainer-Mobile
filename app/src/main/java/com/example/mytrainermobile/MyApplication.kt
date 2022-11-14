@@ -4,6 +4,8 @@ import android.app.Application
 import com.example.mytrainermobile.data.network.SportRemoteDataSource
 import com.example.mytrainermobile.data.network.UserRemoteDataSource
 import ar.edu.itba.example.api.data.network.api.RetrofitClient
+import com.example.mytrainermobile.data.network.RoutineRemoteDataSource
+import com.example.mytrainermobile.data.network.repository.RoutineRepository
 import com.example.mytrainermobile.data.network.repository.SportRepository
 import com.example.mytrainermobile.data.network.repository.UserRepository
 import com.example.mytrainermobile.util.SessionManager
@@ -16,6 +18,9 @@ class MyApplication : Application() {
     private val sportRemoteDataSource: SportRemoteDataSource
         get() = SportRemoteDataSource(RetrofitClient.getApiSportService(this))
 
+    private val routineRemoteDataSource: RoutineRemoteDataSource
+        get() = RoutineRemoteDataSource(RetrofitClient.getApiRoutineService(this))
+
     val sessionManager: SessionManager
         get() = SessionManager(this)
 
@@ -24,4 +29,7 @@ class MyApplication : Application() {
 
     val sportRepository: SportRepository
         get() = SportRepository(sportRemoteDataSource)
+
+    val routineRepository: RoutineRepository
+        get() = RoutineRepository(routineRemoteDataSource)
 }

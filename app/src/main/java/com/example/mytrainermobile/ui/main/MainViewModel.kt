@@ -1,4 +1,4 @@
-package com.example.mytrainermobile.ui.name
+package com.example.mytrainermobile.ui.main
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ar.edu.itba.example.api.data.model.Sport
+import com.example.mytrainermobile.data.network.repository.RoutineRepository
 import com.example.mytrainermobile.data.network.repository.SportRepository
 import com.example.mytrainermobile.data.network.repository.UserRepository
 import com.example.mytrainermobile.util.SessionManager
@@ -14,7 +15,8 @@ import kotlinx.coroutines.launch
 class MainViewModel(
     private val sessionManager: SessionManager,
     private val userRepository: UserRepository,
-    private val sportRepository: SportRepository
+    private val sportRepository: SportRepository,
+    private val routineRepository: RoutineRepository,
     ) : ViewModel() {
 
     var uiState by mutableStateOf(MainUiState(isAuthenticated = sessionManager.loadAuthToken() != null))
@@ -165,6 +167,46 @@ class MainViewModel(
             uiState = uiState.copy(
                 message = e.message,
                 isFetching = false)
+        }
+    }
+
+    fun getRoutines() = viewModelScope.launch {
+        uiState = uiState.copy(
+            isFetching = true,
+            message = null
+        )
+        runCatching {
+            routineRepository.getRoutines(true)
+        }.onSuccess { response ->
+            uiState = uiState.copy(
+                isFetching = false,
+                routines = response
+            )
+        }.onFailure { e ->
+            uiState = uiState.copy(
+                message = e.message,
+                isFetching = false
+            )
+        }
+    }
+
+    fun getRoutinesBySearch(query: String) = viewModelScope.launch {
+        uiState = uiState.copy(
+            isFetching = true,
+            message = null
+        )
+        runCatching {
+            routineRepository.getRoutinesBySearch(query)
+        }.onSuccess { response ->
+            uiState = uiState.copy(
+                isFetching = false,
+                searchRoutines = response
+            )
+        }.onFailure { e ->
+            uiState = uiState.copy(
+                message = e.message,
+                isFetching = false
+            )
         }
     }
 }
