@@ -26,7 +26,7 @@ fun RoutineBox(routine: Routine,
         shape = RoundedCornerShape(15.dp)
     ) {
         Image(
-            painter = painterResource(id = pictureDecider(routine.category)),
+            painter = painterResource(id = pictureDecider(routine.category.detail)),
             contentDescription = "image",
             contentScale = ContentScale.FillBounds,
             modifier = Modifier.fillMaxSize()

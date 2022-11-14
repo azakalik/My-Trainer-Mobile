@@ -12,8 +12,9 @@ import kotlinx.coroutines.launch
 
 class StartWorkoutViewModel(routineId: Int) : ViewModel() {
 
-    var state by mutableStateOf(StartWorkoutState(routine = RoutineRepository().getRoutineById(routineId)))
+    /*var state by mutableStateOf(StartWorkoutState(routine = RoutineRepository().getRoutineById(routineId)))
         private set
+
 
     init {
         var it = iterator<Int> { state.routine.cycleIds }
@@ -32,5 +33,7 @@ class StartWorkoutViewModel(routineId: Int) : ViewModel() {
     fun rateRoutine() {
 
     }
+
+     */
 
 }

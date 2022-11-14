@@ -67,17 +67,17 @@ fun RoutineInfoFAB( state: StartWorkoutState ) {
                         modifier = Modifier.padding(10.dp),
                     )
                     Text(
-                        text = stringResource(id = R.string.info_description, state.routine.description),
+                        text = stringResource(id = R.string.info_description, state.routine.detail.toString()),
                         color = Color.White,
                         modifier = Modifier.padding(10.dp),
                     )
                     Text(
-                        text = stringResource(id = R.string.info_difficulty, state.routine.difficulty),
+                        text = stringResource(id = R.string.info_difficulty, state.routine.difficulty.toString()),
                         color = Color.White,
                         modifier = Modifier.padding(10.dp),
                     )
                     Text(
-                        text = stringResource(id = R.string.info_rating, state.routine.rating.toString()),
+                        text = stringResource(id = R.string.info_rating, state.routine.score.toString()),
                         color = Color.White,
                         modifier = Modifier.padding(10.dp),
                     )

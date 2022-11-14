@@ -17,6 +17,7 @@ fun getViewModelFactory(defaultArgs: Bundle? = null): ViewModelFactory {
         sessionManager,
         userRepository,
         sportRepository,
+        routineRepository,
         LocalSavedStateRegistryOwner.current,
         defaultArgs
     )

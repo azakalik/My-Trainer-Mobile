@@ -52,16 +52,16 @@ fun StartWorkout(onNavigateToRunningWorkout1: () -> Unit,routineId: Int) {
 
     val startWorkoutViewModel = StartWorkoutViewModel(routineId)
 
-    val state = startWorkoutViewModel.state
+    val state = startWorkoutViewModel
 
 
 
 
     Scaffold(modifier = Modifier.fillMaxSize(),
         backgroundColor = DefaultBackground,
-        topBar = { TopBar(state.routine.name) },
+        topBar = { TopBar(routineTitle) },
         bottomBar = { StartBar(onNavigateToRunningWorkout1) },
-    floatingActionButton = { RoutineInfoFAB(state)} ) {
+        /*floatingActionButton = { RoutineInfoFAB(state)}*/ ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween,
@@ -69,7 +69,7 @@ fun StartWorkout(onNavigateToRunningWorkout1: () -> Unit,routineId: Int) {
         ) {
             Text(routineId.toString())
             Spacer(modifier = Modifier.padding(0.dp, 10.dp, 0.dp, 0.dp))
-            DescriptorBox(state.routine)
+            //DescriptorBox(state.routine)
             Box(
                 modifier = Modifier
                     .height(120.dp)
@@ -88,11 +88,11 @@ fun StartWorkout(onNavigateToRunningWorkout1: () -> Unit,routineId: Int) {
                 modifier = Modifier
                     .padding(), contentPadding = PaddingValues(20.dp, 10.dp, 20.dp, 60.dp)
             ) {
-                items(state.cycles) {
+                /*items(state.cycles) {
                     Box(modifier = Modifier.padding(10.dp)) {
                         CycleBox(it.name, it.detail, it.type, it.repetitions)
                     }//reemplazar item por datos de la lista a enviar a routineBox2
-                }
+                }*/
             }
         }
     }
@@ -111,8 +111,8 @@ fun DescriptorBox(routine: Routine) {
     ) {
         Row(modifier = Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.offset(x = 10.dp), verticalArrangement = Arrangement.SpaceEvenly) {
-                Text(stringResource(id = R.string.info_difficulty, routine.difficulty), color = Color.White)
-                Text(stringResource(R.string.info_rating, routine.rating), color = Color.White)
+                Text(stringResource(id = R.string.info_difficulty, routine.difficulty.toString()), color = Color.White)
+                Text(stringResource(R.string.info_rating, routine.score.toString()), color = Color.White)
                 Text(stringResource(id = R.string.info_category, routine.category), color = Color.White)
             }
             Column(horizontalAlignment = Alignment.End, modifier = Modifier.fillMaxWidth()) {
