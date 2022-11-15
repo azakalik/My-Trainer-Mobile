@@ -13,5 +13,6 @@ interface ApiRoutineService {
 
     @GET("routines/{routineId}")
     suspend fun getRoutine(@Path("routineId") routineId: Int) : Response<NetworkRoutine>
+
 }
 

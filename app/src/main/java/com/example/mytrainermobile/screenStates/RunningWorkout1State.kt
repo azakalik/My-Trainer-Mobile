@@ -9,5 +9,4 @@ class RunningWorkout1State (
     var isRunning : Boolean = false,
     var isPaused : Boolean = false,
     val reps : Int = exercises[currentExerciseIndex].repetitions,
-
-    )
+)

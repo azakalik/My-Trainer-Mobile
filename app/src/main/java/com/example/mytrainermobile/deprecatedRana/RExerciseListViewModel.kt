@@ -1,7 +1,6 @@
 package com.example.mytrainermobile.deprecatedRana
 
 import androidx.compose.runtime.mutableStateOf
-import com.example.mytrainermobile.screenStates.ExcercisesUIState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job

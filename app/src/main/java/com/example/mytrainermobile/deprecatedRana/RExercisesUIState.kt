@@ -1,4 +1,4 @@
-package com.example.mytrainermobile.screenStates
+package com.example.mytrainermobile.deprecatedRana
 
 
 import com.example.mytrainermobile.data.model.Cycle

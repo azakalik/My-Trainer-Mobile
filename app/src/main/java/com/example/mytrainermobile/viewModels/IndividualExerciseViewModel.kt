@@ -4,7 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.example.mytrainermobile.screenStates.RDefaultRoutinesUIState
+import com.example.mytrainermobile.deprecatedRana.RDefaultRoutinesUIState
 import kotlinx.coroutines.Job
 
 class IndividualExerciseViewModel : ViewModel() {

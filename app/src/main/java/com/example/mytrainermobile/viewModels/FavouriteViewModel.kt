@@ -5,36 +5,35 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mytrainermobile.data.model.Routine
-import com.example.mytrainermobile.data.network.repository.RoutineRepository
-import com.example.mytrainermobile.screenStates.ExploreState
-import com.example.mytrainermobile.ui.main.MainUiState
+import com.example.mytrainermobile.data.network.repository.FavouriteRepository
+import com.example.mytrainermobile.screenStates.FavouriteState
 import com.example.mytrainermobile.util.SessionManager
 import kotlinx.coroutines.launch
 
-class ExploreViewModel(
+class FavouriteViewModel(
     private val sessionManager: SessionManager,
-    private val routineRepository: RoutineRepository
-    ) : ViewModel(){
+    private val favouriteRepository: FavouriteRepository,
+) : ViewModel() {
 
-    var uiState by mutableStateOf(ExploreState(isAuthenticated = sessionManager.loadAuthToken() != null))
+    var uiState by mutableStateOf(FavouriteState(isAuthenticated = sessionManager.loadAuthToken() != null))
         private set
 
     init {
-        getRoutines()
+        getFavourites()
     }
 
-     fun getRoutines() = viewModelScope.launch {
+
+    fun getFavourites() = viewModelScope.launch {
         uiState = uiState.copy(
             isFetching = true,
             message = null
         )
         runCatching {
-            routineRepository.getRoutines(true)
+            favouriteRepository.getFavourites()
         }.onSuccess { response ->
             uiState = uiState.copy(
                 isFetching = false,
-                routines = response
+                favouriteRoutines = response
             )
         }.onFailure { e ->
             uiState = uiState.copy(
@@ -44,18 +43,39 @@ class ExploreViewModel(
         }
     }
 
-    fun getRoutinesBySearch(query: String) = viewModelScope.launch {
+    fun toggleFavourite(routineId: Int) = viewModelScope.launch {
         uiState = uiState.copy(
             isFetching = true,
             message = null
         )
         runCatching {
-            routineRepository.getRoutinesBySearch(query)
+            favouriteRepository.toggleFavourite(routineId)
         }.onSuccess { response ->
             uiState = uiState.copy(
                 isFetching = false,
-                searchRoutines = response
             )
+            getFavourites()
+        }.onFailure { e ->
+            uiState = uiState.copy(
+                message = e.message,
+                isFetching = false
+            )
+        }
+
+    }
+
+    fun removeFavourite(routineId: Int) = viewModelScope.launch {
+        uiState = uiState.copy(
+            isFetching = true,
+            message = null
+        )
+        runCatching {
+            favouriteRepository.removeFavourite(routineId)
+        }.onSuccess { response ->
+            uiState = uiState.copy(
+                isFetching = false,
+            )
+            getFavourites()
         }.onFailure { e ->
             uiState = uiState.copy(
                 message = e.message,

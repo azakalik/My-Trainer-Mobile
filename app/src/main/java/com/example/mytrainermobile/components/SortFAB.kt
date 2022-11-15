@@ -30,9 +30,9 @@ import com.example.mytrainermobile.viewModels.SortFABViewModel
 @Composable
 fun SortFAB(
     showButton: Boolean,
-    viewModel: SortFABViewModel
+    //viewModel: SortFABViewModel
 ) {
-
+    /*
     // ----------------- FAB -----------------------------------
     if (showButton) {
         FloatingActionButton(
@@ -94,6 +94,7 @@ fun SortFAB(
             }
         }
     }
+     */
 }
 
 @Composable

@@ -80,4 +80,7 @@
     <string name="info_rating">Rating: %1s</string>
     <string name="info_category">Category: %1s</string>
     <string name="info_description">Description: %1s</string>
+
+    <!-- Search Widget -->
+    <string name="search">Search</string>
 </resources>

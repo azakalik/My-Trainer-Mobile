@@ -14,69 +14,21 @@ import com.example.mytrainermobile.components.RoutineBox
 import com.example.mytrainermobile.components.TitleBox
 import com.example.mytrainermobile.components.TitleForSection
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
+import com.example.mytrainermobile.viewModels.ExploreViewModel
 
 //This class is only meant to be used by explore, favourites and my routines
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun DefaultShowRoutinesScreen(
-    title: String,
     onNavigateToStartWorkout: (id:Int) -> Unit,
     viewModel: DefaultViewModelInterface
 ) {
     MyTrainerMobileTheme() {
-        val routineList = viewModel.getRoutines()
-        Column(modifier = Modifier.fillMaxWidth()) {
-            val configuration = LocalConfiguration.current
-            when (configuration.orientation) {
-                Configuration.ORIENTATION_PORTRAIT -> {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .fillMaxHeight(0.23f),
-                        verticalArrangement = Arrangement.SpaceEvenly
-                    ) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.Center
-                        ) {
-                            TitleForSection()
-                        }
-                        TitleBox(
-                            title = title
-                        )
-                    }
-                }
-                else -> {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .fillMaxHeight(0.2f),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        TitleBox(
-                            title = title
-                        )
-                        TitleForSection()
-                        Spacer(modifier = Modifier.padding(0.dp, 0.dp, 25.dp, 0.dp))
-                    }
-                }
-            }
-            LazyVerticalGrid(
 
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(),
-                contentPadding = PaddingValues(5.dp, 0.dp, 5.dp, 80.dp),
-                horizontalArrangement = Arrangement.SpaceAround,
-                verticalArrangement = Arrangement.Center,
-                columns = GridCells.Adaptive(150.dp),
-                content = {
-                    items(routineList.size) { idx ->
-                        RoutineBox(routine = routineList[idx], onNavigateToStartWorkout )
-                    }
-                })
-        }
+
+
+
+
 
     }
 }
