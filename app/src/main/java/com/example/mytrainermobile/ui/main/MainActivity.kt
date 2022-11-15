@@ -21,17 +21,27 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         val sortFABViewModel by viewModels<SortFABViewModel>()
 
-
         setContent {
             MyTrainerMobileTheme {
                 val exploreViewModel : ExploreViewModel = viewModel(factory =  getViewModelFactory())
                 val myRoutinesViewModel: MyRoutinesViewModel = viewModel(factory = getViewModelFactory())
                 val favouritesViewModel: FavouritesViewModel = viewModel(factory = getViewModelFactory())
+                val mainViewModel: MainViewModel = viewModel(factory = getViewModelFactory())
                 val systemUiController = rememberSystemUiController()
                 systemUiController.setSystemBarsColor(
                     color = androidx.compose.ui.graphics.Color.Black
                 )
-                AuthNavigatorHandler(sortFABViewModel = sortFABViewModel, myRoutinesViewModel = myRoutinesViewModel, favouritesViewModel = favouritesViewModel, exploreViewModel = exploreViewModel)
+                if(mainViewModel.uiState.isAuthenticated){
+                    AppNavigatorHandler(
+                        sortFABViewModel = sortFABViewModel,
+                        myRoutinesViewModel = myRoutinesViewModel,
+                        favouritesViewModel = favouritesViewModel,
+                        exploreViewModel = exploreViewModel
+                    )
+                }
+                else{
+                    AuthNavigatorHandler(sortFABViewModel = sortFABViewModel, myRoutinesViewModel = myRoutinesViewModel, favouritesViewModel = favouritesViewModel, exploreViewModel = exploreViewModel)
+                }
             }
         }
     }

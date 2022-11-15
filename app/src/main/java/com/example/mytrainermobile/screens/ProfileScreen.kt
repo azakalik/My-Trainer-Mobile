@@ -1,12 +1,14 @@
 package com.example.mytrainermobile.screens
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -20,11 +22,12 @@ fun ShowProfileScreen(
     viewModel: MainViewModel = viewModel(factory = getViewModelFactory())
 ) {
     val uiState = viewModel.uiState
+    val activity = (LocalContext.current as? Activity)
     viewModel.getCurrentUser()
     Column() {
         Text("Profile Screen")
         if(uiState.isAuthenticated){
-            DefaultButton(onClick = { viewModel.logout() }, text = "Logout")
+            DefaultButton(onClick = { viewModel.logout(); activity?.finish() }, text = "Logout")
 
             val currentUserData = uiState.currentUser?.let {
                 "Current User: ${it.firstName} ${it.lastName} (${it.email})"
