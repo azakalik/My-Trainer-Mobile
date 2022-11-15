@@ -22,7 +22,7 @@ class ExploreViewModelFactory constructor(
         handle: SavedStateHandle
     ) = with(modelClass) {
         when {
-            isAssignableFrom(MainViewModel::class.java) ->
+            isAssignableFrom(ExploreViewModel::class.java) ->
                 ExploreViewModel(sessionManager, routineRepository)
             else ->
                 throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

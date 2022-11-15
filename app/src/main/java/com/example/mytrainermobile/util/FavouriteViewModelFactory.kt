@@ -22,7 +22,7 @@ class FavouriteViewModelFactory constructor(
         handle: SavedStateHandle
     ) = with(modelClass) {
         when {
-            isAssignableFrom(MainViewModel::class.java) ->
+            isAssignableFrom(FavouriteViewModel::class.java) ->
                 FavouriteViewModel(sessionManager, favouriteRepository)
             else ->
                 throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

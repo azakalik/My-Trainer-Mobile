@@ -23,7 +23,9 @@ fun ExploreScreen(
     onNavigateToStartWorkout: (id:Int) -> Unit,
     viewModel: ExploreViewModel =  viewModel(factory = getExploreViewModelFactory())
 ) {
+    viewModel.getRoutines()
     val routinesList = viewModel.uiState.routines.orEmpty()
+
 
     ScreenDescription(title = stringResource(id = R.string.explore))
     LazyVerticalGrid(
