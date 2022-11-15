@@ -1,13 +1,9 @@
 package com.example.mytrainermobile
 
 import android.app.Application
-import com.example.mytrainermobile.data.network.SportRemoteDataSource
-import com.example.mytrainermobile.data.network.UserRemoteDataSource
 import ar.edu.itba.example.api.data.network.api.RetrofitClient
-import com.example.mytrainermobile.data.network.RoutineRemoteDataSource
-import com.example.mytrainermobile.data.network.repository.RoutineRepository
-import com.example.mytrainermobile.data.network.repository.SportRepository
-import com.example.mytrainermobile.data.network.repository.UserRepository
+import com.example.mytrainermobile.data.network.*
+import com.example.mytrainermobile.data.network.repository.*
 import com.example.mytrainermobile.util.SessionManager
 
 class MyApplication : Application() {
@@ -21,6 +17,11 @@ class MyApplication : Application() {
     private val routineRemoteDataSource: RoutineRemoteDataSource
         get() = RoutineRemoteDataSource(RetrofitClient.getApiRoutineService(this))
 
+    private val favouriteRemoteDataSource: FavouriteRemoteDataSource
+        get() = FavouriteRemoteDataSource(RetrofitClient.getApiFavouriteService(this))
+
+    private val myRoutinesRemoteDataSource: MyRoutineRemoteDataSource get() = MyRoutineRemoteDataSource(RetrofitClient.getApiUserService(this))
+
     val sessionManager: SessionManager
         get() = SessionManager(this)
 
@@ -32,4 +33,9 @@ class MyApplication : Application() {
 
     val routineRepository: RoutineRepository
         get() = RoutineRepository(routineRemoteDataSource)
+
+    val favouriteRepository: FavouriteRepository
+        get() = FavouriteRepository(favouriteRemoteDataSource)
+
+    val myRoutineRepository: MyRoutineRepository get() = MyRoutineRepository(myRoutinesRemoteDataSource)
 }

@@ -5,8 +5,11 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mytrainermobile.screens.*
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
+import com.example.mytrainermobile.util.ViewModelFactory
+import com.example.mytrainermobile.util.getViewModelFactory
 import com.example.mytrainermobile.viewModels.ExploreViewModel
 import com.example.mytrainermobile.viewModels.FavouritesViewModel
 import com.example.mytrainermobile.viewModels.MyRoutinesViewModel
@@ -17,11 +20,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val sortFABViewModel by viewModels<SortFABViewModel>()
-        val myRoutinesViewModel by viewModels<MyRoutinesViewModel>()
-        val favouritesViewModel by viewModels<FavouritesViewModel>()
-        val exploreViewModel by viewModels<ExploreViewModel>()
+
+
         setContent {
             MyTrainerMobileTheme {
+                val exploreViewModel : ExploreViewModel = viewModel(factory =  getViewModelFactory())
+                val myRoutinesViewModel: MyRoutinesViewModel = viewModel(factory = getViewModelFactory())
+                val favouritesViewModel: FavouritesViewModel = viewModel(factory = getViewModelFactory())
                 val systemUiController = rememberSystemUiController()
                 systemUiController.setSystemBarsColor(
                     color = androidx.compose.ui.graphics.Color.Black

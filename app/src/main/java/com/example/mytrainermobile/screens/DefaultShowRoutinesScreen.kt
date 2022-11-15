@@ -24,7 +24,8 @@ fun DefaultShowRoutinesScreen(
     viewModel: DefaultViewModelInterface
 ) {
     MyTrainerMobileTheme() {
-        val routineList = viewModel.getRoutines()
+        viewModel.loadRoutines()
+        val routineList = viewModel.getRoutineList()
         Column(modifier = Modifier.fillMaxWidth()) {
             val configuration = LocalConfiguration.current
             when (configuration.orientation) {
