@@ -34,7 +34,11 @@ object RetrofitClient {
             .create()
 
         return Retrofit.Builder()
-            .baseUrl(BuildConfig.API_BASE_URL)
+            //.baseUrl(BuildConfig.API_BASE_URL)
+
+            //.baseUrl(BuildConfig.API_BASE_URL)
+            .baseUrl("http://192.168.1.104:8080/api/") //TODO NO BORRAR ESTA LINEA LA USA RANA PARA DEBUGEAR
+
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(okHttpClient)
             .build()
