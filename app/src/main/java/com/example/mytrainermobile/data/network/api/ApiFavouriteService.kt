@@ -15,9 +15,9 @@ interface ApiFavouriteService {
     suspend fun getFavourites() : Response<NetworkPagedContent<NetworkRoutine>>
 
     @POST("favourites/{routineId}")
-    suspend fun markFavourite(@Path("routineId") routineId: Int) : Response<Unit>
+    suspend fun makeFavourite(@Path("routineId") routineId: Int) : Response<Unit>
 
     @DELETE("favourites/{routineId}")
-    suspend fun removeFavourtie(@Path("routineId") routineId: Int) : Response<Unit>
+    suspend fun removeFavourite(@Path("routineId") routineId: Int) : Response<Unit>
 
 }

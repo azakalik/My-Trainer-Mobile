@@ -8,10 +8,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.mytrainermobile.data.model.Routine
 import com.example.mytrainermobile.data.network.repository.RoutineRepository
 import com.example.mytrainermobile.screenStates.RoutineUIState
-import com.example.mytrainermobile.screens.DefaultViewModelInterface
 import kotlinx.coroutines.launch
 
-class ExploreViewModel(val routineRepository: RoutineRepository) : ViewModel(), DefaultViewModelInterface{
+class ExploreViewModel(val routineRepository: RoutineRepository) : ViewModel(),
+    DefaultViewModelInterface {
     var uiState by mutableStateOf(RoutineUIState())
         private set
 

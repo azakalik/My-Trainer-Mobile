@@ -29,6 +29,4 @@ class MyRoutineRepository(private val remoteDataSource : MyRoutineRemoteDataSour
         return routinesMutex.withLock { this.routines }
     }
 
-
-
 }

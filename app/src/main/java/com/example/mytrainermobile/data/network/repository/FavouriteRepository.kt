@@ -7,8 +7,6 @@ import kotlinx.coroutines.sync.withLock
 
 class FavouriteRepository(private val favouriteRemoteDataSource: FavouriteRemoteDataSource) {
 
-
-
     private val routinesMutex = Mutex()
     private var routines: List<Routine> = emptyList()
 
@@ -28,6 +26,18 @@ class FavouriteRepository(private val favouriteRemoteDataSource: FavouriteRemote
             this.routines = allRoutines.content.filter{ it.name.toLowerCase().equals(query.toLowerCase())}.map { it.asModel() }
         }
         return routinesMutex.withLock { this.routines }
+    }
+
+    suspend fun makeFavourite(routineId: Int){
+        routinesMutex.withLock {
+            favouriteRemoteDataSource.makeFavourite(routineId)
+        }
+    }
+
+    suspend fun removeFavourite(routineId: Int){
+        routinesMutex.withLock {
+            favouriteRemoteDataSource.removeFavourite(routineId)
+        }
     }
 
 }

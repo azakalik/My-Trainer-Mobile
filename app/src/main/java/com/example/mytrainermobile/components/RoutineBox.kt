@@ -4,8 +4,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.material.Card
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -15,8 +15,12 @@ import com.example.mytrainermobile.aux_functions.pictureDecider
 import com.example.mytrainermobile.data.model.Routine
 
 @Composable
-fun RoutineBox(routine: Routine,
-               onNavigateToStartWorkout: (id:Int) -> Unit) {
+fun RoutineBox(
+    routine: Routine,
+    callbackMakeFavourite: (routineId: Int) -> Unit,
+    callbackRemoveFavourite: (routineId: Int) -> Unit,
+    onNavigateToStartWorkout: (id: Int) -> Unit
+) {
     Card(
         modifier = Modifier
             .padding(10.dp)
@@ -32,9 +36,9 @@ fun RoutineBox(routine: Routine,
             modifier = Modifier.fillMaxSize()
         )
         Row(verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.End) {
-            FavouriteButton(routine)
+            FavouriteButton(routine, callbackMakeFavourite, callbackRemoveFavourite)
         }
-        Row(verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.Start){
+        Row(verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.Start) {
 //            Text(text = routineName, fontSize = 20.sp, color = DefaultColor, modifier = Modifier.padding(start = 15.dp, bottom = 5.dp))
             RoutineTitleBox(title = routine.name)
         }

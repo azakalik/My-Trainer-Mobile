@@ -14,15 +14,15 @@ class FavouriteRemoteDataSource (
         }
     }
 
-    suspend fun toggleFavourite(routineId: Int){
+    suspend fun makeFavourite(routineId: Int){
         return handleApiResponse {
-            apiFavouriteService.markFavourite(routineId)
+            apiFavouriteService.makeFavourite(routineId)
         }
     }
 
     suspend fun removeFavourite(routineId: Int){
         return handleApiResponse {
-            apiFavouriteService.removeFavourtie(routineId)
+            apiFavouriteService.removeFavourite(routineId)
         }
     }
 }

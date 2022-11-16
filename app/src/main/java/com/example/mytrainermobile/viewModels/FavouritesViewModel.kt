@@ -7,13 +7,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mytrainermobile.data.model.Routine
 import com.example.mytrainermobile.data.network.repository.FavouriteRepository
-import com.example.mytrainermobile.data.network.repository.RoutineRepository
 import com.example.mytrainermobile.screenStates.RoutineUIState
-import com.example.mytrainermobile.screens.DefaultViewModelInterface
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class FavouritesViewModel(val favouriteRepository: FavouriteRepository) : ViewModel(), DefaultViewModelInterface {
+class FavouritesViewModel(val favouriteRepository: FavouriteRepository) : ViewModel(),
+    DefaultViewModelInterface, ToggleFavouriteViewModelnterface {
     private var uiState by mutableStateOf(RoutineUIState())
 
 
@@ -38,4 +37,17 @@ class FavouritesViewModel(val favouriteRepository: FavouriteRepository) : ViewMo
     override fun getRoutineList(): List<Routine> {
         return uiState.routineList
     }
+
+    override fun makeFavourite(routineId: Int): Job = viewModelScope.launch{
+        kotlin.runCatching {
+            favouriteRepository.makeFavourite(routineId)
+        }
+    }
+
+    override fun removeFavourite(routineId: Int): Job = viewModelScope.launch{
+        kotlin.runCatching {
+            favouriteRepository.removeFavourite(routineId)
+        }
+    }
+
 }

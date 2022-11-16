@@ -14,14 +14,17 @@ import com.example.mytrainermobile.components.RoutineBox
 import com.example.mytrainermobile.components.TitleBox
 import com.example.mytrainermobile.components.TitleForSection
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
+import com.example.mytrainermobile.viewModels.DefaultViewModelInterface
+import com.example.mytrainermobile.viewModels.ToggleFavouriteViewModelnterface
 
 //This class is only meant to be used by explore, favourites and my routines
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun DefaultShowRoutinesScreen(
     title: String,
-    onNavigateToStartWorkout: (id:Int) -> Unit,
-    viewModel: DefaultViewModelInterface
+    onNavigateToStartWorkout: (id: Int) -> Unit,
+    viewModel: DefaultViewModelInterface,
+    favouriteMaker: ToggleFavouriteViewModelnterface
 ) {
     MyTrainerMobileTheme() {
         viewModel.loadRoutines()
@@ -64,7 +67,6 @@ fun DefaultShowRoutinesScreen(
                 }
             }
             LazyVerticalGrid(
-
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(),
@@ -74,10 +76,14 @@ fun DefaultShowRoutinesScreen(
                 columns = GridCells.Adaptive(150.dp),
                 content = {
                     items(routineList.size) { idx ->
-                        RoutineBox(routine = routineList[idx], onNavigateToStartWorkout )
+                        RoutineBox(
+                            routineList[idx],
+                            { favouriteMaker.makeFavourite(routineList[idx].id) },
+                            { favouriteMaker.removeFavourite(routineList[idx].id) },
+                            onNavigateToStartWorkout
+                        )
                     }
                 })
         }
-
     }
 }

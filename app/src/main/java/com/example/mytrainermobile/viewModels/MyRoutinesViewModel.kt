@@ -7,13 +7,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mytrainermobile.data.model.Routine
 import com.example.mytrainermobile.data.network.repository.MyRoutineRepository
-import com.example.mytrainermobile.data.network.repository.RoutineRepository
 import com.example.mytrainermobile.screenStates.RoutineUIState
-import com.example.mytrainermobile.screens.DefaultViewModelInterface
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class MyRoutinesViewModel(val routineRepository: MyRoutineRepository) : ViewModel(), DefaultViewModelInterface {
+class MyRoutinesViewModel(val routineRepository: MyRoutineRepository) : ViewModel(),
+    DefaultViewModelInterface {
     var uiState by mutableStateOf(RoutineUIState())
     override fun loadRoutines(): Job = viewModelScope.launch {
         uiState = uiState.copy(
@@ -31,7 +30,6 @@ class MyRoutinesViewModel(val routineRepository: MyRoutineRepository) : ViewMode
                 isFetching = false
             )
         }
-
     }
 
     override fun getRoutineList(): List<Routine> {

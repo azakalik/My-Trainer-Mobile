@@ -10,10 +10,7 @@ import com.example.mytrainermobile.screens.*
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 import com.example.mytrainermobile.util.ViewModelFactory
 import com.example.mytrainermobile.util.getViewModelFactory
-import com.example.mytrainermobile.viewModels.ExploreViewModel
-import com.example.mytrainermobile.viewModels.FavouritesViewModel
-import com.example.mytrainermobile.viewModels.MyRoutinesViewModel
-import com.example.mytrainermobile.viewModels.SortFABViewModel
+import com.example.mytrainermobile.viewModels.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 class MainActivity : ComponentActivity() {
@@ -36,7 +33,7 @@ class MainActivity : ComponentActivity() {
                         sortFABViewModel = sortFABViewModel,
                         myRoutinesViewModel = myRoutinesViewModel,
                         favouritesViewModel = favouritesViewModel,
-                        exploreViewModel = exploreViewModel
+                        exploreViewModel = exploreViewModel,
                     )
                 }
                 else{

@@ -116,20 +116,23 @@ fun AppNavigator(
         composable(AppNavigatorItems.Favourites.route) {
             FavouritesView(
                 onNavigateToStartWorkout,
+                favouritesViewModel,
                 favouritesViewModel
             )
         }
         composable(AppNavigatorItems.Explore.route) {
             ExploreScreen(
                 onNavigateToStartWorkout,
-                exploreViewModel
+                exploreViewModel,
+                favouritesViewModel
             )
         }
         composable(AppNavigatorItems.Profile.route) { ShowProfileScreen() }
         composable(AppNavigatorItems.MyRoutines.route) {
             MyRoutines(
                 onNavigateToStartWorkout,
-                myRoutinesViewModel
+                myRoutinesViewModel,
+                favouritesViewModel
             )
         }
         composable(
