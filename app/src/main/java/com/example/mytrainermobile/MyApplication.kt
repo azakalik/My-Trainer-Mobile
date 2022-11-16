@@ -1,7 +1,7 @@
 package com.example.mytrainermobile
 
 import android.app.Application
-import ar.edu.itba.example.api.data.network.api.RetrofitClient
+import com.example.mytrainermobile.data.network.api.RetrofitClient
 import com.example.mytrainermobile.data.network.*
 import com.example.mytrainermobile.data.network.repository.*
 import com.example.mytrainermobile.util.SessionManager

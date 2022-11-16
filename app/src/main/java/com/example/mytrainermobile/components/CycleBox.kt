@@ -27,7 +27,6 @@ fun CycleBox(name: String, description: String?, type: String, repetitions: Int)
                 .background(Color.DarkGray)
                 .padding(8.dp)
         ) {
-            //Image(painter = painterResource(id = R.drawable.))
             Column {
                 Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
                     Text(
@@ -35,14 +34,14 @@ fun CycleBox(name: String, description: String?, type: String, repetitions: Int)
                         style = TextStyle(DefaultColor),
                         fontSize = 20.sp
                     )
-                    Text(text = repetitions.toString())
+                    Text(text = "Repetitions: $repetitions")
                 }
                 Row (horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()){
                     Text(
                         text = description!!,
                         style = TextStyle(Color.White),
                         fontSize = 14.sp
-                    )// replace for Api.fetch(desc)
+                    )
                     Text(text = type, style = TextStyle(Color.White), fontSize = 12.sp)
                 }
             }

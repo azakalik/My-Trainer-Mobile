@@ -6,7 +6,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
 import com.example.mytrainermobile.data.network.repository.*
-import com.example.mytrainermobile.screenStates.StartWorkoutState
 import com.example.mytrainermobile.ui.main.MainViewModel
 import com.example.mytrainermobile.viewModels.ExploreViewModel
 import com.example.mytrainermobile.viewModels.FavouritesViewModel
@@ -38,7 +37,7 @@ class ViewModelFactory constructor(
             isAssignableFrom(FavouritesViewModel::class.java) ->
                 FavouritesViewModel(favouriteRepository)
             isAssignableFrom(StartWorkoutViewModel::class.java) ->
-                StartWorkoutViewModel(routineCyclesRepository,listOf(routineRepository,myRoutinesRepository,favouriteRepository))
+                StartWorkoutViewModel(routineCyclesRepository, routineRepository)
             isAssignableFrom(MainViewModel::class.java) ->
                 MainViewModel(sessionManager, userRepository, sportRepository, routineRepository)
             else ->

@@ -17,14 +17,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mytrainermobile.R
-import com.example.mytrainermobile.data.model.Routine
 import com.example.mytrainermobile.components.*
+import com.example.mytrainermobile.data.model.Routine
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
 import com.example.mytrainermobile.util.getViewModelFactory
 import com.example.mytrainermobile.viewModels.StartWorkoutViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 
 
 @Composable
@@ -48,53 +48,43 @@ fun StartBar(onNavigateToRunningWorkout1: () -> Unit) {
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun StartWorkout(onNavigateToRunningWorkout1: () -> Unit,routineId: Int, viewModel: StartWorkoutViewModel = viewModel(factory = getViewModelFactory())
+fun StartWorkout(
+    onNavigateToRunningWorkout1: () -> Unit,
+    routineId: Int,
+    viewModel: StartWorkoutViewModel = viewModel(factory = getViewModelFactory())
 ) {
-
-    viewModel.initializeState(routineId)
+    viewModel.getRoutineCycles(routineId)
+    viewModel.getRoutine(routineId)
 
     val uiState = viewModel.uiState
 
-    val routineTitle = uiState.routine?.name
-
-    Scaffold(modifier = Modifier.fillMaxSize(),
-        backgroundColor = DefaultBackground,
-        topBar = { TopBar(routineTitle!!) },
-        bottomBar = { StartBar(onNavigateToRunningWorkout1) },
-        /*floatingActionButton = { RoutineInfoFAB(state)}*/ ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxSize()
-        ) {
-            Text(routineId.toString())
-            Spacer(modifier = Modifier.padding(0.dp, 10.dp, 0.dp, 0.dp))
-            //DescriptorBox(state.routine)
-            Box(
-                modifier = Modifier
-                    .height(120.dp)
-                    .width(120.dp)
+    if (uiState.routine != null){
+        Scaffold(modifier = Modifier.fillMaxSize(),
+            backgroundColor = DefaultBackground,
+            topBar = { TopBar(uiState.routine.name) },
+            bottomBar = { StartBar(onNavigateToRunningWorkout1) },
+            floatingActionButton = { RoutineInfoFAB(viewModel) }) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Top,
+                modifier = Modifier.fillMaxSize()
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.arms),
-                    contentDescription = "image",
+                Spacer(modifier = Modifier.padding(0.dp, 10.dp, 0.dp, 0.dp))
+                DescriptorBox(uiState.routine)
+                LazyColumn(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(),
-                    contentScale = ContentScale.FillBounds
-                )
-            }
-            LazyColumn(
-                modifier = Modifier
-                    .padding(), contentPadding = PaddingValues(20.dp, 10.dp, 20.dp, 60.dp)
-            ) {
-                items(uiState.cycles) {
-                    Box(modifier = Modifier.padding(10.dp)) {
-                        CycleBox(it.name, it.detail, it.type, it.repetitions)
+                        .padding(), contentPadding = PaddingValues(20.dp, 10.dp, 20.dp, 60.dp)
+                ) {
+                    items(uiState.cycles) {
+                        Box(modifier = Modifier.padding(10.dp)) {
+                            CycleBox(it.name, it.detail, it.type, it.repetitions)
+                        }
                     }
                 }
             }
         }
+    } else {
+        Text("rana rompio todo")
     }
 }
 
@@ -109,11 +99,24 @@ fun DescriptorBox(routine: Routine) {
             .border(2.dp, Color.Black, shape = RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
             .height(95.dp)
     ) {
-        Row(modifier = Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            modifier = Modifier.fillMaxSize(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             Column(Modifier.offset(x = 10.dp), verticalArrangement = Arrangement.SpaceEvenly) {
-                Text(stringResource(id = R.string.info_difficulty, routine.difficulty.toString()), color = Color.White)
-                Text(stringResource(R.string.info_rating, routine.score.toString()), color = Color.White)
-                Text(stringResource(id = R.string.info_category, routine.category), color = Color.White)
+                Text(
+                    stringResource(id = R.string.info_difficulty, routine.difficulty.toString()),
+                    color = Color.White
+                )
+                Text(
+                    stringResource(R.string.info_rating, routine.score.toString()),
+                    color = Color.White
+                )
+                Text(
+                    stringResource(id = R.string.info_category, routine.category.name),
+                    color = Color.White
+                )
             }
             Column(horizontalAlignment = Alignment.End, modifier = Modifier.fillMaxWidth()) {
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {

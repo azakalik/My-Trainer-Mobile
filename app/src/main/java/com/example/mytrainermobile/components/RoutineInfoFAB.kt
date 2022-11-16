@@ -18,12 +18,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
 import com.example.mytrainermobile.R
-import com.example.mytrainermobile.screenStates.StartWorkoutState
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
-/*
+import com.example.mytrainermobile.viewModels.StartWorkoutViewModel
+
 @Composable
-fun RoutineInfoFAB( state: StartWorkoutState ) {
+fun RoutineInfoFAB(viewModel: StartWorkoutViewModel) {
     var popupControl by remember { mutableStateOf(false) }
     FloatingActionButton(
         onClick = { popupControl = !popupControl },
@@ -32,72 +32,89 @@ fun RoutineInfoFAB( state: StartWorkoutState ) {
     ) {
         Icon(Icons.Filled.Info, stringResource(id = R.string.info_fab_name))
     }
-
-    // -------- POPUP ---------------------
-    if (popupControl) {
-        Popup(
-            alignment = Alignment.Center,
-            onDismissRequest = { popupControl = !popupControl },
-        ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth(0.6f)
-                    .border(
-                        width = 2.dp,
-                        color = DefaultColor,
-                        shape = RoundedCornerShape(15.dp)
-                    )
-                    .background(color = DefaultBackground, shape = RoundedCornerShape(15.dp))
+    val state = viewModel.uiState
+    if (state.routine != null) {
+        // -------- POPUP ---------------------
+        if (popupControl) {
+            Popup(
+                alignment = Alignment.Center,
+                onDismissRequest = { popupControl = !popupControl },
             ) {
-                Column(
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 20.dp),
-                    horizontalAlignment = Alignment.Start
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.info_fab_name),
-                        color = Color.White,
-                        modifier = Modifier.padding(10.dp),
-                        fontSize = 20.sp
-                    )
-                    Text(
-                        text = stringResource(id = R.string.info_name, state.routine.name),
-                        color = Color.White,
-                        modifier = Modifier.padding(10.dp),
-                    )
-                    Text(
-                        text = stringResource(id = R.string.info_description, state.routine.detail.toString()),
-                        color = Color.White,
-                        modifier = Modifier.padding(10.dp),
-                    )
-                    Text(
-                        text = stringResource(id = R.string.info_difficulty, state.routine.difficulty.toString()),
-                        color = Color.White,
-                        modifier = Modifier.padding(10.dp),
-                    )
-                    Text(
-                        text = stringResource(id = R.string.info_rating, state.routine.score.toString()),
-                        color = Color.White,
-                        modifier = Modifier.padding(10.dp),
-                    )
-                    Text(
-                        text = stringResource(id = R.string.info_category, state.routine.category),
-                        color = Color.White,
-                        modifier = Modifier.padding(10.dp),
-                    )
-
-                    Row(Modifier.fillMaxWidth().padding(10.dp), horizontalArrangement = Arrangement.Center) {
-                        DefaultButton(
-                            onClick = { popupControl = false },
-                            text = stringResource(id = R.string.close)
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth(0.6f)
+                        .border(
+                            width = 2.dp,
+                            color = DefaultColor,
+                            shape = RoundedCornerShape(15.dp)
                         )
+                        .background(color = DefaultBackground, shape = RoundedCornerShape(15.dp))
+                ) {
+                    Column(
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 20.dp),
+                        horizontalAlignment = Alignment.Start
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.info_fab_name),
+                            color = Color.White,
+                            modifier = Modifier.padding(10.dp),
+                            fontSize = 20.sp
+                        )
+                        Text(
+                            text = stringResource(id = R.string.info_name, state.routine.name),
+                            color = Color.White,
+                            modifier = Modifier.padding(10.dp),
+                        )
+                        Text(
+                            text = stringResource(
+                                id = R.string.info_description,
+                                state.routine.detail.toString()
+                            ),
+                            color = Color.White,
+                            modifier = Modifier.padding(10.dp),
+                        )
+                        Text(
+                            text = stringResource(
+                                id = R.string.info_difficulty,
+                                state.routine.difficulty.toString()
+                            ),
+                            color = Color.White,
+                            modifier = Modifier.padding(10.dp),
+                        )
+                        Text(
+                            text = stringResource(
+                                id = R.string.info_rating,
+                                state.routine.score.toString()
+                            ),
+                            color = Color.White,
+                            modifier = Modifier.padding(10.dp),
+                        )
+                        Text(
+                            text = stringResource(
+                                id = R.string.info_category,
+                                state.routine.category.name
+                            ),
+                            color = Color.White,
+                            modifier = Modifier.padding(10.dp),
+                        )
+
+                        Row(
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(10.dp),
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            DefaultButton(
+                                onClick = { popupControl = false },
+                                text = stringResource(id = R.string.close)
+                            )
+                        }
                     }
                 }
             }
         }
     }
 }
-
- */
 
