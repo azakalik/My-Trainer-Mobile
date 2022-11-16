@@ -28,7 +28,9 @@ fun DefaultShowRoutinesScreen(
 ) {
     MyTrainerMobileTheme() {
         viewModel.loadRoutines()
+        favouriteMaker.loadRoutines()
         val routineList = viewModel.getRoutineList()
+        val favouriteList = favouriteMaker.getRoutineList()
         Column(modifier = Modifier.fillMaxWidth()) {
             val configuration = LocalConfiguration.current
             when (configuration.orientation) {
@@ -78,8 +80,17 @@ fun DefaultShowRoutinesScreen(
                     items(routineList.size) { idx ->
                         RoutineBox(
                             routineList[idx],
-                            { favouriteMaker.makeFavourite(routineList[idx].id) },
-                            { favouriteMaker.removeFavourite(routineList[idx].id) },
+                            {favouriteList.find { it.id == routineList[idx].id } != null},
+                            {
+                                favouriteMaker.makeFavourite(routineList[idx].id)
+                                favouriteMaker.loadRoutines()
+                                viewModel.loadRoutines()
+                            },
+                            {
+                                favouriteMaker.removeFavourite(routineList[idx].id)
+                                favouriteMaker.loadRoutines()
+                                viewModel.loadRoutines()
+                            },
                             onNavigateToStartWorkout
                         )
                     }

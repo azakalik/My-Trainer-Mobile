@@ -41,12 +41,16 @@ class FavouritesViewModel(val favouriteRepository: FavouriteRepository) : ViewMo
     override fun makeFavourite(routineId: Int): Job = viewModelScope.launch{
         kotlin.runCatching {
             favouriteRepository.makeFavourite(routineId)
+        }.onSuccess {
+            loadRoutines()
         }
     }
 
     override fun removeFavourite(routineId: Int): Job = viewModelScope.launch{
         kotlin.runCatching {
             favouriteRepository.removeFavourite(routineId)
+        }.onSuccess {
+            loadRoutines()
         }
     }
 

@@ -17,6 +17,7 @@ import com.example.mytrainermobile.data.model.Routine
 @Composable
 fun RoutineBox(
     routine: Routine,
+    isFavourite: (routineId: Int) -> Boolean,
     callbackMakeFavourite: (routineId: Int) -> Unit,
     callbackRemoveFavourite: (routineId: Int) -> Unit,
     onNavigateToStartWorkout: (id: Int) -> Unit
@@ -36,7 +37,7 @@ fun RoutineBox(
             modifier = Modifier.fillMaxSize()
         )
         Row(verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.End) {
-            FavouriteButton(routine, callbackMakeFavourite, callbackRemoveFavourite)
+            FavouriteButton(routine, isFavourite, callbackMakeFavourite, callbackRemoveFavourite)
         }
         Row(verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.Start) {
 //            Text(text = routineName, fontSize = 20.sp, color = DefaultColor, modifier = Modifier.padding(start = 15.dp, bottom = 5.dp))
