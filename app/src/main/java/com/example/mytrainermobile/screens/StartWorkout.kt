@@ -68,6 +68,7 @@ fun StartWorkout(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Top,
                 modifier = Modifier.fillMaxSize()
+
             ) {
                 Spacer(modifier = Modifier.padding(0.dp, 10.dp, 0.dp, 0.dp))
                 DescriptorBox(uiState.routine)

@@ -24,9 +24,10 @@ fun DefaultShowRoutinesScreen(
     title: String,
     onNavigateToStartWorkout: (id: Int) -> Unit,
     viewModel: DefaultViewModelInterface,
-    //favouriteMaker: ToggleFavouriteViewModelnterface
+    favouriteMaker: ToggleFavouriteViewModelnterface
 ) {
     MyTrainerMobileTheme() {
+        viewModel.loadRoutines()
         val routineList = viewModel.getRoutineList()
         Column(modifier = Modifier.fillMaxWidth()) {
             val configuration = LocalConfiguration.current
@@ -77,8 +78,8 @@ fun DefaultShowRoutinesScreen(
                     items(routineList.size) { idx ->
                         RoutineBox(
                             routineList[idx],
-                            { /*favouriteMaker.makeFavourite(routineList[idx].id) */ },
-                            { /* favouriteMaker.removeFavourite(routineList[idx].id) */},
+                            { favouriteMaker.makeFavourite(routineList[idx].id) },
+                            { favouriteMaker.removeFavourite(routineList[idx].id) },
                             onNavigateToStartWorkout
                         )
                     }

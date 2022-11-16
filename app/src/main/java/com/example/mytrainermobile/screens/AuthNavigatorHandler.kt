@@ -6,6 +6,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.mytrainermobile.viewModels.ExploreViewModel
+import com.example.mytrainermobile.viewModels.FavouritesViewModel
+import com.example.mytrainermobile.viewModels.MyRoutinesViewModel
+import com.example.mytrainermobile.viewModels.SortFABViewModel
 
 
 sealed class AuthNavigatorItems(val route: String) {
@@ -21,7 +25,10 @@ fun AuthNavigatorHandler(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     startDestination: String = "signIn",
-    loginCallback: (String, String) -> Unit
+    sortFABViewModel: SortFABViewModel,
+    myRoutinesViewModel: MyRoutinesViewModel,
+    favouritesViewModel: FavouritesViewModel,
+    exploreViewModel: ExploreViewModel,
 ) {
     NavHost(
         modifier = modifier,
@@ -39,7 +46,7 @@ fun AuthNavigatorHandler(
                 navController.navigate(AuthNavigatorItems.SignUp.route) {
                     popUpTo(AuthNavigatorItems.SignUp.route) { inclusive = false }
                 }
-            }, loginCallback)
+            }, onNavigateToAppNavigator)
         }
         composable(AuthNavigatorItems.SignUp.route) {
             ShowSignupScreen(onNavigateToSignIn = {
@@ -49,7 +56,12 @@ fun AuthNavigatorHandler(
             }, onNavigateToAppNavigator)
         }
         composable(AuthNavigatorItems.AppNavigationHandler.route) {
-            AppNavigatorHandler()
+            AppNavigatorHandler(
+                sortFABViewModel = sortFABViewModel,
+                myRoutinesViewModel = myRoutinesViewModel,
+                favouritesViewModel = favouritesViewModel,
+                exploreViewModel = exploreViewModel
+            )
         }
     }
 }
