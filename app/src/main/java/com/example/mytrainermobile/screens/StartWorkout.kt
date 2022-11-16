@@ -121,7 +121,7 @@ fun DescriptorBox(routine: Routine) {
             }
             Column(horizontalAlignment = Alignment.End, modifier = Modifier.fillMaxWidth()) {
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-//                    FavouriteButton(routine, )
+//                    FavouriteButton(routine, { id -> viewModel }, { id -> } )
                     RateButton(routine)
                     ShareButton(routine.name)
                 }

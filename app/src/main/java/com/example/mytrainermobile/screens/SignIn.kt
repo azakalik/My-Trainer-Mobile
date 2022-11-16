@@ -1,5 +1,6 @@
 package com.example.mytrainermobile.screens
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
@@ -28,11 +29,12 @@ import com.example.mytrainermobile.util.getViewModelFactory
 @Composable
 fun ShowSignInScreen(
     onNavigateToSignUp: () -> Unit,
-    onNavigateToMyRoutines: () -> Unit,
-    viewModel: MainViewModel = viewModel(factory = getViewModelFactory())
+    loginCallback: (String,String) -> Unit,
 ) {
     MyTrainerMobileTheme {
-        val uiState = viewModel.uiState
+        var counter by  remember  { mutableStateOf(0) }
+        counter++
+        Log.d("mensajeSignIn",counter.toString())
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -60,23 +62,19 @@ fun ShowSignInScreen(
                     value = email,
                     callback = { email = it },
                     placeholder = stringResource(id = R.string.signup_insert_email),
-                    isError = uiState.errorOcurred
+                    //isError = uiState.errorOcurred
                 )
 
                 DefaultTextField(
                     value = password,
                     callback = { password = it },
                     placeholder = stringResource(id = R.string.signup_insert_password),
-                    isError = uiState.errorOcurred
+                    //isError = uiState.errorOcurred
                 )
 
                 // ------- SIGN IN BUTTONS -----------------------------
                 DefaultButton(onClick = {
-                    if (!uiState.isAuthenticated) {
-                        viewModel.login(email, password)
-                    }
-                    if (uiState.isAuthenticated)
-                        onNavigateToMyRoutines()
+                    loginCallback(email,password)
                 }, text = stringResource(id = R.string.signInText))
                 Button(
                     onClick = { GoToSignUp(onNavigateToSignUp) },
@@ -88,8 +86,8 @@ fun ShowSignInScreen(
                     Text(stringResource(id = R.string.signup_goto_signup), color = Color.White)
                 }
 
-                if (uiState.errorOcurred)
-                    Text(stringResource(id = R.string.sign_error), color = Color.Red)
+                //if (uiState.errorOcurred)
+                //    Text(stringResource(id = R.string.sign_error), color = Color.Red)
             }
         }
     }

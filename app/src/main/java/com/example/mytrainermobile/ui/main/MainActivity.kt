@@ -2,9 +2,14 @@ package com.example.mytrainermobile.ui.main
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mytrainermobile.screens.*
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
@@ -20,9 +25,6 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MyTrainerMobileTheme {
-                val exploreViewModel : ExploreViewModel = viewModel(factory =  getViewModelFactory())
-                val myRoutinesViewModel: MyRoutinesViewModel = viewModel(factory = getViewModelFactory())
-                val favouritesViewModel: FavouritesViewModel = viewModel(factory = getViewModelFactory())
                 val mainViewModel: MainViewModel = viewModel(factory = getViewModelFactory())
                 val systemUiController = rememberSystemUiController()
                 systemUiController.setSystemBarsColor(
@@ -31,13 +33,10 @@ class MainActivity : ComponentActivity() {
                 if(mainViewModel.uiState.isAuthenticated){
                     AppNavigatorHandler(
                         sortFABViewModel = sortFABViewModel,
-                        myRoutinesViewModel = myRoutinesViewModel,
-                        favouritesViewModel = favouritesViewModel,
-                        exploreViewModel = exploreViewModel,
                     )
                 }
                 else{
-                    AuthNavigatorHandler(sortFABViewModel = sortFABViewModel, myRoutinesViewModel = myRoutinesViewModel, favouritesViewModel = favouritesViewModel, exploreViewModel = exploreViewModel)
+                    AuthNavigatorHandler(loginCallback =  { name:String, password:String -> mainViewModel.login(name,password) } )
                 }
             }
         }

@@ -2,10 +2,11 @@ package com.example.mytrainermobile.screens
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
@@ -24,8 +25,11 @@ fun DefaultShowRoutinesScreen(
     title: String,
     onNavigateToStartWorkout: (id: Int) -> Unit,
     viewModel: DefaultViewModelInterface,
-    favouriteMaker: ToggleFavouriteViewModelnterface
+
 ) {
+    var counter by  remember  { mutableStateOf(0) }
+    counter++
+    Log.d("mensaje",counter.toString())
     MyTrainerMobileTheme() {
         viewModel.loadRoutines()
         val routineList = viewModel.getRoutineList()
@@ -78,8 +82,8 @@ fun DefaultShowRoutinesScreen(
                     items(routineList.size) { idx ->
                         RoutineBox(
                             routineList[idx],
-                            { favouriteMaker.makeFavourite(routineList[idx].id) },
-                            { favouriteMaker.removeFavourite(routineList[idx].id) },
+                           { /* favouriteMaker.makeFavourite(routineList[idx].id)*/ },
+                            { /*favouriteMaker.removeFavourite(routineList[idx].id) */},
                             onNavigateToStartWorkout
                         )
                     }

@@ -37,6 +37,7 @@ class StartWorkoutViewModel(
         }
     }
 
+
     fun getRoutineCycles(routineId: Int) = viewModelScope.launch {
         uiState = uiState.copy(
             isFetching = true,

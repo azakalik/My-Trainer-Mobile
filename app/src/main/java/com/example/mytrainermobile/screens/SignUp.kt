@@ -27,7 +27,7 @@ import com.example.mytrainermobile.ui.theme.DefaultColor
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 
 @Composable
-fun ShowSignupScreen(onNavigateToSignIn: () -> Unit, onNavigateToMyRoutines: () -> Unit) {
+fun ShowSignupScreen(onNavigateToSignIn: () -> Unit) {
     MyTrainerMobileTheme {
         Box(
             modifier = Modifier
@@ -53,7 +53,7 @@ fun ShowSignupScreen(onNavigateToSignIn: () -> Unit, onNavigateToMyRoutines: () 
                     SignupText()
                 }
                 ShowSignUpForm()
-                ShowSignUpButtons(onNavigateToSignIn, onNavigateToMyRoutines)
+               //ShowSignUpButtons(onNavigateToSignIn, onNavigateToMyRoutines)
             }
         }
     }

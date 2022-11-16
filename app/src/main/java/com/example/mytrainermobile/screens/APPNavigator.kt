@@ -30,9 +30,6 @@ import com.example.mytrainermobile.viewModels.SortFABViewModel
 fun AppNavigatorHandler(
     navController: NavHostController = rememberNavController(),
     sortFABViewModel: SortFABViewModel,
-    myRoutinesViewModel: MyRoutinesViewModel,
-    favouritesViewModel: FavouritesViewModel,
-    exploreViewModel: ExploreViewModel,
 ) {
     var bottomBarStateManager by rememberSaveable { mutableStateOf(true) }
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -71,9 +68,6 @@ fun AppNavigatorHandler(
         AppNavigator(
             navController = navController,
             padding = it,
-            myRoutinesViewModel = myRoutinesViewModel,
-            favouritesViewModel = favouritesViewModel,
-            exploreViewModel = exploreViewModel
         )
     }
 }
@@ -97,9 +91,7 @@ fun AppNavigator(
     navController: NavHostController,
     padding: PaddingValues,
     startDestination: String = AppNavigatorItems.MyRoutines.route,
-    myRoutinesViewModel: MyRoutinesViewModel,
-    favouritesViewModel: FavouritesViewModel,
-    exploreViewModel: ExploreViewModel,
+
 ) {
 
 
@@ -116,23 +108,21 @@ fun AppNavigator(
         composable(AppNavigatorItems.Favourites.route) {
             FavouritesView(
                 onNavigateToStartWorkout,
-                favouritesViewModel,
-                favouritesViewModel
+
             )
         }
         composable(AppNavigatorItems.Explore.route) {
             ExploreScreen(
                 onNavigateToStartWorkout,
-                exploreViewModel,
-                favouritesViewModel
+
+
             )
         }
         composable(AppNavigatorItems.Profile.route) { ShowProfileScreen() }
         composable(AppNavigatorItems.MyRoutines.route) {
             MyRoutines(
                 onNavigateToStartWorkout,
-                myRoutinesViewModel,
-                favouritesViewModel
+
             )
         }
         composable(
