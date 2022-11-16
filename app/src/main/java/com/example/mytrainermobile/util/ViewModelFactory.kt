@@ -38,7 +38,7 @@ class ViewModelFactory constructor(
             isAssignableFrom(FavouritesViewModel::class.java) ->
                 FavouritesViewModel(favouriteRepository)
             isAssignableFrom(StartWorkoutViewModel::class.java) ->
-                StartWorkoutViewModel(routineCyclesRepository)
+                StartWorkoutViewModel(routineCyclesRepository,listOf(routineRepository,myRoutinesRepository,favouriteRepository))
             isAssignableFrom(MainViewModel::class.java) ->
                 MainViewModel(sessionManager, userRepository, sportRepository, routineRepository)
             else ->

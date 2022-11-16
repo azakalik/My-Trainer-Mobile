@@ -7,4 +7,5 @@ data class StartWorkoutState(
     val cycles: List<Cycle> = listOf(),
     val isFetching: Boolean = false,
     val message: String? = null,
+    val routine: Routine? = null
 )

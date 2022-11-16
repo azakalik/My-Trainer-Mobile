@@ -24,15 +24,15 @@ import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 import com.example.mytrainermobile.util.getViewModelFactory
+import javax.security.auth.callback.Callback
 
 @Composable
 fun ShowSignInScreen(
     onNavigateToSignUp: () -> Unit,
-    onNavigateToMyRoutines: () -> Unit,
-    viewModel: MainViewModel = viewModel(factory = getViewModelFactory())
-) {
+    loginCallback: (String,String) -> Unit,
+
+    ) {
     MyTrainerMobileTheme {
-        val uiState = viewModel.uiState
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -60,24 +60,18 @@ fun ShowSignInScreen(
                     value = email,
                     callback = { email = it },
                     placeholder = stringResource(id = R.string.signup_insert_email),
-                    isError = uiState.errorOcurred
                 )
 
                 DefaultTextField(
                     value = password,
                     callback = { password = it },
                     placeholder = stringResource(id = R.string.signup_insert_password),
-                    isError = uiState.errorOcurred
                 )
 
                 // ------- SIGN IN BUTTONS -----------------------------
-                DefaultButton(onClick = {
-                    if (!uiState.isAuthenticated) {
-                        viewModel.login(email, password)
-                    }
-                    if (uiState.isAuthenticated)
-                        onNavigateToMyRoutines()
-                }, text = stringResource(id = R.string.signInText))
+                DefaultButton(
+                    onClick = { loginCallback(email,password) }, text = stringResource(id = R.string.signInText)
+                )
                 Button(
                     onClick = { GoToSignUp(onNavigateToSignUp) },
                     colors = ButtonDefaults.buttonColors(
@@ -88,8 +82,8 @@ fun ShowSignInScreen(
                     Text(stringResource(id = R.string.signup_goto_signup), color = Color.White)
                 }
 
-                if (uiState.errorOcurred)
-                    Text(stringResource(id = R.string.sign_error), color = Color.Red)
+               //if (errorOcurred)
+               //     Text(stringResource(id = R.string.sign_error), color = Color.Red)
             }
         }
     }

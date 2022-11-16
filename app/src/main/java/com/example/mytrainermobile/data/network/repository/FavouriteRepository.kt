@@ -5,7 +5,7 @@ import com.example.mytrainermobile.data.network.FavouriteRemoteDataSource
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
-class FavouriteRepository(private val favouriteRemoteDataSource: FavouriteRemoteDataSource) {
+class FavouriteRepository(private val favouriteRemoteDataSource: FavouriteRemoteDataSource) : WorkoutScreenGetter {
 
     private val routinesMutex = Mutex()
     private var routines: List<Routine> = emptyList()
@@ -38,6 +38,14 @@ class FavouriteRepository(private val favouriteRemoteDataSource: FavouriteRemote
         routinesMutex.withLock {
             favouriteRemoteDataSource.removeFavourite(routineId)
         }
+    }
+
+    override fun getRoutine(id: Int): Routine? {
+        for ( r in routines){
+            if ( r.id == id)
+                return r;
+        }
+        return null
     }
 
 }

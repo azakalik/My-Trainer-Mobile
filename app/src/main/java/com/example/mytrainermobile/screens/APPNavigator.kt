@@ -10,6 +10,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -20,6 +21,7 @@ import androidx.navigation.navArgument
 import com.example.mytrainermobile.components.SortFAB
 import com.example.mytrainermobile.components.ThisBottomAppBar
 import com.example.mytrainermobile.ui.theme.DefaultBackground
+import com.example.mytrainermobile.util.getViewModelFactory
 import com.example.mytrainermobile.viewModels.ExploreViewModel
 import com.example.mytrainermobile.viewModels.FavouritesViewModel
 import com.example.mytrainermobile.viewModels.MyRoutinesViewModel
@@ -29,10 +31,7 @@ import com.example.mytrainermobile.viewModels.SortFABViewModel
 @Composable
 fun AppNavigatorHandler(
     navController: NavHostController = rememberNavController(),
-    sortFABViewModel: SortFABViewModel,
-    myRoutinesViewModel: MyRoutinesViewModel,
-    favouritesViewModel: FavouritesViewModel,
-    exploreViewModel: ExploreViewModel,
+
 ) {
     var bottomBarStateManager by rememberSaveable { mutableStateOf(true) }
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -58,12 +57,12 @@ fun AppNavigatorHandler(
         modifier = Modifier
             .fillMaxSize()
             .background(DefaultBackground),
-        floatingActionButton = {
+        /*floatingActionButton = {
             SortFAB(
                 floatingActionButtonManager,
-                viewModel = sortFABViewModel
+                viewModel = viewModel(factory = getViewModelFactory())
             )
-        },
+        },*/
         bottomBar = {
             ThisBottomAppBar(navController, bottomBarStateManager)
         },
@@ -71,9 +70,6 @@ fun AppNavigatorHandler(
         AppNavigator(
             navController = navController,
             padding = it,
-            myRoutinesViewModel = myRoutinesViewModel,
-            favouritesViewModel = favouritesViewModel,
-            exploreViewModel = exploreViewModel
         )
     }
 }
@@ -97,9 +93,7 @@ fun AppNavigator(
     navController: NavHostController,
     padding: PaddingValues,
     startDestination: String = AppNavigatorItems.MyRoutines.route,
-    myRoutinesViewModel: MyRoutinesViewModel,
-    favouritesViewModel: FavouritesViewModel,
-    exploreViewModel: ExploreViewModel,
+
 ) {
 
 
@@ -116,23 +110,19 @@ fun AppNavigator(
         composable(AppNavigatorItems.Favourites.route) {
             FavouritesView(
                 onNavigateToStartWorkout,
-                favouritesViewModel,
-                favouritesViewModel
+
             )
         }
         composable(AppNavigatorItems.Explore.route) {
             ExploreScreen(
                 onNavigateToStartWorkout,
-                exploreViewModel,
-                favouritesViewModel
+
             )
         }
         composable(AppNavigatorItems.Profile.route) { ShowProfileScreen() }
         composable(AppNavigatorItems.MyRoutines.route) {
             MyRoutines(
                 onNavigateToStartWorkout,
-                myRoutinesViewModel,
-                favouritesViewModel
             )
         }
         composable(
