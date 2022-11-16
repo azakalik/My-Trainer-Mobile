@@ -124,14 +124,14 @@ fun RateButton(routine: Routine) {
     if (popupControl) {
         Popup(
             onDismissRequest = { popupControl = false },
+            alignment = Alignment.Center
         ) {
             Surface(
                 border = BorderStroke(1.dp, MaterialTheme.colors.primary),
                 shape = RoundedCornerShape(8.dp),
                 color = DefaultBackground,
                 modifier = Modifier
-                    .fillMaxSize(1f)
-                    .padding(60.dp, 230.dp, 60.dp, 230.dp)
+                    .fillMaxSize(0.5f)
             ) {
                 Column(
                     modifier = Modifier.padding(10.dp),

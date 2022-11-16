@@ -138,7 +138,7 @@ fun AppNavigator(
         ){
             it.arguments?.getInt("id")?.let { routineId ->
                 RunningWorkout1(
-                    routineId
+                    routineId,
                 )
             }
         }

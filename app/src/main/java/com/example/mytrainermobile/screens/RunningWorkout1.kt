@@ -1,6 +1,7 @@
 package com.example.mytrainermobile.screens
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -10,8 +11,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CornerSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,6 +23,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Popup
 import com.example.mytrainermobile.R
 import com.example.mytrainermobile.data.model.Cycle
 import com.example.mytrainermobile.components.TopBar
@@ -37,7 +41,6 @@ fun RunningWorkout1(
     routineId: Int,
     viewModel: RunningWorkout1ViewModel = viewModel(factory = getViewModelFactory()),
 ) {
-    var list = listOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8)
 
     var fetchInformation by remember{mutableStateOf(true)}
     if (fetchInformation){
@@ -45,30 +48,19 @@ fun RunningWorkout1(
         fetchInformation = false
     }
 
+    var popupControl by remember { mutableStateOf(false) }
+
+
     val uiState = viewModel.uiState
 
     val scaffoldState = rememberScaffoldState()
-    val scope = rememberCoroutineScope()
+    rememberCoroutineScope()
 
     Scaffold(
         scaffoldState = scaffoldState,
         modifier = Modifier.fillMaxSize(),
         backgroundColor = DefaultBackground,
         topBar = { TopBar("Routine title") },
-        /*
-        floatingActionButton = {
-            FloatingActionButton(onClick = { /**/ }, modifier = Modifier.size(130.dp), backgroundColor = DefaultBackground) {
-                Timer(
-                    totalTime = 10L * 1000L, //tiempo del ej -> pedir a viewmodel
-                    handleColor = DefaultColor,
-                    inactiveBarColor = Color.Gray,
-                    activeBarColor = DefaultColor,
-                    modifier = Modifier.size(85.dp)
-                )
-            }
-        },
-        isFloatingActionButtonDocked = true,
-        */
         bottomBar = {
             BottomAppBar(
                 // Defaults to null, that is, No cutout
@@ -79,34 +71,56 @@ fun RunningWorkout1(
                 )
             ) {}
         },
-        drawerContent = {
-            DrawerHeader()
-            DrawerBody(
-                items = uiState.cycles.orEmpty(),
-                Modifier,
-                onItemClick = {
-                    viewModel.getCycleExercises(it.id)
-                }
-            )
-        },
         floatingActionButton = {
             ExtendedFloatingActionButton(
                 backgroundColor = DefaultColor ,
                 contentColor = Color.White ,
                 text = { Text(stringResource(id = R.string.viewCycles)) },
                 onClick = {
-                    scope.launch {
-                        scaffoldState.drawerState.apply {
-                            if (isClosed) open() else close()
-                        }
-                    }
+                    popupControl = !popupControl
                 }
             )
         }
     )
     {
-        Column() {
 
+        if(popupControl) {
+            Popup(
+                onDismissRequest = { popupControl = false },
+                alignment = Alignment.Center
+            ) {
+                Surface(
+                    border = BorderStroke(1.dp, MaterialTheme.colors.primary),
+                    shape = RoundedCornerShape(8.dp),
+                    color = DefaultBackground,
+                    modifier = Modifier
+                        .fillMaxSize(0.5f)
+                        //.padding(60.dp, 230.dp, 60.dp, 230.dp),
+
+                ){
+                    Column(
+                        modifier = Modifier.padding(10.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.SpaceEvenly
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.cycle),
+                            color = Color.White,
+                            fontSize = 20.sp
+                        )
+                        DrawerBody(
+                            items = uiState.cycles.orEmpty(),
+                            Modifier,
+                            onItemClick = {
+                                viewModel.getCycleExercises(it.id)
+                                popupControl = false
+                            }
+                        )
+                    }
+                }
+            }
+        }
+        Column() {
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize(), contentPadding = PaddingValues(20.dp)
