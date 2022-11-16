@@ -26,7 +26,7 @@ import com.example.mytrainermobile.viewModels.StartWorkoutViewModel
 
 
 @Composable
-fun StartBar(onNavigateToRunningWorkout1: (id: Int) -> Unit) {
+fun StartBar(onNavigateToRunningWorkout1: (id: Int) -> Unit, routineId: Int) {
     Box(
         Modifier
             .background(DefaultBackground)
@@ -35,7 +35,7 @@ fun StartBar(onNavigateToRunningWorkout1: (id: Int) -> Unit) {
     ) {
         DefaultButton(
             text = stringResource(id = R.string.start),
-            onClick = { onNavigateToRunningWorkout1 }
+            onClick = { onNavigateToRunningWorkout1(routineId) }
         )
     }
 }
@@ -60,7 +60,7 @@ fun StartWorkout(
         Scaffold(modifier = Modifier.fillMaxSize(),
             backgroundColor = DefaultBackground,
             topBar = { TopBar(uiState.routine.name) },
-            bottomBar = { StartBar( onNavigateToRunningWorkout1) },
+            bottomBar = { StartBar( onNavigateToRunningWorkout1, routineId) },
             floatingActionButton = { RoutineInfoFAB(viewModel) }) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -83,7 +83,7 @@ fun StartWorkout(
             }
         }
     } else {
-        Text("rana rompio todo")
+        Text("There was an error while fetching the routine. Please check your internet connection.")
     }
 }
 
