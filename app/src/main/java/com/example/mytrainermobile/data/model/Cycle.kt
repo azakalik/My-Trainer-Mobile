@@ -1,20 +1,25 @@
 package com.example.mytrainermobile.data.model
 
+import com.example.mytrainermobile.data.network.model.NetworkCycle
 
-/*
-"id": 1,
-      "name": "Fast Warmup",
-      "detail": "Fast Warmup",
-      "type": "warmup",
-      "order": 1,
-      "repetitions": 1,
-      "metadata": null
- */
+
+
 data class Cycle(
-    val id: Int,
-    val name: String,
-    val detail: String,
-    val type: String,
-    val repetitions: Int,
-    val exerciseIds: List<Int>
-)
+    var id: Int,
+    var name: String,
+    var detail: String? = null,
+    var type: String,
+    var order: Int,
+    var repetitions: Int
+) {
+    fun asNetworkModel() : NetworkCycle {
+        return NetworkCycle(
+            id = id,
+            name = name,
+            detail = detail,
+            type = type,
+            order = order,
+            repetitions = repetitions
+        )
+    }
+}

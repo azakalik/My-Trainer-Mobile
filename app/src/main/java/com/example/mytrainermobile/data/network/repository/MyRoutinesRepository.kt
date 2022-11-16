@@ -2,11 +2,10 @@ package com.example.mytrainermobile.data.network.repository
 
 import com.example.mytrainermobile.data.model.Routine
 import com.example.mytrainermobile.data.network.MyRoutineRemoteDataSource
-import com.example.mytrainermobile.data.network.RoutineRemoteDataSource
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
-class MyRoutineRepository(private val remoteDataSource : MyRoutineRemoteDataSource) {
+class MyRoutinesRepository(private val remoteDataSource : MyRoutineRemoteDataSource) {
 
     private val routinesMutex = Mutex()
     private var routines: List<Routine> = emptyList()

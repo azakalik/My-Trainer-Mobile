@@ -22,7 +22,9 @@ import com.example.mytrainermobile.data.model.Routine
 import com.example.mytrainermobile.components.*
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
+import com.example.mytrainermobile.util.getViewModelFactory
 import com.example.mytrainermobile.viewModels.StartWorkoutViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 
 @Composable
@@ -46,15 +48,14 @@ fun StartBar(onNavigateToRunningWorkout1: () -> Unit) {
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun StartWorkout(onNavigateToRunningWorkout1: () -> Unit,routineId: Int) {
+fun StartWorkout(onNavigateToRunningWorkout1: () -> Unit,routineId: Int, viewModel: StartWorkoutViewModel = viewModel(factory = getViewModelFactory())
+) {
 
     val routineTitle = "Routine Title"
 
-    val startWorkoutViewModel = StartWorkoutViewModel(routineId)
+    viewModel.getRoutineCycles(routineId)
 
-    val state = startWorkoutViewModel
-
-
+    val uiState = viewModel.uiState
 
 
     Scaffold(modifier = Modifier.fillMaxSize(),
@@ -88,11 +89,11 @@ fun StartWorkout(onNavigateToRunningWorkout1: () -> Unit,routineId: Int) {
                 modifier = Modifier
                     .padding(), contentPadding = PaddingValues(20.dp, 10.dp, 20.dp, 60.dp)
             ) {
-                /*items(state.cycles) {
+                items(uiState.cycles) {
                     Box(modifier = Modifier.padding(10.dp)) {
                         CycleBox(it.name, it.detail, it.type, it.repetitions)
-                    }//reemplazar item por datos de la lista a enviar a routineBox2
-                }*/
+                    }
+                }
             }
         }
     }

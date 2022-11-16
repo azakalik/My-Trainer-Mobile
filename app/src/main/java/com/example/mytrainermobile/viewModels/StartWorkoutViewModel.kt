@@ -5,35 +5,34 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mytrainermobile.data.network.repository.CycleRepository
-import com.example.mytrainermobile.data.network.repository.RoutineRepository
+import com.example.mytrainermobile.data.network.repository.RoutineCyclesRepository
 import com.example.mytrainermobile.screenStates.StartWorkoutState
 import kotlinx.coroutines.launch
 
-class StartWorkoutViewModel(routineId: Int) : ViewModel() {
+class StartWorkoutViewModel(
+    private val routinesCyclesRepository: RoutineCyclesRepository,
+) : ViewModel() {
 
-    /*var state by mutableStateOf(StartWorkoutState(routine = RoutineRepository().getRoutineById(routineId)))
-        private set
+    var uiState by mutableStateOf(StartWorkoutState())
 
-
-    init {
-        var it = iterator<Int> { state.routine.cycleIds }
-        viewModelScope.launch {
-            state = state.copy(
-                isLoading = true
+    fun getRoutineCycles(routineId: Int) = viewModelScope.launch {
+        uiState = uiState.copy(
+            isFetching = true,
+            message = null
+        )
+        runCatching {
+            routinesCyclesRepository.getRoutineCycles(routineId = routineId, refresh = true)
+        }.onSuccess { response ->
+            uiState = uiState.copy(
+                isFetching = false,
+                cycles = response
             )
-            state = state.copy(
-                cycles = CycleRepository().getCycles() ,
-                //cycles = CycleRepository().getCycles(),
-                isLoading = false
+        }.onFailure {  e ->
+            uiState = uiState.copy(
+                message = e.message,
+                isFetching = false
             )
         }
     }
-
-    fun rateRoutine() {
-
-    }
-
-     */
 
 }

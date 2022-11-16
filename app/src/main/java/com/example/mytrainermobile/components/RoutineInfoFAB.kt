@@ -21,7 +21,7 @@ import com.example.mytrainermobile.R
 import com.example.mytrainermobile.screenStates.StartWorkoutState
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
-
+/*
 @Composable
 fun RoutineInfoFAB( state: StartWorkoutState ) {
     var popupControl by remember { mutableStateOf(false) }
@@ -98,3 +98,6 @@ fun RoutineInfoFAB( state: StartWorkoutState ) {
         }
     }
 }
+
+ */
+

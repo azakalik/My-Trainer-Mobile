@@ -70,7 +70,7 @@ fun RunningWorkout1() {
             DrawerHeader()
             DrawerBody(
                 items = listOf(
-                    Cycle(1,"ciclo Prueba", "test", "arm", 1, listOf(1))
+                    Cycle(1,"ciclo Prueba", "test", "arm", 1, 1)
                 ),
                 Modifier,
                 onItemClick = {

@@ -5,6 +5,6 @@ import com.example.mytrainermobile.data.model.Routine
 
 data class StartWorkoutState(
     val cycles: List<Cycle> = listOf(),
-    val isLoading: Boolean = false,
-    val routine: Routine
+    val isFetching: Boolean = false,
+    val message: String? = null,
 )

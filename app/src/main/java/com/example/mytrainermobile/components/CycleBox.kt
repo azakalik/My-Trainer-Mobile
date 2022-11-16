@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.sp
 import com.example.mytrainermobile.ui.theme.DefaultColor
 
 @Composable
-fun CycleBox(name: String, description: String, type: String, repetitions: Int) {
+fun CycleBox(name: String, description: String?, type: String, repetitions: Int) {
     Card(
         modifier = Modifier
             .fillMaxWidth(1f)
@@ -39,7 +39,7 @@ fun CycleBox(name: String, description: String, type: String, repetitions: Int) 
                 }
                 Row (horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()){
                     Text(
-                        text = description,
+                        text = description!!,
                         style = TextStyle(Color.White),
                         fontSize = 14.sp
                     )// replace for Api.fetch(desc)

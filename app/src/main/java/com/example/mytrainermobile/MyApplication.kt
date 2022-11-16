@@ -20,7 +20,11 @@ class MyApplication : Application() {
     private val favouriteRemoteDataSource: FavouriteRemoteDataSource
         get() = FavouriteRemoteDataSource(RetrofitClient.getApiFavouriteService(this))
 
-    private val myRoutinesRemoteDataSource: MyRoutineRemoteDataSource get() = MyRoutineRemoteDataSource(RetrofitClient.getApiUserService(this))
+    private val myRoutinesRemoteDataSource: MyRoutineRemoteDataSource
+        get() = MyRoutineRemoteDataSource(RetrofitClient.getApiUserService(this))
+
+    private val routineCyclesRemoteDataSource: RoutineCyclesRemoteDataSource
+        get() = RoutineCyclesRemoteDataSource(RetrofitClient.getApiRoutineCyclesService(this))
 
     val sessionManager: SessionManager
         get() = SessionManager(this)
@@ -37,5 +41,9 @@ class MyApplication : Application() {
     val favouriteRepository: FavouriteRepository
         get() = FavouriteRepository(favouriteRemoteDataSource)
 
-    val myRoutineRepository: MyRoutineRepository get() = MyRoutineRepository(myRoutinesRemoteDataSource)
+    val myRoutinesRepository: MyRoutinesRepository
+        get() = MyRoutinesRepository(myRoutinesRemoteDataSource)
+
+    val routineCyclesRepository: RoutineCyclesRepository
+        get() = RoutineCyclesRepository(routineCyclesRemoteDataSource)
 }
