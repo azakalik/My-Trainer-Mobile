@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun DefaultTextField(value: String, callback: (String) -> Unit, placeholder: String) {
+fun DefaultTextField(value: String, callback: (String) -> Unit, placeholder: String, isError: Boolean = false) {
     OutlinedTextField(
         value = value,
         placeholder = { Text(placeholder) },
@@ -19,6 +19,8 @@ fun DefaultTextField(value: String, callback: (String) -> Unit, placeholder: Str
         colors = TextFieldDefaults.outlinedTextFieldColors(
             textColor = Color.White,
             errorBorderColor = Color.Red,
-        )
+        ),
+        singleLine = true,
+        isError = isError
     )
 }

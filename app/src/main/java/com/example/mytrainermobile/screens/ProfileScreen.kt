@@ -41,7 +41,7 @@ fun ShowProfileScreen(
             )
         }
         else
-            Text("The user is not logged in yer")
+            Text("The user is not logged in yet")
     }
 
 }

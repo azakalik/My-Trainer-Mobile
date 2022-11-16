@@ -19,6 +19,7 @@ import com.example.mytrainermobile.R
 import com.example.mytrainermobile.components.DefaultButton
 import com.example.mytrainermobile.components.DefaultTextField
 import com.example.mytrainermobile.ui.main.MainViewModel
+import com.example.mytrainermobile.ui.main.errorOcurred
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
@@ -58,13 +59,15 @@ fun ShowSignInScreen(
                 DefaultTextField(
                     value = email,
                     callback = { email = it },
-                    placeholder = stringResource(id = R.string.signup_insert_email)
+                    placeholder = stringResource(id = R.string.signup_insert_email),
+                    isError = uiState.errorOcurred
                 )
 
                 DefaultTextField(
                     value = password,
                     callback = { password = it },
-                    placeholder = stringResource(id = R.string.signup_insert_password)
+                    placeholder = stringResource(id = R.string.signup_insert_password),
+                    isError = uiState.errorOcurred
                 )
 
                 // ------- SIGN IN BUTTONS -----------------------------
@@ -84,6 +87,9 @@ fun ShowSignInScreen(
                 ) {
                     Text(stringResource(id = R.string.signup_goto_signup), color = Color.White)
                 }
+
+                if (uiState.errorOcurred)
+                    Text(stringResource(id = R.string.sign_error), color = Color.Red)
             }
         }
     }
@@ -97,11 +103,6 @@ fun SignInText() {
         modifier = Modifier.padding(bottom = 20.dp),
         color = Color.White
     )
-}
-
-@Composable
-fun ShowSignInForm() {
-
 }
 
 fun GoToSignUp(onNavigateToSignUp: () -> Unit) {
