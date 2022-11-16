@@ -8,9 +8,12 @@ import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
 
 @Composable
-fun MicroTimer(totalTime: Long, isRunning: Boolean) {
+fun MicroTimer(totalTime: Long) {
     var currentTime by remember{
         mutableStateOf(totalTime)
+    }
+    var isRunning by remember {
+        mutableStateOf(false)
     }
     LaunchedEffect(key1 = currentTime, key2 = isRunning) {
         if(currentTime > 0 && isRunning) {

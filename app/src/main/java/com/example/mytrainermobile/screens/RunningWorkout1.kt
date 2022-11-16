@@ -18,7 +18,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mytrainermobile.R
@@ -26,14 +25,28 @@ import com.example.mytrainermobile.data.model.Cycle
 import com.example.mytrainermobile.components.TopBar
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
+import com.example.mytrainermobile.util.getViewModelFactory
 import kotlinx.coroutines.launch
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.mytrainermobile.components.ExerciseBox
+import com.example.mytrainermobile.viewModels.RunningWorkout1ViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-@Preview (showBackground = true)
 @Composable
-fun RunningWorkout1() {
-
+fun RunningWorkout1(
+    routineId: Int,
+    viewModel: RunningWorkout1ViewModel = viewModel(factory = getViewModelFactory()),
+) {
     var list = listOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8)
+
+    var fetchInformation by remember{mutableStateOf(true)}
+    if (fetchInformation){
+        viewModel.getRoutineCycles(routineId)
+        fetchInformation = false
+    }
+
+    val uiState = viewModel.uiState
+
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
 
@@ -69,12 +82,10 @@ fun RunningWorkout1() {
         drawerContent = {
             DrawerHeader()
             DrawerBody(
-                items = listOf(
-                    Cycle(1,"ciclo Prueba", "test", "arm", 1, 1)
-                ),
+                items = uiState.cycles.orEmpty(),
                 Modifier,
                 onItemClick = {
-                    //list = fetchExercises(it.id)
+                    viewModel.getCycleExercises(it.id)
                 }
             )
         },
@@ -92,7 +103,6 @@ fun RunningWorkout1() {
                 }
             )
         }
-
     )
     {
         Column() {
@@ -101,8 +111,8 @@ fun RunningWorkout1() {
                 modifier = Modifier
                     .fillMaxSize(), contentPadding = PaddingValues(20.dp)
             ) {
-                items(items = list, itemContent = { item ->
-
+                items(uiState.cycleExercises.orEmpty())
+                {
                     Box(modifier = Modifier
                         .padding(10.dp)
                         .pointerInput(Unit) {
@@ -111,9 +121,13 @@ fun RunningWorkout1() {
                                 onTap = {/*TODO */ }
                             )
                         }) {
-                        //ExerciseBox()
-                    }//reemplazar item por datos de la lista a enviar a routineBox2
-                })
+                        it.repetitions?.let { it1 ->
+                            ExerciseBox(it.exercise.name,  it.exercise.detail, it.exercise.type, it.duration,
+                                it1
+                            )
+                        }
+                    }
+                }
             }
         }
     }

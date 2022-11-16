@@ -16,6 +16,7 @@ class StartWorkoutViewModel(
 ) : ViewModel() {
 
     var uiState by mutableStateOf(StartWorkoutState())
+        private set
 
     fun getRoutine(routineId: Int) = viewModelScope.launch {
         uiState = uiState.copy(

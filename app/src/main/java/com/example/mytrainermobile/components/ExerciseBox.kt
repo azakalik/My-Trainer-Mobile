@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.sp
 import com.example.mytrainermobile.ui.theme.DefaultColor
 
 @Composable
-fun ExerciseBox(exerciseTitle: String, exerciseDescription: String, category: String, duration: Long, repetitions: Int,isRunning:Boolean) {
+fun ExerciseBox(exerciseTitle: String, exerciseDescription: String?, category: String, duration: Int?, repetitions: Int) {
     Card(
         modifier = Modifier
             .fillMaxWidth(1f)
@@ -35,14 +35,16 @@ fun ExerciseBox(exerciseTitle: String, exerciseDescription: String, category: St
                         style = TextStyle(DefaultColor),
                         fontSize = 20.sp
                     )// replace for Api.fetch(title)
-                    if(duration != 0L)
-                        MicroTimer(totalTime = duration*1000L, isRunning)
-                    else
-                        Text(text = repetitions.toString())
+                    if (duration != null) {
+                        if(duration.toLong() != 0L)
+                            MicroTimer(totalTime = duration*1000L)
+                        else
+                            Text(text = repetitions.toString())
+                    }
                 }
                 Row (horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()){
                     Text(
-                        text = exerciseDescription,
+                        text = exerciseDescription.orEmpty(),
                         style = TextStyle(Color.White),
                         fontSize = 14.sp
                     )// replace for Api.fetch(desc)

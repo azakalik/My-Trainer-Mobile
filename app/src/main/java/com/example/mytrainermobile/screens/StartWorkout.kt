@@ -26,28 +26,24 @@ import com.example.mytrainermobile.viewModels.StartWorkoutViewModel
 
 
 @Composable
-fun StartButton(onNavigateToRunningWorkout1: () -> Unit) {
-    DefaultButton(
-        text = stringResource(id = R.string.start),
-        onClick = { onNavigateToRunningWorkout1() })
-}
-
-@Composable
-fun StartBar(onNavigateToRunningWorkout1: () -> Unit) {
+fun StartBar(onNavigateToRunningWorkout1: (id: Int) -> Unit) {
     Box(
         Modifier
             .background(DefaultBackground)
             .fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
-        StartButton(onNavigateToRunningWorkout1)
+        DefaultButton(
+            text = stringResource(id = R.string.start),
+            onClick = { onNavigateToRunningWorkout1 }
+        )
     }
 }
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun StartWorkout(
-    onNavigateToRunningWorkout1: () -> Unit,
+    onNavigateToRunningWorkout1: (id: Int) -> Unit,
     routineId: Int,
     viewModel: StartWorkoutViewModel = viewModel(factory = getViewModelFactory())
 ) {
@@ -64,7 +60,7 @@ fun StartWorkout(
         Scaffold(modifier = Modifier.fillMaxSize(),
             backgroundColor = DefaultBackground,
             topBar = { TopBar(uiState.routine.name) },
-            bottomBar = { StartBar(onNavigateToRunningWorkout1) },
+            bottomBar = { StartBar( onNavigateToRunningWorkout1) },
             floatingActionButton = { RoutineInfoFAB(viewModel) }) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,

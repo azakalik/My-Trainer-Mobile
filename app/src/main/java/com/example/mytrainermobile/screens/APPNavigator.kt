@@ -99,8 +99,8 @@ fun AppNavigator(
         navController.navigate("${WorkoutNavigatorItems.StartWorkout.route}/$routineId") {
         }
     }
-    val onNavigateToRunningWorkout1 = {
-        navController.navigate(WorkoutNavigatorItems.RunningWorkout.route) {
+    val onNavigateToRunningWorkout1 = { routineId: Int ->
+        navController.navigate("${WorkoutNavigatorItems.RunningWorkout.route}/$routineId") {
         }
     }
 
@@ -108,14 +108,11 @@ fun AppNavigator(
         composable(AppNavigatorItems.Favourites.route) {
             FavouritesView(
                 onNavigateToStartWorkout,
-
             )
         }
         composable(AppNavigatorItems.Explore.route) {
             ExploreScreen(
                 onNavigateToStartWorkout,
-
-
             )
         }
         composable(AppNavigatorItems.Profile.route) { ShowProfileScreen() }
@@ -131,11 +128,20 @@ fun AppNavigator(
         ) {
             it.arguments?.getInt("id")?.let { routineId ->
                 StartWorkout(
-                    onNavigateToRunningWorkout1, routineId
+                    { onNavigateToRunningWorkout1(routineId) }, routineId
                 )
             }
         }
-        composable(WorkoutNavigatorItems.RunningWorkout.route) { RunningWorkout1() }
+        composable(
+            "${WorkoutNavigatorItems.RunningWorkout.route}/{id}",
+            arguments = listOf(navArgument("id") { type = NavType.IntType })
+        ){
+            it.arguments?.getInt("id")?.let { routineId ->
+                RunningWorkout1(
+                    routineId
+                )
+            }
+        }
     }
 
 }

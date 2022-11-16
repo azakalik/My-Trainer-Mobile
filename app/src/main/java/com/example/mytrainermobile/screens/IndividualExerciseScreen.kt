@@ -17,24 +17,9 @@ import com.example.mytrainermobile.components.TopBar
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
 
-/*
-* {
-  "order": 1,
-  "duration": 30,
-  "repetitions": 0,
-  "exercise": {
-    "id": 1,
-    "name": "Jumping Jacks",
-    "detail": "Jumping Jacks",
-    "type": "exercise",
-    "date": 1620062203228,
-    "metadata": null
-  }
-}*/
-@Preview(showBackground = true)
 @Composable
 fun IndividualExerciseScreen() {
-    val uistate = Exercise(1,"Jumping jacks","JUMP!!","Legs", duration = 20, repetitions = 0)
+    val uistate = Exercise(1,"Jumping jacks","JUMP!!","Legs", null, 1)
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -63,14 +48,14 @@ fun IndividualExerciseScreen() {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     DetailText(title = "Name", description = uistate.name)
-                    DetailText(title ="Detail" , description = uistate.detail)
+                    //DetailText(title ="Detail" , description = uistate.detail)
                     DetailText(title = "type", description = "Exercise")
-                    uistate.repetitions?.let { it1 -> DetailText(title = "repetitions", description ="ss" ) }
+                    //uistate.repetitions?.let { it1 -> DetailText(title = "repetitions", description ="ss" ) }
                 }
             }
 
 
-            uistate.duration?.let {
+            /*uistate.duration?.let {
                 //TODO PASAR A TIMER CALLBACK
                 Timer(
                     totalTime = 10L * 1000L, //tiempo del ej -> pedir a viewmodel
@@ -79,7 +64,7 @@ fun IndividualExerciseScreen() {
                     activeBarColor = DefaultColor,
                     modifier = Modifier.size(185.dp)
                 )
-            }
+            }*/
 
         }
     }
