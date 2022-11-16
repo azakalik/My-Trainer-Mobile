@@ -5,7 +5,7 @@ import com.example.mytrainermobile.data.network.MyRoutineRemoteDataSource
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
-class MyRoutinesRepository(private val remoteDataSource : MyRoutineRemoteDataSource) : WorkoutScreenGetter {
+class MyRoutinesRepository(private val remoteDataSource : MyRoutineRemoteDataSource) {
 
     private val routinesMutex = Mutex()
     private var routines: List<Routine> = emptyList()
@@ -26,14 +26,6 @@ class MyRoutinesRepository(private val remoteDataSource : MyRoutineRemoteDataSou
             this.routines = allRoutines.content.filter{ it.name.toLowerCase().equals(query.toLowerCase())}.map { it.asModel() }
         }
         return routinesMutex.withLock { this.routines }
-    }
-
-    override fun getRoutine(id: Int): Routine? {
-        for ( r in routines){
-            if ( r.id == id)
-                return r;
-            }
-        return null
     }
 
 }

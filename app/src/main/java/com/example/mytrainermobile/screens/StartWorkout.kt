@@ -51,15 +51,16 @@ fun StartBar(onNavigateToRunningWorkout1: () -> Unit) {
 fun StartWorkout(onNavigateToRunningWorkout1: () -> Unit,routineId: Int, viewModel: StartWorkoutViewModel = viewModel(factory = getViewModelFactory())
 ) {
 
-    viewModel.initializeState(routineId)
+    val routineTitle = "Routine Title"
+
+    viewModel.getRoutineCycles(routineId)
 
     val uiState = viewModel.uiState
 
-    val routineTitle = uiState.routine?.name
 
     Scaffold(modifier = Modifier.fillMaxSize(),
         backgroundColor = DefaultBackground,
-        topBar = { TopBar(routineTitle!!) },
+        topBar = { TopBar(routineTitle) },
         bottomBar = { StartBar(onNavigateToRunningWorkout1) },
         /*floatingActionButton = { RoutineInfoFAB(state)}*/ ) {
         Column(

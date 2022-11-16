@@ -7,7 +7,7 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
 
-class RoutineRepository(private val remoteDataSource : RoutineRemoteDataSource) : WorkoutScreenGetter {
+class RoutineRepository(private val remoteDataSource : RoutineRemoteDataSource) {
 
     private val routinesMutex = Mutex()
     private var routines: List<Routine> = emptyList()
@@ -30,12 +30,8 @@ class RoutineRepository(private val remoteDataSource : RoutineRemoteDataSource) 
         return routinesMutex.withLock { this.routines }
     }
 
-    override fun getRoutine(id: Int): Routine? {
-        for ( r in routines){
-            if ( r.id == id)
-                return r;
-        }
-        return null
+    suspend fun getRoutine(routineId: Int) : Routine {
+        return remoteDataSource.getRoutine(routineId).asModel()
     }
 
 }
