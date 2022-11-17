@@ -7,12 +7,12 @@ data class RoutineUIState (
     val isFetching: Boolean = false,
     val routineList: List<Routine> = emptyList(),
     val showSortFAB: Boolean = false,
-    val sortingBy: String = "creationDate",
-    val auxSortingBy: String = "creationDate",
+    val sortingBy: String = "date",
+    val auxSortingBy: String = "date",
     val sortDescending: Boolean = false,
     val sortDirection: String = "asc",
     val auxSortDescending: Boolean = false,
-    val directionOptions: List<String> = listOf("asc", "des"),
-    val sortOptions: List<String> = listOf("creationDate", "score", "difficulty", "category"),
+    val directionOptions: List<String> = listOf("asc", "desc"),
+    val sortOptions: List<String> = listOf("date", "score", "difficulty", "category"),
     var index: Int = 0
 )
