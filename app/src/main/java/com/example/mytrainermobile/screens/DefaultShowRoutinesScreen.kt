@@ -16,10 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
-import com.example.mytrainermobile.components.RoutineBox
-import com.example.mytrainermobile.components.SortFAB
-import com.example.mytrainermobile.components.TitleBox
-import com.example.mytrainermobile.components.TitleForSection
+import com.example.mytrainermobile.components.*
 import com.example.mytrainermobile.data.model.Routine
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 import com.example.mytrainermobile.viewModels.DefaultViewModelInterface
@@ -36,72 +33,65 @@ fun DefaultShowRoutinesScreen(
 ) {
     MyTrainerMobileTheme() {
         val routineList = viewModel.getRoutineList()
-        /*Scaffold(
-            scaffoldState = scaffoldState,
-
-            floatingActionButton = {
-                SortFAB(
-                    true,
-                    viewModel = viewModel,
-                )
-            },
-        ) {*/
-            Column(modifier = Modifier.fillMaxWidth()) {
-                val configuration = LocalConfiguration.current
-                when (configuration.orientation) {
-                    Configuration.ORIENTATION_PORTRAIT -> {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .fillMaxHeight(0.23f),
-                            verticalArrangement = Arrangement.SpaceEvenly
-                        ) {
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.Center
-                            ) {
-                                TitleForSection()
-                            }
-                            TitleBox(
-                                title = title
-                            )
-                        }
-                    }
-                    else -> {
+        Column(modifier = Modifier.fillMaxWidth()) {
+            val configuration = LocalConfiguration.current
+            when (configuration.orientation) {
+                Configuration.ORIENTATION_PORTRAIT -> {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .fillMaxHeight(0.23f),
+                        verticalArrangement = Arrangement.SpaceEvenly
+                    ) {
                         Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .fillMaxHeight(0.2f),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Center
                         ) {
+                            TitleForSection()
+                        }
+                        Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
                             TitleBox(
                                 title = title
                             )
-                            TitleForSection()
-                            Spacer(modifier = Modifier.padding(0.dp, 0.dp, 25.dp, 0.dp))
+                            SortButton(viewModel)
                         }
                     }
                 }
-                LazyVerticalGrid(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(),
-                    contentPadding = PaddingValues(5.dp, 0.dp, 5.dp, 80.dp),
-                    horizontalArrangement = Arrangement.SpaceAround,
-                    verticalArrangement = Arrangement.Center,
-                    columns = GridCells.Adaptive(150.dp),
-                    content = {
-                        items(routineList.size) { idx ->
-                            RoutineBox(
-                                routineList[idx],
-                                { /* favouriteMaker.makeFavourite(routineList[idx].id)*/ },
-                                { /*favouriteMaker.removeFavourite(routineList[idx].id) */ },
-                                onNavigateToStartWorkout
-                            )
-                        }
-                    })
+                else -> {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .fillMaxHeight(0.2f),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        TitleBox(
+                            title = title
+                        )
+                        TitleForSection()
+                        SortButton(viewModel)
+                    }
+                }
             }
+            LazyVerticalGrid(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(),
+                contentPadding = PaddingValues(5.dp, 0.dp, 5.dp, 80.dp),
+                horizontalArrangement = Arrangement.SpaceAround,
+                verticalArrangement = Arrangement.Center,
+                columns = GridCells.Adaptive(150.dp),
+                content = {
+                    items(routineList.size) { idx ->
+                        RoutineBox(
+                            routineList[idx],
+                            { /* favouriteMaker.makeFavourite(routineList[idx].id)*/ },
+                            { /*favouriteMaker.removeFavourite(routineList[idx].id) */ },
+                            onNavigateToStartWorkout
+                        )
+                    }
+                }
+            )
         }
-   // }
+    }
 }

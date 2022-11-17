@@ -17,12 +17,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.mytrainermobile.components.SortFAB
 import com.example.mytrainermobile.components.ThisBottomAppBar
 import com.example.mytrainermobile.ui.theme.DefaultBackground
-import com.example.mytrainermobile.viewModels.ExploreViewModel
-import com.example.mytrainermobile.viewModels.FavouritesViewModel
-import com.example.mytrainermobile.viewModels.MyRoutinesViewModel
 import com.example.mytrainermobile.viewModels.SortFABViewModel
 
 

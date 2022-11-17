@@ -8,6 +8,7 @@ import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -22,28 +23,27 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
 import com.example.mytrainermobile.R
 import com.example.mytrainermobile.aux_functions.getSortOptionsList
-import com.example.mytrainermobile.screenStates.SortFABState
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
 import com.example.mytrainermobile.viewModels.DefaultViewModelInterface
-import com.example.mytrainermobile.viewModels.SortFABViewModel
 
 @Composable
-fun SortFAB(
-    showButton: Boolean,
+fun SortButton(
     viewModel: DefaultViewModelInterface
 ) {
+    // ------------------- BUTTON ---------------------------------
 
-    // ----------------- FAB -----------------------------------
-    if (showButton) {
-        FloatingActionButton(
-            onClick = { viewModel.toggleShowSortFAB() },
-            contentColor = DefaultColor,
-            containerColor = DefaultBackground,
-        ) {
-            Icon(Icons.Filled.Menu, stringResource(id = R.string.fab_name))
-        }
+    androidx.compose.material.IconButton(onClick = {
+        viewModel.toggleShowSortFAB()
+    }) {
+        androidx.compose.material.Icon(
+            modifier = Modifier.size(35.dp),
+            imageVector = Icons.Filled.Menu,
+            contentDescription = "Menu",
+            tint = DefaultColor,
+        )
     }
+
 
     // ------------------- POPUP ----------------------------------
     if (viewModel.getState().showSortFAB) {
