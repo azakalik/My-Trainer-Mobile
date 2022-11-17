@@ -30,7 +30,6 @@ import com.example.mytrainermobile.components.TopBar
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
 import com.example.mytrainermobile.util.getViewModelFactory
-import kotlinx.coroutines.launch
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mytrainermobile.components.ExerciseBox
 import com.example.mytrainermobile.viewModels.RunningWorkout1ViewModel
@@ -148,12 +147,6 @@ fun RunningWorkout1(
 }
 
 @Composable
-fun DrawerHeader(){
-    Box(modifier = Modifier.fillMaxWidth()) {
-        Text(text = stringResource(id = R.string.cycle), fontSize = 32.sp)
-    }
-}
-@Composable
 fun DrawerBody(
     items: List<Cycle>,
     modifier: Modifier,
@@ -168,11 +161,6 @@ fun DrawerBody(
             }
         }
     }
-}
-
-@Composable
-fun LoadExercises(cycleId: Int) {
-
 }
 
 

@@ -28,6 +28,8 @@
     <string name="cycle">Cycles</string>
     <string name="cycleWithNumber">Cycle %1$d</string>
     <string name="viewCycles">View Cycles</string>
+    <string name="seeDetails">See Details</string>
+    <string name="details">Exercise Details</string>
 
     <!-- Favourites -->
     <string name="myfavourites">My Favourites</string>

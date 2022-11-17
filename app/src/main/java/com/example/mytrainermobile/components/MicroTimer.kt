@@ -8,19 +8,19 @@ import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
 
 @Composable
-fun MicroTimer(totalTime: Long) {
+fun MicroTimer(totalTime: Long, isRunning: Boolean) {
     var currentTime by remember{
         mutableStateOf(totalTime)
-    }
-    var isRunning by remember {
-        mutableStateOf(false)
     }
     LaunchedEffect(key1 = currentTime, key2 = isRunning) {
         if(currentTime > 0 && isRunning) {
             delay(100L)
             currentTime -= 100L
         }
+        else if(currentTime == 0.toLong())
+            currentTime = totalTime
+
     }
-    Text( text = (currentTime / 1000).toString(), fontSize = 24.sp, fontWeight = FontWeight.Bold, color = Color.White)
+    Text( text = (currentTime / 1000).toString(), fontSize = 40.sp, fontWeight = FontWeight.Bold, color = Color.White)
 
 }
