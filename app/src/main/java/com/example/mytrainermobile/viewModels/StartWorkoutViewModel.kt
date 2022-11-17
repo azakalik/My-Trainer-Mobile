@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mytrainermobile.data.model.Cycle
 import com.example.mytrainermobile.data.network.repository.FavouriteRepository
 import com.example.mytrainermobile.data.network.repository.RoutineCyclesRepository
 import com.example.mytrainermobile.data.network.repository.RoutineRepository
@@ -19,8 +20,6 @@ class StartWorkoutViewModel(
 
     var uiState by mutableStateOf(StartWorkoutState())
         private set
-
-
 
     //TODO INTENAR SOLUCIONAR ERROR DE REPOSITORY NO SIENDO UN SINGLETON
     suspend fun checkFavourite(id:Int) : Boolean {
@@ -68,8 +67,6 @@ class StartWorkoutViewModel(
         uiState = uiState.copy(routine = routine)
     }
 
-
-
     fun getRoutineCycles(routineId: Int) = viewModelScope.launch {
         uiState = uiState.copy(
             isFetching = true,
@@ -88,6 +85,18 @@ class StartWorkoutViewModel(
                 isFetching = false
             )
         }
+    }
+
+    fun openPopup(cycle: Cycle){
+        uiState = uiState.copy(
+            currentCycleForPopup = cycle,
+        )
+    }
+
+    fun closePopup(){
+        uiState = uiState.copy(
+            currentCycleForPopup = null
+        )
     }
 
 }

@@ -1,6 +1,7 @@
 package com.example.mytrainermobile.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -11,39 +12,39 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.mytrainermobile.data.model.Cycle
 import com.example.mytrainermobile.ui.theme.DefaultColor
+import com.example.mytrainermobile.viewModels.StartWorkoutViewModel
 
 @Composable
-fun CycleBox(name: String, description: String?, type: String, repetitions: Int) {
+fun CycleBox(
+    cycle: Cycle,
+    viewModel: StartWorkoutViewModel
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth(1f)
-            .height(75.dp),
+            .height(75.dp)
+            .clickable(onClick = { viewModel.openPopup(cycle) }),
         shape = RoundedCornerShape(15.dp)
 
     ) {
         Row(
             modifier = Modifier
                 .background(Color.DarkGray)
-                .padding(8.dp)
+                .padding(8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Column {
-                Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-                    Text(
-                        text = name,
-                        style = TextStyle(DefaultColor),
-                        fontSize = 20.sp
-                    )
-                    Text(text = "Repetitions: $repetitions")
-                }
-                Row (horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()){
-                    Text(
-                        text = description!!,
-                        style = TextStyle(Color.White),
-                        fontSize = 14.sp
-                    )
-                    Text(text = type, style = TextStyle(Color.White), fontSize = 12.sp)
-                }
+            Column() {
+                Text(
+                    text = cycle.name,
+                    style = TextStyle(DefaultColor),
+                    fontSize = 20.sp
+                )
+            }
+            Column(verticalArrangement = Arrangement.SpaceAround, modifier = Modifier.fillMaxHeight()) {
+                Text(text = "Repetitions: " + cycle.repetitions)
+                Text(text = "Cycle type: " + cycle.type, style = TextStyle(Color.White))
             }
         }
     }
