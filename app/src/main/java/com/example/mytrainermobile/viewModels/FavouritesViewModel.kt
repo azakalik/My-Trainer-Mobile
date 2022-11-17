@@ -11,7 +11,9 @@ import com.example.mytrainermobile.screenStates.RoutineUIState
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class FavouritesViewModel(val favouriteRepository: FavouriteRepository) : ViewModel(),
+class FavouritesViewModel(
+    val favouriteRepository: FavouriteRepository,
+) : ViewModel(),
     DefaultViewModelInterface, ToggleFavouriteViewModelnterface {
     private var uiState by mutableStateOf(RoutineUIState())
 
@@ -38,6 +40,10 @@ class FavouritesViewModel(val favouriteRepository: FavouriteRepository) : ViewMo
         return uiState.routineList
     }
 
+    override fun getState(): RoutineUIState {
+        return uiState
+    }
+
     override fun makeFavourite(routineId: Int): Job = viewModelScope.launch{
         kotlin.runCatching {
             favouriteRepository.makeFavourite(routineId)
@@ -48,6 +54,52 @@ class FavouritesViewModel(val favouriteRepository: FavouriteRepository) : ViewMo
         kotlin.runCatching {
             favouriteRepository.removeFavourite(routineId)
         }
+    }
+
+    override fun toggleShowSortFAB() {
+        uiState = uiState.copy(
+            showSortFAB = !(uiState.showSortFAB)
+        )
+    }
+
+    override fun toggleAuxSortDescending() {
+        uiState = uiState.copy(
+            auxSortDescending = !(uiState.auxSortDescending),
+            sortDirection = uiState.directionOptions[(uiState.index)%2],
+            index = (uiState.index+1)
+        )
+    }
+
+    override fun toggleAuxSortingBy(sortingOption: String) {
+        uiState = uiState.copy(
+            auxSortingBy = sortingOption
+        )
+    }
+
+    override fun saveChanges(): Job = viewModelScope.launch {
+        uiState = uiState.copy(
+            isFetching = true,
+            message = null
+        )
+        kotlin.runCatching {
+            //el repository sabe si debe refreshear o no
+            favouriteRepository.getFavouriteRoutinesSorted(uiState.auxSortingBy,uiState.sortDirection)
+        }.onSuccess { suppliedRoutineList ->
+            uiState = uiState.copy(isFetching = false, routineList = suppliedRoutineList)
+        }.onFailure { except ->
+            uiState = uiState.copy(
+                message = except.message,
+                isFetching = false
+            )
+        }
+    }
+
+    override fun unSaveChanges() {
+        uiState = uiState.copy(
+            auxSortingBy = uiState.sortingBy,
+            auxSortDescending = uiState.sortDescending,
+            index = 0
+        )
     }
 
 }

@@ -25,4 +25,10 @@ class FavouriteRemoteDataSource (
             apiFavouriteService.removeFavourite(routineId)
         }
     }
+
+    suspend fun getFavouriteRoutinesSorted(order: String, dir: String) : NetworkPagedContent<NetworkRoutine>{
+        return handleApiResponse {
+            apiFavouriteService.getFavouriteRoutinesSorted(order,dir)
+        }
+    }
 }

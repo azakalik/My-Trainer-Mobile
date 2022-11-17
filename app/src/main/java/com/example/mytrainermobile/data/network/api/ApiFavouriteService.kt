@@ -4,10 +4,7 @@ package com.example.mytrainermobile.data.network.api
 import ar.edu.itba.example.api.data.network.model.NetworkPagedContent
 import com.example.mytrainermobile.data.network.model.NetworkRoutine
 import retrofit2.Response
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface ApiFavouriteService {
 
@@ -19,5 +16,8 @@ interface ApiFavouriteService {
 
     @DELETE("favourites/{routineId}")
     suspend fun removeFavourite(@Path("routineId") routineId: Int) : Response<Unit>
+
+    @GET("users/current/routines")
+    suspend fun getFavouriteRoutinesSorted(@Query("orderBy") orderBy: String, @Query("direction") direction: String) : Response<NetworkPagedContent<NetworkRoutine>>
 
 }

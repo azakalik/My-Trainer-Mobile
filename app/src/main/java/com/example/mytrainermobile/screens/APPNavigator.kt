@@ -55,12 +55,15 @@ fun AppNavigatorHandler(
         modifier = Modifier
             .fillMaxSize()
             .background(DefaultBackground),
+        /*
         floatingActionButton = {
             SortFAB(
                 floatingActionButtonManager,
-                viewModel = sortFABViewModel
+                viewModel =
             )
         },
+        */
+
         bottomBar = {
             ThisBottomAppBar(navController, bottomBarStateManager)
         },

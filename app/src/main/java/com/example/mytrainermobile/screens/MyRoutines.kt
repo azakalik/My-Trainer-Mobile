@@ -11,8 +11,6 @@ import com.example.mytrainermobile.viewModels.ToggleFavouriteViewModelnterface
 @Composable
 fun MyRoutines(
     onNavigateToStartWorkout: (id:Int) -> Unit,
-
-
 ) {
 
     val viewModel : MyRoutinesViewModel = viewModel(factory = getViewModelFactory())

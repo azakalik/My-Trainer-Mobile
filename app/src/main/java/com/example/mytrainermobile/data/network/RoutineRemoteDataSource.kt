@@ -20,6 +20,11 @@ class RoutineRemoteDataSource(
         }
     }
 
+    suspend fun getRoutinesSorted(order: String, dir: String) : NetworkPagedContent<NetworkRoutine>{
+        return handleApiResponse {
+            apiRoutineService.getRoutinesSorted(order,dir)
+        }
+    }
 
 
 }
