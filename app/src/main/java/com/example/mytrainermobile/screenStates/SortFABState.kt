@@ -6,5 +6,5 @@ data class SortFABState(
     val auxSortingBy: String = "creationDate",
     val sortDescending: Boolean = false,
     val auxSortDescending: Boolean = false,
-    val sortOptions: List<String> = listOf("creationDate", "rating", "difficulty", "category")
+    val sortOptions: List<String> = listOf("creationDate", "score", "difficulty", "category")
 )

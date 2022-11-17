@@ -34,5 +34,13 @@ class RoutineRepository(private val remoteDataSource : RoutineRemoteDataSource) 
         return remoteDataSource.getRoutine(routineId).asModel()
     }
 
+    suspend fun getRoutinesSorted(order: String, dir: String): List<Routine> {
+        val filteredRoutines = remoteDataSource.getRoutinesSorted(order, dir)
+        routinesMutex.withLock {
+            this.routines = filteredRoutines.content.map { it.asModel() }
+        }
+        return routinesMutex.withLock { this.routines }
+    }
+
 }
 

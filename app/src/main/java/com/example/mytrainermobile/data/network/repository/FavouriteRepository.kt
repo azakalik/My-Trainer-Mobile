@@ -40,4 +40,12 @@ class FavouriteRepository(private val favouriteRemoteDataSource: FavouriteRemote
         }
     }
 
+    suspend fun getFavouriteRoutinesSorted(order: String, dir: String): List<Routine> {
+        val filteredRoutines = favouriteRemoteDataSource.getFavouriteRoutinesSorted(order, dir)
+        routinesMutex.withLock {
+            this.routines = filteredRoutines.content.map { it.asModel() }
+        }
+        return routinesMutex.withLock { this.routines }
+    }
+
 }

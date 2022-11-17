@@ -25,12 +25,13 @@ import com.example.mytrainermobile.aux_functions.getSortOptionsList
 import com.example.mytrainermobile.screenStates.SortFABState
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
+import com.example.mytrainermobile.viewModels.DefaultViewModelInterface
 import com.example.mytrainermobile.viewModels.SortFABViewModel
 
 @Composable
 fun SortFAB(
     showButton: Boolean,
-    viewModel: SortFABViewModel
+    viewModel: DefaultViewModelInterface
 ) {
 
     // ----------------- FAB -----------------------------------
@@ -45,7 +46,7 @@ fun SortFAB(
     }
 
     // ------------------- POPUP ----------------------------------
-    if (viewModel.state.showSortFAB) {
+    if (viewModel.getState().showSortFAB) {
         Popup(
             alignment = Alignment.Center,
             onDismissRequest = { viewModel.toggleShowSortFAB() },
@@ -97,8 +98,8 @@ fun SortFAB(
 }
 
 @Composable
-fun ShowRadioButtons(viewModel: SortFABViewModel){
-    val state = viewModel.state
+fun ShowRadioButtons(viewModel: DefaultViewModelInterface){
+    val state = viewModel.getState()
     val radioOptions = state.sortOptions
     val stringNames = getSortOptionsList()
     var iterator = 0

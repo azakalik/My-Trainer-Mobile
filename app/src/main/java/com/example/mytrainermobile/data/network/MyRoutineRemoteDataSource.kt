@@ -12,4 +12,10 @@ class MyRoutineRemoteDataSource(private val apiUserService: ApiUserService): Rem
         }
     }
 
+    suspend fun getCurrentUserRoutinesSorted(order: String, dir: String) : NetworkPagedContent<NetworkRoutine>{
+        return handleApiResponse {
+            apiUserService.getCurrentUserRoutinesSorted(order,dir)
+        }
+    }
+
 }
