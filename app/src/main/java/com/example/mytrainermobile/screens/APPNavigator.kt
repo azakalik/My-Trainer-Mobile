@@ -1,5 +1,6 @@
 package com.example.mytrainermobile.screens
 
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,15 +18,15 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import androidx.navigation.navDeepLink
 import com.example.mytrainermobile.components.ThisBottomAppBar
 import com.example.mytrainermobile.ui.theme.DefaultBackground
-import com.example.mytrainermobile.viewModels.SortFABViewModel
+
 
 
 @Composable
 fun AppNavigatorHandler(
     navController: NavHostController = rememberNavController(),
-    sortFABViewModel: SortFABViewModel,
 ) {
     var bottomBarStateManager by rememberSaveable { mutableStateOf(true) }
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -40,25 +41,15 @@ fun AppNavigatorHandler(
         AppNavigatorItems.MyRoutines.route,
         AppNavigatorItems.Explore.route
     )
-    var floatingActionButtonManager by rememberSaveable { mutableStateOf(true) }
 
     val currentRoute = navBackStackEntry?.destination?.route
 
-    floatingActionButtonManager = currentRoute in filterScreen
     bottomBarStateManager = currentRoute in bottomBarScreens
 
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
             .background(DefaultBackground),
-        /*
-        floatingActionButton = {
-            SortFAB(
-                floatingActionButtonManager,
-                viewModel =
-            )
-        },
-        */
 
         bottomBar = {
             ThisBottomAppBar(navController, bottomBarStateManager)
@@ -127,7 +118,14 @@ fun AppNavigator(
         }
         composable(
             "${WorkoutNavigatorItems.StartWorkout.route}/{id}",
-            arguments = listOf(navArgument("id") { type = NavType.IntType })
+            arguments = listOf(navArgument("id") { type = NavType.IntType }),
+            deepLinks = listOf(
+                navDeepLink {
+                    this.uriPattern = "http://mytrainer.com/startWorkout/{id}"
+                    action = Intent.ACTION_VIEW
+
+                }
+            )
         ) {
             it.arguments?.getInt("id")?.let { routineId ->
                 StartWorkout(

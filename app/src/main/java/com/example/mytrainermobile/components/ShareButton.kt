@@ -20,10 +20,10 @@ import androidx.core.content.ContextCompat.startActivity
 import com.example.mytrainermobile.R
 
 @Composable
-fun ShareButton(routineTitle: String) {
+fun ShareButton(routineTitle: String, routineId: Int) {
     val sendIntent: Intent = Intent().apply {
         action = Intent.ACTION_SEND
-        putExtra(Intent.EXTRA_TEXT, stringResource(id = R.string.shareText))
+        putExtra(Intent.EXTRA_TEXT, stringResource(id = R.string.shareText, routineId.toString()))
         putExtra(Intent.EXTRA_TITLE, routineTitle)
         type = "text/plain"
     }
