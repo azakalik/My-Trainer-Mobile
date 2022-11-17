@@ -18,7 +18,6 @@ class ViewModelFactory constructor(
     private val favouriteRepository: FavouriteRepository,
     private val routineCyclesRepository: RoutineCyclesRepository,
     private val cycleExercisesRepository: CycleExercisesRepository,
-    private val reviewRepository: ReviewRepository,
     owner: SavedStateRegistryOwner,
     defaultArgs: Bundle? = null
 ) : AbstractSavedStateViewModelFactory(owner, defaultArgs) {
@@ -36,7 +35,7 @@ class ViewModelFactory constructor(
             isAssignableFrom(FavouritesViewModel::class.java) ->
                 FavouritesViewModel(favouriteRepository)
             isAssignableFrom(StartWorkoutViewModel::class.java) ->
-                StartWorkoutViewModel(routineCyclesRepository, routineRepository,favouriteRepository,userRepository,reviewRepository)
+                StartWorkoutViewModel(routineCyclesRepository, routineRepository,favouriteRepository)
             isAssignableFrom(RunningWorkout1ViewModel::class.java) ->
                 RunningWorkout1ViewModel(cycleExercisesRepository, routineCyclesRepository)
             isAssignableFrom(MainViewModel::class.java) ->

@@ -78,7 +78,7 @@ fun StartWorkout(
 
             ) {
                 Spacer(modifier = Modifier.padding(0.dp, 10.dp, 0.dp, 0.dp))
-                DescriptorBox(uiState.routine,makeFavouriteCallback,removeFavouriteCallback, uiState.routineRating!!)
+                DescriptorBox(uiState.routine, makeFavouriteCallback, removeFavouriteCallback)
                 LazyColumn(
                     modifier = Modifier
                         .padding(), contentPadding = PaddingValues(20.dp, 10.dp, 20.dp, 60.dp)
@@ -151,7 +151,11 @@ fun StartWorkout(
 }
 
 @Composable
-fun DescriptorBox(routine: Routine,makeFavouriteCallback : (Int) -> Job,removeFavouriteCallback: (Int) -> Job, routineRating:Double) {
+fun DescriptorBox(
+    routine: Routine,
+    makeFavouriteCallback: (Int) -> Job,
+    removeFavouriteCallback: (Int) -> Job
+) {
 
     Box(
         modifier = Modifier
@@ -175,7 +179,7 @@ fun DescriptorBox(routine: Routine,makeFavouriteCallback : (Int) -> Job,removeFa
                     color = Color.White
                 )
                 Text(
-                    stringResource(R.string.info_rating, routineRating.toString()),
+                    stringResource(R.string.info_rating, routine.score.toString()),
                     color = Color.White
                 )
                 Text(

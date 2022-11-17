@@ -9,9 +9,6 @@ data class StartWorkoutState(
     val cycles: List<Cycle> = listOf(),
     val isFetching: Boolean = false,
     val message: String? = null,
-    val currentUser: String? = null,
-    val userRating:Int? = null,
-    val routineRating:Double? = null
     val currentCycleForPopup : Cycle? = null //null if no popup is shown
 )
 
