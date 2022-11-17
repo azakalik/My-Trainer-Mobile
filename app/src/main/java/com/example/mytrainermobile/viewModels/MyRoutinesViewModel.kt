@@ -14,14 +14,14 @@ import kotlinx.coroutines.launch
 class MyRoutinesViewModel(val routinesRepository: MyRoutinesRepository) : ViewModel(),
     DefaultViewModelInterface {
     var uiState by mutableStateOf(RoutineUIState())
-    override fun loadRoutines(): Job = viewModelScope.launch {
+    override fun loadRoutines(refresh:Boolean): Job = viewModelScope.launch {
         uiState = uiState.copy(
             isFetching = true,
             message = null
         )
         kotlin.runCatching {
             //el repository sabe si debe refreshear o no
-            routinesRepository.getRoutines()
+            routinesRepository.getRoutines(refresh)
         }.onSuccess { suppliedRoutineList ->
             uiState = uiState.copy(isFetching = false, routineList = suppliedRoutineList)
         }.onFailure { except ->

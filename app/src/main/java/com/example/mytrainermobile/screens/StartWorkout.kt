@@ -23,6 +23,7 @@ import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
 import com.example.mytrainermobile.util.getViewModelFactory
 import com.example.mytrainermobile.viewModels.StartWorkoutViewModel
+import kotlinx.coroutines.Job
 
 
 @Composable
@@ -55,6 +56,9 @@ fun StartWorkout(
     }
 
     val uiState = viewModel.uiState
+    val makeFavouriteCallback = { id:Int -> viewModel.makeFavourite(id)}
+    val removeFavouriteCallback = { id:Int -> viewModel.removeFavourite(id)}
+
 
     if (uiState.routine != null) {
         Scaffold(modifier = Modifier.fillMaxSize(),
@@ -69,7 +73,7 @@ fun StartWorkout(
 
             ) {
                 Spacer(modifier = Modifier.padding(0.dp, 10.dp, 0.dp, 0.dp))
-                DescriptorBox(uiState.routine)
+                DescriptorBox(uiState.routine,makeFavouriteCallback,removeFavouriteCallback)
                 LazyColumn(
                     modifier = Modifier
                         .padding(), contentPadding = PaddingValues(20.dp, 10.dp, 20.dp, 60.dp)
@@ -88,7 +92,7 @@ fun StartWorkout(
 }
 
 @Composable
-fun DescriptorBox(routine: Routine) {
+fun DescriptorBox(routine: Routine,makeFavouriteCallback : (Int) -> Job,removeFavouriteCallback: (Int) -> Job) {
 
     Box(
         modifier = Modifier
@@ -119,7 +123,7 @@ fun DescriptorBox(routine: Routine) {
             }
             Column(horizontalAlignment = Alignment.End, modifier = Modifier.fillMaxWidth()) {
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-//                    FavouriteButton(routine, { id -> viewModel }, { id -> } )
+                    FavouriteButton(routine, makeFavouriteCallback, removeFavouriteCallback )
                     RateButton(routine)
                     ShareButton(routine.name)
                 }

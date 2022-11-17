@@ -10,6 +10,7 @@ class FavouriteRepository(private val favouriteRemoteDataSource: FavouriteRemote
     private val routinesMutex = Mutex()
     private var routines: List<Routine> = emptyList()
 
+
     suspend fun getRoutines(refresh: Boolean = false): List<Routine> {
         if( refresh || routines.isEmpty()){
             val result = favouriteRemoteDataSource.getFavourites()
@@ -32,12 +33,23 @@ class FavouriteRepository(private val favouriteRemoteDataSource: FavouriteRemote
         routinesMutex.withLock {
             favouriteRemoteDataSource.makeFavourite(routineId)
         }
+        //recargo las rutinas favoritas
+        getRoutines(refresh = true)
     }
 
     suspend fun removeFavourite(routineId: Int){
+        //if ( routines.stream().noneMatch { r-> r.id == routineId} )
+        //    return
         routinesMutex.withLock {
             favouriteRemoteDataSource.removeFavourite(routineId)
         }
+        getRoutines(refresh = true)
     }
+
+    suspend fun isFavourited(routineId:Int) : Boolean{
+        return favouriteRemoteDataSource.getFavourites().content.stream().map { r -> r.asModel() }.anyMatch{ r -> r.id == routineId}
+    }
+
+
 
 }

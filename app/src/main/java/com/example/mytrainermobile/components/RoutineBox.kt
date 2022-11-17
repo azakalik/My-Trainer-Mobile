@@ -35,9 +35,9 @@ fun RoutineBox(
             contentScale = ContentScale.FillBounds,
             modifier = Modifier.fillMaxSize()
         )
-        Row(verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.End) {
+        /*Row(verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.End) {
             FavouriteButton(routine, callbackMakeFavourite, callbackRemoveFavourite)
-        }
+        }*/
         Row(verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.Start) {
 //            Text(text = routineName, fontSize = 20.sp, color = DefaultColor, modifier = Modifier.padding(start = 15.dp, bottom = 5.dp))
             RoutineTitleBox(title = routine.name)

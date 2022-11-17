@@ -16,14 +16,14 @@ class FavouritesViewModel(val favouriteRepository: FavouriteRepository) : ViewMo
     private var uiState by mutableStateOf(RoutineUIState())
 
 
-    override fun loadRoutines(): Job = viewModelScope.launch {
+    override fun loadRoutines(refresh:Boolean): Job = viewModelScope.launch {
         uiState = uiState.copy(
             isFetching = true,
             message = null
         )
         kotlin.runCatching {
             //el repository sabe si debe refreshear o no
-            favouriteRepository.getRoutines()
+            favouriteRepository.getRoutines( refresh)
         }.onSuccess { suppliedRoutineList ->
             uiState = uiState.copy(isFetching = false, routineList = suppliedRoutineList)
         }.onFailure { except ->

@@ -10,15 +10,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.mytrainermobile.data.model.Routine
+import kotlinx.coroutines.Job
 
 @Composable
 fun FavouriteButton(
     routine: Routine,
-    callbackMakeFavourite: (routineId: Int) -> Unit,
-    callbackRemoveFavourite: (routineId: Int) -> Unit
+    callbackMakeFavourite: (routineId: Int) -> Job,
+    callbackRemoveFavourite: (routineId: Int) -> Job
 ) {
     val color = if (routine.isFavourite) Color.Red else Color.White
-
     IconButton(onClick = {
         if (routine.isFavourite)
             callbackRemoveFavourite(routine.id)

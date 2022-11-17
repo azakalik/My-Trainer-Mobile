@@ -1,6 +1,6 @@
 package com.example.mytrainermobile.screens
 
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mytrainermobile.R
@@ -16,6 +16,11 @@ fun MyRoutines(
 ) {
 
     val viewModel : MyRoutinesViewModel = viewModel(factory = getViewModelFactory())
+    var firstEntry by  remember  { mutableStateOf(true) }
+    if ( firstEntry) {
+        viewModel.loadRoutines()
+        firstEntry = false
+    }
     DefaultShowRoutinesScreen(
         title = stringResource(id = R.string.myroutines),
         onNavigateToStartWorkout,

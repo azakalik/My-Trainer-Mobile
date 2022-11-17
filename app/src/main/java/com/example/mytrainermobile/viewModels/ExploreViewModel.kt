@@ -15,7 +15,7 @@ class ExploreViewModel(val routineRepository: RoutineRepository) : ViewModel(),
     var uiState by mutableStateOf(RoutineUIState())
         private set
 
-    override fun loadRoutines() = viewModelScope.launch {
+    override fun loadRoutines(refresh: Boolean) = viewModelScope.launch {
         uiState = uiState.copy(
             isFetching = true,
             message = null

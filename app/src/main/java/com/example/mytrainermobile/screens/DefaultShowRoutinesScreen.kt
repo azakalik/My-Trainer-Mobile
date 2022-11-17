@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.example.mytrainermobile.components.RoutineBox
 import com.example.mytrainermobile.components.TitleBox
 import com.example.mytrainermobile.components.TitleForSection
+import com.example.mytrainermobile.data.model.Routine
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 import com.example.mytrainermobile.viewModels.DefaultViewModelInterface
 import com.example.mytrainermobile.viewModels.ToggleFavouriteViewModelnterface
@@ -27,11 +28,7 @@ fun DefaultShowRoutinesScreen(
     viewModel: DefaultViewModelInterface,
 
 ) {
-    var counter by  remember  { mutableStateOf(0) }
-    counter++
-    Log.d("mensaje",counter.toString())
     MyTrainerMobileTheme() {
-        viewModel.loadRoutines()
         val routineList = viewModel.getRoutineList()
         Column(modifier = Modifier.fillMaxWidth()) {
             val configuration = LocalConfiguration.current
