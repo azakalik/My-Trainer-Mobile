@@ -9,6 +9,7 @@ data class RunningWorkout1State (
     val cycles: List<Cycle>? = emptyList(),
     val isFetching: Boolean = false,
     val message: String? = null,
+    val currentCycle: Cycle? = null
 
     /*
     var currentExerciseIndex : Int = 0,

@@ -12,11 +12,6 @@ import com.example.mytrainermobile.ui.theme.DefaultColor
 @Composable
 fun TopBar(title: String) {
     TopAppBar(backgroundColor = DefaultBackground, contentColor = DefaultColor, title = {
-        TitleWorkout(title = title)
+        Text(modifier = Modifier.fillMaxWidth(), text = title)
     })
-}
-
-@Composable
-fun TitleWorkout(title: String) {
-    Text(modifier = Modifier.fillMaxWidth(), text = title)
 }

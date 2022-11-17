@@ -140,7 +140,7 @@ fun StartWorkout(
                     )
                     Text(
                         "Order: " + uiState.currentCycleForPopup.order
-                    )
+                    )//todo fijarse si se va
                     Row(Modifier.padding(10.dp).fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
                         DefaultButton(onClick = { viewModel.closePopup() }, text = "Close")
                     }

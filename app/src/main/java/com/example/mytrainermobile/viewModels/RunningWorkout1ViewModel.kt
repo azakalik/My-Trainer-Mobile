@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mytrainermobile.data.model.Cycle
 import com.example.mytrainermobile.data.network.repository.CycleExercisesRepository
 import com.example.mytrainermobile.data.network.repository.RoutineCyclesRepository
 import com.example.mytrainermobile.screenStates.RunningWorkout1State
@@ -29,7 +30,7 @@ class RunningWorkout1ViewModel(
         }.onSuccess { response ->
             uiState = uiState.copy(
                 isFetching = false,
-                cycleExercises = response
+                cycleExercises = response,
             )
         }.onFailure {  e ->
             uiState = uiState.copy(
@@ -58,5 +59,9 @@ class RunningWorkout1ViewModel(
             )
         }
     }
-
+    fun setCurrentCycle(cycle: Cycle){
+        uiState = uiState.copy(
+            currentCycle = cycle
+        )
+    }
 }

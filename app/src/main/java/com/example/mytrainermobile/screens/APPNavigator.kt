@@ -75,6 +75,7 @@ fun AppNavigatorHandler(
 sealed class WorkoutNavigatorItems(val route: String) {
     object StartWorkout : WorkoutNavigatorItems("startWorkout")
     object RunningWorkout : WorkoutNavigatorItems("runningWorkout1")
+    object IndividualExercise : WorkoutNavigatorItems("individualExercise")
 }
 
 
@@ -91,7 +92,7 @@ fun AppNavigator(
     padding: PaddingValues,
     startDestination: String = AppNavigatorItems.MyRoutines.route,
 
-) {
+    ) {
 
 
     val onNavigateToStartWorkout = { routineId: Int ->
@@ -100,6 +101,10 @@ fun AppNavigator(
     }
     val onNavigateToRunningWorkout1 = { routineId: Int ->
         navController.navigate("${WorkoutNavigatorItems.RunningWorkout.route}/$routineId") {
+        }
+    }
+    val onNavigateToIndividualExercise = { routineId: Int ->
+        navController.navigate("${WorkoutNavigatorItems.IndividualExercise.route}/$routineId") {
         }
     }
 
@@ -118,7 +123,6 @@ fun AppNavigator(
         composable(AppNavigatorItems.MyRoutines.route) {
             MyRoutines(
                 onNavigateToStartWorkout,
-
             )
         }
         composable(
@@ -134,11 +138,19 @@ fun AppNavigator(
         composable(
             "${WorkoutNavigatorItems.RunningWorkout.route}/{id}",
             arguments = listOf(navArgument("id") { type = NavType.IntType })
-        ){
+        ) {
             it.arguments?.getInt("id")?.let { routineId ->
                 RunningWorkout1(
-                    routineId,
+                    { onNavigateToIndividualExercise(routineId) }, routineId
                 )
+            }
+        }
+        composable(
+            "${WorkoutNavigatorItems.IndividualExercise.route}/{id}",
+            arguments = listOf(navArgument("id") { type = NavType.IntType })
+        ) {
+            it.arguments?.getInt("id")?.let { routineId ->
+                IndividualExerciseScreen(routineId)
             }
         }
     }

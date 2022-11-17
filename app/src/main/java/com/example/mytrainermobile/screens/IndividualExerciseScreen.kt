@@ -18,7 +18,7 @@ import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
 
 @Composable
-fun IndividualExerciseScreen() {
+fun IndividualExerciseScreen(routineId: Int) {
     val uistate = Exercise(1,"Jumping jacks","JUMP!!","Legs", null, 1)
 
     Scaffold(
@@ -55,16 +55,16 @@ fun IndividualExerciseScreen() {
             }
 
 
-            /*uistate.duration?.let {
-                //TODO PASAR A TIMER CALLBACK
-                Timer(
-                    totalTime = 10L * 1000L, //tiempo del ej -> pedir a viewmodel
-                    handleColor = DefaultColor,
-                    inactiveBarColor = Color.Gray,
-                    activeBarColor = DefaultColor,
-                    modifier = Modifier.size(185.dp)
-                )
-            }*/
+//            uistate.duration?.let {
+//                //TODO PASAR A TIMER CALLBACK
+//                Timer(
+//                    totalTime = 10L * 1000L, //tiempo del ej -> pedir a viewmodel
+//                    handleColor = DefaultColor,
+//                    inactiveBarColor = Color.Gray,
+//                    activeBarColor = DefaultColor,
+//                    modifier = Modifier.size(185.dp)
+//                )
+//            }
 
         }
     }

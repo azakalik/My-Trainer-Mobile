@@ -1,13 +1,12 @@
 package com.example.mytrainermobile.screens
 
+
 import android.annotation.SuppressLint
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
-
-
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CornerSize
@@ -15,7 +14,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
-
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Transparent
@@ -24,25 +22,26 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mytrainermobile.R
+import com.example.mytrainermobile.components.ExerciseBox
+import com.example.mytrainermobile.components.RW1TopBar
 import com.example.mytrainermobile.data.model.Cycle
-import com.example.mytrainermobile.components.TopBar
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
 import com.example.mytrainermobile.util.getViewModelFactory
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.mytrainermobile.components.ExerciseBox
 import com.example.mytrainermobile.viewModels.RunningWorkout1ViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun RunningWorkout1(
+    onNavigateToIndividualExercise: (id: Int) -> Unit,
     routineId: Int,
     viewModel: RunningWorkout1ViewModel = viewModel(factory = getViewModelFactory()),
-) {
+    ) {
 
-    var fetchInformation by remember{mutableStateOf(true)}
-    if (fetchInformation){
+    var fetchInformation by remember { mutableStateOf(true) }
+    if (fetchInformation) {
         viewModel.getRoutineCycles(routineId)
         fetchInformation = false
     }
@@ -59,7 +58,7 @@ fun RunningWorkout1(
         scaffoldState = scaffoldState,
         modifier = Modifier.fillMaxSize(),
         backgroundColor = DefaultBackground,
-        topBar = { TopBar("Routine title") },
+        topBar = { RW1TopBar(viewModel, onNavigateToIndividualExercise) },
         bottomBar = {
             BottomAppBar(
                 // Defaults to null, that is, No cutout
@@ -72,8 +71,8 @@ fun RunningWorkout1(
         },
         floatingActionButton = {
             ExtendedFloatingActionButton(
-                backgroundColor = DefaultColor ,
-                contentColor = Color.White ,
+                backgroundColor = DefaultColor,
+                contentColor = Color.White,
                 text = { Text(stringResource(id = R.string.viewCycles)) },
                 onClick = {
                     popupControl = !popupControl
@@ -82,8 +81,7 @@ fun RunningWorkout1(
         }
     )
     {
-
-        if(popupControl) {
+        if (popupControl) {
             Popup(
                 onDismissRequest = { popupControl = false },
                 alignment = Alignment.Center
@@ -94,9 +92,9 @@ fun RunningWorkout1(
                     color = DefaultBackground,
                     modifier = Modifier
                         .fillMaxSize(0.5f)
-                        //.padding(60.dp, 230.dp, 60.dp, 230.dp),
+                    //.padding(60.dp, 230.dp, 60.dp, 230.dp),
 
-                ){
+                ) {
                     Column(
                         modifier = Modifier.padding(10.dp),
                         horizontalAlignment = Alignment.CenterHorizontally,
@@ -112,6 +110,7 @@ fun RunningWorkout1(
                             Modifier,
                             onItemClick = {
                                 viewModel.getCycleExercises(it.id)
+                                viewModel.setCurrentCycle(it)
                                 popupControl = false
                             }
                         )
@@ -135,7 +134,8 @@ fun RunningWorkout1(
                             )
                         }) {
                         it.repetitions?.let { it1 ->
-                            ExerciseBox(it.exercise.name,  it.exercise.detail, it.exercise.type, it.duration,
+                            ExerciseBox(
+                                it.exercise.name, it.exercise.detail, it.exercise.type, it.duration,
                                 it1
                             )
                         }
@@ -151,12 +151,15 @@ fun DrawerBody(
     items: List<Cycle>,
     modifier: Modifier,
     onItemClick: (Cycle) -> Unit
-){
+) {
     LazyColumn(modifier) {
         items(items) { item ->
             Row(
-                modifier = Modifier.fillMaxWidth().clickable { onItemClick(item) }.padding(16.dp)
-            ){
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { onItemClick(item) }
+                    .padding(16.dp)
+            ) {
                 Text(text = item.name, modifier = Modifier.weight(1f))
             }
         }
