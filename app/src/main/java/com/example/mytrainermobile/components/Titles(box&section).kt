@@ -46,25 +46,3 @@ fun TitleBox(title: String) {
         }
     }
 }
-
-@Composable
-fun RoutineTitleBox(title:String){
-    Box(
-        modifier = Modifier
-            .border(
-                width = 2.dp,
-                color = DefaultColor,
-                shape = RoundedCornerShape(0.dp, 0.dp, 15.dp, 15.dp)
-            ).background(color = DefaultBackground).fillMaxWidth()
-    ){
-        Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxWidth()) {
-            Text(
-                text = title,
-                color = Color.White,
-                fontWeight = FontWeight.Bold,
-                fontSize = 16.sp,
-                modifier = Modifier.padding(vertical = 5.dp),
-            )
-        }
-    }
-}

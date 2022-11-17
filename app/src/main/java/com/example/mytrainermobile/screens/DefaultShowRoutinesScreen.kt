@@ -98,6 +98,7 @@ fun DefaultShowRoutinesScreen(
                     }
                 }
             }
+            var bigScreenMode = false
             LazyVerticalGrid(
                 modifier = Modifier
                     .fillMaxSize()
@@ -110,9 +111,8 @@ fun DefaultShowRoutinesScreen(
                     items(routineList.size) { idx ->
                         RoutineBox(
                             routineList[idx],
-                            { /* favouriteMaker.makeFavourite(routineList[idx].id)*/ },
-                            { /*favouriteMaker.removeFavourite(routineList[idx].id) */ },
-                            onNavigateToStartWorkout
+                            onNavigateToStartWorkout,
+                            bigScreenMode
                         )
                     }
                 }
