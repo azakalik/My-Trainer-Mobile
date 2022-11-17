@@ -21,7 +21,6 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val sortFABViewModel by viewModels<SortFABViewModel>()
 
         setContent {
             MyTrainerMobileTheme {
@@ -31,9 +30,7 @@ class MainActivity : ComponentActivity() {
                     color = androidx.compose.ui.graphics.Color.Black
                 )
                 if(mainViewModel.uiState.isAuthenticated){
-                    AppNavigatorHandler(
-                        sortFABViewModel = sortFABViewModel,
-                    )
+                    AppNavigatorHandler()
                 }
                 else{
                     AuthNavigatorHandler(loginCallback =  { name:String, password:String -> mainViewModel.login(name,password) } )

@@ -194,7 +194,7 @@ fun DescriptorBox(
                 ) {
                     FavouriteButton(routine, makeFavouriteCallback, removeFavouriteCallback)
                     RateButton(routine)
-                    ShareButton(routine.name)
+                    ShareButton(routine.name, routine.id)
                 }
             }
         }
