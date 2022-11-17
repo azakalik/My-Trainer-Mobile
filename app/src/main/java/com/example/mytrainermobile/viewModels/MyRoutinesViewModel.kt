@@ -21,7 +21,7 @@ class MyRoutinesViewModel(val routineRepository: MyRoutinesRepository) : ViewMod
         )
         kotlin.runCatching {
             //el repository sabe si debe refreshear o no
-            routinesRepository.getRoutines(refresh)
+            routineRepository.getRoutines(refresh)
         }.onSuccess { suppliedRoutineList ->
             uiState = uiState.copy(isFetching = false, routineList = suppliedRoutineList)
         }.onFailure { except ->
