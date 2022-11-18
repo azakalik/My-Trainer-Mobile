@@ -120,7 +120,7 @@ fun StartWorkout(
             ) {
                 Spacer(modifier = Modifier.padding(0.dp, 10.dp, 0.dp, 0.dp))
 
-                DescriptorBox(uiState.routine, viewModel, makeFavouriteCallback, removeFavouriteCallback)
+                DescriptorBox(uiState.routine, viewModel, makeFavouriteCallback, removeFavouriteCallback, showRatingSnackbar)
                 if(uiState.canExecute) {
                     LazyColumn(
                         modifier = Modifier
