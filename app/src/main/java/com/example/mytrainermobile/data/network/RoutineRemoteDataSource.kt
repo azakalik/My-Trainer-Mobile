@@ -2,6 +2,7 @@ package com.example.mytrainermobile.data.network
 
 import ar.edu.itba.example.api.data.network.model.NetworkPagedContent
 import com.example.mytrainermobile.data.network.api.ApiRoutineService
+import com.example.mytrainermobile.data.network.model.NetworkReview
 import com.example.mytrainermobile.data.network.model.NetworkRoutine
 
 class RoutineRemoteDataSource(
@@ -26,5 +27,10 @@ class RoutineRemoteDataSource(
         }
     }
 
+    suspend fun reviewRoutine(review : NetworkReview, routineId : Int){
+        return handleApiResponse {
+            apiRoutineService.reviewRoutine(routineId,review)
+        }
+    }
 
 }

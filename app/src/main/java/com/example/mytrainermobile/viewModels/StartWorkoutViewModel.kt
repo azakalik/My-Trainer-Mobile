@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mytrainermobile.data.model.Cycle
+import com.example.mytrainermobile.data.model.Review
 import com.example.mytrainermobile.data.network.repository.FavouriteRepository
 import com.example.mytrainermobile.data.network.repository.RoutineCyclesRepository
 import com.example.mytrainermobile.data.network.repository.RoutineRepository
@@ -53,18 +54,54 @@ class StartWorkoutViewModel(
             isFetching = true,
             message = null
         )
-        favouritesRepository.makeFavourite(routineId)
-        val routine = uiState.routine?.copy(isFavourite = true)
-        uiState = uiState.copy(routine = routine)
-
+        uiState = uiState.copy( isFetching = true, message = null)
+        runCatching {
+            favouritesRepository.removeFavourite(routineId)
+        }.onSuccess {
+            val routine = uiState.routine?.copy(isFavourite = true)
+            uiState = uiState.copy(routine = routine)
+        }.onFailure {  e ->
+            uiState = uiState.copy(
+                message = e.message,
+                isFetching = false
+            )
+        }
     }
 
 
     fun removeFavourite(routineId: Int) = viewModelScope.launch {
         uiState = uiState.copy( isFetching = true, message = null)
-        favouritesRepository.removeFavourite(routineId)
-        val routine = uiState.routine?.copy(isFavourite = false)
-        uiState = uiState.copy(routine = routine)
+        runCatching {
+            favouritesRepository.removeFavourite(routineId)
+        }.onSuccess {
+            val routine = uiState.routine?.copy(isFavourite = false)
+            uiState = uiState.copy(routine = routine)
+        }.onFailure {  e ->
+            uiState = uiState.copy(
+                message = e.message,
+                isFetching = false
+            )
+        }
+
+    }
+
+    fun reviewRoutine(review: Review, id : Int) = viewModelScope.launch{
+        uiState = uiState.copy(
+            isFetching = true,
+            message = null
+        )
+        runCatching {
+            routinesRepository.reviewRoutine(review, id)
+        }.onSuccess { response ->
+            uiState = uiState.copy(
+                isFetching = false,
+            )
+        }.onFailure { e ->
+            // Handle the error and notify the UI when appropriate.
+            uiState = uiState.copy(
+                message = e.message,
+                isFetching = false)
+        }
     }
 
     fun getRoutineCycles(routineId: Int) = viewModelScope.launch {

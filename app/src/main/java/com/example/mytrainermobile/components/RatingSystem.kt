@@ -15,11 +15,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
 import com.example.mytrainermobile.R
+import com.example.mytrainermobile.data.model.Review
 import com.example.mytrainermobile.data.model.Routine
 import com.example.mytrainermobile.ui.theme.DefaultBackground
+import com.example.mytrainermobile.viewModels.DefaultViewModelInterface
+import com.example.mytrainermobile.viewModels.StartWorkoutViewModel
 
 @Composable
-fun RatingSystem() {
+fun ratingSystem(): Int {
     // rating : 1
     var selected1 by remember { mutableStateOf(false) }
     val colorStar1 = if (selected1) Color.Yellow else Color.White
@@ -36,8 +39,10 @@ fun RatingSystem() {
     var selected5 by remember { mutableStateOf(false) }
     val colorStar5 = if (selected5) Color.Yellow else Color.White
 
+    var review by remember { mutableStateOf(0) }
+
     Row() {
-        IconButton(onClick = {
+        IconButton(onClick = { review = 1;
             if (!selected1) selected1 = !selected1; if (selected2) selected2 =
             !selected2; if (selected3) selected3 = !selected3; if (selected4) selected4 =
             !selected4; if (selected5) selected5 = !selected5
@@ -51,7 +56,7 @@ fun RatingSystem() {
                 tint = colorStar1,
             )
         }
-        IconButton(onClick = {
+        IconButton(onClick = { review = 2;
             if (!selected1) selected1 = !selected1; if (!selected2) selected2 =
             !selected2; if (selected3) selected3 = !selected3; if (selected4) selected4 =
             !selected4; if (selected5) selected5 = !selected5
@@ -63,7 +68,7 @@ fun RatingSystem() {
                 tint = colorStar2,
             )
         }
-        IconButton(onClick = {
+        IconButton(onClick = { review = 3;
             if (!selected1) selected1 = !selected1; if (!selected2) selected2 =
             !selected2; if (!selected3) selected3 = !selected3; if (selected4) selected4 =
             !selected4; if (selected5) selected5 = !selected5
@@ -77,7 +82,7 @@ fun RatingSystem() {
                 tint = colorStar3,
             )
         }
-        IconButton(onClick = {
+        IconButton(onClick = { review = 4;
             if (!selected1) selected1 = !selected1; if (!selected2) selected2 =
             !selected2; if (!selected3) selected3 = !selected3; if (!selected4) selected4 =
             !selected4; if (selected5) selected5 = !selected5
@@ -89,7 +94,7 @@ fun RatingSystem() {
                 tint = colorStar4,
             )
         }
-        IconButton(onClick = {
+        IconButton(onClick = { review = 5;
             if (!selected1) selected1 = !selected1; if (!selected2) selected2 =
             !selected2; if (!selected3) selected3 = !selected3; if (!selected4) selected4 =
             !selected4; if (!selected5) selected5 = !selected5
@@ -102,10 +107,11 @@ fun RatingSystem() {
             )
         }
     }
+    return review
 }
 
 @Composable
-fun RateButton(routine: Routine) {
+fun RateButton(viewModel: StartWorkoutViewModel, routineId: Int) {
     var popupControl by remember { mutableStateOf(false) }
     val colorStar = if (popupControl) Color.Yellow else Color.White
 
@@ -143,7 +149,7 @@ fun RateButton(routine: Routine) {
                         color = Color.White,
                         fontSize = 20.sp
                     )
-                    RatingSystem()
+                     val rating = ratingSystem()
                     Row(
                         horizontalArrangement = Arrangement.SpaceAround,
                         modifier = Modifier.fillMaxWidth()
@@ -153,6 +159,8 @@ fun RateButton(routine: Routine) {
                             text = stringResource(id = R.string.cancel)
                         )
                         DefaultButton(onClick = {
+                            var review = Review(rating, "")
+                            viewModel.reviewRoutine(review, routineId)
                             popupControl = false
                         }, text = stringResource(id = R.string.save))
                     }

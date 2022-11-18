@@ -78,7 +78,7 @@ fun StartWorkout(
 
             ) {
                 Spacer(modifier = Modifier.padding(0.dp, 10.dp, 0.dp, 0.dp))
-                DescriptorBox(uiState.routine, makeFavouriteCallback, removeFavouriteCallback)
+                DescriptorBox(uiState.routine, viewModel, makeFavouriteCallback, removeFavouriteCallback)
                 LazyColumn(
                     modifier = Modifier
                         .padding(), contentPadding = PaddingValues(20.dp, 10.dp, 20.dp, 60.dp)
@@ -153,6 +153,7 @@ fun StartWorkout(
 @Composable
 fun DescriptorBox(
     routine: Routine,
+    viewModel: StartWorkoutViewModel,
     makeFavouriteCallback: (Int) -> Job,
     removeFavouriteCallback: (Int) -> Job
 ) {
@@ -192,9 +193,9 @@ fun DescriptorBox(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.End
                 ) {
-                    FavouriteButton(routine, makeFavouriteCallback, removeFavouriteCallback)
-                    RateButton(routine)
-                    ShareButton(routine.name, routine.id)
+                    FavouriteButton(routine = routine, callbackMakeFavourite = makeFavouriteCallback, callbackRemoveFavourite = removeFavouriteCallback)
+                    RateButton(viewModel = viewModel, routineId = routine.id)
+                    ShareButton(routineTitle = routine.name, routineId = routine.id)
                 }
             }
         }

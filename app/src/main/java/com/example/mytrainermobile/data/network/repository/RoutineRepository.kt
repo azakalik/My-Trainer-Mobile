@@ -1,6 +1,7 @@
 package com.example.mytrainermobile.data.network.repository
 
 
+import com.example.mytrainermobile.data.model.Review
 import com.example.mytrainermobile.data.model.Routine
 import com.example.mytrainermobile.data.network.RoutineRemoteDataSource
 import kotlinx.coroutines.sync.Mutex
@@ -40,6 +41,10 @@ class RoutineRepository(private val remoteDataSource : RoutineRemoteDataSource) 
             this.routines = filteredRoutines.content.map { it.asModel() }
         }
         return routinesMutex.withLock { this.routines }
+    }
+
+    suspend fun reviewRoutine(review : Review, routineId : Int){
+        remoteDataSource.reviewRoutine(review.asNetworkModel(), routineId)
     }
 
 }
