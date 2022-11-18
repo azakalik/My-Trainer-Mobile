@@ -11,7 +11,7 @@ data class IndividualExerciseScreenState(
     val cycleExercises: List<CycleExercise> = listOf(),
     val exercise: CycleExercise? = null,
     val exerciseIndex:Int = 0,
-    //val exerciseTime:Long = 0L,
+    val refresh: Boolean = false,
 
     val isPaused:Boolean = false,
     val finished:Boolean = false,

@@ -19,7 +19,7 @@ class IndividualExerciseScreenViewModel(
     var uiState by mutableStateOf(IndividualExerciseScreenState())
         private set
 
-    fun getCycleExercises(cycleId: Int) = viewModelScope.launch {
+    fun getCycleExercises(cycleId: Int, next: Boolean, prev: Boolean) = viewModelScope.launch {
         uiState = uiState.copy(
             isFetching = true,
             message = null
@@ -31,7 +31,14 @@ class IndividualExerciseScreenViewModel(
                 isFetching = false,
                 cycleExercises = response,
             )
-            execute2()
+            if(next) {
+                nextExercise2()
+            }
+            else if(prev){
+                prevExercise2()
+            }else {
+                execute2()
+            }
         }.onFailure {  e ->
             uiState = uiState.copy(
                 message = e.message,
@@ -65,7 +72,7 @@ class IndividualExerciseScreenViewModel(
 
         uiState = uiState.copy(cycleIndex = 0, exerciseIndex = 0)
 
-        getCycleExercises(uiState.cycles[uiState.cycleIndex].id)
+        getCycleExercises(uiState.cycles[uiState.cycleIndex].id, false,false)
 
     }
 
@@ -81,30 +88,27 @@ class IndividualExerciseScreenViewModel(
     }
 
     fun nextExercise() {
-        if( uiState.exerciseIndex < uiState.cycleExercises.size) {
+        if( uiState.exerciseIndex < uiState.cycleExercises.size - 1) {
             uiState = uiState.copy( exerciseIndex = uiState.exerciseIndex + 1 )
             uiState = uiState.copy( exercise = uiState.cycleExercises[uiState.exerciseIndex] )
         }
         //termine ejecucion de ejercicios de un ciclo
         else {
-            uiState = uiState.copy( cycleReps = uiState.cycleReps - 1)
             // ya no se repite mas el ciclo
-            if( uiState.cycleReps == 0){
+            if( uiState.cycleReps == 1){
                 // hay otro ciclo
-                if(uiState.cycleIndex < uiState.cycles.size) {
+                if(uiState.cycleIndex < uiState.cycles.size - 1) {
                     uiState = uiState.copy( cycleIndex = uiState.cycleIndex + 1 )
                     uiState = uiState.copy( exerciseIndex = 0)
                     // actualizo lista de ejercicios
-                    getCycleExercises(uiState.cycles[uiState.cycleIndex].id)
-                    uiState = uiState.copy(
-                        cycle = uiState.cycles[uiState.cycleIndex],
-                        exercise = uiState.cycleExercises[uiState.exerciseIndex]
-                    )
+                    getCycleExercises(uiState.cycles[uiState.cycleIndex].id, true, false)
+
                 }
                 // no hay mas ciclos
                 else {
                     uiState = uiState.copy( finished = true )
                 }
+                uiState = uiState.copy( cycleReps = uiState.cycleReps - 1)
             }
             // sigue el mismo ciclo
             else{
@@ -112,6 +116,14 @@ class IndividualExerciseScreenViewModel(
                 uiState = uiState.copy( exercise = uiState.cycleExercises[uiState.exerciseIndex] )
             }
         }
+    }
+
+    fun nextExercise2(){
+        uiState = uiState.copy(
+            cycle = uiState.cycles[uiState.cycleIndex],
+            exercise = uiState.cycleExercises[uiState.exerciseIndex]
+        )
+        uiState = uiState.cycle?.let { uiState.copy(cycleReps = it.repetitions) }!!
     }
 
     fun prevExercise() {
@@ -132,12 +144,21 @@ class IndividualExerciseScreenViewModel(
             else if(uiState.cycleIndex != 0){
                 uiState = uiState.copy( cycleIndex = uiState.cycleIndex - 1)
                 // actualizo lista de ejercicios
-                getCycleExercises(uiState.cycles[uiState.cycleIndex].id)
-                uiState = uiState.copy( exerciseIndex = uiState.cycleExercises.size - 1 )
-                uiState = uiState.copy( exercise = uiState.cycleExercises[uiState.exerciseIndex] )
-                uiState = uiState.copy( cycleReps = 0 )
+                getCycleExercises(uiState.cycles[uiState.cycleIndex].id, false, true)
+
             }
         }
     }
 
+    fun prevExercise2(){
+        uiState = uiState.copy( exerciseIndex = uiState.cycleExercises.size - 1 )
+        uiState = uiState.copy( cycle = uiState.cycles[uiState.cycleIndex] )
+        uiState = uiState.copy( exercise = uiState.cycleExercises[uiState.exerciseIndex] )
+        uiState = uiState.copy( cycleReps = 1 )
+    }
+
+
+    fun refresh() {
+        uiState = uiState.copy( refresh = !uiState.refresh)
+    }
 }

@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mytrainermobile.ui.theme.DefaultColor
+import com.example.mytrainermobile.viewModels.IndividualExerciseScreenViewModel
 import kotlinx.coroutines.delay
 import kotlin.math.PI
 import kotlin.math.cos
@@ -44,11 +45,15 @@ fun Timer(totalTime: Long, handleColor: Color, inactiveBarColor: Color, activeBa
     var isRunning by remember {
         mutableStateOf(false)
     }
-    LaunchedEffect(key1 = currentTime, key2 = isRunning) {
+
+    LaunchedEffect(key1 = currentTime, key2 = isRunning ) {
         if(currentTime > 0 && isRunning) {
             delay(100L)
             currentTime -= 100L
             value = currentTime / totalTime.toFloat()
+        }
+        else{
+            return@LaunchedEffect
         }
     }
     Box(contentAlignment = Alignment.Center, modifier = modifier.onSizeChanged { size = it }

@@ -39,7 +39,9 @@
     <string name="prev">Prev</string>
     <string name="detail">Detail</string>
     <string name="type">Type</string>
-    <string name="repetitions">Repetitions:</string>
+    <string name="repetitions">Repetitions</string>
+    <string name="ended">Routine finished. Good job and keep it up!</string>
+    <string name="endtitle">Your are one step ahead than yesterday</string>
 
     <!-- Favourites -->
     <string name="myfavourites">My Favourites</string>

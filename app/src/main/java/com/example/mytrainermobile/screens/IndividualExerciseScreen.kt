@@ -22,6 +22,7 @@ import com.example.mytrainermobile.viewModels.IndividualExerciseScreenViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mytrainermobile.R
 import com.example.mytrainermobile.components.DefaultButton
+import com.example.mytrainermobile.components.MicroTimer
 
 
 @Composable
@@ -34,12 +35,17 @@ fun IndividualExerciseScreen(routineId: Int, viewModel: IndividualExerciseScreen
         fetchInformation = false
     }
 
+
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         backgroundColor = DefaultBackground,
         topBar = {
-            if(uiState.cycle != null){
+            if(uiState.cycle != null && !uiState.finished){
                 TopBar(uiState.cycle.name)
+            }
+            else{
+                TopBar(stringResource(R.string.endtitle))
             }
                  }
     ) {
@@ -64,44 +70,49 @@ fun IndividualExerciseScreen(routineId: Int, viewModel: IndividualExerciseScreen
                     verticalArrangement = Arrangement.SpaceEvenly,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    uiState.exercise?.exercise?.let { it1 -> DetailText(title = stringResource(R.string.name), description = it1.name) }
-                    uiState.exercise?.exercise?.detail?.let { it1 -> DetailText(title = stringResource(id = R.string.detail) , description = it1) }
-                    uiState.exercise?.exercise?.type?.let { it1 -> DetailText(title = stringResource(id = R.string.type), description = it1) }
-                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly, verticalAlignment = Alignment.CenterVertically) {
-                        DefaultButton(onClick = { viewModel.prevExercise() }, text = stringResource( id = R.string.prev ))
-                        if(uiState.exercise?.duration != 0) {
-                            uiState.exercise?.duration?.let { it1 ->
+                    if(!uiState.finished) {
+                        uiState.exercise?.exercise?.let { it1 -> DetailText(title = stringResource(R.string.name), description = it1.name) }
+                        uiState.exercise?.exercise?.detail?.let { it1 -> DetailText(title = stringResource(id = R.string.detail) , description = it1) }
+                        uiState.exercise?.exercise?.type?.let { it1 -> DetailText(title = stringResource(id = R.string.type), description = it1) }
+                        val time = uiState.exercise?.duration?.toLong()
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceEvenly,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            DefaultButton(
+                                onClick = { viewModel.prevExercise() },
+                                text = stringResource(id = R.string.prev)
+                            )
+                            if (uiState.exercise?.duration != 0 && time != null) {
                                 Timer(
-                                    totalTime = it1.toLong(),
+                                    totalTime = time * 1000L,
                                     handleColor = DefaultColor,
                                     inactiveBarColor = DefaultBackground,
                                     activeBarColor = DefaultColor,
-                                    modifier = Modifier.size(100.dp)
+                                    modifier = Modifier.size(100.dp),
                                 )
+                            } else {
+                                Column() {
+                                    DetailText(
+                                        title = stringResource(id = R.string.repetitions),
+                                        description = uiState.exercise?.repetitions.toString()
+                                    )
+                                }
                             }
-                        }else{
-                            Column() {
-                                DetailText(title = stringResource(id = R.string.repetitions), description ="")
-                                DetailText(title = uiState.exercise.repetitions.toString(), description ="")
-                            }
+                            DefaultButton(
+                                onClick = { viewModel.nextExercise(); viewModel.refresh() },
+                                text = stringResource(id = R.string.next)
+                            )
                         }
-                        DefaultButton(onClick = { viewModel.nextExercise() }, text = stringResource( id = R.string.next ))
+                    }else{
+                        Text(text = stringResource(id = R.string.ended),color = DefaultColor,
+                            fontSize = 28.sp,
+                            fontWeight = FontWeight.Bold )
                     }
                 }
             }
-
-
-//            uistate.duration?.let {
-//                //TODO PASAR A TIMER CALLBACK
-//                Timer(
-//                    totalTime = 10L * 1000L, //tiempo del ej -> pedir a viewmodel
-//                    handleColor = DefaultColor,
-//                    inactiveBarColor = Color.Gray,
-//                    activeBarColor = DefaultColor,
-//                    modifier = Modifier.size(185.dp)
-//                )
-//            }
-
         }
     }
 }
