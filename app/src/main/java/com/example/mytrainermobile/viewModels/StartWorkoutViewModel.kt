@@ -96,6 +96,7 @@ class StartWorkoutViewModel(
             uiState = uiState.copy(
                 isFetching = false,
             )
+            getRoutine(id)
         }.onFailure { e ->
             // Handle the error and notify the UI when appropriate.
             uiState = uiState.copy(

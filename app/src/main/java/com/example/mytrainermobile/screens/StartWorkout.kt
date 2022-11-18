@@ -53,6 +53,8 @@ fun StartWorkout(
     routineId: Int,
     viewModel: StartWorkoutViewModel = viewModel(factory = getViewModelFactory())
 ) {
+
+    //----------------------------Callbacks and resources initialization
     var fetchInformation by remember { mutableStateOf(true) }
     if (fetchInformation) {
         viewModel.getRoutineCycles(routineId)
@@ -91,6 +93,10 @@ fun StartWorkout(
             }
         }
     }
+
+
+
+        //--------------------------------------------------------Screen Rendering --------------
 
     if (uiState.routine != null) {
         Scaffold(modifier = Modifier.fillMaxSize(),
