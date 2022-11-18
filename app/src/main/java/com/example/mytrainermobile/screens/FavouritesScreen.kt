@@ -14,9 +14,9 @@ fun FavouritesView(
     ) {
 
     val viewModel: FavouritesViewModel = viewModel(factory = getViewModelFactory())
-    var firstEntry by  remember  { mutableStateOf(true) }
+    //var firstEntry by  remember  { mutableStateOf(true) }
     viewModel.loadRoutines(refresh = true)
-    firstEntry = false
+    //firstEntry = false
     DefaultShowRoutinesScreen(
         title = stringResource(id = R.string.myfavourites),
         onNavigateToStartWorkout,

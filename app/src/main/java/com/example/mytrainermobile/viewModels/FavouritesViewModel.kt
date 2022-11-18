@@ -21,7 +21,7 @@ class FavouritesViewModel(
     override fun loadRoutines(refresh:Boolean): Job = viewModelScope.launch {
         uiState = uiState.copy(
             isFetching = true,
-            message = null
+            message = null,
         )
         kotlin.runCatching {
             //el repository sabe si debe refreshear o no
