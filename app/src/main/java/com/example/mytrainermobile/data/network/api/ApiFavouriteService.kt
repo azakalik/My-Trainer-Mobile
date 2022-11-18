@@ -17,7 +17,7 @@ interface ApiFavouriteService {
     @DELETE("favourites/{routineId}")
     suspend fun removeFavourite(@Path("routineId") routineId: Int) : Response<Unit>
 
-    @GET("users/current/routines")
+    @GET("favourites")
     suspend fun getFavouriteRoutinesSorted(@Query("orderBy") orderBy: String, @Query("direction") direction: String) : Response<NetworkPagedContent<NetworkRoutine>>
 
 }

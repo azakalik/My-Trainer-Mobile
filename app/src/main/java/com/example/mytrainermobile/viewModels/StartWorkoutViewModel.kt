@@ -56,7 +56,7 @@ class StartWorkoutViewModel(
         )
         uiState = uiState.copy( isFetching = true, message = null)
         runCatching {
-            favouritesRepository.removeFavourite(routineId)
+            favouritesRepository.makeFavourite(routineId)
         }.onSuccess {
             val routine = uiState.routine?.copy(isFavourite = true)
             uiState = uiState.copy(routine = routine)
