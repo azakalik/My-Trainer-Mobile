@@ -90,7 +90,7 @@ fun ShowSignInScreen(
 @Composable
 fun SignInText() {
     Text(
-        text = "stringResource(id = R.string.signInText)",
+        text = stringResource(id = R.string.signInText),
         style = Typography().h3.copy(fontWeight = FontWeight.Bold),
         modifier = Modifier.padding(bottom = 20.dp),
         color = Color.White
