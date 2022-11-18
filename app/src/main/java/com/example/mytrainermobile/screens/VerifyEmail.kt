@@ -1,7 +1,9 @@
 package com.example.mytrainermobile.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.material.Typography
 import androidx.compose.runtime.*
@@ -12,22 +14,26 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Popup
+import androidx.compose.ui.window.PopupProperties
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mytrainermobile.R
 import com.example.mytrainermobile.components.DefaultButton
 import com.example.mytrainermobile.components.DefaultTextField
 import com.example.mytrainermobile.components.SecondaryButton
-import com.example.mytrainermobile.ui.main.MainUiState
-import com.example.mytrainermobile.ui.main.errorOcurred
+import com.example.mytrainermobile.screenStates.errorOcurred
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
+import com.example.mytrainermobile.util.getViewModelFactory
+import com.example.mytrainermobile.viewModels.VerifyEmailViewModel
 
 @Composable
 fun VerifyEmailScreen(
     onNavigateToSignIn: () -> Unit,
-    callback: (String, String) -> Unit,
-    uiState: MainUiState
+    viewModel: VerifyEmailViewModel = viewModel(factory = getViewModelFactory())
 ) {
+    val uiState = viewModel.uiState
     MyTrainerMobileTheme {
         Box(
             modifier = Modifier
@@ -66,17 +72,23 @@ fun VerifyEmailScreen(
                     isError = uiState.errorOcurred
                 )
 
-                // ------- SIGN IN BUTTONS -----------------------------
-                DefaultButton(onClick = {
-                    callback(email, code)
-                }, text = "Verify email")
+                DefaultButton(
+                    onClick = { viewModel.verifyEmail(email, code) },
+                    text = "Verify email"
+                )
                 SecondaryButton(
                     onClick = { onNavigateToSignIn() },
-                    "Go back to sign in"
+                    "Go to sign in"
                 )
 
                 if (uiState.errorOcurred)
                     Text(stringResource(id = R.string.sign_error), color = Color.Red)
+                else {
+                    ShowVerifyCompletedPopup(
+                        onNavigateToSignIn = onNavigateToSignIn,
+                        showPopup = !uiState.errorOcurred
+                    )
+                }
             }
         }
     }
@@ -90,4 +102,58 @@ fun VerifyEmailText() {
         modifier = Modifier.padding(bottom = 20.dp),
         color = Color.White
     )
+}
+
+@Composable
+fun ShowVerifyCompletedPopup(onNavigateToSignIn: () -> Unit, showPopup: Boolean) {
+    if (showPopup) {
+        Popup(
+            alignment = Alignment.Center,
+            properties = PopupProperties(
+                focusable = true,
+                dismissOnBackPress = false,
+                dismissOnClickOutside = false
+            )
+        ) {
+            Row(
+                Modifier.fillMaxSize(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceAround
+            ) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxHeight(0.5f)
+                        .fillMaxWidth(0.8f)
+                        .border(
+                            width = 2.dp,
+                            color = DefaultColor,
+                            shape = RoundedCornerShape(15.dp)
+                        )
+                        .background(
+                            color = DefaultBackground,
+                            shape = RoundedCornerShape(15.dp)
+                        )
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(10.dp),
+                        verticalArrangement = Arrangement.SpaceAround,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            "User created succesfully, press the button below to sign in and start using the app",
+                            color = Color.White,
+                            fontSize = 24.sp,
+                            modifier = Modifier.padding(15.dp)
+                        )
+                        DefaultButton(
+                            onClick = { GoToSignIn(onNavigateToSignIn) },
+                            "Sign in"
+                        )
+                    }
+                }
+            }
+        }
+    }
 }

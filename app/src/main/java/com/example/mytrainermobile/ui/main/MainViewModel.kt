@@ -38,45 +38,8 @@ class MainViewModel(
             // Handle the error and notify the UI when appropriate.
             uiState = uiState.copy(
                 message = e.message,
-                isFetching = false)
-        }
-    }
-
-    fun signup(username: String, email: String, password: String, firstName: String, lastName: String) = viewModelScope.launch {
-        uiState = uiState.copy(
-            isFetching = true,
-            message = null
-        )
-        runCatching {
-            userRepository.signup(username = username, email = email, password = password, firstName = firstName, lastName = lastName)
-        }.onSuccess {
-            uiState = uiState.copy(
-                isFetching = false,
+                isFetching = false
             )
-        }.onFailure { e ->
-            // Handle the error and notify the UI when appropriate.
-            uiState = uiState.copy(
-                message = e.message,
-                isFetching = false)
-        }
-    }
-
-    fun verifyEmail(email: String, code: String) = viewModelScope.launch {
-        uiState = uiState.copy(
-            isFetching = true,
-            message = null
-        )
-        runCatching {
-            userRepository.verifyEmail(email, code)
-        }.onSuccess {
-            uiState = uiState.copy(
-                isFetching = false,
-            )
-        }.onFailure { e ->
-            // Handle the error and notify the UI when appropriate.
-            uiState = uiState.copy(
-                message = e.message,
-                isFetching = false)
         }
     }
 
@@ -114,91 +77,6 @@ class MainViewModel(
             uiState = uiState.copy(
                 isFetching = false,
                 currentUser = response
-            )
-        }.onFailure { e ->
-            // Handle the error and notify the UI when appropriate.
-            uiState = uiState.copy(
-                message = e.message,
-                isFetching = false)
-        }
-    }
-
-    fun getSports() = viewModelScope.launch {
-        uiState = uiState.copy(
-            isFetching = true,
-            message = null
-        )
-        runCatching {
-            sportRepository.getSports(true)
-        }.onSuccess { response ->
-            uiState = uiState.copy(
-                isFetching = false,
-                sports = response
-            )
-        }.onFailure { e ->
-            // Handle the error and notify the UI when appropriate.
-            uiState = uiState.copy(
-                message = e.message,
-                isFetching = false)
-        }
-    }
-
-    fun getSport(sportId: Int) = viewModelScope.launch {
-        uiState = uiState.copy(
-            isFetching = true,
-            message = null
-        )
-        runCatching {
-            sportRepository.getSport(sportId)
-        }.onSuccess { response ->
-            uiState = uiState.copy(
-                isFetching = false,
-                currentSport = response
-            )
-        }.onFailure { e ->
-            // Handle the error and notify the UI when appropriate.
-            uiState = uiState.copy(
-                message = e.message,
-                isFetching = false)
-        }
-    }
-
-    fun addOrModifySport(sport: Sport) = viewModelScope.launch {
-        uiState = uiState.copy(
-            isFetching = true,
-            message = null
-        )
-        runCatching {
-            if (sport.id == null)
-                sportRepository.addSport(sport)
-            else
-                sportRepository.modifySport(sport)
-        }.onSuccess { response ->
-            uiState = uiState.copy(
-                isFetching = false,
-                currentSport = response,
-                sports = null
-            )
-        }.onFailure { e ->
-            // Handle the error and notify the UI when appropriate.
-            uiState = uiState.copy(
-                message = e.message,
-                isFetching = false)
-        }
-    }
-
-    fun deleteSport(sportId: Int) = viewModelScope.launch {
-        uiState = uiState.copy(
-            isFetching = true,
-            message = null
-        )
-        runCatching {
-            sportRepository.deleteSport(sportId)
-        }.onSuccess { response ->
-            uiState = uiState.copy(
-                isFetching = false,
-                currentSport = null,
-                sports = null
             )
         }.onFailure { e ->
             // Handle the error and notify the UI when appropriate.

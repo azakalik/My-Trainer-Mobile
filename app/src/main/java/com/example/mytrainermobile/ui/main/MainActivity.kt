@@ -32,22 +32,8 @@ class MainActivity : ComponentActivity() {
                                 password
                             )
                         },
-                        uiState = mainViewModel.uiState,
-                        signupCallback = { username: String, email: String, password: String, firstName: String, lastName: String ->
-                            mainViewModel.signup(
-                                username,
-                                email,
-                                password,
-                                firstName,
-                                lastName
-                            )
-                        },
-                        verifyEmailCallback = { email: String, code: String ->
-                            mainViewModel.verifyEmail(
-                                email,
-                                code
-                            )
-                        })
+                        uiState = mainViewModel.uiState
+                    )
                 }
             }
         }

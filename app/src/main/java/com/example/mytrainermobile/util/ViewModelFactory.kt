@@ -42,6 +42,10 @@ class ViewModelFactory constructor(
                 IndividualExerciseScreenViewModel(cycleExercisesRepository, routineCyclesRepository)
             isAssignableFrom(MainViewModel::class.java) ->
                 MainViewModel(sessionManager, userRepository, sportRepository, routineRepository)
+            isAssignableFrom(SignUpViewModel::class.java) ->
+                SignUpViewModel(userRepository)
+            isAssignableFrom(VerifyEmailViewModel::class.java) ->
+                VerifyEmailViewModel(userRepository)
             else ->
                 throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }

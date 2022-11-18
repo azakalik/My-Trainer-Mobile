@@ -22,9 +22,7 @@ fun AuthNavigatorHandler(
     navController: NavHostController = rememberNavController(),
     startDestination: String = "signIn",
     loginCallback: (String, String) -> Unit,
-    signupCallback: (String, String, String, String, String) -> Unit,
-    verifyEmailCallback: (String, String) -> Unit,
-    uiState: MainUiState
+    uiState: MainUiState,
 ) {
     NavHost(
         modifier = modifier,
@@ -43,16 +41,16 @@ fun AuthNavigatorHandler(
             )
         }
         composable(AuthNavigatorItems.SignUp.route) {
-            ShowSignupScreen(onNavigateToSignIn = {
-                navController.navigate(AuthNavigatorItems.SignIn.route) {
-                    popUpTo(AuthNavigatorItems.SignIn.route) { inclusive = true }
-                }
-            }, signupCallback, uiState)
+            ShowSignupScreen(
+                onNavigateToVerifyEmail = {
+                    navController.navigate(AuthNavigatorItems.Verify.route)
+                })
+
         }
         composable(AuthNavigatorItems.Verify.route) {
             VerifyEmailScreen(onNavigateToSignIn = {
                 navController.navigate(AuthNavigatorItems.SignIn.route)
-            }, callback = verifyEmailCallback, uiState = uiState)
+            })
         }
     }
 }

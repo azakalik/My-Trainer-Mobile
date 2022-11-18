@@ -18,22 +18,25 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mytrainermobile.R
 import com.example.mytrainermobile.components.DefaultButton
 import com.example.mytrainermobile.components.DefaultTextField
 import com.example.mytrainermobile.components.SecondaryButton
-import com.example.mytrainermobile.ui.main.MainUiState
-import com.example.mytrainermobile.ui.main.errorOcurred
+import com.example.mytrainermobile.screenStates.SignUpState
+import com.example.mytrainermobile.screenStates.errorOcurred
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
+import com.example.mytrainermobile.util.getViewModelFactory
+import com.example.mytrainermobile.viewModels.SignUpViewModel
 
 @Composable
 fun ShowSignupScreen(
-    onNavigateToSignIn: () -> Unit,
-    callback: (String, String, String, String, String) -> Unit,
-    uiState: MainUiState
+    onNavigateToVerifyEmail: () -> Unit,
+    viewModel: SignUpViewModel = viewModel(factory = getViewModelFactory())
 ) {
+    val uiState = viewModel.uiState
     MyTrainerMobileTheme {
         Box(
             modifier = Modifier
@@ -58,7 +61,15 @@ fun ShowSignupScreen(
                     )
                     SignupText()
                 }
-                ShowSignUpForm(callback, onNavigateToSignIn, uiState)
+                ShowSignUpForm({ username: String, email: String, password: String, firstName: String, lastName: String ->
+                    viewModel.signup(
+                        username,
+                        email,
+                        password,
+                        firstName,
+                        lastName
+                    )
+                }, onNavigateToVerifyEmail, uiState)
             }
         }
     }
@@ -77,8 +88,8 @@ fun SignupText() {
 @Composable
 fun ShowSignUpForm(
     callback: (String, String, String, String, String) -> Unit,
-    onNavigateToSignIn: () -> Unit,
-    uiState: MainUiState
+    onNavigateToVerifyEmail: () -> Unit,
+    uiState: SignUpState
 ) {
     var step by remember { mutableStateOf(0) }
     var showPopup by remember { mutableStateOf(false) }
@@ -138,31 +149,31 @@ fun ShowSignUpForm(
         )
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
             SecondaryButton(onClick = { step = 0 }, text = "Go back")
-            DefaultButton({ callback(username, email, password, firstName, lastName); showPopup = true }, "Sign up")
+            DefaultButton({
+                callback(username, email, password, firstName, lastName); showPopup = true
+            }, "Sign up")
         }
     }
-//    if (uiState.errorOcurred){
-//        Row() {
-//            Text(text = "There is an error in the form: ", color = Color.Red)
-//            showPopup = false
-//            if (email != email2){
-//                Text(text = "the emails do not match", color = Color.Red)
-//            } else if (password != password2){
-//                Text(text = "the passwords do not match", color = Color.Red)
-//            } else if (email.isBlank() || password.isBlank()){
-//                Text(text = "do not leave empty fields", color = Color.Red)
-//            } else if (username.isBlank() || firstName.isBlank() || lastName.isBlank()){
-//                Text(text = "do not leave empty fields", color = Color.Red)
-//                step = 0
-//            }
-//        }
-//        Text(text = "Correct the error and try to sign up again.", color = Color.Red)
-//    }
-    ShowSignupCompletedPopup(onNavigateToSignIn = onNavigateToSignIn, showPopup = showPopup)
-}
-
-fun SignUp(onNavigateToMyRoutines: () -> Unit) {/*TODO*/
-    onNavigateToMyRoutines()
+    if (uiState.errorOcurred){
+        Row() {
+            Text(text = "There is an error in the form: ", color = Color.Red)
+            showPopup = false
+            if (email != email2){
+                Text(text = "the emails do not match", color = Color.Red)
+            } else if (password != password2){
+                Text(text = "the passwords do not match", color = Color.Red)
+            } else if (email.isBlank() || password.isBlank()){
+                Text(text = "do not leave empty fields", color = Color.Red)
+            } else if (username.isBlank() || firstName.isBlank() || lastName.isBlank()){
+                Text(text = "do not leave empty fields", color = Color.Red)
+                step = 0
+            } else {
+                Text(text = uiState.message!!, color = Color.Red)
+            }
+        }
+        Text(text = "Correct the error and try to sign up again.", color = Color.Red)
+    }
+    ShowSignupCompletedPopup(onNavigateToSignIn = onNavigateToVerifyEmail, showPopup = showPopup)
 }
 
 fun GoToSignIn(onNavigateToSignIn: () -> Unit) {
@@ -207,14 +218,14 @@ fun ShowSignupCompletedPopup(onNavigateToSignIn: () -> Unit, showPopup: Boolean)
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text(
-                            "User created succesfully, press the button below to sign in and start using the app",
+                            "User created succesfully, press the button below to verify your email and start using the app",
                             color = Color.White,
                             fontSize = 24.sp,
                             modifier = Modifier.padding(15.dp)
                         )
                         DefaultButton(
                             onClick = { GoToSignIn(onNavigateToSignIn) },
-                            stringResource(id = R.string.signup_goto_signin)
+                            "Verify email"
                         )
                     }
                 }
