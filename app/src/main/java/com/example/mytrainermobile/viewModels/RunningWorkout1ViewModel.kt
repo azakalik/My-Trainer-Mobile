@@ -68,4 +68,12 @@ class RunningWorkout1ViewModel(
             currentCycle = cycle
         )
     }
+
+    fun start(){
+        uiState = uiState.copy( running = true )
+    }
+
+    fun stop() {
+        uiState = uiState.copy( running = false )
+    }
 }

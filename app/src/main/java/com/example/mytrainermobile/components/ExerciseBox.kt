@@ -14,6 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mytrainermobile.ui.theme.DefaultColor
+import com.example.mytrainermobile.viewModels.RunningWorkout1ViewModel
 
 
 @Composable
@@ -22,50 +23,31 @@ fun ExerciseBox(
     exerciseDescription: String?,
     category: String,
     duration: Int?,
-    repetitions: Int
+    repetitions: Int,
+    viewModel: RunningWorkout1ViewModel
 ) {
-//    var popupControl by remember { mutableStateOf(false) }
+
     var running by remember { mutableStateOf(false) }
     var color = if (running) DefaultColor else Color.DarkGray
     var titleColor = if (running) Color.White else DefaultColor
-//    if(popupControl) {
-//        Popup(
-//            onDismissRequest = { popupControl = false },
-//            alignment = Alignment.Center,
-//        ) {
-//            Surface(
-//                border = BorderStroke(1.dp, MaterialTheme.colors.primary),
-//                shape = RoundedCornerShape(8.dp),
-//                color = DefaultBackground,
-//                modifier = Modifier
-//                    .clickable { popupControl = !popupControl }
-//                    .padding(100.dp)
-//
-//            ){
-//                Column(
-//                    modifier = Modifier.padding(10.dp),
-//                    horizontalAlignment = Alignment.CenterHorizontally,
-//                    verticalArrangement = Arrangement.SpaceEvenly
-//                ) {
-//                    Text(
-//                        text = stringResource(id = R.string.details),
-//                        color = Color.White,
-//                        fontSize = 20.sp
-//                    )
-//                    Text(
-//                        text = exerciseDescription.orEmpty(),
-//                        color = Color.White,
-//                        fontSize = 20.sp
-//                    )
-//                }
-//            }
-//        }
-//    }
+
     Card(
         modifier = Modifier
             .fillMaxWidth(1f)
             .height(95.dp)
-            .clickable { running = !running },
+            .clickable {
+                if(!viewModel.uiState.running && !running) {
+                    viewModel.start()
+                    running = true
+                }
+                else if(viewModel.uiState.running && running){
+                    running = false
+                    viewModel.stop()
+                }
+                else if(viewModel.uiState.running && !running){
+                    running = false
+                }
+                       },
         shape = RoundedCornerShape(15.dp)
 
     ) {
@@ -95,4 +77,5 @@ fun ExerciseBox(
             }
         }
     }
+
 }

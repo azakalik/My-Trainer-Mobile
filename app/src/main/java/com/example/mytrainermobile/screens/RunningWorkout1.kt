@@ -139,7 +139,8 @@ fun RunningWorkout1(
                                     it.exercise.detail,
                                     it.exercise.type,
                                     it.duration,
-                                    it1
+                                    it1,
+                                    viewModel
                                 )
                             }
                         }
