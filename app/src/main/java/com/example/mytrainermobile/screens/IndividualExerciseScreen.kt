@@ -35,6 +35,7 @@ fun IndividualExerciseScreen(routineId: Int, viewModel: IndividualExerciseScreen
         fetchInformation = false
     }
 
+    var newExercise by remember { mutableStateOf(true) }
 
 
     Scaffold(
@@ -82,17 +83,27 @@ fun IndividualExerciseScreen(routineId: Int, viewModel: IndividualExerciseScreen
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             DefaultButton(
-                                onClick = { viewModel.prevExercise() },
+                                onClick = { viewModel.prevExercise(); newExercise = !newExercise },
                                 text = stringResource(id = R.string.prev)
                             )
                             if (uiState.exercise?.duration != 0 && time != null) {
-                                Timer(
-                                    totalTime = time * 1000L,
-                                    handleColor = DefaultColor,
-                                    inactiveBarColor = DefaultBackground,
-                                    activeBarColor = DefaultColor,
-                                    modifier = Modifier.size(100.dp),
-                                )
+                                if(newExercise) {
+                                    Timer(
+                                        totalTime = time * 1000L,
+                                        handleColor = DefaultColor,
+                                        inactiveBarColor = DefaultBackground,
+                                        activeBarColor = DefaultColor,
+                                        modifier = Modifier.size(100.dp),
+                                    )
+                                }else{
+                                    Timer(
+                                        totalTime = time * 1000L,
+                                        handleColor = DefaultColor,
+                                        inactiveBarColor = DefaultBackground,
+                                        activeBarColor = DefaultColor,
+                                        modifier = Modifier.size(100.dp),
+                                    )
+                                }
                             } else {
                                 Column() {
                                     DetailText(
@@ -102,7 +113,7 @@ fun IndividualExerciseScreen(routineId: Int, viewModel: IndividualExerciseScreen
                                 }
                             }
                             DefaultButton(
-                                onClick = { viewModel.nextExercise(); viewModel.refresh() },
+                                onClick = { viewModel.nextExercise(); newExercise = !newExercise },
                                 text = stringResource(id = R.string.next)
                             )
                         }
