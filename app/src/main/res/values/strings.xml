@@ -40,6 +40,16 @@
     <!-- Home/Explore -->
     <string name="explore">Explore</string>
 
+    <!-- Profile -->
+    <string name="profile">My Profile</string>
+    <string name="usermail">Email: %1s</string>
+    <string name="username">Username: %1s</string>
+    <string name="nameandsurname">Name: %1s %1s</string>
+    <string name="editprofile">Edit Profile</string>
+    <string name="name">Name</string>
+    <string name="lastname">Last Name</string>
+
+
     <!-- Filter FAB -->
     <string name="fab_name">Sort routines</string>
 

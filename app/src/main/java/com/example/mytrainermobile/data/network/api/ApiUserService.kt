@@ -1,15 +1,9 @@
 package com.example.mytrainermobile.data.network.api
 
 import ar.edu.itba.example.api.data.network.model.NetworkPagedContent
-import com.example.mytrainermobile.data.network.model.NetworkCredentials
-import com.example.mytrainermobile.data.network.model.NetworkRoutine
-import com.example.mytrainermobile.data.network.model.NetworkToken
-import com.example.mytrainermobile.data.network.model.NetworkUser
+import com.example.mytrainermobile.data.network.model.*
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ApiUserService {
     @POST("users/login")
@@ -27,4 +21,7 @@ interface ApiUserService {
 
     @GET("users/current/routines")
     suspend fun getCurrentUserRoutinesSorted(@Query("orderBy") orderBy: String, @Query("direction") direction: String) : Response<NetworkPagedContent<NetworkRoutine>>
+
+    @PUT("users/current")
+    suspend fun modifyUser(@Body newName : NetworkUserData): Response<NetworkUser>
 }

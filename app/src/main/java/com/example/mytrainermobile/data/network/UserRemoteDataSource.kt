@@ -3,6 +3,7 @@ package com.example.mytrainermobile.data.network
 import com.example.mytrainermobile.data.network.api.ApiUserService
 import com.example.mytrainermobile.data.network.model.NetworkCredentials
 import com.example.mytrainermobile.data.network.model.NetworkUser
+import com.example.mytrainermobile.data.network.model.NetworkUserData
 import com.example.mytrainermobile.util.SessionManager
 
 class UserRemoteDataSource(
@@ -24,5 +25,11 @@ class UserRemoteDataSource(
 
     suspend fun getCurrentUser() : NetworkUser {
         return handleApiResponse { apiUserService.getCurrentUser() }
+    }
+
+    suspend fun modifyUser(name: String, surname: String){
+        handleApiResponse {
+            apiUserService.modifyUser(NetworkUserData(name, surname))
+        }
     }
 }

@@ -190,23 +190,24 @@ class MainViewModel(
         }
     }
 
-    fun getRoutinesBySearch(query: String) = viewModelScope.launch {
+    fun modifyUser(name: String, surname: String) = viewModelScope.launch {
         uiState = uiState.copy(
             isFetching = true,
             message = null
         )
         runCatching {
-            routineRepository.getRoutinesBySearch(query)
+            userRepository.modifyUser(name, surname)
         }.onSuccess { response ->
             uiState = uiState.copy(
                 isFetching = false,
-                searchRoutines = response
+                currentUser = null
             )
+            getCurrentUser()
         }.onFailure { e ->
+            // Handle the error and notify the UI when appropriate.
             uiState = uiState.copy(
                 message = e.message,
-                isFetching = false
-            )
+                isFetching = false)
         }
     }
 }

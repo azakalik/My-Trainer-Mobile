@@ -34,6 +34,8 @@ class UserRepository(
         return currentUserMutex.withLock { this.currentUser }
     }
 
-
+    suspend fun modifyUser(name: String, surname: String){
+        remoteDataSource.modifyUser(name, surname)
+    }
 }
 
