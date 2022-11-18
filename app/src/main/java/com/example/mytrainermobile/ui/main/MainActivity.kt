@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
                     AppNavigatorHandler()
                 }
                 else{
-                    AuthNavigatorHandler(loginCallback =  { name:String, password:String -> mainViewModel.login(name,password) } )
+                    AuthNavigatorHandler(loginCallback =  { name:String, password:String -> mainViewModel.login(name,password) }, uiState = mainViewModel.uiState )
                 }
             }
         }

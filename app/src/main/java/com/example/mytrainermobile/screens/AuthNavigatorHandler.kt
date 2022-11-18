@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.mytrainermobile.ui.main.MainUiState
 
 
 sealed class AuthNavigatorItems(val route: String) {
@@ -20,20 +21,20 @@ fun AuthNavigatorHandler(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     startDestination: String = "signIn",
-    loginCallback : (String,String) -> Unit
+    loginCallback : (String,String) -> Unit,
+    uiState: MainUiState
 ) {
     NavHost(
         modifier = modifier,
         navController = navController,
         startDestination = startDestination
     ) {
-        composable(AuthNavigatorItems.Arrive.route) { ArriveScreen(/*...*/) }
         composable(AuthNavigatorItems.SignIn.route) {
             ShowSignInScreen(onNavigateToSignUp = {
                 navController.navigate(AuthNavigatorItems.SignUp.route) {
                     popUpTo(AuthNavigatorItems.SignUp.route) { inclusive = false }
                 }
-            }, loginCallback )
+            }, loginCallback, uiState)
         }
         composable(AuthNavigatorItems.SignUp.route) {
             ShowSignupScreen(onNavigateToSignIn = {

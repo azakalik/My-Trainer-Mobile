@@ -19,6 +19,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mytrainermobile.R
 import com.example.mytrainermobile.components.DefaultButton
 import com.example.mytrainermobile.components.DefaultTextField
+import com.example.mytrainermobile.ui.main.MainUiState
 import com.example.mytrainermobile.ui.main.MainViewModel
 import com.example.mytrainermobile.ui.main.errorOcurred
 import com.example.mytrainermobile.ui.theme.DefaultBackground
@@ -30,11 +31,9 @@ import com.example.mytrainermobile.util.getViewModelFactory
 fun ShowSignInScreen(
     onNavigateToSignUp: () -> Unit,
     loginCallback: (String,String) -> Unit,
+    uiState: MainUiState
 ) {
     MyTrainerMobileTheme {
-        var counter by  remember  { mutableStateOf(0) }
-        counter++
-        Log.d("mensajeSignIn",counter.toString())
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -62,14 +61,14 @@ fun ShowSignInScreen(
                     value = email,
                     callback = { email = it },
                     placeholder = stringResource(id = R.string.signup_insert_email),
-                    //isError = uiState.errorOcurred
+                    isError = uiState.errorOcurred
                 )
 
                 DefaultTextField(
                     value = password,
                     callback = { password = it },
                     placeholder = stringResource(id = R.string.signup_insert_password),
-                    //isError = uiState.errorOcurred
+                    isError = uiState.errorOcurred
                 )
 
                 // ------- SIGN IN BUTTONS -----------------------------
@@ -86,8 +85,8 @@ fun ShowSignInScreen(
                     Text(stringResource(id = R.string.signup_goto_signup), color = Color.White)
                 }
 
-                //if (uiState.errorOcurred)
-                //    Text(stringResource(id = R.string.sign_error), color = Color.Red)
+                if (uiState.errorOcurred)
+                    Text(stringResource(id = R.string.sign_error), color = Color.Red)
             }
         }
     }
