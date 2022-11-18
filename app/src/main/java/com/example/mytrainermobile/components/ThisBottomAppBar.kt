@@ -6,11 +6,14 @@ import androidx.compose.material.Text
 import androidx.compose.material3.NavigationBar
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.mytrainermobile.data.model.BottomNavigationData
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
+import com.example.mytrainermobile.R
+
 
 @Composable
 fun ThisBottomAppBar(navController: NavController, showBottomBar: Boolean) {
@@ -31,8 +34,8 @@ fun ThisBottomAppBar(navController: NavController, showBottomBar: Boolean) {
                 BottomNavigationItem(
                     unselectedContentColor = Color.White,
                     selectedContentColor = DefaultColor,
-                    icon = { Icon(imageVector = item.icon, contentDescription = item.title) },
-                    label = { Text(text = item.title) },
+                    icon = { Icon(imageVector = item.icon, contentDescription = stringResource(item.title)) },
+                    label = { Text(text = stringResource(id = item.title )) },
                     alwaysShowLabel = true,
                     selected = currentRoute == item.route,
                     onClick = {
@@ -51,4 +54,5 @@ fun ThisBottomAppBar(navController: NavController, showBottomBar: Boolean) {
             }
         }
     }
+
 }

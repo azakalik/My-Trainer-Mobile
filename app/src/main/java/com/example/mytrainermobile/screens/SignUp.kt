@@ -56,7 +56,7 @@ fun ShowSignupScreen(
                     modifier = Modifier.fillMaxSize()
                 ) {
                     Text(
-                        text = "My Trainer",
+                        text = stringResource(id = R.string.title),
                         color = DefaultColor,
                         fontSize = 64.sp,
                         fontWeight = FontWeight.Bold,
@@ -107,7 +107,7 @@ fun ShowSignUpForm(
         DefaultTextField(
             value = username,
             callback = { username = it },
-            placeholder = "Insert username *",
+            placeholder = stringResource(id = R.string.signup_insert_username),
             isError = uiState.errorOcurred
         )
         DefaultTextField(
@@ -122,7 +122,7 @@ fun ShowSignUpForm(
             placeholder = stringResource(id = R.string.signup_insert_surname),
             isError = uiState.errorOcurred
         )
-        DefaultButton({ step = 1 }, "Continue")
+        DefaultButton({ step = 1 }, stringResource(R.string.signup_continue))
     }
     if (step == 1) {
         DefaultTextField(
@@ -150,30 +150,30 @@ fun ShowSignUpForm(
             isError = uiState.errorOcurred
         )
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
-            SecondaryButton(onClick = { step = 0 }, text = "Go back")
+            SecondaryButton(onClick = { step = 0 }, text = stringResource(id = R.string.signup_goback))
             DefaultButton({
                 callback(username, email, password, firstName, lastName); showPopup = true
-            }, "Sign up")
+            }, stringResource(id = R.string.signUpText))
         }
     }
     if (uiState.errorOcurred){
         Row() {
-            Text(text = "There is an error in the form: ", color = Color.Red)
+            Text(text = stringResource(id = R.string.formerror), color = Color.Red)
             showPopup = false
             if (email != email2){
-                Text(text = "the emails do not match", color = Color.Red)
+                Text(text = stringResource(id = R.string.emailerror), color = Color.Red)
             } else if (password != password2){
-                Text(text = "the passwords do not match", color = Color.Red)
+                Text(text = stringResource(R.string.passerror), color = Color.Red)
             } else if (email.isBlank() || password.isBlank()){
-                Text(text = "do not leave empty fields", color = Color.Red)
+                Text(text = stringResource(id = R.string.fielderror), color = Color.Red)
             } else if (username.isBlank() || firstName.isBlank() || lastName.isBlank()){
-                Text(text = "do not leave empty fields", color = Color.Red)
+                Text(text = stringResource(id = R.string.fielderror), color = Color.Red)
                 step = 0
             } else {
                 Text(text = uiState.message!!, color = Color.Red)
             }
         }
-        Text(text = "Correct the error and try to sign up again.", color = Color.Red)
+        //Text(text = "Correct the error and try to sign up again.", color = Color.Red)
     }
     ShowSignupCompletedPopup(onNavigateToSignIn = onNavigateToVerifyEmail, showPopup = showPopup)
 }
@@ -220,14 +220,14 @@ fun ShowSignupCompletedPopup(onNavigateToSignIn: () -> Unit, showPopup: Boolean)
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text(
-                            "User created succesfully, press the button below to verify your email and start using the app",
+                            stringResource(id = R.string.createsucces),
                             color = Color.White,
                             fontSize = 24.sp,
                             modifier = Modifier.padding(15.dp)
                         )
                         DefaultButton(
                             onClick = { GoToSignIn(onNavigateToSignIn) },
-                            "Verify email"
+                            stringResource(id = R.string.verify)
                         )
                     }
                 }

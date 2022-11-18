@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -23,6 +24,8 @@ import com.example.mytrainermobile.data.model.Routine
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
 import com.example.mytrainermobile.ui.theme.DefaultSecondary
+import com.example.mytrainermobile.R
+
 
 @Composable
 fun RoutineBox(
@@ -109,33 +112,38 @@ fun SideTitleBox(routine: Routine){
                 color = DefaultColor,
                 shape = RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp)
             )
-            .background(color = DefaultSecondary, shape = RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
+            .background(
+                color = DefaultSecondary,
+                shape = RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp)
+            )
             .fillMaxSize()
     ) {
-        Column(modifier = Modifier.fillMaxSize().padding(20.dp), horizontalAlignment = Alignment.Start, verticalArrangement = Arrangement.SpaceAround) {
+        Column(modifier = Modifier
+            .fillMaxSize()
+            .padding(20.dp), horizontalAlignment = Alignment.Start, verticalArrangement = Arrangement.SpaceAround) {
             Text(
-                text = "Name: " + routine.name,
+                text = stringResource(id = R.string.info_name, routine.name),
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp,
                 modifier = Modifier.padding(vertical = 5.dp),
             )
             Text(
-                text = "Difficulty: " + routine.difficulty,
+                text = stringResource(id = R.string.info_difficulty, routine.difficulty.toString()),
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp,
                 modifier = Modifier.padding(vertical = 5.dp),
             )
             Text(
-                text = "Rating: " + routine.score,
+                text = stringResource(id = R.string.info_rating, routine.score.toString()),
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp,
                 modifier = Modifier.padding(vertical = 5.dp),
             )
             Text(
-                text = "Category: " + routine.category.name,
+                text = stringResource(id = R.string.info_category, routine.category.name),
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp,

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="cycleWithNumber">Ciclo %1$d</string>
     <!--ARRIVE SCREEN-->
     <string name="app_name">My Trainer Mobile</string>
     <string name="signInText">Ingresar</string>
@@ -8,14 +7,27 @@
     <string name="introScreenMessage">Entrena donde sea, cuando sea.</string>
 
     <!--SIGN UP and IN SCREEN-->
-    <string name="signup_insert_name">Ingrese Nombre</string>
-    <string name="signup_insert_surname">Ingrese Apellido</string>
-    <string name="signup_insert_email">Ingrese Correo</string>
-    <string name="signup_reinsert_email">Reingrese Correo</string>
-    <string name="signup_insert_password">Ingrese Clave</string>
-    <string name="signup_reinsert_password">Reingrese Clave</string>
-    <string name="signup_goto_signin">ir a inicio de sesion</string>
-    <string name="signup_goto_signup">ir a registrar una cuenta</string>
+    <string name="signup_insert_name">Ingrese Nombre *</string>
+    <string name="signup_insert_surname">Ingrese Apellido *</string>
+    <string name="signup_insert_email">Ingrese Correo *</string>
+    <string name="signup_reinsert_email">Confirmar Correo *</string>
+    <string name="signup_insert_password">Ingrese Clave *</string>
+    <string name="signup_reinsert_password">Confirmar Clave *</string>
+    <string name="signup_goto_signin">Ir a inicio de sesion</string>
+    <string name="signup_goto_signup">Ir a registrar una cuenta</string>
+    <string name="sign_error">Email o contraseña incorrectos</string>
+    <string name="title">My Trainer</string>
+    <string name="signup_insert_username">Ingrese Nombre de Usuario *</string>
+    <string name="signup_continue">Continuar</string>
+    <string name="signup_goback">Atras</string>
+    <string name="formerror">Hay un error en la información: </string>
+    <string name="emailerror">los correos no coinciden</string>
+    <string name="passerror">las contraseñas no coinciden</string>
+    <string name="fielderror">información faltante</string>
+    <string name="createsucces">Usuario creado correctamente, verifique su correo.</string>
+    <string name="verify">Verificar Correo</string>
+
+
 
     <!-- ViewWorkout -->
     <string name="share">Compartir</string>
@@ -23,10 +35,28 @@
     <string name="rate">Puntuar</string>
     <string name="ratepopup">Puntuando Entrenamiento Actual</string>
     <string name="start">Comenzar Entrenamiento</string>
+    <string name="nocycles">Esta rutina no tiene ciclos.</string>
+
 
     <!-- Running workout 1 -->
 
     <string name="cycle">Ciclo</string>
+    <string name="cycleWithNumber">Ciclo %1$d</string>
+    <string name="viewCycles">Ver Ciclos</string>
+    <string name="seeDetails">Ver Detalles</string>
+    <string name="details">Detalles de Ejercicio</string>
+    <string name="noexercise">Este ciclo no tiene ejercicios.</string>
+    <string name="selected">No hay ciclo seleccionado</string>
+    <string name="detailedview">Vista Detallada</string>
+
+    <!-- Individual Exercise -->
+    <string name="next">Siguiente</string>
+    <string name="prev">Previo</string>
+    <string name="detail">Detalles</string>
+    <string name="type">Tipo</string>
+    <string name="repetitions">Repeticiones</string>
+    <string name="ended">Rutina terminada. Enhorabuena, buen trabajo!</string>
+    <string name="endtitle">Estas un paso mas adelante de lo que estabas ayer!</string>
 
     <!-- Favourites -->
     <string name="myfavourites">Mis Favoritas</string>
@@ -39,9 +69,81 @@
 
     <!-- Filter FAB -->
     <string name="fab_name">Ordenar rutinas</string>
+    <string name="dir">Descendiente</string>
+
 
     <!-- Buttons -->
     <string name="accept">Aceptar</string>
     <string name="cancel">Cancelar</string>
     <string name="save">Guardar</string>
+    <string name="close">Cerrar</string>
+
+
+    <!-- Profile -->
+    <string name="profile">Mi Perfil</string>
+    <string name="usermail">Email: %1s</string>
+    <string name="username">Usuario: %1s</string>
+    <string name="nameandsurname">Nombre: %1s %1s</string>
+    <string name="editprofile">Editar Perfil</string>
+    <string name="name">Nombre</string>
+    <string name="lastname">Apellido</string>
+    <string name="logout">Cerrar Sesión</string>
+
+
+    <!-- Share -->
+    <string name="shareText">Mira esta rutina! &#xA; http://mytrainer.com/startworkout/%1s</string>
+
+    <!-- General -->
+    <string name="no_information">No hay informacion</string>
+
+    <!-- Sort -->
+    <string name="sort_creation_date">Fecha de Creación</string>
+    <string name="sort_rating">Puntaje</string>
+    <string name="sort_difficulty">Dificultad</string>
+    <string name="sort_category">Categoría</string>
+
+    <!-- Routine types -->
+    <string name="arms">Brazos</string>
+    <string name="abs">Abs</string>
+    <string name="back">Espalda</string>
+    <string name="cardio">Cardio</string>
+    <string name="chest">Pecho</string>
+    <string name="legs">Pernas</string>
+    <string name="mixed">Mixto</string>
+    <string name="shoulder">Hombros</string>
+
+    <!-- Routine info FAB -->
+    <string name="info_fab_name">Más Información</string>
+    <string name="info_name">Nombre: %1s</string>
+    <string name="info_difficulty">Dificultad: %1s</string>
+    <string name="info_rating">Puntaje: %1s</string>
+    <string name="info_category">Categoría: %1s</string>
+    <string name="info_description">Descripción: %1s</string>
+
+    <!-- CycleBox -->
+    <string name="reps">Repeticiones: %1s</string>
+    <string name="cycleType">Tipo de Ciclo: %1s</string>
+
+    <!-- CycleInformationButton -->
+    <string name="cycleName">Nombre del Ciclo: %1s</string>
+    <string name="cycleDetail">Detalle: %1s</string>
+    <string name="cycle_type">Tipo: %1s</string>
+    <string name="cycleReps">Repeticiones: %1s</string>
+    <string name="cycleinfo">Información del Ciclo</string>
+
+    <!-- Snackbars -->
+    <string name="favSnackBar">La rutina es ahora favorita. Disponible en Favoritas.</string>
+    <string name="unfavSnackBar">La rutina no es más favorita.</string>
+    <string name="rateSnackBar">La rutina fue puntuada correctamente.</string>
+
+    <!-- navButtons -->
+
+    <!-- navButtons -->
+    <string name="Routines">Rutinas</string>
+    <string name="Favourites">Favoritas</string>
+    <string name="Me">Yo</string>
+
+    <!-- errors -->
+    <string name="profileError">No hay una sesión iniciada.</string>
+
 </resources>

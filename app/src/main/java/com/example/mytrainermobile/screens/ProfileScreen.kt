@@ -87,91 +87,116 @@ fun ShowProfileScreen(
                 }
             }
         }
-        if(uiState.isAuthenticated){
-            Column( horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()) {
-                if(!editing) {
-                    if (user != null) {
-                        Text(
-                            text = stringResource(
-                                R.string.nameandsurname,
-                                user.firstName,
-                                user.lastName
-                            ),
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 16.dp, start = 16.dp, end = 16.dp),
-                            fontSize = 30.sp
-                        )
-                        Text(
-                            text = stringResource(R.string.username, user.username),
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 16.dp, start = 16.dp, end = 16.dp),
-                            fontSize = 30.sp
-                        )
-                        Text(
-                            text = stringResource(R.string.usermail, user.email),
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 16.dp, start = 16.dp, end = 16.dp),
-                            fontSize = 30.sp
-                        )
-                        Spacer(modifier = Modifier.padding(10.dp))
-                        DefaultButton(
-                            onClick = { viewModel.logout(); activity?.finish() },
-                            text = "Logout"
-                        )
-                    }
-                }else {
-                    Column(
-                        modifier = Modifier.padding(10.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.SpaceEvenly
-                    ) {
-                        var name by remember { mutableStateOf("") }
-                        var surname by remember { mutableStateOf("") }
-                        Text(
-                            text = stringResource(id = R.string.editprofile),
-                            color = Color.White,
-                            fontSize = 20.sp
-                        )
-                        if(user != null) {
-                            DefaultTextField(
-                                value = name,
-                                //placeholder = { Text(text = user.firstName) },
-                                placeholder = stringResource(R.string.name),
-                                callback = {
-                                    name = it
-                                }
+        if(viewModel.uiState.message == null) {
+
+            if (uiState.isAuthenticated) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    if (!editing) {
+                        if (user != null) {
+                            Text(
+                                text = stringResource(
+                                    R.string.nameandsurname,
+                                    user.firstName,
+                                    user.lastName
+                                ),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(top = 16.dp, start = 16.dp, end = 16.dp),
+                                fontSize = 30.sp
                             )
-                            DefaultTextField(
-                                value = surname,
-                                //placeholder = { Text(text = user.lastName) },
-                                placeholder = stringResource(R.string.lastname),
-                                callback = {
-                                    surname = it
-                                }
+                            Text(
+                                text = stringResource(R.string.username, user.username),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(top = 16.dp, start = 16.dp, end = 16.dp),
+                                fontSize = 30.sp
+                            )
+                            Text(
+                                text = stringResource(R.string.usermail, user.email),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(top = 16.dp, start = 16.dp, end = 16.dp),
+                                fontSize = 30.sp
+                            )
+                            Spacer(modifier = Modifier.padding(10.dp))
+                            DefaultButton(
+                                onClick = { viewModel.logout(); activity?.finish() },
+                                text = stringResource(R.string.logout)
                             )
                         }
-                        Row(
-                            horizontalArrangement = Arrangement.SpaceAround,
-                            modifier = Modifier.fillMaxWidth()
+                    } else {
+                        Column(
+                            modifier = Modifier.padding(10.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.SpaceEvenly
                         ) {
-                            DefaultButton(
-                                onClick = { editing = false },
-                                text = stringResource(id = R.string.cancel)
+                            var name by remember { mutableStateOf("") }
+                            var surname by remember { mutableStateOf("") }
+                            Text(
+                                text = stringResource(id = R.string.editprofile),
+                                color = Color.White,
+                                fontSize = 20.sp
                             )
-                            DefaultButton(onClick = {
-                                viewModel.modifyUser(name.toString(), surname.toString())
-                                editing = false
-                            }, text = stringResource(id = R.string.save))
+                            if (user != null) {
+                                DefaultTextField(
+                                    value = name,
+                                    //placeholder = { Text(text = user.firstName) },
+                                    placeholder = stringResource(R.string.name),
+                                    callback = {
+                                        name = it
+                                    }
+                                )
+                                DefaultTextField(
+                                    value = surname,
+                                    //placeholder = { Text(text = user.lastName) },
+                                    placeholder = stringResource(R.string.lastname),
+                                    callback = {
+                                        surname = it
+                                    }
+                                )
+                            }
+                            Row(
+                                horizontalArrangement = Arrangement.SpaceAround,
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                DefaultButton(
+                                    onClick = { editing = false },
+                                    text = stringResource(id = R.string.cancel)
+                                )
+                                DefaultButton(onClick = {
+                                    viewModel.modifyUser(name.toString(), surname.toString())
+                                    editing = false
+                                }, text = stringResource(id = R.string.save))
+                            }
                         }
                     }
                 }
+            } else
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.profileError),
+                        fontSize = 20.sp,
+                        color = Color.White
+                    )
+                }
+        }else{
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = viewModel.uiState.message!!,
+                    fontSize = 20.sp,
+                    color = Color.White
+                )
             }
         }
-        else
-            Text("The user is not logged in yet")
     }
 
 }

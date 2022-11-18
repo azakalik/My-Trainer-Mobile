@@ -15,6 +15,16 @@
     <string name="signup_goto_signin">Go to Sign In</string>
     <string name="signup_goto_signup">Go to Sign Up</string>
     <string name="sign_error">The email or password inserted is incorrect</string>
+    <string name="title">My Trainer</string>
+    <string name="signup_insert_username">Insert Username *</string>
+    <string name="signup_continue">Continue</string>
+    <string name="signup_goback">Go back</string>
+    <string name="formerror">There is an error in the form: </string>
+    <string name="emailerror">the emails don\'t match</string>
+    <string name="passerror">the passwords don\'t match</string>
+    <string name="fielderror">obligatory fields empty</string>
+    <string name="createsucces">User created successfully, verify your email.</string>
+    <string name="verify">Verify Email</string>
 
     <!-- ViewWorkout -->
     <string name="share">Share</string>
@@ -32,16 +42,23 @@
     <string name="seeDetails">See Details</string>
     <string name="details">Exercise Details</string>
     <string name="noexercise">This cycle has no exercises.</string>
+    <string name="selected">No cycle selected</string>
+    <string name="detailedview">Detailed View</string>
+
+    <!-- Snackbars -->
+    <string name="favSnackBar">Routine is now favourite. Available in Favourites.</string>
+    <string name="unfavSnackBar">Routine is no longer favourite.</string>
+    <string name="rateSnackBar">Routine has been rated successfully.</string>
 
 
     <!-- Individual Exercise -->
     <string name="next">Next</string>
-    <string name="prev">Prev</string>
+    <string name="prev">Previous</string>
     <string name="detail">Detail</string>
     <string name="type">Type</string>
     <string name="repetitions">Repetitions</string>
     <string name="ended">Routine finished. Good job and keep it up!</string>
-    <string name="endtitle">Your are one step ahead than yesterday</string>
+    <string name="endtitle">Your are one step ahead than yesterday!</string>
 
     <!-- Favourites -->
     <string name="myfavourites">My Favourites</string>
@@ -60,10 +77,12 @@
     <string name="editprofile">Edit Profile</string>
     <string name="name">Name</string>
     <string name="lastname">Last Name</string>
+    <string name="logout">Logout</string>
 
 
     <!-- Filter FAB -->
     <string name="fab_name">Sort routines</string>
+    <string name="dir">Descending</string>
 
     <!-- Buttons -->
     <string name="accept">Accept</string>
@@ -83,10 +102,6 @@
     <string name="sort_difficulty">Difficulty</string>
     <string name="sort_category">Category</string>
 
-    <!-- Display routine info -->
-    <string name="display_difficulty">Creation date</string> <!-- TODO esto recibe como parametro la dificultad-->
-    <string name="display_rating">Creation date</string>
-    <string name="display_creator">Creation date</string>
 
     <!-- Routine types -->
     <string name="arms">Arms</string>
@@ -105,4 +120,28 @@
     <string name="info_rating">Rating: %1s</string>
     <string name="info_category">Category: %1s</string>
     <string name="info_description">Description: %1s</string>
+
+    <!-- CycleBox -->
+    <string name="reps">Repetitions: %1s</string>
+    <string name="cycleType">Cycle type: %1s</string>
+
+    <!-- CycleInformationButton -->
+    <string name="cycleName">Cycle Name: %1s</string>
+    <string name="cycleDetail">Detail: %1s</string>
+    <string name="cycle_type">Type: %1s</string>
+    <string name="cycleReps">Repetitions: %1s</string>
+    <string name="cycleinfo">Cycle information</string>
+
+    <!-- navButtons -->
+    <string name="Routines">Routines</string>
+    <string name="Favourites">Favourites</string>
+    <string name="Me">Me</string>
+
+    <!-- errors -->
+    <string name="profileError">The user is not logged in yet</string>
+
+
+
+
+
 </resources>

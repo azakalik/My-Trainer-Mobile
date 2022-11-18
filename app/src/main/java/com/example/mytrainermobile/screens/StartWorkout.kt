@@ -70,10 +70,14 @@ fun StartWorkout(
     val scaffoldState = rememberScaffoldState()
     val coroutineScope = rememberCoroutineScope()
 
+    val favouriteMessage = stringResource(id = R.string.favSnackBar)
+    val unfavouriteMessage = stringResource(id = R.string.unfavSnackBar)
+    val rateMessage = stringResource(id = R.string.rateSnackBar)
+
     val makeFavouriteCallback = {
             id: Int -> viewModel.makeFavourite(id) ;
             coroutineScope.launch {
-                when (scaffoldState.snackbarHostState.showSnackbar(message = "Routine has been favourited, now available in my routines", actionLabel = "OK", duration = SnackbarDuration.Short)) {
+                when (scaffoldState.snackbarHostState.showSnackbar(message = favouriteMessage, actionLabel = "OK", duration = SnackbarDuration.Short)) {
                     SnackbarResult.ActionPerformed -> scaffoldState.snackbarHostState.currentSnackbarData?.dismiss()
                     else -> {}
                 }
@@ -81,7 +85,7 @@ fun StartWorkout(
     }
     val removeFavouriteCallback = { id: Int -> viewModel.removeFavourite(id)
         coroutineScope.launch {
-            when (scaffoldState.snackbarHostState.showSnackbar(message = "Routine is no longer favourited", actionLabel = "OK",duration = SnackbarDuration.Short) ){
+            when (scaffoldState.snackbarHostState.showSnackbar(message = unfavouriteMessage, actionLabel = "OK",duration = SnackbarDuration.Short) ){
                 SnackbarResult.ActionPerformed -> scaffoldState.snackbarHostState.currentSnackbarData?.dismiss()
                 else -> {}
             }
@@ -90,7 +94,7 @@ fun StartWorkout(
 
     val showRatingSnackbar = {
         coroutineScope.launch {
-            when (scaffoldState.snackbarHostState.showSnackbar(message = "Routine has been rated succesfully", actionLabel = "OK",duration = SnackbarDuration.Short) ){
+            when (scaffoldState.snackbarHostState.showSnackbar(message = rateMessage, actionLabel = "OK",duration = SnackbarDuration.Short) ){
                 SnackbarResult.ActionPerformed -> scaffoldState.snackbarHostState.currentSnackbarData?.dismiss()
                 else -> {}
             }
@@ -100,103 +104,133 @@ fun StartWorkout(
 
 
         //--------------------------------------------------------Screen Rendering --------------
+    if(viewModel.uiState .message == null) {
 
-    if (uiState.routine != null) {
-        Scaffold(modifier = Modifier.fillMaxSize(),
-            scaffoldState = scaffoldState,
-            backgroundColor = DefaultBackground,
-            snackbarHost = {
-                           SnackbarHost(it) { state ->
-                               Snackbar(actionColor = DefaultColor, backgroundColor = DefaultSecondary, contentColor = Color.White, snackbarData = state)
-                           }
-            },
-            topBar = { TopBar(uiState.routine.name) },
-            bottomBar = { StartBar(onNavigateToRunningWorkout1, routineId, uiState.canExecute) },
-            floatingActionButton = { RoutineInfoFAB(viewModel) }) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Top,
-                modifier = Modifier.fillMaxSize()
+        if (uiState.routine != null) {
+            Scaffold(modifier = Modifier.fillMaxSize(),
+                scaffoldState = scaffoldState,
+                backgroundColor = DefaultBackground,
+                snackbarHost = {
+                    SnackbarHost(it) { state ->
+                        Snackbar(
+                            actionColor = DefaultColor,
+                            backgroundColor = DefaultSecondary,
+                            contentColor = Color.White,
+                            snackbarData = state
+                        )
+                    }
+                },
+                topBar = { TopBar(uiState.routine.name) },
+                bottomBar = {
+                    StartBar(
+                        onNavigateToRunningWorkout1,
+                        routineId,
+                        uiState.canExecute
+                    )
+                },
+                floatingActionButton = { RoutineInfoFAB(viewModel) }) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Top,
+                    modifier = Modifier.fillMaxSize()
 
-            ) {
-                Spacer(modifier = Modifier.padding(0.dp, 10.dp, 0.dp, 0.dp))
+                ) {
+                    Spacer(modifier = Modifier.padding(0.dp, 10.dp, 0.dp, 0.dp))
 
-                DescriptorBox(uiState.routine, viewModel, makeFavouriteCallback, removeFavouriteCallback, showRatingSnackbar)
-                if(uiState.canExecute) {
-                    LazyColumn(
-                        modifier = Modifier
-                            .padding(), contentPadding = PaddingValues(20.dp, 10.dp, 20.dp, 60.dp)
-                    ) {
-                        items(uiState.cycles) {
-                            Box(modifier = Modifier.padding(10.dp)) {
-                                CycleBox(
-                                    it,
-                                    viewModel,
-                                )
+                    DescriptorBox(
+                        uiState.routine,
+                        viewModel,
+                        makeFavouriteCallback,
+                        removeFavouriteCallback,
+                        showRatingSnackbar
+                    )
+                    if (uiState.canExecute) {
+                        LazyColumn(
+                            modifier = Modifier
+                                .padding(),
+                            contentPadding = PaddingValues(20.dp, 10.dp, 20.dp, 60.dp)
+                        ) {
+                            items(uiState.cycles) {
+                                Box(modifier = Modifier.padding(10.dp)) {
+                                    CycleBox(
+                                        it,
+                                        viewModel,
+                                    )
+                                }
                             }
                         }
+                    } else {
+                        Column(
+                            Modifier.fillMaxSize(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center
+                        ) {
+                            Text(stringResource(R.string.nocycles), fontSize = 25.sp)
+                        }
                     }
-                }else{
-                    Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-                        Text(stringResource(R.string.nocycles), fontSize = 25.sp)
-                    }
-                }
 
+                }
             }
         }
-    }
 
-    // ------------- CYCLE INFORMATION POPUP ------------------------------
-    if (uiState.showPopup) {
-        Popup(
-            alignment = Alignment.Center,
-            onDismissRequest = { viewModel.closePopup() },
-        ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth(0.6f)
-                    .border(
-                        width = 2.dp,
-                        color = DefaultColor,
-                        shape = RoundedCornerShape(15.dp)
-                    )
-                    .background(color = DefaultBackground, shape = RoundedCornerShape(15.dp))
+        // ------------- CYCLE INFORMATION POPUP ------------------------------
+        if (uiState.showPopup) {
+            Popup(
+                alignment = Alignment.Center,
+                onDismissRequest = { viewModel.closePopup() },
             ) {
-                Column(
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 20.dp),
-                    horizontalAlignment = Alignment.Start
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth(0.6f)
+                        .border(
+                            width = 2.dp,
+                            color = DefaultColor,
+                            shape = RoundedCornerShape(15.dp)
+                        )
+                        .background(color = DefaultBackground, shape = RoundedCornerShape(15.dp))
                 ) {
-                    Text(
-                        text = "Cycle information",
-                        color = Color.White,
-                        modifier = Modifier.padding(10.dp),
-                        fontSize = 20.sp
-                    )
-                    Text(
-                        "Cycle name: " + uiState.currentCycleForPopup!!.name
-                    )
-                    Text(
-                        "Detail: " + uiState.currentCycleForPopup.detail
-                    )
-                    Text(
-                        "Type: " + uiState.currentCycleForPopup.type
-                    )
-                    Text(
-                        "Repetitions: " + uiState.currentCycleForPopup.repetitions
-                    )
-                    Text(
-                        "Order: " + uiState.currentCycleForPopup.order
-                    )//todo fijarse si se va
-                    Row(
+                    Column(
                         Modifier
-                            .padding(10.dp)
-                            .fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-                        DefaultButton(onClick = { viewModel.closePopup() }, text = "Close")
+                            .fillMaxWidth()
+                            .padding(horizontal = 20.dp),
+                        horizontalAlignment = Alignment.Start
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.cycleinfo),
+                            color = Color.White,
+                            modifier = Modifier.padding(10.dp),
+                            fontSize = 20.sp
+                        )
+                        if(uiState.currentCycleForPopup != null) {
+                            Text( stringResource(R.string.cycleName, uiState.currentCycleForPopup.name) )
+
+                            if (uiState.currentCycleForPopup.detail != null) {
+                                Text( stringResource(id = R.string.cycleDetail, uiState.currentCycleForPopup.detail!!) )
+                            }
+                            Text( stringResource(R.string.cycle_type, uiState.currentCycleForPopup.type) )
+                            Text( stringResource(id = R.string.cycleReps, uiState.currentCycleForPopup.repetitions.toString()) )
+                        }
+                        Row(
+                            Modifier
+                                .padding(10.dp)
+                                .fillMaxWidth(), horizontalArrangement = Arrangement.Center
+                        ) {
+                            DefaultButton(onClick = { viewModel.closePopup() }, stringResource(id = R.string.close))
+                        }
                     }
                 }
             }
+        }
+    }else{
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = viewModel.uiState.message!!,
+                fontSize = 20.sp,
+                color = Color.White
+            )
         }
     }
 }

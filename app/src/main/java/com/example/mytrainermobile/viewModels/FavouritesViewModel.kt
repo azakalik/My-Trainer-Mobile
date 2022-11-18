@@ -15,7 +15,8 @@ class FavouritesViewModel(
     val favouriteRepository: FavouriteRepository,
 ) : ViewModel(),
     DefaultViewModelInterface, ToggleFavouriteViewModelnterface {
-    private var uiState by mutableStateOf(RoutineUIState())
+    var uiState by mutableStateOf(RoutineUIState())
+        private set
 
 
     override fun loadRoutines(refresh:Boolean): Job = viewModelScope.launch {

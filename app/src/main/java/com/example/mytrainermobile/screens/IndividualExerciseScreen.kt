@@ -57,71 +57,110 @@ fun IndividualExerciseScreen(routineId: Int, viewModel: IndividualExerciseScreen
             verticalArrangement = Arrangement.SpaceAround,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Card(
-                modifier = Modifier
-                    .height(400.dp)
-                    .padding(25.dp),
-                border = BorderStroke(width = 2.dp, color = DefaultColor),
-                backgroundColor = DefaultBackground,
-                elevation = 100.dp
-            ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    verticalArrangement = Arrangement.SpaceEvenly,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    if(!uiState.finished) {
-                        uiState.exercise?.exercise?.let { it1 -> DetailText(title = stringResource(R.string.name), description = it1.name) }
-                        uiState.exercise?.exercise?.detail?.let { it1 -> DetailText(title = stringResource(id = R.string.detail) , description = it1) }
-                        uiState.exercise?.exercise?.type?.let { it1 -> DetailText(title = stringResource(id = R.string.type), description = it1) }
-                        val time = uiState.exercise?.duration?.toLong()
+            if(viewModel.uiState.message == null) {
 
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceEvenly,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            DefaultButton(
-                                onClick = { viewModel.prevExercise(); newExercise = !newExercise },
-                                text = stringResource(id = R.string.prev)
-                            )
-                            if (uiState.exercise?.duration != 0 && time != null) {
-                                if(newExercise) {
-                                    Timer(
-                                        totalTime = time * 1000L,
-                                        handleColor = DefaultColor,
-                                        inactiveBarColor = DefaultBackground,
-                                        activeBarColor = DefaultColor,
-                                        modifier = Modifier.size(100.dp),
-                                    )
-                                }else{
-                                    Timer(
-                                        totalTime = time * 1000L,
-                                        handleColor = DefaultColor,
-                                        inactiveBarColor = DefaultBackground,
-                                        activeBarColor = DefaultColor,
-                                        modifier = Modifier.size(100.dp),
-                                    )
-                                }
-                            } else {
-                                Column() {
-                                    DetailText(
-                                        title = stringResource(id = R.string.repetitions),
-                                        description = uiState.exercise?.repetitions.toString()
-                                    )
-                                }
+                Card(
+                    modifier = Modifier
+                        .height(400.dp)
+                        .padding(25.dp),
+                    border = BorderStroke(width = 2.dp, color = DefaultColor),
+                    backgroundColor = DefaultBackground,
+                    elevation = 100.dp
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        verticalArrangement = Arrangement.SpaceEvenly,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        if (!uiState.finished) {
+                            uiState.exercise?.exercise?.let { it1 ->
+                                DetailText(
+                                    title = stringResource(
+                                        R.string.name
+                                    ), description = it1.name
+                                )
                             }
-                            DefaultButton(
-                                onClick = { viewModel.nextExercise(); newExercise = !newExercise },
-                                text = stringResource(id = R.string.next)
+                            uiState.exercise?.exercise?.detail?.let { it1 ->
+                                DetailText(
+                                    title = stringResource(
+                                        id = R.string.detail
+                                    ), description = it1
+                                )
+                            }
+                            uiState.exercise?.exercise?.type?.let { it1 ->
+                                DetailText(
+                                    title = stringResource(
+                                        id = R.string.type
+                                    ), description = it1
+                                )
+                            }
+                            val time = uiState.exercise?.duration?.toLong()
+
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceEvenly,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                DefaultButton(
+                                    onClick = {
+                                        viewModel.prevExercise(); newExercise = !newExercise
+                                    },
+                                    text = stringResource(id = R.string.prev)
+                                )
+                                if (uiState.exercise?.duration != 0 && time != null) {
+                                    if (newExercise) {
+                                        Timer(
+                                            totalTime = time * 1000L,
+                                            handleColor = DefaultColor,
+                                            inactiveBarColor = DefaultBackground,
+                                            activeBarColor = DefaultColor,
+                                            modifier = Modifier.size(100.dp),
+                                        )
+                                    } else {
+                                        Timer(
+                                            totalTime = time * 1000L,
+                                            handleColor = DefaultColor,
+                                            inactiveBarColor = DefaultBackground,
+                                            activeBarColor = DefaultColor,
+                                            modifier = Modifier.size(100.dp),
+                                        )
+                                    }
+                                } else {
+                                    Column() {
+                                        DetailText(
+                                            title = stringResource(id = R.string.repetitions),
+                                            description = uiState.exercise?.repetitions.toString()
+                                        )
+                                    }
+                                }
+                                DefaultButton(
+                                    onClick = {
+                                        viewModel.nextExercise(); newExercise = !newExercise
+                                    },
+                                    text = stringResource(id = R.string.next)
+                                )
+                            }
+                        } else {
+                            Text(
+                                text = stringResource(id = R.string.ended), color = DefaultColor,
+                                fontSize = 28.sp,
+                                fontWeight = FontWeight.Bold
                             )
                         }
-                    }else{
-                        Text(text = stringResource(id = R.string.ended),color = DefaultColor,
-                            fontSize = 28.sp,
-                            fontWeight = FontWeight.Bold )
                     }
+                }
+            }
+            else{
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = viewModel.uiState.message!!,
+                        fontSize = 20.sp,
+                        color = Color.White
+                    )
                 }
             }
         }

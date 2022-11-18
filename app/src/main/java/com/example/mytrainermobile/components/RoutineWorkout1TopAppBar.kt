@@ -5,6 +5,8 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import com.example.mytrainermobile.R
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
 import com.example.mytrainermobile.viewModels.RunningWorkout1ViewModel
@@ -16,7 +18,7 @@ fun RW1TopBar(viewModel: RunningWorkout1ViewModel, onNavigateToIndividualExercis
             modifier = Modifier.fillMaxWidth(),
             text =
             if (viewModel.uiState.currentCycle != null) viewModel.uiState.currentCycle!!.name
-            else "No Cycle selected"
+            else stringResource(id = R.string.selected)
         )
-    }, actions = { DefaultButton({ onNavigateToIndividualExercise(routineId) }, "Detailed view") })
+    }, actions = { DefaultButton({ onNavigateToIndividualExercise(routineId) }, stringResource(id = R.string.detailedview)) })
 }

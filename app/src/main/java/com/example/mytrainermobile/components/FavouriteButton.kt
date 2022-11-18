@@ -37,7 +37,7 @@ fun FavouriteButton(
                 contentDescription = "Favorite",
                 tint = color,
             )
-            Text(text = "Favourite", color = Color.White)
+            Text(text = stringResource(id = R.string.favourite), color = Color.White)
         }
 
     }

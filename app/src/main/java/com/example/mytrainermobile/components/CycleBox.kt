@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -16,6 +17,8 @@ import com.example.mytrainermobile.data.model.Cycle
 import com.example.mytrainermobile.ui.theme.DefaultColor
 import com.example.mytrainermobile.ui.theme.DefaultSecondary
 import com.example.mytrainermobile.viewModels.StartWorkoutViewModel
+import com.example.mytrainermobile.R
+
 
 @Composable
 fun CycleBox(
@@ -44,8 +47,8 @@ fun CycleBox(
                 )
             }
             Column(verticalArrangement = Arrangement.SpaceAround, modifier = Modifier.fillMaxHeight()) {
-                Text(text = "Repetitions: " + cycle.repetitions)
-                Text(text = "Cycle type: " + cycle.type, style = TextStyle(Color.White))
+                Text(text = stringResource( R.string.reps, cycle.repetitions.toString()))
+                Text(text = stringResource(id = R.string.cycleType, cycle.type), style = TextStyle(Color.White))
             }
         }
     }

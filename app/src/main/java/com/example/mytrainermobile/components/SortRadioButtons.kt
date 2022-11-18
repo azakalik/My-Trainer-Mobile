@@ -8,6 +8,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -15,6 +16,8 @@ import androidx.compose.ui.unit.dp
 import com.example.mytrainermobile.aux_functions.getSortOptionsList
 import com.example.mytrainermobile.ui.theme.DefaultColor
 import com.example.mytrainermobile.viewModels.DefaultViewModelInterface
+import com.example.mytrainermobile.R
+
 
 
 @Composable
@@ -73,7 +76,7 @@ fun ShowRadioButtons(viewModel: DefaultViewModelInterface){
             )
         )
         Text(
-            text = "Descending",
+            text = stringResource(id = R.string.dir),
             style = MaterialTheme.typography.bodyLarge,
             modifier = Modifier.padding(start = 16.dp),
             color = Color.White

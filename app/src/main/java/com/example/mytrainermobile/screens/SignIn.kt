@@ -41,7 +41,7 @@ fun ShowSignInScreen(
             ) {
                 // -------- TITLE--------------------------------------
                 Text(
-                    text = "My Trainer",
+                    text = stringResource(id = R.string.title),
                     modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 20.dp),
                     color = DefaultColor,
                     fontSize = 64.sp,
