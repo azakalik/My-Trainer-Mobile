@@ -86,7 +86,7 @@ fun VerifyEmailScreen(
                 else {
                     ShowVerifyCompletedPopup(
                         onNavigateToSignIn = onNavigateToSignIn,
-                        showPopup = !uiState.errorOcurred
+                        showPopup = !uiState.errorOcurred && uiState.attemptedToVerify
                     )
                 }
             }

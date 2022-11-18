@@ -26,6 +26,7 @@ class VerifyEmailViewModel(
         }.onSuccess {
             uiState = uiState.copy(
                 isFetching = false,
+                attemptedToVerify = true,
             )
         }.onFailure { e ->
             // Handle the error and notify the UI when appropriate.

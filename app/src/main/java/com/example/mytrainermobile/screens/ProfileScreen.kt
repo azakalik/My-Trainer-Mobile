@@ -34,14 +34,11 @@ import com.example.mytrainermobile.util.getViewModelFactory
 fun ShowProfileScreen(
     viewModel: MainViewModel = viewModel(factory = getViewModelFactory())
 ) {
-    var counter by  remember  { mutableStateOf(0) }
-    counter++
-    Log.d("mensajeProfile",counter.toString())
     val uiState = viewModel.uiState
     val activity = (LocalContext.current as? Activity)
     var editing by remember { mutableStateOf(false) }
+//    viewModel.getCurrentUser()
     val user = uiState.currentUser
-    viewModel.getCurrentUser()
     Column {
         val configuration = LocalConfiguration.current
         when (configuration.orientation) {

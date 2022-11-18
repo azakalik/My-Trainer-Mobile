@@ -34,6 +34,7 @@ class MainViewModel(
                 isFetching = false,
                 isAuthenticated = true
             )
+            getCurrentUser()
         }.onFailure { e ->
             // Handle the error and notify the UI when appropriate.
             uiState = uiState.copy(
