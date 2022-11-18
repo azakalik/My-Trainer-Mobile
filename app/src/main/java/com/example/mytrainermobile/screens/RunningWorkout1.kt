@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mytrainermobile.R
+import com.example.mytrainermobile.components.DefaultButton
 import com.example.mytrainermobile.components.ExerciseBox
 import com.example.mytrainermobile.components.RW1TopBar
 import com.example.mytrainermobile.data.model.Cycle
@@ -154,13 +155,8 @@ fun DrawerBody(
 ) {
     LazyColumn(modifier) {
         items(items) { item ->
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { onItemClick(item) }
-                    .padding(16.dp)
-            ) {
-                Text(text = item.name, modifier = Modifier.weight(1f))
+            Button(onClick = {onItemClick(item)}) {
+                Text(text = item.name, color = Color.White)
             }
         }
     }
