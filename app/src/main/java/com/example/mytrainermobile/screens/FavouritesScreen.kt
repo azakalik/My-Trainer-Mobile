@@ -11,7 +11,6 @@ import com.example.mytrainermobile.viewModels.ToggleFavouriteViewModelnterface
 @Composable
 fun FavouritesView(
     onNavigateToStartWorkout: (id:Int) -> Unit,
-    //favouriteMaker: ToggleFavouriteViewModelnterface
     ) {
 
     val viewModel: FavouritesViewModel = viewModel(factory = getViewModelFactory())
@@ -22,6 +21,6 @@ fun FavouritesView(
         title = stringResource(id = R.string.myfavourites),
         onNavigateToStartWorkout,
         viewModel = viewModel,
-    //    favouriteMaker = favouriteMaker
+        false
     )
 }

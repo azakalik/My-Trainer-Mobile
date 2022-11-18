@@ -1,6 +1,5 @@
 package com.example.mytrainermobile.viewModels
 
-import com.example.mytrainermobile.data.model.Review
 import com.example.mytrainermobile.data.model.Routine
 import com.example.mytrainermobile.screenStates.RoutineUIState
 import kotlinx.coroutines.Job
@@ -9,7 +8,7 @@ interface DefaultViewModelInterface {
     fun loadRoutines(refresh:Boolean = false) : Job
     fun getRoutineList() : List<Routine>
     fun getState(): RoutineUIState
-    fun toggleShowSortFAB()
+    fun toggleShowSortButton()
     fun toggleAuxSortDescending()
     fun toggleAuxSortingBy(sortingOption: String)
     fun saveChanges(): Job

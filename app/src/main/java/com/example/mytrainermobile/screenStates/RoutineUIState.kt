@@ -6,7 +6,7 @@ data class RoutineUIState (
     val message:String? = null,
     val isFetching: Boolean = false,
     val routineList: List<Routine> = emptyList(),
-    val showSortFAB: Boolean = false,
+    val showSortButton: Boolean = false,
     val sortingBy: String = "date",
     val auxSortingBy: String = "date",
     val sortDescending: Boolean = false,

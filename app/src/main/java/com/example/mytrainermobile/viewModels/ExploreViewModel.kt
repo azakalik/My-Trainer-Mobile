@@ -1,12 +1,10 @@
 package com.example.mytrainermobile.viewModels
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mytrainermobile.data.model.Review
 import com.example.mytrainermobile.data.model.Routine
 import com.example.mytrainermobile.data.network.repository.RoutineRepository
 import com.example.mytrainermobile.screenStates.RoutineUIState
@@ -44,9 +42,9 @@ class ExploreViewModel(val routineRepository: RoutineRepository) : ViewModel(),
         return uiState
     }
 
-    override fun toggleShowSortFAB() {
+    override fun toggleShowSortButton() {
         uiState = uiState.copy(
-            showSortFAB = !(uiState.showSortFAB)
+            showSortButton = !(uiState.showSortButton)
         )
     }
 

@@ -2,21 +2,22 @@ package com.example.mytrainermobile.screens
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
-import androidx.compose.material.IconButton
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -34,9 +35,8 @@ import com.example.mytrainermobile.viewModels.DefaultViewModelInterface
 fun DefaultShowRoutinesScreen(
     title: String,
     onNavigateToStartWorkout: (id: Int) -> Unit,
-
     viewModel: DefaultViewModelInterface,
-
+    showSort: Boolean = true
 ) {
     MyTrainerMobileTheme() {
         val routineList = viewModel.getRoutineList()
@@ -56,21 +56,38 @@ fun DefaultShowRoutinesScreen(
                         ) {
                             TitleForSection()
                         }
-                        Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-                            TitleBox(
-                                title = title
-                            )
-                            IconButton(onClick = {
-                                viewModel.toggleShowSortFAB()
-                            }) {
-                                androidx.compose.material.Icon(
-                                    modifier = Modifier.size(35.dp),
-                                    imageVector = Icons.Filled.Menu,
-                                    contentDescription = "Menu",
-                                    tint = DefaultColor,
+                        if (showSort) {
+                            Row(
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                TitleBox(
+                                    title = title
+                                )
+                                IconButton(onClick = {
+                                    viewModel.toggleShowSortButton()
+                                }) {
+                                    androidx.compose.material.Icon(
+                                        painter = painterResource(R.drawable.ic_baseline_sort_24),
+                                        contentDescription = "Sort",
+                                        tint = DefaultColor,
+                                        modifier = Modifier.padding(10.dp)
+                                    )
+                                }
+                            }
+                        } else {
+                            Row(
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                TitleBox(
+                                    title = title
                                 )
                             }
                         }
+
                     }
                 }
                 else -> {
@@ -85,15 +102,17 @@ fun DefaultShowRoutinesScreen(
                             title = title
                         )
                         TitleForSection()
-                        IconButton(onClick = {
-                            viewModel.toggleShowSortFAB()
-                        }) {
-                            androidx.compose.material.Icon(
-                                modifier = Modifier.size(35.dp),
-                                imageVector = Icons.Filled.Menu,
-                                contentDescription = "Menu",
-                                tint = DefaultColor,
-                            )
+                        if(showSort){
+                            IconButton(onClick = {
+                                viewModel.toggleShowSortButton()
+                            }) {
+                                androidx.compose.material.Icon(
+                                    modifier = Modifier.size(35.dp),
+                                    imageVector = Icons.Filled.Menu,
+                                    contentDescription = "Menu",
+                                    tint = DefaultColor,
+                                )
+                            }
                         }
                     }
                 }
@@ -117,10 +136,10 @@ fun DefaultShowRoutinesScreen(
                     }
                 }
             )
-            if (viewModel.getState().showSortFAB) {
+            if (viewModel.getState().showSortButton) {
                 Popup(
                     alignment = Alignment.Center,
-                    onDismissRequest = { viewModel.toggleShowSortFAB() },
+                    onDismissRequest = { viewModel.toggleShowSortButton() },
                 ) {
                     Box(
                         modifier = Modifier
@@ -130,14 +149,20 @@ fun DefaultShowRoutinesScreen(
                                 color = DefaultColor,
                                 shape = RoundedCornerShape(15.dp)
                             )
-                            .background(color = DefaultBackground, shape = RoundedCornerShape(15.dp))
+                            .background(
+                                color = DefaultBackground,
+                                shape = RoundedCornerShape(15.dp)
+                            )
                     ) {
                         Column(
                             Modifier.fillMaxWidth(),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             // --------- POPUP TITLE --------------------------------
-                            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+                            Row(
+                                Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.Center
+                            ) {
                                 Text(
                                     text = stringResource(id = R.string.fab_name),
                                     color = Color.White,
@@ -152,12 +177,12 @@ fun DefaultShowRoutinesScreen(
                                 horizontalArrangement = Arrangement.SpaceEvenly
                             ) {
                                 DefaultButton(
-                                    onClick = { viewModel.toggleShowSortFAB(); viewModel.unSaveChanges() },
+                                    onClick = { viewModel.toggleShowSortButton(); viewModel.unSaveChanges() },
                                     text = stringResource(id = R.string.cancel)
                                 )
                                 DefaultButton(
                                     onClick = {
-                                        viewModel.toggleShowSortFAB(); viewModel.saveChanges()
+                                        viewModel.toggleShowSortButton(); viewModel.saveChanges()
                                     },
                                     text = stringResource(id = R.string.accept)
                                 )

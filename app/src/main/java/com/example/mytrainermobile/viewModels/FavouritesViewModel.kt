@@ -56,9 +56,9 @@ class FavouritesViewModel(
         }
     }
 
-    override fun toggleShowSortFAB() {
+    override fun toggleShowSortButton() {
         uiState = uiState.copy(
-            showSortFAB = !(uiState.showSortFAB)
+            showSortButton = !(uiState.showSortButton)
         )
     }
 
