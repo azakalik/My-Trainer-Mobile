@@ -16,3 +16,4 @@ data class StartWorkoutState(
 )
 
 val StartWorkoutState.showPopup: Boolean get() = currentCycleForPopup != null
+val StartWorkoutState.canExecute: Boolean get() = cycles.isNotEmpty()

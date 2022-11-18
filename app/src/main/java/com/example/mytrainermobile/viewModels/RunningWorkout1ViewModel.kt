@@ -50,8 +50,12 @@ class RunningWorkout1ViewModel(
         }.onSuccess { response ->
             uiState = uiState.copy(
                 isFetching = false,
-                cycles = response
+                cycles = response,
+                currentCycle = if(response.isNotEmpty()) response[0] else null
             )
+            if(uiState.currentCycle != null) {
+                getCycleExercises(uiState.currentCycle!!.id)
+            }
         }.onFailure {  e ->
             uiState = uiState.copy(
                 message = e.message,

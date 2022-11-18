@@ -22,6 +22,7 @@
     <string name="rate">Rate</string>
     <string name="ratepopup">Rate Current Workout</string>
     <string name="start">Start Workout</string>
+    <string name="nocycles">This routine has no cycles.</string>
 
     <!-- Running workout 1 -->
 
@@ -30,6 +31,15 @@
     <string name="viewCycles">View Cycles</string>
     <string name="seeDetails">See Details</string>
     <string name="details">Exercise Details</string>
+    <string name="noexercise">This cycle has no exercises.</string>
+
+
+    <!-- Individual Exercise -->
+    <string name="next">Next</string>
+    <string name="prev">Prev</string>
+    <string name="detail">Detail</string>
+    <string name="type">Type</string>
+    <string name="repetitions">Repetitions:</string>
 
     <!-- Favourites -->
     <string name="myfavourites">My Favourites</string>

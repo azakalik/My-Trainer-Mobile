@@ -21,6 +21,7 @@ import com.example.mytrainermobile.R
 import com.example.mytrainermobile.components.*
 import com.example.mytrainermobile.data.model.Cycle
 import com.example.mytrainermobile.data.model.Routine
+import com.example.mytrainermobile.screenStates.canExecute
 import com.example.mytrainermobile.screenStates.showPopup
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
@@ -32,7 +33,7 @@ import java.lang.Thread.sleep
 
 
 @Composable
-fun StartBar(onNavigateToRunningWorkout1: (id: Int) -> Unit, routineId: Int) {
+fun StartBar(onNavigateToRunningWorkout1: (id: Int) -> Unit, routineId: Int, enabled: Boolean) {
     Box(
         Modifier
             .background(DefaultBackground)
@@ -41,7 +42,8 @@ fun StartBar(onNavigateToRunningWorkout1: (id: Int) -> Unit, routineId: Int) {
     ) {
         DefaultButton(
             text = stringResource(id = R.string.start),
-            onClick = { onNavigateToRunningWorkout1(routineId) }
+            onClick = { onNavigateToRunningWorkout1(routineId) },
+            enabled = enabled
         )
     }
 }
@@ -108,7 +110,7 @@ fun StartWorkout(
                            }
             },
             topBar = { TopBar(uiState.routine.name) },
-            bottomBar = { StartBar(onNavigateToRunningWorkout1, routineId) },
+            bottomBar = { StartBar(onNavigateToRunningWorkout1, routineId, uiState.canExecute) },
             floatingActionButton = { RoutineInfoFAB(viewModel) }) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -117,20 +119,28 @@ fun StartWorkout(
 
             ) {
                 Spacer(modifier = Modifier.padding(0.dp, 10.dp, 0.dp, 0.dp))
-                DescriptorBox(uiState.routine, viewModel, makeFavouriteCallback, removeFavouriteCallback, showRatingSnackbar)
-                LazyColumn(
-                    modifier = Modifier
-                        .padding(), contentPadding = PaddingValues(20.dp, 10.dp, 20.dp, 60.dp)
-                ) {
-                    items(uiState.cycles) {
-                        Box(modifier = Modifier.padding(10.dp)) {
-                            CycleBox(
-                                it,
-                                viewModel,
-                            )
+
+                DescriptorBox(uiState.routine, viewModel, makeFavouriteCallback, removeFavouriteCallback)
+                if(uiState.canExecute) {
+                    LazyColumn(
+                        modifier = Modifier
+                            .padding(), contentPadding = PaddingValues(20.dp, 10.dp, 20.dp, 60.dp)
+                    ) {
+                        items(uiState.cycles) {
+                            Box(modifier = Modifier.padding(10.dp)) {
+                                CycleBox(
+                                    it,
+                                    viewModel,
+                                )
+                            }
                         }
                     }
+                }else{
+                    Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+                        Text(stringResource(R.string.nocycles), fontSize = 25.sp)
+                    }
                 }
+
             }
         }
     }

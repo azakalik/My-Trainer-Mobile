@@ -4,7 +4,6 @@ package com.example.mytrainermobile.screens
 import android.annotation.SuppressLint
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -28,6 +27,7 @@ import com.example.mytrainermobile.components.DefaultButton
 import com.example.mytrainermobile.components.ExerciseBox
 import com.example.mytrainermobile.components.RW1TopBar
 import com.example.mytrainermobile.data.model.Cycle
+import com.example.mytrainermobile.screenStates.hasExercises
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
 import com.example.mytrainermobile.util.getViewModelFactory
@@ -41,25 +41,23 @@ fun RunningWorkout1(
     viewModel: RunningWorkout1ViewModel = viewModel(factory = getViewModelFactory()),
     ) {
 
+    val uiState = viewModel.uiState
+    var popupControl by remember { mutableStateOf(false) }
+    val scaffoldState = rememberScaffoldState()
+    rememberCoroutineScope()
+
     var fetchInformation by remember { mutableStateOf(true) }
     if (fetchInformation) {
         viewModel.getRoutineCycles(routineId)
+
         fetchInformation = false
     }
-
-    var popupControl by remember { mutableStateOf(false) }
-
-
-    val uiState = viewModel.uiState
-
-    val scaffoldState = rememberScaffoldState()
-    rememberCoroutineScope()
 
     Scaffold(
         scaffoldState = scaffoldState,
         modifier = Modifier.fillMaxSize(),
         backgroundColor = DefaultBackground,
-        topBar = { RW1TopBar(viewModel, onNavigateToIndividualExercise) },
+        topBar = { RW1TopBar(viewModel, onNavigateToIndividualExercise, routineId) },
         bottomBar = {
             BottomAppBar(
                 // Defaults to null, that is, No cutout
@@ -120,27 +118,36 @@ fun RunningWorkout1(
             }
         }
         Column() {
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize(), contentPadding = PaddingValues(20.dp)
-            ) {
-                items(uiState.cycleExercises.orEmpty())
-                {
-                    Box(modifier = Modifier
-                        .padding(10.dp)
-                        .pointerInput(Unit) {
-                            detectTapGestures(
-                                onDoubleTap = {/*TODO DOUBLETAP*/ },
-                                onTap = {/*TODO */ }
-                            )
-                        }) {
-                        it.repetitions?.let { it1 ->
-                            ExerciseBox(
-                                it.exercise.name, it.exercise.detail, it.exercise.type, it.duration,
-                                it1
-                            )
+            if(uiState.hasExercises) {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize(), contentPadding = PaddingValues(20.dp)
+                ) {
+                    items(uiState.cycleExercises)
+                    {
+                        Box(modifier = Modifier
+                            .padding(10.dp)
+                            .pointerInput(Unit) {
+                                detectTapGestures(
+                                    onDoubleTap = {/*TODO DOUBLETAP*/ },
+                                    onTap = {/*TODO */ }
+                                )
+                            }) {
+                            it.repetitions?.let { it1 ->
+                                ExerciseBox(
+                                    it.exercise.name,
+                                    it.exercise.detail,
+                                    it.exercise.type,
+                                    it.duration,
+                                    it1
+                                )
+                            }
                         }
                     }
+                }
+            }else{
+                Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+                    Text(stringResource(R.string.noexercise), fontSize = 25.sp)
                 }
             }
         }

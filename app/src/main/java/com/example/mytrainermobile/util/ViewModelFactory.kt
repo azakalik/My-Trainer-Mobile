@@ -38,6 +38,8 @@ class ViewModelFactory constructor(
                 StartWorkoutViewModel(routineCyclesRepository, routineRepository,favouriteRepository)
             isAssignableFrom(RunningWorkout1ViewModel::class.java) ->
                 RunningWorkout1ViewModel(cycleExercisesRepository, routineCyclesRepository)
+            isAssignableFrom(IndividualExerciseScreenViewModel::class.java) ->
+                IndividualExerciseScreenViewModel(cycleExercisesRepository, routineCyclesRepository)
             isAssignableFrom(MainViewModel::class.java) ->
                 MainViewModel(sessionManager, userRepository, sportRepository, routineRepository)
             else ->

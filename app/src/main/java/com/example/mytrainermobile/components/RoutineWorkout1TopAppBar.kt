@@ -10,7 +10,7 @@ import com.example.mytrainermobile.ui.theme.DefaultColor
 import com.example.mytrainermobile.viewModels.RunningWorkout1ViewModel
 
 @Composable
-fun RW1TopBar(viewModel: RunningWorkout1ViewModel, onNavigateToIndividualExercise: (id: Int) -> Unit,) {
+fun RW1TopBar(viewModel: RunningWorkout1ViewModel, onNavigateToIndividualExercise: (id: Int) -> Unit, routineId: Int) {
     TopAppBar(backgroundColor = DefaultBackground, contentColor = DefaultColor, title = {
         Text(
             modifier = Modifier.fillMaxWidth(),
@@ -18,5 +18,5 @@ fun RW1TopBar(viewModel: RunningWorkout1ViewModel, onNavigateToIndividualExercis
             if (viewModel.uiState.currentCycle != null) viewModel.uiState.currentCycle!!.name
             else "No Cycle selected"
         )
-    }, actions = { DefaultButton({ onNavigateToIndividualExercise(viewModel.uiState.currentCycle!!.id) }, "Detailed view") })
+    }, actions = { DefaultButton({ onNavigateToIndividualExercise(routineId) }, "Detailed view") })
 }
