@@ -36,11 +36,6 @@ fun AppNavigatorHandler(
         AppNavigatorItems.Explore.route,
         AppNavigatorItems.Profile.route
     )
-    val filterScreen = listOf(
-        AppNavigatorItems.Favourites.route,
-        AppNavigatorItems.MyRoutines.route,
-        AppNavigatorItems.Explore.route
-    )
 
     val currentRoute = navBackStackEntry?.destination?.route
 

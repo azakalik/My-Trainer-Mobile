@@ -37,10 +37,10 @@ fun ThisBottomAppBar(navController: NavController, showBottomBar: Boolean) {
                     selected = currentRoute == item.route,
                     onClick = {
                         navController.navigate(item.route) {
-                            navController.graph.startDestinationRoute?.let { screenRoute ->
-                                popUpTo(screenRoute) {
+                            navController.graph.startDestinationRoute?.let {
+                                popUpTo(BottomNavigationData.MyRoutines.route) {
                                     saveState = true
-                                    inclusive = true
+                                    inclusive = false
                                 }
                                 launchSingleTop = true
                                 restoreState = true
