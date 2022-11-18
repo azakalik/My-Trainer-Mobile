@@ -20,6 +20,7 @@ import com.example.mytrainermobile.data.model.Routine
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.viewModels.DefaultViewModelInterface
 import com.example.mytrainermobile.viewModels.StartWorkoutViewModel
+import kotlinx.coroutines.Job
 
 @Composable
 fun ratingSystem(): Int {
@@ -111,7 +112,7 @@ fun ratingSystem(): Int {
 }
 
 @Composable
-fun RateButton(viewModel: StartWorkoutViewModel, routineId: Int) {
+fun RateButton(viewModel: StartWorkoutViewModel, routineId: Int,showRatingSnackBar: () ->Job) {
     var popupControl by remember { mutableStateOf(false) }
     val colorStar = if (popupControl) Color.Yellow else Color.White
 
@@ -163,6 +164,7 @@ fun RateButton(viewModel: StartWorkoutViewModel, routineId: Int) {
                             var review = Review(rating, "")
                             viewModel.reviewRoutine(review, routineId)
                             popupControl = false
+                            showRatingSnackBar()
                         }, text = stringResource(id = R.string.save))
                     }
                 }
