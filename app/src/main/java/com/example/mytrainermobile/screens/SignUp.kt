@@ -46,12 +46,14 @@ fun ShowSignupScreen(
             Column(
                 modifier = Modifier
                     .verticalScroll(state = ScrollState(initial = 0))
-                    .fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceAround
             ) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    //verticalArrangement = Arrangement.SpaceEvenly
+                    verticalArrangement = Arrangement.SpaceEvenly,
+                    modifier = Modifier.fillMaxSize()
                 ) {
                     Text(
                         text = "My Trainer",

@@ -3,6 +3,9 @@ package com.example.mytrainermobile.viewModels
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mytrainermobile.data.model.Routine
@@ -87,4 +90,5 @@ class ExploreViewModel(val routineRepository: RoutineRepository) : ViewModel(),
             index = 0
         )
     }
+
 }

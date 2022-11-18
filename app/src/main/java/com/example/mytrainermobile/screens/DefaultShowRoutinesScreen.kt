@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
@@ -38,8 +39,12 @@ fun DefaultShowRoutinesScreen(
     viewModel: DefaultViewModelInterface,
     showSort: Boolean = true
 ) {
+    val configuration = LocalConfiguration.current
+    val screenHeight = configuration.screenHeightDp.dp
+    val screenWidth = configuration.screenWidthDp.dp
+
     MyTrainerMobileTheme() {
-        val bigScreenMode = viewModel.getScreenMode()
+        val bigScreenMode = viewModel.getScreenMode(screenWidth)
         val routineList = viewModel.getRoutineList()
         Column(modifier = Modifier.fillMaxWidth()) {
             val configuration = LocalConfiguration.current
@@ -74,7 +79,7 @@ fun DefaultShowRoutinesScreen(
                                         painter = painterResource(R.drawable.ic_baseline_sort_24),
                                         contentDescription = "Sort",
                                         tint = DefaultColor,
-                                        modifier = Modifier.padding(10.dp).size(viewModel.getSortSize())
+                                        modifier = Modifier.padding(10.dp).size(viewModel.getSortSize(screenWidth))
                                     )
                                 }
                             }
@@ -114,7 +119,7 @@ fun DefaultShowRoutinesScreen(
                                     painter = painterResource(R.drawable.ic_baseline_sort_24),
                                     contentDescription = "Sort",
                                     tint = DefaultColor,
-                                    modifier = Modifier.padding(10.dp).size(viewModel.getSortSize())
+                                    modifier = Modifier.padding(10.dp).size(viewModel.getSortSize(screenWidth))
                                 )
                             }
                         }
