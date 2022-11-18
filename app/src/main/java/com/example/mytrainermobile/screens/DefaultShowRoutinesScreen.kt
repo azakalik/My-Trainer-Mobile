@@ -39,6 +39,7 @@ fun DefaultShowRoutinesScreen(
     showSort: Boolean = true
 ) {
     MyTrainerMobileTheme() {
+        val bigScreenMode = viewModel.getScreenMode()
         val routineList = viewModel.getRoutineList()
         Column(modifier = Modifier.fillMaxWidth()) {
             val configuration = LocalConfiguration.current
@@ -54,7 +55,7 @@ fun DefaultShowRoutinesScreen(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.Center
                         ) {
-                            TitleForSection()
+                            TitleForSection(bigScreenMode)
                         }
                         if (showSort) {
                             Row(
@@ -63,7 +64,8 @@ fun DefaultShowRoutinesScreen(
                                 modifier = Modifier.fillMaxWidth()
                             ) {
                                 TitleBox(
-                                    title = title
+                                    title = title,
+                                    bigScreenMode
                                 )
                                 IconButton(onClick = {
                                     viewModel.toggleShowSortButton()
@@ -72,7 +74,7 @@ fun DefaultShowRoutinesScreen(
                                         painter = painterResource(R.drawable.ic_baseline_sort_24),
                                         contentDescription = "Sort",
                                         tint = DefaultColor,
-                                        modifier = Modifier.padding(10.dp)
+                                        modifier = Modifier.padding(10.dp).size(viewModel.getSortSize())
                                     )
                                 }
                             }
@@ -83,7 +85,8 @@ fun DefaultShowRoutinesScreen(
                                 modifier = Modifier.fillMaxWidth()
                             ) {
                                 TitleBox(
-                                    title = title
+                                    title = title,
+                                    bigScreenMode
                                 )
                             }
                         }
@@ -99,43 +102,65 @@ fun DefaultShowRoutinesScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         TitleBox(
-                            title = title
+                            title = title,
+                            bigScreenMode
                         )
-                        TitleForSection()
+                        TitleForSection(bigScreenMode)
                         if(showSort){
                             IconButton(onClick = {
                                 viewModel.toggleShowSortButton()
                             }) {
                                 androidx.compose.material.Icon(
-                                    modifier = Modifier.size(35.dp),
-                                    imageVector = Icons.Filled.Menu,
-                                    contentDescription = "Menu",
+                                    painter = painterResource(R.drawable.ic_baseline_sort_24),
+                                    contentDescription = "Sort",
                                     tint = DefaultColor,
+                                    modifier = Modifier.padding(10.dp).size(viewModel.getSortSize())
                                 )
                             }
                         }
                     }
                 }
             }
-            var bigScreenMode = false
-            LazyVerticalGrid(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(),
-                contentPadding = PaddingValues(5.dp, 0.dp, 5.dp, 80.dp),
-                horizontalArrangement = Arrangement.SpaceAround,
-                verticalArrangement = Arrangement.Center,
-                columns = GridCells.Adaptive(150.dp),
-                content = {
-                    items(routineList.size) { idx ->
-                        RoutineBox(
-                            routineList[idx],
-                            onNavigateToStartWorkout,
-                            bigScreenMode
-                        )
+            if(bigScreenMode){
+                LazyVerticalGrid(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(),
+                    contentPadding = PaddingValues(5.dp, 0.dp, 5.dp, 80.dp),
+                    horizontalArrangement = Arrangement.SpaceAround,
+                    verticalArrangement = Arrangement.Center,
+                    columns = GridCells.Adaptive(400.dp),
+                    content = {
+                        items(routineList.size) { idx ->
+                            RoutineBox(
+                                routineList[idx],
+                                onNavigateToStartWorkout,
+                                bigScreenMode
+                            )
+                        }
                     }
-                }
-            )
+                )
+            } else {
+                LazyVerticalGrid(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(),
+                    contentPadding = PaddingValues(5.dp, 0.dp, 5.dp, 80.dp),
+                    horizontalArrangement = Arrangement.SpaceAround,
+                    verticalArrangement = Arrangement.Center,
+                    columns = GridCells.Adaptive(150.dp),
+                    content = {
+                        items(routineList.size) { idx ->
+                            RoutineBox(
+                                routineList[idx],
+                                onNavigateToStartWorkout,
+                                bigScreenMode
+                            )
+                        }
+                    }
+                )
+            }
+
             if (viewModel.getState().showSortButton) {
                 Popup(
                     alignment = Alignment.Center,

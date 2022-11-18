@@ -15,17 +15,19 @@ import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
 
 @Composable
-fun TitleForSection() {
+fun TitleForSection(bigScreenMode : Boolean = false) {
+    val size = if(bigScreenMode) 96.sp else 44.sp
     Text(
         text = "My Trainer",
         color = DefaultColor,
-        fontSize = 44.sp,
+        fontSize = size,
         fontWeight = FontWeight.Bold
     )
 }
 
 @Composable
-fun TitleBox(title: String) {
+fun TitleBox(title: String, bigScreenMode: Boolean = false) {
+    val size = if(bigScreenMode) 32.sp else 16.sp
     Box(
         modifier = Modifier
             .offset(x = (-5).dp)
@@ -40,7 +42,7 @@ fun TitleBox(title: String) {
                 text = title,
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
-                fontSize = 16.sp,
+                fontSize = size,
                 modifier = Modifier.padding(vertical = 5.dp, horizontal = 10.dp)
             )
         }

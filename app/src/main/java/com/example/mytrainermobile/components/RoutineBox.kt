@@ -30,7 +30,9 @@ fun RoutineBox(
     bigScreenMode: Boolean
 ) {
     if (bigScreenMode) {
-        Box(modifier = Modifier.size(900.dp, 215.dp).padding(20.dp)) {
+        Box(modifier = Modifier
+            .size(300.dp, 215.dp)
+            .padding(20.dp)) {
             Row(Modifier.fillMaxSize()) {
                 Card(
                     modifier = Modifier
@@ -106,12 +108,33 @@ fun SideTitleBox(routine: Routine){
                 color = DefaultColor,
                 shape = RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp)
             )
-            .background(color = DefaultBackground)
+            .background(color = Color.DarkGray, shape = RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
             .fillMaxSize()
     ) {
-        Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxWidth()) {
+        Column(modifier = Modifier.fillMaxSize().padding(20.dp), horizontalAlignment = Alignment.Start, verticalArrangement = Arrangement.SpaceAround) {
             Text(
-                text = routine.name,
+                text = "Name: " + routine.name,
+                color = Color.White,
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp,
+                modifier = Modifier.padding(vertical = 5.dp),
+            )
+            Text(
+                text = "Difficulty: " + routine.difficulty,
+                color = Color.White,
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp,
+                modifier = Modifier.padding(vertical = 5.dp),
+            )
+            Text(
+                text = "Rating: " + routine.score,
+                color = Color.White,
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp,
+                modifier = Modifier.padding(vertical = 5.dp),
+            )
+            Text(
+                text = "Category: " + routine.category.name,
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp,

@@ -137,7 +137,7 @@ fun RateButton(viewModel: StartWorkoutViewModel, routineId: Int) {
                 shape = RoundedCornerShape(8.dp),
                 color = DefaultBackground,
                 modifier = Modifier
-                    .fillMaxSize(0.5f)
+                    .fillMaxWidth(0.8f)
             ) {
                 Column(
                     modifier = Modifier.padding(10.dp),
@@ -147,12 +147,13 @@ fun RateButton(viewModel: StartWorkoutViewModel, routineId: Int) {
                     Text(
                         text = stringResource(id = R.string.ratepopup),
                         color = Color.White,
-                        fontSize = 20.sp
+                        fontSize = 20.sp,
+                        modifier = Modifier.padding(20.dp)
                     )
                      val rating = ratingSystem()
                     Row(
                         horizontalArrangement = Arrangement.SpaceAround,
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth().padding(20.dp)
                     ) {
                         DefaultButton(
                             onClick = { popupControl = false },
