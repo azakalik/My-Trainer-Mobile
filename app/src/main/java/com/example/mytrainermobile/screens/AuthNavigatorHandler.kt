@@ -10,7 +10,7 @@ import com.example.mytrainermobile.ui.main.MainUiState
 
 
 sealed class AuthNavigatorItems(val route: String) {
-    object Arrive : AuthNavigatorItems("arrive")
+    object Verify : AuthNavigatorItems("verifyEmail")
     object SignIn : AuthNavigatorItems("signIn")
     object SignUp : AuthNavigatorItems("signUp")
 }
@@ -21,7 +21,9 @@ fun AuthNavigatorHandler(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     startDestination: String = "signIn",
-    loginCallback : (String,String) -> Unit,
+    loginCallback: (String, String) -> Unit,
+    signupCallback: (String, String, String, String, String) -> Unit,
+    verifyEmailCallback: (String, String) -> Unit,
     uiState: MainUiState
 ) {
     NavHost(
@@ -30,22 +32,31 @@ fun AuthNavigatorHandler(
         startDestination = startDestination
     ) {
         composable(AuthNavigatorItems.SignIn.route) {
-            ShowSignInScreen(onNavigateToSignUp = {
-                navController.navigate(AuthNavigatorItems.SignUp.route) {
-                    popUpTo(AuthNavigatorItems.SignUp.route) { inclusive = false }
-                }
-            }, loginCallback, uiState)
+            ShowSignInScreen(
+                onNavigateToSignUp = {
+                    navController.navigate(AuthNavigatorItems.SignUp.route) {
+                        popUpTo(AuthNavigatorItems.SignUp.route) { inclusive = false }
+                    }
+                }, onNavigateToVerifyEmail = {
+                    navController.navigate(AuthNavigatorItems.Verify.route)
+                }, loginCallback, uiState
+            )
         }
         composable(AuthNavigatorItems.SignUp.route) {
             ShowSignupScreen(onNavigateToSignIn = {
                 navController.navigate(AuthNavigatorItems.SignIn.route) {
                     popUpTo(AuthNavigatorItems.SignIn.route) { inclusive = true }
                 }
-            })
+            }, signupCallback, uiState)
         }
-
+        composable(AuthNavigatorItems.Verify.route) {
+            VerifyEmailScreen(onNavigateToSignIn = {
+                navController.navigate(AuthNavigatorItems.SignIn.route)
+            }, callback = verifyEmailCallback, uiState = uiState)
+        }
     }
 }
+
 
 
 

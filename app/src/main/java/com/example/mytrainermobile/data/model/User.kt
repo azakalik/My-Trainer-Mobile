@@ -1,4 +1,4 @@
-package ar.edu.itba.example.api.data.model
+package com.example.mytrainermobile.data.model
 
 import java.util.Date
 

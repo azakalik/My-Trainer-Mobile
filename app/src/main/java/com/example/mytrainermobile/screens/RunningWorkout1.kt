@@ -26,6 +26,7 @@ import com.example.mytrainermobile.R
 import com.example.mytrainermobile.components.DefaultButton
 import com.example.mytrainermobile.components.ExerciseBox
 import com.example.mytrainermobile.components.RW1TopBar
+import com.example.mytrainermobile.components.SecondaryButton
 import com.example.mytrainermobile.data.model.Cycle
 import com.example.mytrainermobile.screenStates.hasExercises
 import com.example.mytrainermobile.ui.theme.DefaultBackground
@@ -163,9 +164,7 @@ fun DrawerBody(
 ) {
     LazyColumn(modifier) {
         items(items) { item ->
-            Button(onClick = {onItemClick(item)}) {
-                Text(text = item.name, color = Color.White)
-            }
+            SecondaryButton(onClick = {onItemClick(item)}, text = item.name)
         }
     }
 }

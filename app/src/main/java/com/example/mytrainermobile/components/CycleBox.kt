@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mytrainermobile.data.model.Cycle
 import com.example.mytrainermobile.ui.theme.DefaultColor
+import com.example.mytrainermobile.ui.theme.DefaultSecondary
 import com.example.mytrainermobile.viewModels.StartWorkoutViewModel
 
 @Composable
@@ -31,7 +32,7 @@ fun CycleBox(
     ) {
         Row(
             modifier = Modifier
-                .background(Color.DarkGray)
+                .background(DefaultSecondary)
                 .padding(8.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {

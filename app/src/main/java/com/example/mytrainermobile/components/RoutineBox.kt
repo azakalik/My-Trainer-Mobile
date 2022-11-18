@@ -22,6 +22,7 @@ import com.example.mytrainermobile.aux_functions.pictureDecider
 import com.example.mytrainermobile.data.model.Routine
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
+import com.example.mytrainermobile.ui.theme.DefaultSecondary
 
 @Composable
 fun RoutineBox(
@@ -108,7 +109,7 @@ fun SideTitleBox(routine: Routine){
                 color = DefaultColor,
                 shape = RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp)
             )
-            .background(color = Color.DarkGray, shape = RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
+            .background(color = DefaultSecondary, shape = RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp))
             .fillMaxSize()
     ) {
         Column(modifier = Modifier.fillMaxSize().padding(20.dp), horizontalAlignment = Alignment.Start, verticalArrangement = Arrangement.SpaceAround) {

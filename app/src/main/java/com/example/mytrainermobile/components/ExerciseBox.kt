@@ -14,6 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mytrainermobile.ui.theme.DefaultColor
+import com.example.mytrainermobile.ui.theme.DefaultSecondary
 import com.example.mytrainermobile.viewModels.RunningWorkout1ViewModel
 
 
@@ -28,7 +29,7 @@ fun ExerciseBox(
 ) {
 
     var running by remember { mutableStateOf(false) }
-    var color = if (running) DefaultColor else Color.DarkGray
+    var color = if (running) DefaultColor else DefaultSecondary
     var titleColor = if (running) Color.White else DefaultColor
 
     Card(
@@ -36,18 +37,16 @@ fun ExerciseBox(
             .fillMaxWidth(1f)
             .height(95.dp)
             .clickable {
-                if(!viewModel.uiState.running && !running) {
+                if (!viewModel.uiState.running && !running) {
                     viewModel.start()
                     running = true
-                }
-                else if(viewModel.uiState.running && running){
+                } else if (viewModel.uiState.running && running) {
                     running = false
                     viewModel.stop()
-                }
-                else if(viewModel.uiState.running && !running){
+                } else if (viewModel.uiState.running && !running) {
                     running = false
                 }
-                       },
+            },
         shape = RoundedCornerShape(15.dp)
 
     ) {
@@ -62,7 +61,7 @@ fun ExerciseBox(
                 style = TextStyle(titleColor),
                 fontSize = 28.sp
             )
-            Column (verticalArrangement = Arrangement.Center){
+            Column(verticalArrangement = Arrangement.Center) {
                 if (duration != null) {
                     if (duration.toLong() != 0L)
                         MicroTimer(totalTime = duration * 1000L, running)

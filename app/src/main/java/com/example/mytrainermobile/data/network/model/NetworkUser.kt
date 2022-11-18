@@ -1,7 +1,7 @@
 package com.example.mytrainermobile.data.network.model
 
 
-import ar.edu.itba.example.api.data.model.User
+import com.example.mytrainermobile.data.model.User
 import com.google.gson.annotations.SerializedName
 import java.util.Date
 

@@ -1,7 +1,7 @@
 package com.example.mytrainermobile.ui.main
 
 import ar.edu.itba.example.api.data.model.Sport
-import ar.edu.itba.example.api.data.model.User
+import com.example.mytrainermobile.data.model.User
 import com.example.mytrainermobile.data.model.Routine
 
 

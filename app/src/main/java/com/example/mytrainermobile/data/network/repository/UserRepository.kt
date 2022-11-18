@@ -1,6 +1,6 @@
 package com.example.mytrainermobile.data.network.repository
 
-import ar.edu.itba.example.api.data.model.User
+import com.example.mytrainermobile.data.model.User
 import com.example.mytrainermobile.data.network.UserRemoteDataSource
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -16,6 +16,14 @@ class UserRepository(
 
     suspend fun login(username: String, password: String) {
         remoteDataSource.login(username, password)
+    }
+
+    suspend fun signup(username: String, email: String, password: String, firstName: String, lastName: String) {
+        remoteDataSource.signup(username = username, email = email, password = password, firstName = firstName, lastName = lastName)
+    }
+
+    suspend fun verifyEmail(email: String, code: String) {
+        remoteDataSource.verifyEmail(email, code)
     }
 
     suspend fun logout() {

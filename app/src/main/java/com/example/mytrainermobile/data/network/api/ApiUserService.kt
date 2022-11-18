@@ -9,12 +9,17 @@ interface ApiUserService {
     @POST("users/login")
     suspend fun login(@Body credentials: NetworkCredentials): Response<NetworkToken>
 
+    @POST("users")
+    suspend fun signup(@Body user: NetworkNewUser): Response<Unit>
+
+    @POST("users/verify_email")
+    suspend fun verifyEmail(@Body verification: NetworkVerification): Response<Unit>
+
     @POST("users/logout")
     suspend fun logout(): Response<Unit>
 
     @GET("users/current")
     suspend fun getCurrentUser(): Response<NetworkUser>
-
 
     @GET("users/current/routines")
     suspend fun getCurrentUserRoutines(): Response<NetworkPagedContent<NetworkRoutine>>

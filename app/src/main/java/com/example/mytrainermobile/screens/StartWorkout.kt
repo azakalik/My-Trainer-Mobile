@@ -25,6 +25,7 @@ import com.example.mytrainermobile.screenStates.canExecute
 import com.example.mytrainermobile.screenStates.showPopup
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
+import com.example.mytrainermobile.ui.theme.DefaultSecondary
 import com.example.mytrainermobile.util.getViewModelFactory
 import com.example.mytrainermobile.viewModels.StartWorkoutViewModel
 import kotlinx.coroutines.Job
@@ -106,7 +107,7 @@ fun StartWorkout(
             backgroundColor = DefaultBackground,
             snackbarHost = {
                            SnackbarHost(it) { state ->
-                               Snackbar(actionColor = DefaultColor, backgroundColor = Color.DarkGray, contentColor = Color.White, snackbarData = state)
+                               Snackbar(actionColor = DefaultColor, backgroundColor = DefaultSecondary, contentColor = Color.White, snackbarData = state)
                            }
             },
             topBar = { TopBar(uiState.routine.name) },

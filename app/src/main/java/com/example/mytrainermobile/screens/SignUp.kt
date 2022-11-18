@@ -1,33 +1,39 @@
 package com.example.mytrainermobile.screens
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.material.Typography
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Popup
+import androidx.compose.ui.window.PopupProperties
 import com.example.mytrainermobile.R
 import com.example.mytrainermobile.components.DefaultButton
 import com.example.mytrainermobile.components.DefaultTextField
+import com.example.mytrainermobile.components.SecondaryButton
+import com.example.mytrainermobile.ui.main.MainUiState
+import com.example.mytrainermobile.ui.main.errorOcurred
 import com.example.mytrainermobile.ui.theme.DefaultBackground
 import com.example.mytrainermobile.ui.theme.DefaultColor
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 
 @Composable
-fun ShowSignupScreen(onNavigateToSignIn: () -> Unit) {
+fun ShowSignupScreen(
+    onNavigateToSignIn: () -> Unit,
+    callback: (String, String, String, String, String) -> Unit,
+    uiState: MainUiState
+) {
     MyTrainerMobileTheme {
         Box(
             modifier = Modifier
@@ -52,20 +58,10 @@ fun ShowSignupScreen(onNavigateToSignIn: () -> Unit) {
                     )
                     SignupText()
                 }
-                ShowSignUpForm()
-               //ShowSignUpButtons(onNavigateToSignIn, onNavigateToMyRoutines)
+                ShowSignUpForm(callback, onNavigateToSignIn, uiState)
             }
         }
     }
-}
-
-@Composable
-fun ShowImage() {
-    Image(
-        painter = painterResource(id = R.drawable.arms),
-        contentDescription = ""/*TODO*/,
-        modifier = Modifier.size(width = 30.dp, height = 40.dp)
-    )
 }
 
 @Composable
@@ -73,60 +69,96 @@ fun SignupText() {
     Text(
         text = stringResource(id = R.string.signUpText),
         style = Typography().h3.copy(fontWeight = FontWeight.Bold),
-        modifier = Modifier.padding(0.dp,0.dp,0.dp,10.dp),
+        modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 10.dp),
         color = Color.White
     )
 }
 
 @Composable
-fun ShowSignUpForm() {
-    var name by remember { mutableStateOf("") }
-    var surname by remember { mutableStateOf("") }
+fun ShowSignUpForm(
+    callback: (String, String, String, String, String) -> Unit,
+    onNavigateToSignIn: () -> Unit,
+    uiState: MainUiState
+) {
+    var step by remember { mutableStateOf(0) }
+    var showPopup by remember { mutableStateOf(false) }
+    var username by remember { mutableStateOf("") }
+    var firstName by remember { mutableStateOf("") }
+    var lastName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var email2 by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var password2 by remember { mutableStateOf("") }
 
-    DefaultTextField(
-        value = name,
-        callback = { name = it },
-        placeholder = stringResource(id = R.string.signup_insert_name)
-    )
-    DefaultTextField(
-        value = surname,
-        callback = { surname = it },
-        placeholder = stringResource(id = R.string.signup_insert_surname)
-    )
-    DefaultTextField(
-        value = email,
-        callback = { email = it },
-        placeholder = stringResource(id = R.string.signup_insert_email)
-    )
-    /*DefaultTextField(
-        value = email2,
-        callback = { email2 = it },
-        placeholder = stringResource(id = R.string.signup_reinsert_email)
-    )*/
-    DefaultTextField(
-        value = password,
-        callback = { password = it },
-        placeholder = stringResource(id = R.string.signup_insert_password)
-    )
-    DefaultTextField(
-        value = password2,
-        callback = { password2 = it },
-        placeholder = stringResource(id = R.string.signup_reinsert_password)
-    )
-
-    //aca iria el datepicker
-}
-
-@Composable
-fun ShowSignUpButtons(onNavigateToSignIn: () -> Unit, onNavigateToMyRoutines: () -> Unit){
-    DefaultButton(text = stringResource(id = R.string.signUpText), onClick = { SignUp(onNavigateToMyRoutines) })
-    Button(onClick= { GoToSignIn(onNavigateToSignIn) }, colors = ButtonDefaults.buttonColors(backgroundColor = DefaultBackground, Color.White)) {
-        Text(stringResource(id = R.string.signup_goto_signin), color = Color.White)
+    if (step == 0) {
+        DefaultTextField(
+            value = username,
+            callback = { username = it },
+            placeholder = "Insert username *",
+            isError = uiState.errorOcurred
+        )
+        DefaultTextField(
+            value = firstName,
+            callback = { firstName = it },
+            placeholder = stringResource(id = R.string.signup_insert_name),
+            isError = uiState.errorOcurred
+        )
+        DefaultTextField(
+            value = lastName,
+            callback = { lastName = it },
+            placeholder = stringResource(id = R.string.signup_insert_surname),
+            isError = uiState.errorOcurred
+        )
+        DefaultButton({ step = 1 }, "Continue")
     }
+    if (step == 1) {
+        DefaultTextField(
+            value = email,
+            callback = { email = it },
+            placeholder = stringResource(id = R.string.signup_insert_email),
+            isError = uiState.errorOcurred
+        )
+        DefaultTextField(
+            value = email2,
+            callback = { email2 = it },
+            placeholder = stringResource(id = R.string.signup_reinsert_email),
+            isError = uiState.errorOcurred
+        )
+        DefaultTextField(
+            value = password,
+            callback = { password = it },
+            placeholder = stringResource(id = R.string.signup_insert_password),
+            isError = uiState.errorOcurred
+        )
+        DefaultTextField(
+            value = password2,
+            callback = { password2 = it },
+            placeholder = stringResource(id = R.string.signup_reinsert_password),
+            isError = uiState.errorOcurred
+        )
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
+            SecondaryButton(onClick = { step = 0 }, text = "Go back")
+            DefaultButton({ callback(username, email, password, firstName, lastName); showPopup = true }, "Sign up")
+        }
+    }
+//    if (uiState.errorOcurred){
+//        Row() {
+//            Text(text = "There is an error in the form: ", color = Color.Red)
+//            showPopup = false
+//            if (email != email2){
+//                Text(text = "the emails do not match", color = Color.Red)
+//            } else if (password != password2){
+//                Text(text = "the passwords do not match", color = Color.Red)
+//            } else if (email.isBlank() || password.isBlank()){
+//                Text(text = "do not leave empty fields", color = Color.Red)
+//            } else if (username.isBlank() || firstName.isBlank() || lastName.isBlank()){
+//                Text(text = "do not leave empty fields", color = Color.Red)
+//                step = 0
+//            }
+//        }
+//        Text(text = "Correct the error and try to sign up again.", color = Color.Red)
+//    }
+    ShowSignupCompletedPopup(onNavigateToSignIn = onNavigateToSignIn, showPopup = showPopup)
 }
 
 fun SignUp(onNavigateToMyRoutines: () -> Unit) {/*TODO*/
@@ -135,4 +167,59 @@ fun SignUp(onNavigateToMyRoutines: () -> Unit) {/*TODO*/
 
 fun GoToSignIn(onNavigateToSignIn: () -> Unit) {
     onNavigateToSignIn()
+}
+
+@Composable
+fun ShowSignupCompletedPopup(onNavigateToSignIn: () -> Unit, showPopup: Boolean) {
+    if (showPopup) {
+        Popup(
+            alignment = Alignment.Center,
+            properties = PopupProperties(
+                focusable = true,
+                dismissOnBackPress = false,
+                dismissOnClickOutside = false
+            )
+        ) {
+            Row(
+                Modifier.fillMaxSize(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceAround
+            ) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxHeight(0.5f)
+                        .fillMaxWidth(0.8f)
+                        .border(
+                            width = 2.dp,
+                            color = DefaultColor,
+                            shape = RoundedCornerShape(15.dp)
+                        )
+                        .background(
+                            color = DefaultBackground,
+                            shape = RoundedCornerShape(15.dp)
+                        )
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(10.dp),
+                        verticalArrangement = Arrangement.SpaceAround,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            "User created succesfully, press the button below to sign in and start using the app",
+                            color = Color.White,
+                            fontSize = 24.sp,
+                            modifier = Modifier.padding(15.dp)
+                        )
+                        DefaultButton(
+                            onClick = { GoToSignIn(onNavigateToSignIn) },
+                            stringResource(id = R.string.signup_goto_signin)
+                        )
+                    }
+                }
+            }
+        }
+    }
+
 }

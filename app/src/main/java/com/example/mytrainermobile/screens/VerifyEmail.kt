@@ -23,10 +23,9 @@ import com.example.mytrainermobile.ui.theme.DefaultColor
 import com.example.mytrainermobile.ui.theme.MyTrainerMobileTheme
 
 @Composable
-fun ShowSignInScreen(
-    onNavigateToSignUp: () -> Unit,
-    onNavigateToVerifyEmail: () -> Unit,
-    loginCallback: (String, String) -> Unit,
+fun VerifyEmailScreen(
+    onNavigateToSignIn: () -> Unit,
+    callback: (String, String) -> Unit,
     uiState: MainUiState
 ) {
     MyTrainerMobileTheme {
@@ -47,11 +46,11 @@ fun ShowSignInScreen(
                     fontSize = 64.sp,
                     fontWeight = FontWeight.Bold,
                 )
-                SignInText()
+                VerifyEmailText()
 
                 // ---------- SIGN IN FIELDS ---------------------------
                 var email by remember { mutableStateOf("") }
-                var password by remember { mutableStateOf("") }
+                var code by remember { mutableStateOf("") }
 
                 DefaultTextField(
                     value = email,
@@ -61,42 +60,34 @@ fun ShowSignInScreen(
                 )
 
                 DefaultTextField(
-                    value = password,
-                    callback = { password = it },
-                    placeholder = stringResource(id = R.string.signup_insert_password),
+                    value = code,
+                    callback = { code = it },
+                    placeholder = "Insert code *",
                     isError = uiState.errorOcurred
                 )
 
                 // ------- SIGN IN BUTTONS -----------------------------
                 DefaultButton(onClick = {
-                    loginCallback(email, password)
-                }, text = stringResource(id = R.string.signInText))
+                    callback(email, code)
+                }, text = "Verify email")
                 SecondaryButton(
-                    onClick = { GoToSignUp(onNavigateToSignUp) },
-                    stringResource(id = R.string.signup_goto_signup)
+                    onClick = { onNavigateToSignIn() },
+                    "Go back to sign in"
                 )
 
-                var sentToVerify by remember{mutableStateOf(false)}
-                if (uiState.errorOcurred){
-                    Text(uiState.message!!, color = Color.Red)
-                    if (uiState.message == "Email verification error" && !sentToVerify) {onNavigateToVerifyEmail(); sentToVerify = true}
-                }
-
+                if (uiState.errorOcurred)
+                    Text(stringResource(id = R.string.sign_error), color = Color.Red)
             }
         }
     }
 }
 
 @Composable
-fun SignInText() {
+fun VerifyEmailText() {
     Text(
-        text = stringResource(id = R.string.signInText),
+        text = "Verify email",
         style = Typography().h3.copy(fontWeight = FontWeight.Bold),
         modifier = Modifier.padding(bottom = 20.dp),
         color = Color.White
     )
-}
-
-fun GoToSignUp(onNavigateToSignUp: () -> Unit) {
-    onNavigateToSignUp()
 }

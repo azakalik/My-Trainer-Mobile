@@ -29,10 +29,48 @@ class MainViewModel(
         )
         runCatching {
             userRepository.login(username, password)
-        }.onSuccess { response ->
+        }.onSuccess {
             uiState = uiState.copy(
                 isFetching = false,
                 isAuthenticated = true
+            )
+        }.onFailure { e ->
+            // Handle the error and notify the UI when appropriate.
+            uiState = uiState.copy(
+                message = e.message,
+                isFetching = false)
+        }
+    }
+
+    fun signup(username: String, email: String, password: String, firstName: String, lastName: String) = viewModelScope.launch {
+        uiState = uiState.copy(
+            isFetching = true,
+            message = null
+        )
+        runCatching {
+            userRepository.signup(username = username, email = email, password = password, firstName = firstName, lastName = lastName)
+        }.onSuccess {
+            uiState = uiState.copy(
+                isFetching = false,
+            )
+        }.onFailure { e ->
+            // Handle the error and notify the UI when appropriate.
+            uiState = uiState.copy(
+                message = e.message,
+                isFetching = false)
+        }
+    }
+
+    fun verifyEmail(email: String, code: String) = viewModelScope.launch {
+        uiState = uiState.copy(
+            isFetching = true,
+            message = null
+        )
+        runCatching {
+            userRepository.verifyEmail(email, code)
+        }.onSuccess {
+            uiState = uiState.copy(
+                isFetching = false,
             )
         }.onFailure { e ->
             // Handle the error and notify the UI when appropriate.
