@@ -56,7 +56,7 @@ fun ShowSignInScreen(
                 DefaultTextField(
                     value = email,
                     callback = { email = it },
-                    placeholder = stringResource(id = R.string.signup_insert_email),
+                    placeholder = "Insert username *",
                     isError = uiState.errorOcurred
                 )
 
@@ -90,7 +90,7 @@ fun ShowSignInScreen(
 @Composable
 fun SignInText() {
     Text(
-        text = "Insert username *",
+        text = "stringResource(id = R.string.signInText)",
         style = Typography().h3.copy(fontWeight = FontWeight.Bold),
         modifier = Modifier.padding(bottom = 20.dp),
         color = Color.White
