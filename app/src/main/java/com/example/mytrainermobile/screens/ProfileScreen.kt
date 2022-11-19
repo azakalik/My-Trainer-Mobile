@@ -37,7 +37,12 @@ fun ShowProfileScreen(
     val uiState = viewModel.uiState
     val activity = (LocalContext.current as? Activity)
     var editing by remember { mutableStateOf(false) }
-//    viewModel.getCurrentUser()
+    var firstEntry by  remember  { mutableStateOf(true) }
+    if (firstEntry) {
+        viewModel.getCurrentUser()
+        firstEntry = false
+    }
+
     val user = uiState.currentUser
     Column {
         val configuration = LocalConfiguration.current
@@ -88,7 +93,6 @@ fun ShowProfileScreen(
             }
         }
         if(viewModel.uiState.message == null) {
-
             if (uiState.isAuthenticated) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -198,5 +202,4 @@ fun ShowProfileScreen(
             }
         }
     }
-
 }
