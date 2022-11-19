@@ -9,10 +9,12 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.mytrainermobile.R
 import com.example.mytrainermobile.ui.theme.DefaultColor
 import com.example.mytrainermobile.ui.theme.DefaultSecondary
 import com.example.mytrainermobile.viewModels.RunningWorkout1ViewModel
@@ -63,16 +65,20 @@ fun ExerciseBox(
             )
             Column(verticalArrangement = Arrangement.Center) {
                 if (duration != null) {
-                    if (duration.toLong() != 0L)
+                    if (duration.toLong() != 0L) {
                         MicroTimer(totalTime = duration * 1000L, running)
-                    else
+                        Text(stringResource(R.string.seconds))
+                    }
+                    else {
                         Text(
                             text = repetitions.toString(),
                             fontSize = 40.sp,
                             fontWeight = FontWeight.Bold
                         )
+                        Text(stringResource(R.string.repetitions))
+                    }
                 }
-                Text("Seconds")
+
             }
         }
     }

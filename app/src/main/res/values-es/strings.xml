@@ -48,6 +48,7 @@
     <string name="noexercise">Este ciclo no tiene ejercicios.</string>
     <string name="selected">No hay ciclo seleccionado</string>
     <string name="detailedview">Vista Detallada</string>
+    <string name="seconds">Segundos</string>
 
     <!-- Individual Exercise -->
     <string name="next">Siguiente</string>

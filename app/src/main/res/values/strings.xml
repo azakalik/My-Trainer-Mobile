@@ -44,6 +44,7 @@
     <string name="noexercise">This cycle has no exercises.</string>
     <string name="selected">No cycle selected</string>
     <string name="detailedview">Detailed View</string>
+    <string name="seconds">Seconds</string>
 
     <!-- Snackbars -->
     <string name="favSnackBar">Routine is now favourite. Available in Favourites.</string>
