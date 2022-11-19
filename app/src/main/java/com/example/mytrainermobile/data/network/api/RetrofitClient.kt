@@ -34,7 +34,7 @@ object RetrofitClient {
 
         return Retrofit.Builder()
             .baseUrl(BuildConfig.API_BASE_URL)
-            //.baseUrl("http://192.168.0.239:8080/api/") //TODO NO BORRAR ESTA LINEA LA USA RANA PARA DEBUGEAR
+            //.baseUrl("http://192.168.0.239:8080/api/") //TODO: Reemplazar en la url su ip local para conectarse a la api desde el telefono, y comentar/eliminar la linea de arriba!!!!
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(okHttpClient)
             .build()
