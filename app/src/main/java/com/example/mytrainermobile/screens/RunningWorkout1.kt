@@ -174,7 +174,7 @@ fun DrawerBody(
 ) {
     LazyColumn(modifier) {
         items(items) { item ->
-            SecondaryButton(onClick = {onItemClick(item)}, text = item.name)
+            DefaultButton(onClick = {onItemClick(item)}, text = item.name)
         }
     }
 }
