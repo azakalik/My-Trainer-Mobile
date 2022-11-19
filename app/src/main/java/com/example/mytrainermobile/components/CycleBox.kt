@@ -39,7 +39,7 @@ fun CycleBox(
                 .padding(8.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Column() {
+            Column {
                 Text(
                     text = cycle.name,
                     style = TextStyle(DefaultColor),

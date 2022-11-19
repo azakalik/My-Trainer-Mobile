@@ -157,7 +157,7 @@ fun ShowSignUpForm(
         }
     }
     if (uiState.errorOcurred){
-        Row() {
+        Row {
             Text(text = stringResource(id = R.string.formerror), color = Color.Red)
             showPopup = false
             if (email != email2){

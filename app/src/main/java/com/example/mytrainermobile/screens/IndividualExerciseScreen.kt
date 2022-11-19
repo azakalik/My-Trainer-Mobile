@@ -127,7 +127,7 @@ fun IndividualExerciseScreen(routineId: Int, viewModel: IndividualExerciseScreen
                                         )
                                     }
                                 } else {
-                                    Column() {
+                                    Column {
                                         DetailText(
                                             title = stringResource(id = R.string.repetitions),
                                             description = uiState.exercise?.repetitions.toString()

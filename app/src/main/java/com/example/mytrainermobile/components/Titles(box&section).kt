@@ -39,7 +39,7 @@ fun TitleBox(title: String, bigScreenMode: Boolean = false) {
                 shape = RoundedCornerShape(0.dp, 15.dp, 15.dp, 0.dp)
             )
     ){
-        Row() {
+        Row {
             Text(
                 text = title,
                 color = Color.White,

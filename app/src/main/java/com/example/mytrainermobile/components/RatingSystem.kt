@@ -42,12 +42,11 @@ fun ratingSystem(): Int {
 
     var review by remember { mutableStateOf(0) }
 
-    Row() {
-        IconButton(onClick = { review = 1;
+    Row {
+        IconButton(onClick = { review = 1
             if (!selected1) selected1 = !selected1; if (selected2) selected2 =
             !selected2; if (selected3) selected3 = !selected3; if (selected4) selected4 =
             !selected4; if (selected5) selected5 = !selected5
-            ;
 
         }) {
             Icon(
@@ -57,7 +56,7 @@ fun ratingSystem(): Int {
                 tint = colorStar1,
             )
         }
-        IconButton(onClick = { review = 2;
+        IconButton(onClick = { review = 2
             if (!selected1) selected1 = !selected1; if (!selected2) selected2 =
             !selected2; if (selected3) selected3 = !selected3; if (selected4) selected4 =
             !selected4; if (selected5) selected5 = !selected5
@@ -69,11 +68,10 @@ fun ratingSystem(): Int {
                 tint = colorStar2,
             )
         }
-        IconButton(onClick = { review = 3;
+        IconButton(onClick = { review = 3
             if (!selected1) selected1 = !selected1; if (!selected2) selected2 =
             !selected2; if (!selected3) selected3 = !selected3; if (selected4) selected4 =
             !selected4; if (selected5) selected5 = !selected5
-            ;
 
         }) {
             Icon(
@@ -83,7 +81,7 @@ fun ratingSystem(): Int {
                 tint = colorStar3,
             )
         }
-        IconButton(onClick = { review = 4;
+        IconButton(onClick = { review = 4
             if (!selected1) selected1 = !selected1; if (!selected2) selected2 =
             !selected2; if (!selected3) selected3 = !selected3; if (!selected4) selected4 =
             !selected4; if (selected5) selected5 = !selected5
@@ -95,7 +93,7 @@ fun ratingSystem(): Int {
                 tint = colorStar4,
             )
         }
-        IconButton(onClick = { review = 5;
+        IconButton(onClick = { review = 5
             if (!selected1) selected1 = !selected1; if (!selected2) selected2 =
             !selected2; if (!selected3) selected3 = !selected3; if (!selected4) selected4 =
             !selected4; if (!selected5) selected5 = !selected5

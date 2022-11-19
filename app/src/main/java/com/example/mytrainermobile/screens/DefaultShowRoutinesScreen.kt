@@ -43,7 +43,7 @@ fun DefaultShowRoutinesScreen(
     val screenHeight = configuration.screenHeightDp.dp
     val screenWidth = configuration.screenWidthDp.dp
 
-    MyTrainerMobileTheme() {
+    MyTrainerMobileTheme {
         val bigScreenMode = viewModel.getScreenMode(screenWidth)
         val routineList = viewModel.getRoutineList()
         Column(modifier = Modifier.fillMaxWidth()) {

@@ -118,7 +118,7 @@ fun RunningWorkout1(
                     }
                 }
             }
-            Column() {
+            Column {
                 if (uiState.hasExercises) {
                     LazyColumn(
                         modifier = Modifier

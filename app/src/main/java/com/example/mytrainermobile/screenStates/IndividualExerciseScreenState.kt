@@ -18,5 +18,4 @@ data class IndividualExerciseScreenState(
 
     val isFetching: Boolean = false,
     val message: String? = null,
-) {
-}
+)
