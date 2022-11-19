@@ -12,6 +12,6 @@ fun pictureDecider(type: String): Int {
         "legs" -> R.drawable.legs
         "mixed" -> R.drawable.mixed
         "shoulders" -> R.drawable.shoulders
-        else -> R.drawable.arms //todo improve error picture
+        else -> R.drawable.legs
     }
 }

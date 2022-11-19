@@ -15,7 +15,6 @@ import kotlinx.coroutines.launch
 class MainViewModel(
     private val sessionManager: SessionManager,
     private val userRepository: UserRepository,
-    private val sportRepository: SportRepository,
     private val routineRepository: RoutineRepository,
     ) : ViewModel() {
 

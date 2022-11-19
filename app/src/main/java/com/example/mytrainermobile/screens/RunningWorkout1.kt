@@ -127,13 +127,7 @@ fun RunningWorkout1(
                         items(uiState.cycleExercises)
                         {
                             Box(modifier = Modifier
-                                .padding(10.dp)
-                                .pointerInput(Unit) {
-                                    detectTapGestures(
-                                        onDoubleTap = {/*TODO DOUBLETAP*/ },
-                                        onTap = {/*TODO */ }
-                                    )
-                                }) {
+                                .padding(10.dp)) {
                                 it.repetitions?.let { it1 ->
                                     ExerciseBox(
                                         it.exercise.name,

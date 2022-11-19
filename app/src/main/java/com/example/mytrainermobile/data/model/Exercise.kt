@@ -3,7 +3,6 @@ package com.example.mytrainermobile.data.model
 import com.example.mytrainermobile.data.network.model.NetworkExercise
 import java.util.*
 
-//todo ver si cambiamos o no la logica de metadata
 
 class Exercise(
     var id: Int,

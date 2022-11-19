@@ -189,17 +189,6 @@ fun ShowProfileScreen(
                         color = Color.White
                     )
                 }
-        }else{
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = viewModel.uiState.message!!,
-                    fontSize = 20.sp,
-                    color = Color.White
-                )
-            }
         }
     }
 }

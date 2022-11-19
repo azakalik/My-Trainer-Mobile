@@ -22,7 +22,6 @@ class StartWorkoutViewModel(
     var uiState by mutableStateOf(StartWorkoutState())
         private set
 
-    //TODO INTENAR SOLUCIONAR ERROR DE REPOSITORY NO SIENDO UN SINGLETON
     suspend fun checkFavourite(id:Int) : Boolean {
         return favouritesRepository.isFavourited(id)
     }
