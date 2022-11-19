@@ -27,7 +27,7 @@ fun ShowRadioButtons(viewModel: DefaultViewModelInterface){
     val stringNames = getSortOptionsList()
     var iterator = 0
 
-    Row() {
+    Row {
         Column(Modifier.selectableGroup()) {
             radioOptions.forEach { text ->
                 Row(

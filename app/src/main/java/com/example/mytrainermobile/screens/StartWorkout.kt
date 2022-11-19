@@ -75,8 +75,8 @@ fun StartWorkout(
     val rateMessage = stringResource(id = R.string.rateSnackBar)
 
     val makeFavouriteCallback = {
-            id: Int -> viewModel.makeFavourite(id) ;
-            coroutineScope.launch {
+            id: Int -> viewModel.makeFavourite(id)
+        coroutineScope.launch {
                 when (scaffoldState.snackbarHostState.showSnackbar(message = favouriteMessage, actionLabel = "OK", duration = SnackbarDuration.Short)) {
                     SnackbarResult.ActionPerformed -> scaffoldState.snackbarHostState.currentSnackbarData?.dismiss()
                     else -> {}

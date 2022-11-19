@@ -4,6 +4,7 @@ import com.example.mytrainermobile.data.model.Routine
 import com.example.mytrainermobile.data.network.MyRoutineRemoteDataSource
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import java.util.*
 
 class MyRoutinesRepository(private val remoteDataSource : MyRoutineRemoteDataSource) {
 
@@ -23,7 +24,9 @@ class MyRoutinesRepository(private val remoteDataSource : MyRoutineRemoteDataSou
     suspend fun getRoutinesBySearch(query: String): List<Routine> {
         val allRoutines = remoteDataSource.getRoutines()
         routinesMutex.withLock {
-            this.routines = allRoutines.content.filter{ it.name.toLowerCase().equals(query.toLowerCase())}.map { it.asModel() }
+            this.routines = allRoutines.content.filter{ it.name.lowercase(Locale.getDefault()).equals(query.lowercase(
+                Locale.getDefault()
+            ))}.map { it.asModel() }
         }
         return routinesMutex.withLock { this.routines }
     }
